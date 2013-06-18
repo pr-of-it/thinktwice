@@ -5,8 +5,8 @@ class m130618_110925_create_users_table extends CDbMigration
 	public function up()
 	{
         $this->createTable('tt_users', array(
+            'id' => 'pk',
             'login' => 'string',
-            'salt' => 'string',
             'password' => 'string',
             'email' => 'string',
             'registered' => 'datetime',
