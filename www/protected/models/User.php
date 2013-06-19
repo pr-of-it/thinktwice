@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'tt_users':
  * @property string $login
  * @property string $password
+ * @property string $name
  * @property string $email
  * @property string $register_time
  * @property string $update_time
@@ -32,11 +33,11 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, password, email', 'length', 'max'=>255),
+			array('login, password, name, email', 'length', 'max'=>255),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('login, password, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
+			array('login, password, name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,6 +77,7 @@ class User extends CActiveRecord
 		return array(
 			'login' => Yii::t('User', 'Login'),
 			'password' => Yii::t('User', 'Password'),
+			'name' => Yii::t('User', 'Name'),
 			'email' => Yii::t('User', 'E-mail'),
 			'register_time' => Yii::t('User', 'Register time'),
 			'update_time' => Yii::t('User', 'Update time'),
@@ -105,6 +107,7 @@ class User extends CActiveRecord
 
 		$criteria->compare('login',$this->login,true);
         $criteria->compare('password',$this->password,true);
+        $criteria->compare('name',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('register_time',$this->register_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
