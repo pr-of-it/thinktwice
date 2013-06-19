@@ -83,8 +83,8 @@ return array(
              'services' => array( // You can change the providers and their classes.
                 /* 'google' => array(
                    'class' => 'GoogleOpenIDService',
-                  ),*/
-               /* 'yandex' => array(
+                  ),
+                'yandex' => array(
                    'class' => 'YandexOpenIDService',
                   ),
                 'twitter' => array(
