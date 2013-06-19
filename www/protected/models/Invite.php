@@ -116,11 +116,11 @@ class Invite extends CActiveRecord
         }
     }
 
-
     protected  function afterSave() {
-
         parent::afterSave();
-        $this->message = 'Выс пригласил(а) на thinktwice.ru пользователь:';
-        mail('email','Приглашение' , $this->message);
+        $th = iconv ("UTF-8","KOI8-U",'Приглашение');
+        $text = 'Выс пригласил(а) на thinktwice.ru пользователь:';
+        $message = iconv("UTF-8","KOI8-U", $text);
+        mail($this->email, $th , $message);
     }
 }
