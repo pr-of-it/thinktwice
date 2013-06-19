@@ -17,7 +17,7 @@
  */
 class User extends CActiveRecord
 {
-	/**
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -33,7 +33,9 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, password, name, email', 'length', 'max'=>255),
+            array('login, password, email', 'required'),
+            array('login, email', 'unique'),
+            array('login, password, name, email', 'length', 'max'=>255),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -127,5 +129,12 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    protected function beforeSave() {
+        if ( $this->getIsNewRecord() ) {
+            $this->password = crypt($this->password);
+        }
+        return true;
+    }
 
 }
