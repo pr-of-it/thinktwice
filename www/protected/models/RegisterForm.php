@@ -56,23 +56,24 @@ class RegisterForm extends CFormModel
             return false;
         }
 
-        try {
+        $user = new User();
+        $user->login = $this->login;
+        $user->password = $this->password;
+        $user->email = $this->email;
+        $result = $user->save();
 
-            $user = new User();
-            $user->login = $this->login;
-            $user->password = $this->password;
-            $user->email = $this->email;
-            $user->save();
-
-            $this->_identity=new UserIdentity($this->login,$this->password);
-            $this->_identity->authenticate();
-            $duration= 3600*24*30; // 30 days
-            Yii::app()->user->login($this->_identity, $duration);
-            return true;
-
-        } catch ( CDbException $e ) {
-            $this->addError('login','Incorrect login or email.');
+        if ( false === $result ) {
+            foreach ( $user->getErrors() as $field => $errors ) {
+                $this->addError($field, implode('<br />', $errors));
+            }
             return false;
         }
+
+        $this->_identity=new UserIdentity($this->login,$this->password);
+        $this->_identity->authenticate();
+        $duration= 3600*24*30; // 30 days
+        Yii::app()->user->login($this->_identity, $duration);
+        return true;
+
 	}
 }
