@@ -99,8 +99,8 @@ return array(
                   ),*/
                 'facebook' => array(
                   'class' => 'FacebookOAuthService',
-                  'client_id' => '...',
-                  'client_secret' => '...',
+                  'client_id' => '391290324321632',
+                  'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
                  ),
                /* 'vkontakte' => array(
                   'class' => 'VKontakteOAuthService',

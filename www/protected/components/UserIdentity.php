@@ -9,12 +9,25 @@ class UserIdentity extends CUserIdentity
 {
     private $_id;
 
+    public $login;
+
+    /**
+     * Constructor.
+     * @param string $username username
+     * @param string $password password
+     */
+    public function __construct($login,$password)
+    {
+        $this->login=$login;
+        $this->password=$password;
+    }
+
 	/**
 	 * @return boolean whether authentication succeeds.
 	 */
 	public function authenticate()
 	{
-        $record = User::model()->findByAttributes(array('login'=>$this->username));
+        $record = User::model()->findByAttributes(array('login'=>$this->login));
         if ( null === $record ) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         } elseif ( crypt($this->password, $record->password) !== $record->password ) {
@@ -34,5 +47,9 @@ class UserIdentity extends CUserIdentity
         return $this->_id;
     }
 
-}
+    public function getName()
+    {
+        return $this->login;
+    }
 
+}

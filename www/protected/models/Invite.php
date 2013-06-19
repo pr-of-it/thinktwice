@@ -1,28 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "tt_users".
+ * This is the model class for table "tt_invites".
  *
- * The followings are the available columns in table 'tt_users':
- * @property string $login
- * @property string $password
- * @property string $name
+ * The followings are the available columns in table 'tt_invites':
+ * @property integer $id
+ * @property integer $inviter_user_id
  * @property string $email
- * @property string $register_time
- * @property string $update_time
- * @property integer $roleid
+ * @property string $code
  *
  * The followings are the available model relations:
- * @property UserRole $role
+ * @property User $inviter
  */
-class User extends CActiveRecord
+class Invite extends CActiveRecord
 {
+
+    const CODE_LENGTH = 12;
+
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tt_users';
+		return 'tt_invites';
 	}
 
 	/**
@@ -33,11 +33,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, password, name, email', 'length', 'max'=>255),
-			array('register_time, update_time', 'safe'),
+			array('inviter_user_id', 'numerical', 'integerOnly'=>true),
+			array('email, code', 'length', 'max'=>255),
+			array('code', 'length', 'max'=>self::CODE_LENGTH),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('login, password, name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
+			array('id, inviter_user_id, email, code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,25 +50,9 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
-            'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
+            'inviter' => array(self::BELONGS_TO, 'User', 'inviter_user_id'),
 		);
 	}
-
-    /**
-     * @return array behaviors
-     */
-    public function behaviors(){
-        return array(
-            'CTimestampBehavior' => array(
-                'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'register_time',
-                'updateAttribute' => 'update_time',
-                'setUpdateOnCreate' => true,
-                'timestampExpression' => new CDbExpression('NOW()'),
-            )
-        );
-    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -75,15 +60,11 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'login' => Yii::t('User', 'Login'),
-			'password' => Yii::t('User', 'Password'),
-			'name' => Yii::t('User', 'Name'),
-			'email' => Yii::t('User', 'E-mail'),
-			'register_time' => Yii::t('User', 'Register time'),
-			'update_time' => Yii::t('User', 'Update time'),
-			'followers' => Yii::t('User', 'Followers'),
-			'roleid' => Yii::t('User', 'Role ID'),
-			'role' => Yii::t('User', 'Role'),
+			'id' => 'ID',
+			'inviter_user_id' => 'Inviter User ID',
+			'inviter' => 'Inviter',
+			'email' => 'Email',
+			'code' => 'Code',
 		);
 	}
 
@@ -105,12 +86,10 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('login',$this->login,true);
-        $criteria->compare('password',$this->password,true);
-        $criteria->compare('name',$this->password,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('inviter_user_id',$this->inviter_user_id);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('register_time',$this->register_time,true);
-		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('code',$this->code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -121,11 +100,27 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Invite the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 
+    protected function afterConstruct() {
+        if ( empty($this->inviter_user_id) ) {
+            $this->inviter_user_id = Yii::app()->user->id;
+        }
+        if ( empty($this->code) ) {
+            $this->code = substr(md5(uniqid('', true)), 0, self::CODE_LENGTH);
+        }
+    }
+
+
+    protected  function afterSave() {
+
+        parent::afterSave();
+        $this->message = 'Выс пригласил(а) на thinktwice.ru пользователь:';
+        mail('email','Приглашение' , $this->message);
+    }
 }
