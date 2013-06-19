@@ -24,5 +24,5 @@ class m130619_070932_alter_users_add_update_time extends CDbMigration
 	{
 	}
 	*/
-    
+
 }

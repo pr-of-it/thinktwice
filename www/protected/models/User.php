@@ -57,6 +57,7 @@ class User extends CActiveRecord
                 'createAttribute' => 'register_time',
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
             )
         );
     }
@@ -96,7 +97,8 @@ class User extends CActiveRecord
 		$criteria->compare('login',$this->login,true);
         $criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('registered',$this->registered,true);
+		$criteria->compare('register_time',$this->register_time,true);
+		$criteria->compare('update_time',$this->update_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -21,8 +21,12 @@
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('registered')); ?>:</b>
-	<?php echo CHtml::encode($data->registered); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('register_time')); ?>:</b>
+	<?php echo CHtml::encode($data->register_time); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('update_time')); ?>:</b>
+	<?php echo CHtml::encode($data->update_time); ?>
 	<br />
 
 

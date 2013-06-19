@@ -27,8 +27,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'registered'); ?>
-		<?php echo $form->textField($model,'registered'); ?>
+		<?php echo $form->label($model,'register_time'); ?>
+		<?php echo $form->textField($model,'register_time'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'update_time'); ?>
+		<?php echo $form->textField($model,'update_time'); ?>
 	</div>
 
 	<div class="row buttons">

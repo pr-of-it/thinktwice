@@ -25,6 +25,7 @@ $this->menu=array(
 		'login',
 		'password',
 		'email',
-		'registered',
+		'register_time',
+		'update_time',
 	),
 )); ?>
