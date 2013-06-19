@@ -50,6 +50,14 @@ $this->breadcrumbs=array(
         </p>
     </div>
 
+    <div class="row">
+        <?php echo $form->labelEx($model,'invite_code'); ?>
+        <?php echo $form->textField($model,'invite_code'); ?>
+        <?php echo $form->error($model,'invite_code'); ?>
+        <p class="hint">
+        </p>
+    </div>
+
     <div class="row buttons">
 		<?php echo CHtml::submitButton('Register'); ?>
 	</div>

@@ -24,7 +24,7 @@ class RegisterForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('login, password, password_repeat, email', 'required'),
+			array('login, password, password_repeat, email, invite_code', 'required'),
             array('password_repeat', 'compare', 'compareAttribute'=>'password'),
         );
 	}
@@ -44,17 +44,32 @@ class RegisterForm extends CFormModel
 	 */
 	public function register()
 	{
-        $user = new User();
-        $user->login = $this->login;
-        $user->password = $this->password;
-        $user->email = $this->email;
+
+        $invite = Invite::model()->find('email=:email', array(':email'=>$this->email));
+        if ( null === $invite ) {
+            $this->addError('email','No invite for this email.');
+            return false;
+        }
+
+        if ( $invite->code != $this->invite_code ) {
+            $this->addError('invite_code','Invalid invite code.');
+            return false;
+        }
+
         try {
+
+            $user = new User();
+            $user->login = $this->login;
+            $user->password = $this->password;
+            $user->email = $this->email;
             $user->save();
+
             $this->_identity=new UserIdentity($this->login,$this->password);
             $this->_identity->authenticate();
             $duration= 3600*24*30; // 30 days
             Yii::app()->user->login($this->_identity, $duration);
             return true;
+
         } catch ( CDbException $e ) {
             $this->addError('login','Incorrect login or email.');
             return false;
