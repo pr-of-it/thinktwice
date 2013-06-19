@@ -9,6 +9,10 @@
  * @property string $email
  * @property string $register_time
  * @property string $update_time
+ * @property integer $roleid
+ *
+ * The followings are the available model relations:
+ * @property UserRole $role
  */
 class User extends CActiveRecord
 {
@@ -32,7 +36,7 @@ class User extends CActiveRecord
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('login, password, email, register_time, update_time', 'safe', 'on'=>'search'),
+			array('login, password, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,6 +49,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
+            'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
 		);
 	}
 
@@ -74,7 +79,9 @@ class User extends CActiveRecord
 			'email' => Yii::t('User', 'E-mail'),
 			'register_time' => Yii::t('User', 'Register time'),
 			'update_time' => Yii::t('User', 'Update time'),
-			'Followers' => Yii::t('User', 'Followers'),
+			'followers' => Yii::t('User', 'Followers'),
+			'roleid' => Yii::t('User', 'Role ID'),
+			'role' => Yii::t('User', 'Role'),
 		);
 	}
 

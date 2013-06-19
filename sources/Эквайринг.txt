@@ -1,0 +1,4 @@
+Доступ к тестовому серверу компании Uniteller - https://test.lk.uniteller.ru:
+
+Логин: test1343139393
+Пароль: 03Db11
