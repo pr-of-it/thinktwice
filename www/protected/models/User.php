@@ -44,6 +44,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
 		);
 	}
 
@@ -73,6 +74,7 @@ class User extends CActiveRecord
 			'email' => Yii::t('User', 'E-mail'),
 			'register_time' => Yii::t('User', 'Register time'),
 			'update_time' => Yii::t('User', 'Update time'),
+			'Followers' => Yii::t('User', 'Followers'),
 		);
 	}
 

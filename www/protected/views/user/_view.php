@@ -29,5 +29,14 @@
 	<?php echo CHtml::encode($data->update_time); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('followers')); ?>:</b>
+    <?php
+    $followers = array();
+    foreach ( $data->followers as $follower ):
+	    $followers[] = CHtml::link(CHtml::encode($follower->login), array('view', 'id'=>$follower->id));
+    endforeach; ?>
+    <?php echo implode('|', $followers); ?>
+	<br />
+
 
 </div>
