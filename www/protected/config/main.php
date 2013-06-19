@@ -17,15 +17,17 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+        /*
                 'ext.eoauth.*',
                 'ext.eoauth.lib.*',
                 'ext.lightopenid.*',
                 'ext.eauth.*',
                 'ext.eauth.services.*',
+        */
          ),
 
 	'modules'=>array(
-              	'gii'=>array(
+        'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'gii',
 			'ipFilters'=>array('127.0.0.1','::1'),
@@ -82,11 +84,12 @@ return array(
                 'loid' => array(
                     'class' => 'ext.lightopenid.loid',
     ),
+        /*
         'eauth' => array(
              'class' => 'ext.eauth.EAuth',
              'popup' => true, // Use the popup window instead of redirecting.
              'services' => array( // You can change the providers and their classes.
-                /* 'google' => array(
+                'google' => array(
                    'class' => 'GoogleOpenIDService',
                   ),
                 'yandex' => array(
@@ -96,13 +99,13 @@ return array(
                    'class' => 'TwitterOAuthService',
                    'key' => '...',
                    'secret' => '...',
-                  ),*/
+                  ),
                 'facebook' => array(
                   'class' => 'FacebookOAuthService',
                   'client_id' => '391290324321632',
                   'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
                  ),
-               /* 'vkontakte' => array(
+                'vkontakte' => array(
                   'class' => 'VKontakteOAuthService',
                   'client_id' => '...',
                   'client_secret' => '...',
@@ -111,9 +114,10 @@ return array(
                   'class' => 'MailruOAuthService',
                   'client_id' => '...',
                   'client_secret' => '...',
-                     ),*/
+                     ),
               ),
           ),
+        */
 	),
 
 	// application-level parameters that can be accessed
