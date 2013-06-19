@@ -12,6 +12,7 @@ defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 require_once($yii);
 header('Content-Type: text/html; charset=utf-8');
 Yii::createWebApplication($config)->run();
+
 /*
 echo $hash = crypt('admin');echo '<br />';
 echo crypt('admin', $hash); die;

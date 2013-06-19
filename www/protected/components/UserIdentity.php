@@ -35,3 +35,4 @@ class UserIdentity extends CUserIdentity
     }
 
 }
+
