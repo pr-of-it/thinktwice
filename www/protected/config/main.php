@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ThinkTwice',
-    'theme' => 'thinktwice',
+        'theme' => 'thinktwice',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -17,10 +17,15 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-	),
+                'ext.eoauth.*',
+                'ext.eoauth.lib.*',
+                'ext.lightopenid.*',
+                'ext.eauth.*',
+                'ext.eauth.services.*',
+         ),
 
 	'modules'=>array(
-		'gii'=>array(
+              	'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'gii',
 			'ipFilters'=>array('127.0.0.1','::1'),
@@ -44,9 +49,9 @@ return array(
 		),
 		'db'=>array(
 			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=tt',
-            'username' => 'postgres',
-            'password' => 'postgres',
-            'charset' => 'utf8',
+                        'username' => 'postgres',
+                        'password' => 'postgres',
+                        'charset' => 'utf8',
 
 		),
 		'errorHandler'=>array(
@@ -68,6 +73,42 @@ return array(
 				*/
 			),
 		),
+            
+                'loid' => array(
+                    'class' => 'ext.lightopenid.loid',
+    ),
+        'eauth' => array(
+             'class' => 'ext.eauth.EAuth',
+             'popup' => true, // Use the popup window instead of redirecting.
+             'services' => array( // You can change the providers and their classes.
+                /* 'google' => array(
+                   'class' => 'GoogleOpenIDService',
+                  ),*/
+               /* 'yandex' => array(
+                   'class' => 'YandexOpenIDService',
+                  ),
+                'twitter' => array(
+                   'class' => 'TwitterOAuthService',
+                   'key' => '...',
+                   'secret' => '...',
+                  ),*/
+                'facebook' => array(
+                  'class' => 'FacebookOAuthService',
+                  'client_id' => '...',
+                  'client_secret' => '...',
+                 ),
+               /* 'vkontakte' => array(
+                  'class' => 'VKontakteOAuthService',
+                  'client_id' => '...',
+                  'client_secret' => '...',
+                 ),
+                'mailru' => array(
+                  'class' => 'MailruOAuthService',
+                  'client_id' => '...',
+                  'client_secret' => '...',
+                     ),*/
+              ),
+          ),
 	),
 
 	// application-level parameters that can be accessed
@@ -76,4 +117,5 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
 	),
+        
 );
