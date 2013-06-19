@@ -5,51 +5,52 @@
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-class UserIdentity extends CUserIdentity
-{
-    private $_id;
+class ServiceUserIdentity extends UserIdentity {
 
-    public $login;
+    /**
+     * @var EAuthServiceBase the authorization service instance.
+     */
+    protected $service;
 
     /**
      * Constructor.
-     * @param string $username username
-     * @param string $password password
+     * @param EAuthServiceBase $service the authorization service instance.
      */
-    public function __construct($login,$password)
-    {
-        $this->login=$login;
-        $this->password=$password;
+    public function __construct($service) {
+        $this->service = $service;
     }
 
-	/**
-	 * @return boolean whether authentication succeeds.
-	 */
-	public function authenticate()
-	{
-        $record = User::model()->findByAttributes(array('login'=>$this->login));
-        if ( null === $record ) {
-            $this->errorCode = self::ERROR_USERNAME_INVALID;
-        } elseif ( crypt($this->password, $record->password) !== $record->password ) {
-            $this->errorCode=self::ERROR_PASSWORD_INVALID;
-        } else {
-            $this->_id = $record->id;
-            $this->setState('login', $record->login);
-            $this->setState('email', $record->email);
-            $this->errorCode=self::ERROR_NONE;
+    /**
+     * Authenticates a user based on {@link username}.
+     * This method is required by {@link IUserIdentity}.
+     * @return boolean whether authentication succeeds.
+     */
+    public function authenticate() {
+
+        if ($this->service->isAuthenticated) {
+
+            // @todo: Поищем сначала такого пользователя в базе
+            $user = User::model()->findByAttributes(array(
+                'service.service' => $this->service->serviceName,
+                'service.service_user_id' => $this->service->id;
+            ));
+            var_dump($user);die;
+
+            $this->name = $this->service->getAttribute('name');
+            $this->setState('id', $this->service->id);
+            $this->setState('login', '');
+            $this->setState('email', '');
+            $this->setState('name', $this->name);
+            $this->setState('service', $this->service->serviceName);
+            $this->errorCode = self::ERROR_NONE;
+
+        }
+        else {
+            $this->errorCode = self::ERROR_NOT_AUTHENTICATED;
         }
 
         return $this->errorCode == self::ERROR_NONE;
 
-    }
-
-    public function getId() {
-        return $this->_id;
-    }
-
-    public function getName()
-    {
-        return $this->login;
     }
 
 }

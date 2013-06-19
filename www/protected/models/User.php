@@ -14,6 +14,8 @@
  *
  * The followings are the available model relations:
  * @property UserRole $role
+ * @property UserService[] $servoces
+ * @property User[] $followers
  */
 class User extends CActiveRecord
 {
@@ -51,8 +53,9 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
+            'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
+            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
 		);
 	}
 

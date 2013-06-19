@@ -76,62 +76,25 @@ return array(
         'eauth' => array(
             'class' => 'ext.eauth.EAuth',
             'popup' => true, // Use the popup window instead of redirecting.
-            'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache'.
-            'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
             'services' => array( // You can change the providers and their classes.
+                'facebook' => array(
+                    'class' => 'FacebookOAuthService',
+                    'client_id' => '391290324321632',
+                    'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
+                ),
             )
         ),
 
-                'log'=>array(
+        'log'=>array(
             'class'=>'CLogRouter',
             'routes'=>array(
                 array(
                     'class'=>'CFileLogRoute',
                     'levels'=>'error, warning',
                 ),
-                // uncomment the following to show log messages on web pages
-                /*
-                array(
-                    'class'=>'CWebLogRoute',
-                ),
-                */
             ),
         ),
 
-        /*
-        'eauth' => array(
-             'class' => 'ext.eauth.EAuth',
-             'popup' => true, // Use the popup window instead of redirecting.
-             'services' => array( // You can change the providers and their classes.
-                'google' => array(
-                   'class' => 'GoogleOpenIDService',
-                  ),
-                'yandex' => array(
-                   'class' => 'YandexOpenIDService',
-                  ),
-                'twitter' => array(
-                   'class' => 'TwitterOAuthService',
-                   'key' => '...',
-                   'secret' => '...',
-                  ),
-                'facebook' => array(
-                  'class' => 'FacebookOAuthService',
-                  'client_id' => '391290324321632',
-                  'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
-                 ),
-                'vkontakte' => array(
-                  'class' => 'VKontakteOAuthService',
-                  'client_id' => '...',
-                  'client_secret' => '...',
-                 ),
-                'mailru' => array(
-                  'class' => 'MailruOAuthService',
-                  'client_id' => '...',
-                  'client_secret' => '...',
-                     ),
-              ),
-          ),
-        */
     ),
 
     // application-level parameters that can be accessed
