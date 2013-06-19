@@ -7,7 +7,8 @@
  * @property string $login
  * @property string $password
  * @property string $email
- * @property string $registered
+ * @property string $register_time
+ * @property string $update_time
  */
 class User extends CActiveRecord
 {
@@ -28,10 +29,10 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('login, password, email', 'length', 'max'=>255),
-			array('registered', 'safe'),
+			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('login, password, email, registered', 'safe', 'on'=>'search'),
+			array('login, password, email, register_time, update_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,6 +47,20 @@ class User extends CActiveRecord
 		);
 	}
 
+    /**
+     * @return array behaviors
+     */
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'register_time',
+                'updateAttribute' => 'update_time',
+                'setUpdateOnCreate' => true,
+            )
+        );
+    }
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -55,7 +70,8 @@ class User extends CActiveRecord
 			'login' => Yii::t('User', 'Login'),
 			'password' => Yii::t('User', 'Password'),
 			'email' => Yii::t('User', 'E-mail'),
-			'registered' => Yii::t('User', 'Register time'),
+			'register_time' => Yii::t('User', 'Register time'),
+			'update_time' => Yii::t('User', 'Update time'),
 		);
 	}
 
