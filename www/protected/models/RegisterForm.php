@@ -12,7 +12,9 @@ class RegisterForm extends CFormModel
 	public $password_repeat;
     public $email;
     public $invite_code;
-
+    public $_code;
+    public $_email;
+    
 	private $_identity;
 
 	/**

@@ -115,7 +115,7 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 
-		// collect user input data
+		// collect user input datac
 		if(isset($_POST['LoginForm']))
 		{
 			$model->attributes=$_POST['LoginForm'];
@@ -136,7 +136,7 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-    public function actionRegister() {
+    public function actionRegister($code,$email) {
         $model = new RegisterForm();
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
@@ -144,7 +144,7 @@ class SiteController extends Controller
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
-
+        
         // collect user input data
         if(isset($_POST['RegisterForm']))
         {
@@ -154,6 +154,7 @@ class SiteController extends Controller
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
+       
         // display the login form
         $this->render('register',array('model'=>$model));
     }

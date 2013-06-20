@@ -118,9 +118,13 @@ class Invite extends CActiveRecord
 
     protected  function afterSave() {
         parent::afterSave();
-        $th = iconv ("UTF-8","KOI8-U",'Приглашение');
-        $text = 'Выс пригласил(а) на thinktwice.ru пользователь:';
-        $message = iconv("UTF-8","KOI8-U", $text);
+        
+        $url = Yii::app()->createAbsoluteUrl('site/register')."?code=$this->code&email=$this->email";
+        
+        $th = iconv ("UTF-8","koi8-r",'Приглашение');
+        $text = 'Вас пригласил на thinktwice.ru пользователь : '.$this->inviter->login.
+                "\r\nДля регистрации перейдите по ссылке: $url\r\nКод регистрации : ".$this->code;
+        $message = iconv("UTF-8","koi8-r", $text);
         mail($this->email, $th , $message);
     }
 }
