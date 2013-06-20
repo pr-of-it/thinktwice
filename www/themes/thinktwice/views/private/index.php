@@ -1,8 +1,18 @@
+<?php
+$this->pageTitle=Yii::app()->name . ' - Личный кабинет';
+$this->breadcrumbs=array(
+    'Личный кабинет',
+);
+?>
+
+
 <p>Вы вошли как <?php echo $user->login; ?></p>
 <p>Ваша роль <?php echo $user->role->name; ?></p>
 <p>Ваш e-mail <?php echo $user->email; ?></p>
-<p>Вы вошли через сервис <?php echo Yii::app()->user->service; ?></p>
-<p>Ваш ID в сервисе <?php echo Yii::app()->user->service_user_id; ?></p>
+<?php if ( Yii::app()->user->service ) : ?>
+    <p>Вы вошли через сервис <?php echo Yii::app()->user->service; ?></p>
+    <p>Ваш ID в сервисе <?php echo Yii::app()->user->service_user_id; ?></p>
+<?php endif; ?>
 
 <h4>Ваши аккаунты в других сетях:</h4>
 <ul>
