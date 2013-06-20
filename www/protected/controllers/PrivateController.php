@@ -11,9 +11,6 @@ class PrivateController extends Controller {
         $this->render('index', array(
             'user' => $user,
              ));
-        echo "<pre>";
-            var_dump($user);
-           echo "</pre>";
     }
 
     public function actionServices($service = null) {
