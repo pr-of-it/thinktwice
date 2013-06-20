@@ -115,7 +115,7 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 
-		// collect user input data
+		// collect user input datac
 		if(isset($_POST['LoginForm']))
 		{
 			$model->attributes=$_POST['LoginForm'];
@@ -156,6 +156,7 @@ class SiteController extends Controller
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
+       
         // display the login form
         $this->render('register',array('model'=>$model));
     }
