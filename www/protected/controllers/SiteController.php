@@ -136,7 +136,7 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-    public function actionRegister() {
+    public function actionRegister($code,$email) {
         $model = new RegisterForm();
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
@@ -144,7 +144,9 @@ class SiteController extends Controller
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
-
+        
+        $model->invite_code = $code ?: null;
+        $model->email = $email ?: null; 
         // collect user input data
         if(isset($_POST['RegisterForm']))
         {
