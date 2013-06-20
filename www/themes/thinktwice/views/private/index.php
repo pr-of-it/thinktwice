@@ -30,7 +30,28 @@ $this->breadcrumbs=array(
     </tr>
     <?php endforeach; ?>
 </table>
-
 <h4>Ваш счет:</h4>
-<p>Сумма на счету: <?php /*echo $user->amount;*/ ?></p>
+<p>Сумма на счету: 
+    <?php
+
+        $summ = 0;
+        foreach($user->operations as $operations ){
+            $summ +=$operations->amount;
+        }
+        echo $summ;
+    ?>
+</p>
 <h6>Последние операции по счету:</h6>
+<table>
+    <thead>
+        <tr><td>№</td><td>Дата</td><td>Тип операции</td><td>Сумма</td></tr>
+    </thead>
+    <?php foreach ($user->operations as $operations ): ?>
+    <tr>
+        <td><?php echo $operations->id; ?></td>
+        <td><?php //echo $operations->time; ?></td>
+        <td><?php echo $operations->reason; ?></td>
+        <td><?php echo $operations->amount; ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
