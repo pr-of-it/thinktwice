@@ -14,7 +14,7 @@
  *
  * The followings are the available model relations:
  * @property UserRole $role
- * @property UserService[] $servoces
+ * @property UserService[] $services
  * @property User[] $followers
  */
 class User extends CActiveRecord
@@ -58,6 +58,18 @@ class User extends CActiveRecord
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
 		);
 	}
+
+    public function hasService($service) {
+        foreach ( $this->services as $s ) {
+            if (
+                $s->service = $service->getServiceName()
+                && $s->service_user_id = $service->id
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @return array behaviors

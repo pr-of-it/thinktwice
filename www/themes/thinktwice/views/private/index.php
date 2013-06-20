@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
     <li><?php echo $service->service; ?> (<?php echo $service->service_user_name; ?>)</li>
 <?php endforeach; ?>
 </ul>
-<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
+<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">управление аккаунтами</a></p>
 
 <h4>Ваши followers:</h4>
 <table>
