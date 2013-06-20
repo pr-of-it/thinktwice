@@ -29,24 +29,34 @@ class ServiceUserIdentity extends UserIdentity {
 
         if ($this->service->isAuthenticated) {
 
-            // @todo: Поищем сначала такого пользователя в базе
-            $user = User::model()->findByAttributes(array(
-                'service.service' => $this->service->serviceName,
-                'service.service_user_id' => $this->service->id;
+            // Поищем сначала такого пользователя в базе, авторизованного через сервис
+            $serviceUser = UserService::model()->with('user')->findByAttributes(array(
+                'service' => $this->service->serviceName,
+                'service_user_id' => $this->service->id,
             ));
-            var_dump($user);die;
-
-            $this->name = $this->service->getAttribute('name');
-            $this->setState('id', $this->service->id);
-            $this->setState('login', '');
-            $this->setState('email', '');
-            $this->setState('name', $this->name);
-            $this->setState('service', $this->service->serviceName);
-            $this->errorCode = self::ERROR_NONE;
+/*
+            var_dump($this->service);
+            echo '<hr />';
+            var_dump($serviceUser);die;
+*/
+            if ( null == $serviceUser ) {
+                $this->errorCode = self::ERROR_USERNAME_INVALID;
+            } else {
+                $this->_id = $serviceUser->user->id;
+                $this->login = $serviceUser->user->login;
+                $this->name = $serviceUser->user->name;
+                $this->setState('id', $serviceUser->user->id);
+                $this->setState('login', $serviceUser->user->login);
+                $this->setState('email', $serviceUser->user->email);
+                $this->setState('name', $serviceUser->user->name);
+                $this->setState('service', $this->service->serviceName);
+                $this->setState('service_user_id', $serviceUser->service_user_id);
+                $this->errorCode = self::ERROR_NONE;
+            }
 
         }
         else {
-            $this->errorCode = self::ERROR_NOT_AUTHENTICATED;
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
         }
 
         return $this->errorCode == self::ERROR_NONE;
