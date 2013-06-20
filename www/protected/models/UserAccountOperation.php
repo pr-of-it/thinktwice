@@ -8,6 +8,7 @@
  * @property integer $user_id
  * @property string $amount
  * @property string $reason
+ * @property string $time
  */
 class UserAccountOperation extends CActiveRecord
 {
@@ -30,9 +31,10 @@ class UserAccountOperation extends CActiveRecord
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'length', 'max'=>19),
 			array('reason', 'length', 'max'=>255),
+			array('time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, amount, reason', 'safe', 'on'=>'search'),
+			array('id, user_id, amount, reason, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,13 +46,20 @@ class UserAccountOperation extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                 'user' => array(self::BELONGS_TO, 'User', 'user_id')
+                     'user' => array(self::BELONGS_TO, 'User', 'user_id')
 		);
-                 $us = User::model()->findByPk(2);
-                 $login = $user->login;
-                 
 	}
-     
+        public function behaviors(){
+            return array(
+                'CTimestampBehavior' => array(
+                    'class' => 'zii.behaviors.CTimestampBehavior',
+                    'createAttribute' => 'time',
+                    'updateAttribute' => 'time',
+                    'setUpdateOnCreate' => true,
+                    'timestampExpression' => new CDbExpression('NOW()'),
+                )
+            );
+        }
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -61,6 +70,7 @@ class UserAccountOperation extends CActiveRecord
 			'user_id' => 'User',
 			'amount' => 'Amount',
 			'reason' => 'Reason',
+			'time' => 'Time',
 		);
 	}
 
@@ -86,6 +96,7 @@ class UserAccountOperation extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('amount',$this->amount,true);
 		$criteria->compare('reason',$this->reason,true);
+		$criteria->compare('time',$this->time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -96,7 +107,7 @@ class UserAccountOperation extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UserAccountOperations the static model class
+	 * @return UserAccountOperation the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -10,7 +10,7 @@ class PrivateController extends Controller {
 
         $this->render('index', array(
             'user' => $user,
-             ));
+        ));
     }
 
     public function actionServices($service = null) {
@@ -27,7 +27,7 @@ class PrivateController extends Controller {
 
                 $identity = new ServiceUserIdentity($authIdentity);
 
-                if ( !$user->hasService($identity->service) ) {
+                if ( empty($user->services) ) {
                     $service = new UserService();
                     $service->user_id = $user->id;
                     $service->service = $identity->service->getServiceName();
@@ -49,12 +49,5 @@ class PrivateController extends Controller {
             'user' => $user,
         ));
 
-    }
-
-    public function actionDeleteService($id) {
-        $service = UserService::model()->findByPk($id);
-        $service->delete();
-        if(!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('private/services'));
     }
 }

@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
     <li><?php echo $service->service; ?> (<?php echo $service->service_user_name; ?>)</li>
 <?php endforeach; ?>
 </ul>
-<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">управление аккаунтами</a></p>
+<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
 <h4>Ваши followers:</h4>
 <table>
@@ -30,26 +30,28 @@ $this->breadcrumbs=array(
     </tr>
     <?php endforeach; ?>
 </table>
-
 <h4>Ваш счет:</h4>
-<p>Сумма на счету: <?php
-    $summ = 0;
-    foreach($user->operations as $operations ){
+<p>Сумма на счету: 
+    <?php
 
-        $summ +=$operations->amount;
-
-    }
-    echo $summ;
-    ?>  
+        $summ = 0;
+        foreach($user->operations as $operations ){
+            $summ +=$operations->amount;
+        }
+        echo $summ;
+    ?>
 </p>
-<h6>Последние операции по счету:
+<h6>Последние операции по счету:</h6>
 <table>
+    <thead>
+        <tr><td>№</td><td>Дата</td><td>Тип операции</td><td>Сумма</td></tr>
+    </thead>
     <?php foreach ($user->operations as $operations ): ?>
     <tr>
-        <td>'Сумма операции: '<?php echo $operations->amount.'<br>'; 
-                  echo 'Тип операции: '.$operations->reason; 
-        ?></td>
+        <td><?php echo $operations->id; ?></td>
+        <td><?php echo $operations->time; ?></td>
+        <td><?php echo $operations->reason; ?></td>
+        <td><?php echo $operations->amount; ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
-</h6>
