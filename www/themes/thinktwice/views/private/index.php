@@ -49,7 +49,7 @@ $this->breadcrumbs=array(
     <?php foreach ($user->operations as $operations ): ?>
     <tr>
         <td><?php echo $operations->id; ?></td>
-        <td><?php //echo $operations->time; ?></td>
+        <td><?php echo $operations->time; ?></td>
         <td><?php echo $operations->reason; ?></td>
         <td><?php echo $operations->amount; ?></td>
     </tr>

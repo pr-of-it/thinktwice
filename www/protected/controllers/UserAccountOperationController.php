@@ -66,7 +66,8 @@ class UserAccountOperationController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-                if(isset($_POST['UserAccountOperation']))
+
+		if(isset($_POST['UserAccountOperation']))
 		{
 			$model->attributes=$_POST['UserAccountOperation'];
 			if($model->save())
@@ -141,7 +142,7 @@ class UserAccountOperationController extends Controller
 			'model'=>$model,
 		));
 	}
-                                 
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

@@ -25,5 +25,6 @@ $this->menu=array(
 		'user_id',
 		'amount',
 		'reason',
+		'time',
 	),
 )); ?>
