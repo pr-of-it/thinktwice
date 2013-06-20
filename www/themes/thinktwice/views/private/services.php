@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
     <h4>Ваши аккаунты в других сетях:</h4>
     <ul>
     <?php foreach ( $user->services as $service ): ?>
-        <li><?php echo $service->service; ?> (<?php echo $service->service_user_name; ?>)</li>
+        <li><?php echo $service->service; ?> (<?php echo $service->service_user_name; ?>) <a href="<?php echo Yii::app()->createAbsoluteUrl('/private/deleteService', array('id'=>$service->id)) ; ?>">удалить привязку</a></li>
     <?php endforeach; ?>
     </ul>
 
