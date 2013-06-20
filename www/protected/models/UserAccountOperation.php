@@ -46,7 +46,9 @@ class UserAccountOperation extends CActiveRecord
 		return array(
                  'user' => array(self::BELONGS_TO, 'User', 'user_id')
 		);
-                           
+                 $us = User::model()->findByPk(2);
+                 $login = $user->login;
+                 
 	}
      
 	/**
