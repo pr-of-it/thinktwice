@@ -9,6 +9,7 @@ class m130620_093759_tt_user_account_operations extends CDbMigration
                 'user_id'=>'int',
                 'amount'=>'money',
                 'reason'=>'string',
+               
             ));
 	}
 
