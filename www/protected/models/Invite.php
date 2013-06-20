@@ -119,7 +119,8 @@ class Invite extends CActiveRecord
     protected  function afterSave() {
         parent::afterSave();
         $th = iconv ("UTF-8","koi8-r",'Приглашение');
-        $text = 'Вас пригласил на thinktwice.ru пользователь : '.$this->inviter->login."\r\n Для регистрации перейдите по ссылке http://thinktwice.local/index.php/site/register \r\n Код регистрации : ".$this->code;
+        $text = 'Вас пригласил на thinktwice.ru пользователь : '.$this->inviter->login.
+        "\r\nДля регистрации перейдите по ссылке: $this->createAbsoluteUrl('site/register')\r\nКод регистрации : ".$this->code;
         $message = iconv("UTF-8","koi8-r", $text);
         mail($this->email, $th , $message);
     }
