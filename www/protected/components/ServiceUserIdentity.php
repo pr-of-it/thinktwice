@@ -10,7 +10,7 @@ class ServiceUserIdentity extends UserIdentity {
     /**
      * @var EAuthServiceBase the authorization service instance.
      */
-    protected $service;
+    public $service;
 
     /**
      * Constructor.
@@ -34,11 +34,7 @@ class ServiceUserIdentity extends UserIdentity {
                 'service' => $this->service->serviceName,
                 'service_user_id' => $this->service->id,
             ));
-/*
-            var_dump($this->service);
-            echo '<hr />';
-            var_dump($serviceUser);die;
-*/
+
             if ( null == $serviceUser ) {
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
             } else {
