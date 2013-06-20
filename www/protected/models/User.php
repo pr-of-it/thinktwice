@@ -56,6 +56,7 @@ class User extends CActiveRecord
             'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
+            'operations'=>array(self::HAS_MANY, 'UserAccauntOperation', 'user_id')
 		);
 	}
 
