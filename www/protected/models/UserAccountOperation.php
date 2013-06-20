@@ -44,10 +44,11 @@ class UserAccountOperation extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'user'=>array(self::BELONGS_TO, 'User', 'user_id')
+                 'user' => array(self::BELONGS_TO, 'User', 'user_id')
 		);
+                           
 	}
-        
+     
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -76,6 +77,7 @@ class UserAccountOperation extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
+
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
