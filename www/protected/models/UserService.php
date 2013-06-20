@@ -101,4 +101,5 @@ class UserService extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 }
