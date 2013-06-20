@@ -7,9 +7,11 @@
  */
 class UserIdentity extends CUserIdentity
 {
-    private $_id;
+    protected $_id;
 
     public $login;
+
+    public $name;
 
     /**
      * Constructor.
@@ -34,8 +36,11 @@ class UserIdentity extends CUserIdentity
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
         } else {
             $this->_id = $record->id;
+            $this->setState('id', $record->id);
             $this->setState('login', $record->login);
             $this->setState('email', $record->email);
+            $this->setState('name', $record->name);
+            $this->setState('service', '');
             $this->errorCode=self::ERROR_NONE;
         }
 

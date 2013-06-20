@@ -32,13 +32,12 @@ class m130619_093127_create_user_roles_table extends CDbMigration
         ));
 
         $role = UserRole::model()->findByAttributes(array('name' => 'user'));
-
         $this->addColumn('tt_users', 'roleid', 'integer DEFAULT ' . $role->id);
 
         $admin = User::model()->findByAttributes(array('login' => 'admin'));
         $role = UserRole::model()->findByAttributes(array('name' => 'admin'));
-        $admin->roleid = $role->id;
-        $admin->save();
+
+        $this->execute('UPDATE tt_users SET roleid=' . $role->id . ' WHERE id=' . $admin->id);
 
     }
 

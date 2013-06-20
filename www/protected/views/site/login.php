@@ -48,10 +48,12 @@ $this->breadcrumbs=array(
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
 	</div>
+    <?php /* ?>
        <h2>Нажмите на иконку для входа через один из сайтов:</h2>
         <?php 
-	$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
+	    $this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
         ?>
+    <?php */ ?>
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
