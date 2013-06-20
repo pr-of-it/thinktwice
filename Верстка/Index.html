@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="CSS/common.css">
+    <link rel="stylesheet" type="text/css" href="CSS/icons.css">
+
+    <!--Страничные стили-->
+    <link rel="stylesheet" type="text/css" href="CSS/dashboard.css">
+
+    <!--Тестовые JSON-->
+    <script type="text/javascript" src="Resources/JSON/user-info.js"></script>
+    <!--jQuery-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script type="text/javascript">
+        var activePage = "dashboard";
+
+        function setActivePage (pageName) {
+            if (activePage == pageName) {
+                return;
+            }
+
+            $("#content").appendTo($("#" + activePage + "-content"));
+            $("#" + pageName + "-content").appendTo("#content");
+
+            activePage = pageName;
+        }
+
+        $(window).load(function()
+        {
+            //загрузка информации о текущем пользователе
+            $("#user-avatar").append("<img src='Resources/JSON/user-avatar.png' />");
+            $("#user-name").append("<span>" + currentUserData.firstName + " " + currentUserData.lastName+ "</span>");
+            $("#user-money").append("<span>" + currentUserData.money.count + " " + currentUserData.money.units + "</span>");
+
+            //активация начальной страницы
+            $("#" + activePage + "-content").appendTo("#content");
+        });
+    </script>
+</head>
+<body>
+    <!--Макет-->
+    <div class="block-base">
+        <div class="block-header">
+            <div class="block-header-logo">
+                <div class="block-header-logo-icon ui-balloon" onclick="setActivePage('dashboard')">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td class="icon-logo"></td>
+                            <td class="icon-logo"></td>
+                            <td class="icon-logo"></td>
+                        </tr>
+                        <tr>
+                            <td class="icon-logo"></td>
+                            <td colspan="2" style="border: 1px solid #2F737C; margin: 1px"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span>Дашборд</span>
+                </div>
+                <div class="block-header-logo-image">
+                    <img src="Resources/Img/header-logo.png">
+                </div>
+            </div>
+            <div class="block-header-current-user">
+                <div id="user-avatar" class="ui-avatar"></div>
+                <div id="user-name" class="ui-caption ui-text ui-text-caption" style="margin-left: 10px"></div>
+                <div id="user-money" class="ui-caption ui-text ui-sub-caption" style="margin-left: 20px"></div>
+            </div>
+        </div>
+        <div id="content" class="block-content">
+
+        </div>
+    </div>
+    <div class="block-footer">
+
+    </div>
+    <!--Доска-->
+    <div id="dashboard" class="block-page">
+        <div id="dashboard-content" class="ui-dashboard-content">
+            <div class="block-video">
+                <div class="block-video-content">
+                    <div class="ui-caption ui-group-caption">
+                        Начало
+                    </div>
+                    <div style="height: 500px; width: 650px; float: none; background-color: #ccc"></div>
+                    <div class="ui-simple-text" style="width: 650px">
+                        Рассказываю про то как быстро заработать миллион на бирже, многоходовкие  уловки, трюки и приемы — это ко мне.
+                        В основном могу по вечерам, но бывают просветления и днями.
+                        В общем, что я вам все рассказываю? Посмотрите видео, и узнайте.
+                    </div>
+                </div>
+            </div>
+            <div class="block-table">
+                <div class="block-table-content">
+                    <div class="ui-caption ui-group-caption">
+                        Главное
+                    </div>
+                    <div class="ui-dashboard">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td><div class="ui-widget" style="background-color: #F8AB1F"></div></td>
+                                <td><div class="ui-widget" style="background-color: #EE7467"></div></td>
+                                <td><div class="ui-widget" style="background-color: #307980"></div></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><div class="ui-widget" style="background-color: #307980"></div></td>
+                                <td><div class="ui-widget" style="background-color: #307980"></div></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><div class="ui-widget" style="background-color: #307980"></div></td>
+                                <td><div class="ui-widget" style="background-color: #307980"></div></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Лента-->
+    <div id="newsline" class="block-page">
+
+    </div>
+    <!--Пользователи-->
+    <div id="users" class="block-page">
+
+    </div>
+</body>
+</html>

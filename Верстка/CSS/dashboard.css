@@ -1,0 +1,47 @@
+.block-video {
+    float: left;
+
+    height: 100%;
+    width: 50%;
+}
+
+    .block-video-content {
+        float: none;
+
+        padding-left: 180px;
+        height: 100%;
+    }
+
+.block-table {
+    float: left;
+
+    height: 100%;
+    width: 50%;
+}
+
+    .block-table-content {
+        float: none;
+
+        height: 100%;
+    }
+
+.ui-dashboard {
+    position: relative;
+    float: none;
+}
+
+    .ui-dashboard-content {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .ui-dashboard table tbody tr td {
+        padding: 10px;
+        width: 180px;
+        height: 180px;
+    }
+
+.ui-widget {
+    height: 100%;
+    cursor: pointer;
+}
