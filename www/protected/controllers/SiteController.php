@@ -145,6 +145,8 @@ class SiteController extends Controller
             Yii::app()->end();
         }
         
+        $model->invite_code = $code ?: null;
+        $model->email = $email ?: null; 
         // collect user input data
         if(isset($_POST['RegisterForm']))
         {

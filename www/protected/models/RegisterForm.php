@@ -10,11 +10,8 @@ class RegisterForm extends CFormModel
 	public $login;
 	public $password;
 	public $password_repeat;
-    public $email;
-    public $invite_code;
-    public $_code;
-    public $_email;
-    
+        public $email;
+        public $invite_code;
 	private $_identity;
 
 	/**
@@ -76,6 +73,5 @@ class RegisterForm extends CFormModel
         $duration= 3600*24*30; // 30 days
         Yii::app()->user->login($this->_identity, $duration);
         return true;
-
 	}
 }
