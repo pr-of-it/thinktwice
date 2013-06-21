@@ -92,7 +92,7 @@ class SiteController extends Controller
 
                 // Успешный вход
                 if ($identity->authenticate()) {
-                    Yii::app()->user->login($identity);
+                    Yii::app()->user->login($identity, 3600*24*30);
                     // Специальный редирект с закрытием popup окна
                     $authIdentity->redirect();
                 }
