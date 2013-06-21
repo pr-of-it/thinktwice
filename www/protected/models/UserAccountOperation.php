@@ -64,6 +64,13 @@ class UserAccountOperation extends CActiveRecord
                 )
             );
         }
+        public function beforeSave(){
+            
+           $this->amount_after = $this->amount_before + $this->amount;
+           $this->amount_before = $this->amount_after;
+           
+         
+        }
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
