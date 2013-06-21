@@ -74,12 +74,12 @@ class UserAccountOperation extends CActiveRecord
 			'user_id' => 'User',
 			'amount' => 'Amount',
                         'before_amount' => 'Before_amount',
-                        'after_amount' => 'after_amount',
+                        'after_amount' => 'After_amount',
 			'reason' => 'Reason',
 			'time' => 'Time',
 		);
 	}
-
+        
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
