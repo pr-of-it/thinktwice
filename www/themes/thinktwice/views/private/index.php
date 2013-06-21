@@ -46,6 +46,7 @@ $this->breadcrumbs=array(
         <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Сумма после операции</td></tr>
     </thead>
     <?php foreach ($user->operations as $operations ): ?>
+
     <tr>
         <td><?php echo $operations->id; ?></td>
         <td><?php echo $operations->time; ?></td>
@@ -63,5 +64,6 @@ $this->breadcrumbs=array(
         <td><?php echo $reas = sprintf("%01.2f", $operations->amount_after) ?></td>
         <td><?php //остаток ?></td>
     </tr>
+
     <?php endforeach; ?>
 </table>
