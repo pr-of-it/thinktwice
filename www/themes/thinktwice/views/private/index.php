@@ -31,13 +31,13 @@ $this->breadcrumbs=array(
     <?php endforeach; ?>
 </table>
 <h4>Ваш счет:</h4>
-<p>Сумма на счету: 
+<p>Сумма на счету:
     <?php
-        $summ = 0;
         foreach($user->operations as $operations ){
-            $summ +=$operations->amount;
+            if($operations == end($user->operations)) {
+                echo sprintf("%01.2f", $operations->amount_after);
+            }
         }
-        echo $summ;
     ?>
 </p>
 <h6>Последние операции по счету:</h6>
@@ -49,7 +49,7 @@ $this->breadcrumbs=array(
     <tr>
         <td><?php echo $operations->id; ?></td>
         <td><?php echo $operations->time; ?></td>
-        <td><?php echo $reas = sprintf("%01.2f", $operations->amount_before); ?></td>
+        <td><?php echo sprintf("%01.2f", $operations->amount_before); ?></td>
        
         <td><?php
         $formatted = sprintf("%01.2f", $operations->amount);        
@@ -60,8 +60,7 @@ $this->breadcrumbs=array(
             echo $formatted;
         }?></td>
         <td><?php echo $operations->reason; ?></td>
-        <td><?php echo $reas = sprintf("%01.2f", $operations->amount_after) ?></td>
-        <td><?php //остаток ?></td>
+        <td><?php echo sprintf("%01.2f", $operations->amount_after) ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
