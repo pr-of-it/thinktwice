@@ -7,6 +7,8 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $amount
+ * @property string $before_amount
+ * @property string $after_amount
  * @property string $reason
  * @property string $time
  */
@@ -30,11 +32,13 @@ class UserAccountOperation extends CActiveRecord
 		return array(
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'length', 'max'=>19),
+                        array('amount_before', 'length', 'max'=>19),
+                        array('amount_after', 'length', 'max'=>19),
 			array('reason', 'length', 'max'=>255),
 			array('time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, amount, reason, time', 'safe', 'on'=>'search'),
+			array('id, user_id, amount, amount_before, amount_after, reason, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,11 +73,13 @@ class UserAccountOperation extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'amount' => 'Amount',
+                        'amount_before' => 'Amount_before',
+                        'amount_after' => 'Amount_after',
 			'reason' => 'Reason',
 			'time' => 'Time',
 		);
 	}
-
+        
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -95,6 +101,8 @@ class UserAccountOperation extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('amount',$this->amount,true);
+                $criteria->compare('amount_before',$this->amount,true);
+                $criteria->compare('amount_after',$this->amount,true);
 		$criteria->compare('reason',$this->reason,true);
 		$criteria->compare('time',$this->time,true);
 

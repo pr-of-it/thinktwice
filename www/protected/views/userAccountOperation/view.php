@@ -24,6 +24,8 @@ $this->menu=array(
 		'id',
 		'user_id',
 		'amount',
+                'amount_before',
+                'amount_after',
 		'reason',
 		'time',
 	),
