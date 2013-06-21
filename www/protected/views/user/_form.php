@@ -33,7 +33,7 @@
 
     <div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->passwordField($model,'name'); ?>
+		<?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
