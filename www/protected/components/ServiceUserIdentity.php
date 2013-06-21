@@ -42,7 +42,6 @@ class ServiceUserIdentity extends UserIdentity {
                 $this->login = $serviceUser->user->login;
                 $this->name = $serviceUser->user->name;
                 $this->setState('id', $serviceUser->user->id);
-                $this->setState('login', $serviceUser->user->login);
                 $this->setState('email', $serviceUser->user->email);
                 $this->setState('name', $serviceUser->user->name);
                 $this->setState('service', $this->service->serviceName);
