@@ -19,6 +19,9 @@
  */
 class User extends CActiveRecord
 {
+
+    public $amount;
+
     /**
 	 * @return string the associated database table name
 	 */
@@ -70,6 +73,20 @@ class User extends CActiveRecord
             }
         }
         return false;
+    }
+
+    public function getAmount() {
+        if ( !$this->isNewRecord ) {
+            return Yii::app()->db->createCommand("
+                SELECT amount_after
+                FROM " . UserAccountOperation::model()->tableName() . "
+                WHERE user_id=" . $this->id . "
+                ORDER BY id DESC
+                LIMIT 1
+            ")->queryScalar();
+        } else {
+            return 0;
+        }
     }
 
     /**
