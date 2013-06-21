@@ -64,9 +64,7 @@ class UserAccountOperation extends CActiveRecord
                 )
             );
         }
-        public function beforeSave(){
-            $prev = self::model()->
-        }
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
