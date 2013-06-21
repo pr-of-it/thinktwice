@@ -33,7 +33,6 @@ $this->breadcrumbs=array(
 <h4>Ваш счет:</h4>
 <p>Сумма на счету: 
     <?php
-
         $summ = 0;
         foreach($user->operations as $operations ){
             $summ +=$operations->amount;
@@ -51,8 +50,7 @@ $this->breadcrumbs=array(
         <td><?php echo $operations->id; ?></td>
         <td><?php echo $operations->time; ?></td>
         <td><?php
-        $formatted = sprintf("%01.2f", $operations->amount);
-        
+        $formatted = sprintf("%01.2f", $operations->amount);        
         if($formatted >0){
             echo $formatted;
         }?></td>
