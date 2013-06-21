@@ -7,8 +7,8 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $amount
- * @property string $before_amount
- * @property string $after_amount
+ * @property string $amount_before
+ * @property string $amount_after
  * @property string $reason
  * @property string $time
  */
@@ -63,6 +63,13 @@ class UserAccountOperation extends CActiveRecord
                     'timestampExpression' => new CDbExpression('NOW()'),
                 )
             );
+        }
+        public function beforeSave(){
+            
+           $this->amount_after = $this->amount_before + $this->amount;
+           $this->amount_before = $this->amount_after;
+           
+         
         }
 	/**
 	 * @return array customized attribute labels (name=>label)
