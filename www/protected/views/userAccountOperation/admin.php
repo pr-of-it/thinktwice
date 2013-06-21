@@ -48,8 +48,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'user_id',
 		'amount',
-                'before_amount',
-                'after_amount',
+                'amount_before',
+                'amount_after',
 		'reason',
 		'time',
 		array(

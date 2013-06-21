@@ -26,11 +26,11 @@
 		<?php echo $form->textField($model,'amount',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
         <div class="row">
-		<?php echo $form->label($model,'before_amount'); ?>
+		<?php echo $form->label($model,'amount_before'); ?>
 		<?php echo $form->textField($model,'before_amount',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
          <div class="row">
-		<?php echo $form->label($model,'after_amount'); ?>
+		<?php echo $form->label($model,'amount_after'); ?>
 		<?php echo $form->textField($model,'after_amount',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
 	<div class="row">
