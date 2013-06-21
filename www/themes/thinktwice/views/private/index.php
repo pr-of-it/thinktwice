@@ -49,7 +49,7 @@ $this->breadcrumbs=array(
     <tr>
         <td><?php echo $operations->id; ?></td>
         <td><?php echo $operations->time; ?></td>
-        <td><?php echo $operations->amount_before; ?></td>
+        <td><?php echo $reas = sprintf("%01.2f", $operations->amount_before); ?></td>
        
         <td><?php
         $formatted = sprintf("%01.2f", $operations->amount);        
@@ -59,8 +59,8 @@ $this->breadcrumbs=array(
         <td><?php if($formatted <0){
             echo $formatted;
         }?></td>
-        <td><?php echo $reas = sprintf("%01.2f", $operations->reason); ?></td>
-        <td><?php echo $operations->amount_after; ?></td>
+        <td><?php echo $operations->reason; ?></td>
+        <td><?php echo $reas = sprintf("%01.2f", $operations->amount_after) ?></td>
         <td><?php //остаток ?></td>
     </tr>
     <?php endforeach; ?>
