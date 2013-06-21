@@ -4,10 +4,9 @@
  * This is the model class for table "tt_users".
  *
  * The followings are the available columns in table 'tt_users':
- * @property string $login
+ * @property string $email
  * @property string $password
  * @property string $name
- * @property string $email
  * @property string $register_time
  * @property string $update_time
  * @property integer $roleid
@@ -38,13 +37,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('login, password, email', 'required'),
-            array('login, email', 'unique'),
-            array('login, password, name, email', 'length', 'max'=>255),
+            array('email, password', 'required'),
+            array('email', 'unique'),
+            array('password, name, email', 'length', 'max'=>255),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('login, password, name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
+			array('name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -110,8 +109,7 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'login' => Yii::t('User', 'Login'),
-			'password' => Yii::t('User', 'Password'),
+            'password' => Yii::t('User', 'Password'),
 			'name' => Yii::t('User', 'Name'),
 			'email' => Yii::t('User', 'E-mail'),
 			'register_time' => Yii::t('User', 'Register time'),
@@ -140,7 +138,6 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('login',$this->login,true);
         $criteria->compare('password',$this->password,true);
         $criteria->compare('name',$this->password,true);
 		$criteria->compare('email',$this->email,true);

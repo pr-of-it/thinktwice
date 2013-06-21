@@ -5,8 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-
-<p>Вы вошли как <?php echo $user->login; ?></p>
+<p>Вы вошли как <?php echo $user->name; ?></p>
 <p>Ваша роль <?php echo $user->role->name; ?></p>
 <p>Ваш e-mail <?php echo $user->email; ?></p>
 <?php if ( Yii::app()->user->service ) : ?>

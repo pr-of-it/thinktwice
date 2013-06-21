@@ -21,9 +21,9 @@ $this->breadcrumbs=array(
 )); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'login'); ?>
-		<?php echo $form->textField($model,'login'); ?>
-		<?php echo $form->error($model,'login'); ?>
+		<?php echo $form->labelEx($model,'email'); ?>
+		<?php echo $form->textField($model,'email'); ?>
+		<?php echo $form->error($model,'email'); ?>
 	</div>
 
 	<div class="row">
