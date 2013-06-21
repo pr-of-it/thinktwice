@@ -82,8 +82,29 @@ class UserAccountOperation extends CActiveRecord
 			'time' => 'Time',
 		);
 	}
-        
-	/**
+        public function afterSave()
+                {
+                    $prev = self::model()->findBySql('
+                        SELECT *
+                        FROM ' . $this->tableName() . '
+                        WHERE user_id=' . $this->user_id . '
+                            AND id<' . $this->id . '
+                        ORDER BY id DESC
+                        LIMIT 1
+                        ');
+                    $attr = array();
+                    if ( null === $prev ) {
+                        $attr['amount_before'] = 0;
+                        $attr['amount_after'] = $this->amount;
+                    } else {
+                        $attr['amount_before'] = $prev->amount_after;
+                        $attr['amount_after'] = $attr['amount_before'] + $this->amount;
+                    }
+                    $this->setIsNewRecord(false);
+                    $this->saveAttributes($attr);
+                }
+
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:

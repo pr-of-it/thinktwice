@@ -1,6 +1,6 @@
 <?php
 
-class m130621_061014_tt_user_account_operations_add_amount_before extends CDbMigration
+class m130621_061014_alter_table_user_account_operations_add_amount_before extends CDbMigration
 {
 	public function up()
 	{

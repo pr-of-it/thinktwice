@@ -2,3 +2,5 @@
 /www/protected/runtime
 nbproject
 /www/assets
+main.php
+console.php
