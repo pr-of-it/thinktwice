@@ -31,15 +31,7 @@ $this->breadcrumbs=array(
     <?php endforeach; ?>
 </table>
 <h4>Ваш счет:</h4>
-<p>Сумма на счету:
-    <?php
-        foreach($user->operations as $operations ){
-            if($operations == end($user->operations)) {
-                echo sprintf("%01.2f", $operations->amount_after);
-            }
-        }
-    ?>
-</p>
+<p>Сумма на счету: <?php echo $user->getAmount(); ?></p>
 <h6>Последние операции по счету:</h6>
 <table>
     <thead>
