@@ -30,7 +30,7 @@
 		<?php echo $form->textField($model,'amount_before',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
          <div class="row">
-		<?php echo $form->label($model,'after_after'); ?>
+		<?php echo $form->label($model,'amount_after'); ?>
 		<?php echo $form->textField($model,'amount_after',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
 	<div class="row">
