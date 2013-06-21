@@ -70,13 +70,16 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+            echo "<pre>";
+            var_dump($model);die;
+            echo "</pre>";
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-		));
+        ));
 	}
 
 	/**
@@ -94,6 +97,9 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+            echo "<pre>";
+            var_dump($model);die;
+            echo "</pre>";
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
