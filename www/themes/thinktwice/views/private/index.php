@@ -49,6 +49,7 @@ $this->breadcrumbs=array(
     <tr>
         <td><?php echo $operations->id; ?></td>
         <td><?php echo $operations->time; ?></td>
+       
         <td><?php
         $formatted = sprintf("%01.2f", $operations->amount);        
         if($formatted >0){

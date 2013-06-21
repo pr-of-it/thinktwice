@@ -27,11 +27,11 @@
 	</div>
         <div class="row">
 		<?php echo $form->label($model,'amount_before'); ?>
-		<?php echo $form->textField($model,'before_amount',array('size'=>19,'maxlength'=>19)); ?>
+		<?php echo $form->textField($model,'amount_before',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
          <div class="row">
 		<?php echo $form->label($model,'amount_after'); ?>
-		<?php echo $form->textField($model,'after_amount',array('size'=>19,'maxlength'=>19)); ?>
+		<?php echo $form->textField($model,'amount_after',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
 	<div class="row">
 		<?php echo $form->label($model,'reason'); ?>
