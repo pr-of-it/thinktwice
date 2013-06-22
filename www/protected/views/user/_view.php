@@ -34,5 +34,4 @@
     <?php echo implode('|', $followers); ?>
 	<br />
 
-
 </div>
