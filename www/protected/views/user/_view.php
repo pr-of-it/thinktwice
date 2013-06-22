@@ -34,12 +34,4 @@
     <?php echo implode('|', $followers); ?>
 	<br />
 
-
-    <h1>comments</h1>
-
-    <?php $this->renderPartial('comment.views.comment.commentList', array(
-        'model'=>$data
-    )); ?>
-
-
 </div>
