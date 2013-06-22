@@ -80,7 +80,7 @@ return array(
                 'facebook' => array(
                     'class' => 'FacebookOAuthService',
                     'client_id' => '391290324321632',
-                    'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
+                    'client_secret' => '62e1b00024612a3a385ad34c4296a4c5',
                 ),
             )
         ),
