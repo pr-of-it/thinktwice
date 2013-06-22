@@ -141,8 +141,8 @@ class CommentableBehavior extends CActiveRecordBehavior
 
 		// @todo: add support for composite pks
 		return new CDbCriteria(array(
-			'join' => "JOIN " . $this->mapTable . " cm ON t.id = cm." . $this->mapCommentColumn,
-		    'condition' => "cm." . $this->mapRelatedColumn . "=:pk",
+			'join' => "JOIN " . $this->mapTable . " cm ON \"t\".\"id\" = \"cm\".\"" . $this->mapCommentColumn . "\"",
+		    'condition' => "\"cm\".\"" . $this->mapRelatedColumn . "\"=:pk",
 			'params' => array(':pk'=>$this->owner->getPrimaryKey())
 		));
 	}
