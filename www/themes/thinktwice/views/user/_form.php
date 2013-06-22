@@ -20,12 +20,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'login'); ?>
-		<?php echo $form->textField($model,'login',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'login'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'password'); ?>
