@@ -40,7 +40,7 @@ class User extends CActiveRecord
             array('email, password', 'required'),
             array('email', 'unique'),
             array('password, name, email', 'length', 'max'=>255),
-			array('register_time, update_time', 'safe'),
+			array('register_time, update_time, roleid', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
@@ -141,6 +141,7 @@ class User extends CActiveRecord
         $criteria->compare('password',$this->password,true);
         $criteria->compare('name',$this->password,true);
 		$criteria->compare('email',$this->email,true);
+        $criteria->compare('roleid',$this->roleid,true);
 		$criteria->compare('register_time',$this->register_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 
@@ -159,6 +160,11 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getRole()
+    {
+        return $this->role;
+    }
 
     protected function beforeSave() {
         if ( $this->getIsNewRecord() ) {
