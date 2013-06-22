@@ -35,6 +35,25 @@ return array(
             'password'=>'gii',
             'ipFilters'=>array('127.0.0.1','::1'),
         ),
+        'comment'=>array(
+            'class'=>'ext.comment-module.CommentModule',
+            'commentableModels'=>array(
+                // define commentable Models here (key is an alias that must be lower case, value is the model class name)
+                'user'=>'User'
+            ),
+            // set this to the class name of the model that represents your users
+            'userModelClass'=>'User',
+            // set this to the username attribute of User model class
+            'userNameAttribute'=>'name',
+            // set this to the email attribute of User model class
+            'userEmailAttribute'=>'email',
+            // you can set controller filters that will be added to the comment controller {@see CController::filters()}
+//          'controllerFilters'=>array(),
+            // you can set accessRules that will be added to the comment controller {@see CController::accessRules()}
+//          'controllerAccessRules'=>array(),
+            // you can extend comment class and use your extended one, set path alias here
+//          'commentModelClass'=>'comment.models.Comment',
+        ),
     ),
 
     // application components
@@ -80,7 +99,7 @@ return array(
                 'facebook' => array(
                     'class' => 'FacebookOAuthService',
                     'client_id' => '391290324321632',
-                    'client_secret' => 'b479d4aa59c0bb6be2ac8f0cbf05ed63',
+                    'client_secret' => '62e1b00024612a3a385ad34c4296a4c5',
                 ),
             )
         ),
