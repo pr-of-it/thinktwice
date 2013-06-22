@@ -6,10 +6,10 @@ class PrivateController extends Controller {
 
     public function actionIndex() {
 
-        $user = User::model()->with(array('followers', 'services','operations'))->findByPk(Yii::app()->user->id);
-
+        $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
         $this->render('index', array(
             'user' => $user,
+            'operations' => $user->getLastOperations(10),
         ));
     }
 

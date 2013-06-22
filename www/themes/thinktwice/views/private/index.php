@@ -5,7 +5,6 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<p>Вы вошли как <?php echo $user->name; ?></p>
 <p>Ваша роль <?php echo $user->role->name; ?></p>
 <p>Ваш e-mail <?php echo $user->email; ?></p>
 <?php if ( Yii::app()->user->service ) : ?>
@@ -29,30 +28,33 @@ $this->breadcrumbs=array(
     </tr>
     <?php endforeach; ?>
 </table>
+
 <h4>Ваш счет:</h4>
 <p>Сумма на счету: <?php echo sprintf("%01.2f", $user->getAmount()); ?></p>
+
 <h6>Последние операции по счету:</h6>
 <table>
     <thead>
         <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
     </thead>
-    <?php foreach ($user->operations as $operations ): ?>
+    <?php var_dump($operations); ?>
+    <?php foreach ($operations as $operation ): ?>
 
     <tr>
-        <td><?php echo $operations->id; ?></td>
-        <td><?php echo strstr($operations->time,'.',true); ?></td>
-        <td><?php echo sprintf("%01.2f", $operations->amount_before); ?></td>
-       
+        <td><?php echo $operation->id; ?></td>
+        <td><?php echo strstr($operation->time,'.',true); ?></td>
+        <td><?php echo sprintf("%01.2f", $operation->amount_before); ?></td>
+
         <td><?php
-        $formatted = sprintf("%01.2f", $operations->amount);        
+        $formatted = sprintf("%01.2f", $operation->amount);
         if($formatted >0){
             echo $formatted;
         }?></td>
         <td><?php if($formatted <0){
             echo $formatted;
         }?></td>
-        <td><?php echo $operations->reason; ?></td>
-        <td><?php echo sprintf("%01.2f", $operations->amount_after) ?></td>
+        <td><?php echo $operation->reason; ?></td>
+        <td><?php echo sprintf("%01.2f", $operation->amount_after) ?></td>
     </tr>
 
     <?php endforeach; ?>

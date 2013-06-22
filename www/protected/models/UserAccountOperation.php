@@ -102,6 +102,7 @@ class UserAccountOperation extends CActiveRecord
         $this->saveAttributes($attr);
     }
 
+
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      *
