@@ -118,6 +118,7 @@ class User extends CActiveRecord
 			'roleid' => Yii::t('User', 'Role ID'),
 			'role' => Yii::t('User', 'Role'),
 		);
+
 	}
 
 	/**
