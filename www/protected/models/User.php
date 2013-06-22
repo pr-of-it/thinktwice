@@ -171,7 +171,7 @@ class User extends CActiveRecord
         if ( $this->getIsNewRecord() ) {
             $this->password = crypt($this->password);
         }
-       parent::beforeSave();
+       return parent::beforeSave();
     }
     
 }
