@@ -99,7 +99,14 @@ class User extends CActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => new CDbExpression('NOW()'),
-            )
+            ),
+            'commentable' => array(
+                'class' => 'ext.comment-module.behaviors.CommentableBehavior',
+                // name of the table created in last step
+                'mapTable' => 'tt_user_comments',
+                // name of column to related model id in mapTable
+                'mapRelatedColumn' => 'userId'
+            ),
         );
     }
 
