@@ -30,17 +30,17 @@ $this->breadcrumbs=array(
     <?php endforeach; ?>
 </table>
 <h4>Ваш счет:</h4>
-<p>Сумма на счету: <?php echo $user->getAmount(); ?></p>
+<p>Сумма на счету: <?php echo sprintf("%01.2f", $user->getAmount()); ?></p>
 <h6>Последние операции по счету:</h6>
 <table>
     <thead>
-        <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Сумма после операции</td></tr>
+        <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
     </thead>
     <?php foreach ($user->operations as $operations ): ?>
 
     <tr>
         <td><?php echo $operations->id; ?></td>
-        <td><?php echo $operations->time; ?></td>
+        <td><?php echo strstr($operations->time,'.',true); ?></td>
         <td><?php echo sprintf("%01.2f", $operations->amount_before); ?></td>
        
         <td><?php
