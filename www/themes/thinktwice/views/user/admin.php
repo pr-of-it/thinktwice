@@ -46,9 +46,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'login',
+		'password',
 		'email',
-        'role.name',
 		'register_time',
 		'update_time',
 		array(

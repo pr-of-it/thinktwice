@@ -17,16 +17,16 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'login'); ?>
-		<?php echo $form->textField($model,'login',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
-	<div class="row">
+    <div class="row">
+        <?php echo $form->label($model,'name'); ?>
+        <?php echo $form->textField($model,'name'); ?>
+    </div>
+
+    <div class="row">
 		<?php echo $form->label($model,'register_time'); ?>
 		<?php echo $form->textField($model,'register_time'); ?>
 	</div>
