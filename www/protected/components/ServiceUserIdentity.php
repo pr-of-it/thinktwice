@@ -46,6 +46,7 @@ class ServiceUserIdentity extends UserIdentity {
                 $this->setState('name', $serviceUser->user->name);
                 $this->setState('service', $this->service->serviceName);
                 $this->setState('service_user_id', $serviceUser->service_user_id);
+                $this->setState('role', $serviceUser->user->role->name);
                 $this->errorCode = self::ERROR_NONE;
             }
 

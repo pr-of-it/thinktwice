@@ -38,12 +38,6 @@
 	</div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'phone'); ?>
-		<?php echo $form->textField($model,'phone'); ?>
-		<?php echo $form->error($model,'phone'); ?>
-	</div>
-
-    <div class="row">
         <?php echo $form->labelEx($model,'role'); ?>
         <?php echo $form->dropDownList($model,'roleid', CHtml::listData( UserRole::model()->findAll(), 'id', 'name' )); ?>
         <?php echo $form->error($model,'roleid'); ?>
