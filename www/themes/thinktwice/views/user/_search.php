@@ -27,6 +27,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model,'phone'); ?>
+        <?php echo $form->textField($model,'phone'); ?>
+    </div>
+
+    <div class="row">
 		<?php echo $form->label($model,'register_time'); ?>
 		<?php echo $form->textField($model,'register_time'); ?>
 	</div>
