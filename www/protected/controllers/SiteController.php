@@ -161,4 +161,26 @@ class SiteController extends Controller
         $this->render('register',array('model'=>$model));
     }
 
+    public function actionRestore() {
+
+        $model = new RestoreForm();
+        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        $success = false;
+
+        if(isset($_POST['RestoreForm'])) {
+            $model->attributes=$_POST['RestoreForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $model->validate() && $model->restore() ) {
+                $success = true;
+            }
+        }
+
+        $this->render('restore',array('model'=>$model, 'success'=>$success));
+
+    }
+
 }

@@ -184,6 +184,11 @@ class User extends CActiveRecord
     protected function beforeSave() {
         if ( $this->getIsNewRecord() ) {
             $this->password = crypt($this->password);
+        } else {
+            $old_password = self::model()->findByPk($this->id)->password;
+            if ( $old_password != $this->password ) {
+                $this->password = crypt($this->password);
+            }
         }
        return parent::beforeSave();
     }
