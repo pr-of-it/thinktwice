@@ -28,6 +28,6 @@
 
 <?php endforeach; ?>
 </table>
-<?$this->widget('CLinkPager', array(
+<?php $this->widget('CLinkPager', array(
     'pages' => $pages,
 ))?>
