@@ -9,9 +9,8 @@ class PrivateController extends Controller {
         $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
         $this->render('index', array(
             'user' => $user,
-            'operations' => $user->getLastOperations(10),
         ));
-    }
+
 
     public function actionServices($service = null) {
 

@@ -37,8 +37,7 @@ $this->breadcrumbs=array(
     <thead>
         <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
     </thead>
-    <?php var_dump($operations); ?>
-    <?php foreach ($operations as $operation ): ?>
+    <?php foreach (array_slice($user->operations,-10,10) as $operation ): ?>
 
     <tr>
         <td><?php echo $operation->id; ?></td>

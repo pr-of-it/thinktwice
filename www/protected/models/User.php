@@ -88,19 +88,6 @@ class User extends CActiveRecord
         }
     }
 
-    public function getLastOperations($count) {
-        if ( !$this->isNewRecord ) {
-            return Yii::app()->db->createCommand("
-                SELECT *
-                FROM " . UserAccountOperation::model()->tableName() . "
-                WHERE user_id=" . $this->id . "
-                ORDER BY id DESC
-                LIMIT " .  $count . "
-            ")->queryAll();
-        } else {
-            return array();
-        }
-    }
 
     /**
      * @return array behaviors
