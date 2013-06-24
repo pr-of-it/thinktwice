@@ -91,8 +91,7 @@ class Comment extends CActiveRecord
 				'createAttribute' => 'createDate',
 				'updateAttribute' => null,
 				// need special DbExpression when db is sqlite
-				'timestampExpression' => (strncasecmp('sqlite', $this->dbConnection->driverName, 6)===0) ?
-					new CDbExpression("datetime('now')") : null,
+				'timestampExpression' => new CDbExpression("NOW()"),
 			),
 		);
 	}
@@ -102,7 +101,7 @@ class Comment extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('message', 'safe'),
+			array('type, key, message', 'safe'),
 			array('type', 'validateType', 'on'=>'create'),
 			array('key',  'validateKey',  'on'=>'create'),
 			// The following rule is used by search().
@@ -151,7 +150,7 @@ class Comment extends CActiveRecord
 			$commentedModel = CActiveRecord::model($this->module->commentableModels[$this->type]);
 			// if comment is new, connect it with commended model
 			$this->getDbConnection()->createCommand(
-				"INSERT INTO ".$commentedModel->mapTable."(".$commentedModel->mapCommentColumn.", ".$commentedModel->mapRelatedColumn.")
+				"INSERT INTO \"".$commentedModel->mapTable."\" (\"".$commentedModel->mapCommentColumn."\", \"".$commentedModel->mapRelatedColumn."\")
 				 VALUES (:id, :key);"
 			)->execute(array(':id' => $this->id, ':key' => $this->key));
 
