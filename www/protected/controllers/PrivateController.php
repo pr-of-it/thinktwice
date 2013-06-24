@@ -10,8 +10,7 @@ class PrivateController extends Controller {
         $this->render('index', array(
             'user' => $user,
         ));
-
-
+    }
     public function actionServices($service = null) {
 
         $user = User::model()->with(array('services'))->findByPk(Yii::app()->user->id);
