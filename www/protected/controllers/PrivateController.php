@@ -26,7 +26,7 @@ class PrivateController extends Controller {
         return array(
             array('allow',
                 'actions'=>array('index','services', 'deleteService'),
-                'roles'=>array('admin'),
+                'roles'=>array('user'),
             ),
             array('deny',  // deny all users
                 'users'=>array('*'),

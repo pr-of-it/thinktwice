@@ -33,7 +33,15 @@
 	<?php echo CHtml::encode($data->update_time); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('followers')); ?>:</b>
+    <b><?php echo CHtml::encode($data->getAttributeLabel('can_consult')); ?>:</b>
+    <?php echo CHtml::encode($data->can_consult); ?>
+    <br />
+
+    <b><?php echo CHtml::encode($data->getAttributeLabel('consult_price')); ?>:</b>
+    <?php echo CHtml::encode($data->consult_price); ?>
+    <br />
+
+    <b><?php echo CHtml::encode($data->getAttributeLabel('followers')); ?>:</b>
     <?php
     $followers = array();
     foreach ( $data->followers as $follower ):
