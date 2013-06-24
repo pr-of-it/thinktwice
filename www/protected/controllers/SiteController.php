@@ -136,7 +136,7 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-    public function actionRegister($code,$email) {
+    public function actionRegister($code = null, $email = null) {
         $model = new RegisterForm();
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')

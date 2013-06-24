@@ -20,13 +20,15 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'login'); ?>
-		<?php echo $form->textField($model,'login'); ?>
-		<?php echo $form->error($model,'login'); ?>
-	</div>
+    <div class="row">
+        <?php echo $form->labelEx($model,'email'); ?>
+        <?php echo $form->textField($model,'email'); ?>
+        <?php echo $form->error($model,'email'); ?>
+        <p class="hint">
+        </p>
+    </div>
 
-	<div class="row">
+    <div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
@@ -41,14 +43,6 @@ $this->breadcrumbs=array(
 		<p class="hint">
 		</p>
 	</div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
-        <?php echo $form->textField($model,'email',array('value'=>'email')); ?>
-        <?php echo $form->error($model,'email'); ?>
-        <p class="hint">
-        </p>
-    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'invite_code'); ?>

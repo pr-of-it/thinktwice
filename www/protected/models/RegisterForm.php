@@ -56,7 +56,6 @@ class RegisterForm extends CFormModel
         }
 
         $user = new User();
-        $user->login = $this->login;
         $user->password = $this->password;
         $user->email = $this->email;
         $result = $user->save();
