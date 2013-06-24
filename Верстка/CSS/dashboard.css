@@ -1,47 +1,70 @@
-.block-video {
-    float: left;
-
-    height: 100%;
-    width: 50%;
-}
-
-    .block-video-content {
-        float: none;
-
-        padding-left: 180px;
-        height: 100%;
-    }
-
-.block-table {
-    float: left;
-
-    height: 100%;
-    width: 50%;
-}
-
-    .block-table-content {
-        float: none;
-
-        height: 100%;
-    }
-
-.ui-dashboard {
+.dashboard-caption {
     position: relative;
-    float: none;
+    color: #4D6569;
+    font-size: 18pt;
+    text-align: left;
+    margin-bottom: 35px;
 }
 
-    .ui-dashboard-content {
-        width: 100%;
-        overflow-x: auto;
+.dashboard-video {
+    float: left;
+    width: 960px;
+}
+
+    .dashboard-video-block {
+        margin-left: 180px;
+        margin-right: 180px;
     }
 
-    .ui-dashboard table tbody tr td {
-        padding: 10px;
+    .dashboard-video-text {
+        margin-top: 20px;
+        font-size: 14pt;
+        line-height: 32px;
+        color: #ccc;
+    }
+
+.dashboard-block {
+    position: relative;
+    float: left;
+    margin-right: 180px;
+}
+    .dashboard-block table {
+        border-spacing: 10px;
+        margin-top: -10px;
+        margin-left: -10px;
+    }
+
+    .dashboard-block-small-cell {
         width: 180px;
         height: 180px;
     }
 
-.ui-widget {
+        .dashboard-block-small-cell div {
+            text-align: center;
+        }
+
+    .dashboard-block-big-cell {
+        width: 370px;
+        height: 180px;
+    }
+
+        .dashboard-block-big-cell img {
+            float: right;
+            vertical-align: bottom;
+        }
+
+        .dashboard-block-big-cell span {
+            margin-right: -100px;
+            margin-left: 20px;
+        }
+
+.dashboard-widget {
     height: 100%;
+    width: 100%;
     cursor: pointer;
 }
+
+    .dashboard-widget span {
+        font-size: 14pt;
+        color: #FFFFFD;
+    }
