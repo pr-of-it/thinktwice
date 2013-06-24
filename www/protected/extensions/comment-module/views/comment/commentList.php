@@ -12,3 +12,4 @@ $this->widget('zii.widgets.CListView', array(
 $this->renderPartial('comment.views.comment._form', array(
 	'comment'=>$model->commentInstance
 ));
+
