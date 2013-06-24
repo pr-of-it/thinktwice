@@ -11,6 +11,7 @@
  * @property string $register_time
  * @property string $update_time
  * @property integer $roleid
+ * @property integer $active
  *
  * The followings are the available model relations:
  * @property UserRole $role
@@ -40,8 +41,9 @@ class User extends CActiveRecord
 		return array(
             array('email, password', 'required'),
             array('email', 'unique'),
+            array('active', 'boolean'),
             array('password, name, email', 'length', 'max'=>255),
-			array('register_time, update_time, roleid', 'safe'),
+			array('register_time, update_time, roleid, active', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, email, phone, register_time, update_time, roleid', 'safe', 'on'=>'search'),
@@ -122,6 +124,7 @@ class User extends CActiveRecord
 			'name' => Yii::t('User', 'Name'),
 			'phone' => Yii::t('User', 'Phone'),
 			'email' => Yii::t('User', 'E-mail'),
+			'active' => Yii::t('User', 'Active'),
 			'register_time' => Yii::t('User', 'Register time'),
 			'update_time' => Yii::t('User', 'Update time'),
 			'followers' => Yii::t('User', 'Followers'),
@@ -153,6 +156,7 @@ class User extends CActiveRecord
         $criteria->compare('name',$this->password,true);
 		$criteria->compare('email',$this->email,true);
         $criteria->compare('roleid',$this->roleid,true);
+        $criteria->compare('active',$this->active,true);
 		$criteria->compare('register_time',$this->register_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 

@@ -25,6 +25,7 @@ $this->menu=array(
 		'email',
         'name',
         'phone',
+        'active',
 		'register_time',
 		'update_time',
 	),
