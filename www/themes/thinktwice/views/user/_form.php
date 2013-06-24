@@ -43,6 +43,12 @@
 	</div>
 
     <div class="row">
+		<?php echo $form->labelEx($model,'active'); ?>
+		<?php echo $form->checkBox($model,'active'); ?>
+		<?php echo $form->error($model,'active'); ?>
+	</div>
+
+    <div class="row">
         <?php echo $form->labelEx($model,'role'); ?>
         <?php echo $form->dropDownList($model,'roleid', CHtml::listData( UserRole::model()->findAll(), 'id', 'name' )); ?>
         <?php echo $form->error($model,'roleid'); ?>

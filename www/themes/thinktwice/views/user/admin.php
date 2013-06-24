@@ -50,6 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'email',
         'name',
         'phone',
+        'active',
 		'register_time',
 		'update_time',
 		array(

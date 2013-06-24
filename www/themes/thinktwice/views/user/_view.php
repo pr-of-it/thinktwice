@@ -21,6 +21,10 @@
 	<?php echo CHtml::encode($data->phone); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('active')); ?>:</b>
+	<?php echo CHtml::encode($data->active); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('register_time')); ?>:</b>
 	<?php echo CHtml::encode($data->register_time); ?>
 	<br />

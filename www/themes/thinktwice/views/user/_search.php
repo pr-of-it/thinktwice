@@ -32,6 +32,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model,'active'); ?>
+        <?php echo $form->checkBox($model,'phone'); ?>
+    </div>
+
+    <div class="row">
 		<?php echo $form->label($model,'register_time'); ?>
 		<?php echo $form->textField($model,'register_time'); ?>
 	</div>
