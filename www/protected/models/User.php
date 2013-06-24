@@ -7,6 +7,7 @@
  * @property string $email
  * @property string $password
  * @property string $name
+ * @property string $phone
  * @property string $register_time
  * @property string $update_time
  * @property integer $roleid
@@ -43,7 +44,7 @@ class User extends CActiveRecord
 			array('register_time, update_time, roleid', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name, email, register_time, update_time, roleid', 'safe', 'on'=>'search'),
+			array('name, email, phone, register_time, update_time, roleid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -119,6 +120,7 @@ class User extends CActiveRecord
 		return array(
             'password' => Yii::t('User', 'Password'),
 			'name' => Yii::t('User', 'Name'),
+			'phone' => Yii::t('User', 'Phone'),
 			'email' => Yii::t('User', 'E-mail'),
 			'register_time' => Yii::t('User', 'Register time'),
 			'update_time' => Yii::t('User', 'Update time'),
