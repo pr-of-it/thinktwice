@@ -40,6 +40,8 @@ $this->breadcrumbs=array(
 
     <h2>Либо Вы можете войти через следующие сервисы:</h2>
     <?php Yii::app()->eauth->renderWidget(); ?>
-
+    <?php
+    #$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
+    ?>
     <?php $this->endWidget(); ?>
 </div><!-- form -->

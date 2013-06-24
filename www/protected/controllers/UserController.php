@@ -46,6 +46,7 @@ class UserController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+
 	}
 
 	/**
