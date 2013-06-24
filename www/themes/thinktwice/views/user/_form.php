@@ -49,6 +49,18 @@
 	</div>
 
     <div class="row">
+		<?php echo $form->labelEx($model,'can_consult'); ?>
+		<?php echo $form->checkBox($model,'can_consult'); ?>
+		<?php echo $form->error($model,'can_consult'); ?>
+	</div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'consult_price'); ?>
+        <?php echo $form->textField($model,'consult_price'); ?>
+        <?php echo $form->error($model,'consult_price'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model,'role'); ?>
         <?php echo $form->dropDownList($model,'roleid', CHtml::listData( UserRole::model()->findAll(), 'id', 'name' )); ?>
         <?php echo $form->error($model,'roleid'); ?>

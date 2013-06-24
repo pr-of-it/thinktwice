@@ -50,6 +50,16 @@
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+    <div class="row">
+        <?php echo $form->label($model,'can_consult'); ?>
+        <?php echo $form->checkBox($model,'can_consult'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model,'consult_price'); ?>
+        <?php echo $form->textField($model,'consult_price'); ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->

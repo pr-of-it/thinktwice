@@ -55,7 +55,7 @@ return array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'Administrator',
         'children' => array(
-            'moderator',         // позволим админу всё, что позволено модератору
+            'operator', 'moderator', 'expert', 'lector',
         ),
         'bizRule' => null,
         'data' => null

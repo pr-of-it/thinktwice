@@ -26,6 +26,8 @@ $this->menu=array(
         'name',
         'phone',
         'active',
+        'can_consult',
+        'consult_price',
 		'register_time',
 		'update_time',
 	),

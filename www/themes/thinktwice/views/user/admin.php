@@ -51,6 +51,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         'name',
         'phone',
         'active',
+        'can_consult',
+        'consult_price',
 		'register_time',
 		'update_time',
 		array(
