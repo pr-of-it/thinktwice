@@ -58,3 +58,6 @@ $this->breadcrumbs=array(
 
     <?php endforeach; ?>
 </table>
+<a href="<?php echo Yii::app()->createAbsoluteUrl('/private/account') ; ?>">Полный список операций</a></p>
+
+

@@ -36,6 +36,11 @@
 		<?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
+    <div class="row">
+		<?php echo $form->labelEx($model,'phone'); ?>
+		<?php echo $form->textField($model,'phone'); ?>
+		<?php echo $form->error($model,'phone'); ?>
+	</div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'role'); ?>

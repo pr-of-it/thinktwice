@@ -17,7 +17,9 @@
 	<?php echo CHtml::encode($data->name); ?>
 	<br />
 
-
+	<b><?php echo CHtml::encode($data->getAttributeLabel('phone')); ?>:</b>
+	<?php echo CHtml::encode($data->phone); ?>
+	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('register_time')); ?>:</b>
 	<?php echo CHtml::encode($data->register_time); ?>
