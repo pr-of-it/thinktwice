@@ -10,6 +10,7 @@ class PrivateController extends Controller {
         $this->render('index', array(
             'user' => $user,
         ));
+    }
 
 
     public function actionServices($service = null) {

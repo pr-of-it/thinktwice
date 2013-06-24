@@ -45,6 +45,7 @@ class UserIdentity extends CUserIdentity
             $this->setState('name', $record->name);
             $this->setState('service', '');
             $this->setState('service_user_id', '');
+            $this->setState('role', $record->role->name);
             $this->errorCode=self::ERROR_NONE;
         }
 
