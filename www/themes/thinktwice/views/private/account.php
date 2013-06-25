@@ -1,4 +1,6 @@
-<?php $this->breadcrumbs=array(
+<?php
+$this->pageTitle=Yii::app()->name . ' - Полный список операций';
+$this->breadcrumbs=array(
 'Личный кабинет'=>array('index'),
 'Полный список операций',
 );?>

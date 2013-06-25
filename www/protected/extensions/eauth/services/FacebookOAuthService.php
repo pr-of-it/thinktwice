@@ -54,7 +54,7 @@ class FacebookOAuthService extends EOAuth2Service {
 		return $url;
 	}
 	
-	protected function getTokenUrl($code) {
+	protected function getTokenUrl($ode) {
 		return parent::getTokenUrl($code).'&redirect_uri='.urlencode($this->getState('redirect_uri'));
 	}
 	
