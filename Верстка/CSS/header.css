@@ -1,0 +1,104 @@
+/*********************************************************************************************************************/
+/*Лого*/
+
+.block-header-logo {
+    float: left;
+
+    height: 100%;
+    width: 50%;
+}
+
+    .block-header-logo-image {
+        float: left;
+        margin-left: 36px;
+        height: 100%;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+        .block-header-logo-image img {
+            vertical-align: middle;
+        }
+
+/*********************************************************************************************************************/
+/*Иконка*/
+
+.block-header-logo-icon {
+     display: table;
+     float: left;
+     padding-left: 108px;
+     height: 100%;
+     line-height: 50px;
+}
+
+    .block-header-logo-icon table {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .block-header-logo-icon table tbody {
+        cursor: pointer;
+    }
+
+    .block-header-logo-icon table tbody tr td {
+        width: 8px;
+        height: 8px;
+        border: 1px solid #2F737C;
+        margin: 1px;
+    }
+
+        .block-header-logo-icon table tbody:hover tr td {
+            border-color: #fff;
+        }
+
+/*********************************************************************************************************************/
+/*Уведомление*/
+
+
+
+/*********************************************************************************************************************/
+/*Пользователь*/
+
+.block-header-user {
+    float: left;
+
+    height: 100%;
+    width: 50%;
+}
+    .block-header-user-text {
+        display: table-cell;
+        vertical-align: middle;
+
+        height: 100%;
+        line-height: 50px;
+        text-align: left;
+        font-size: 14pt;
+    }
+
+    .block-header-user-name {
+        padding-left: 10px;
+        color: #fff;
+    }
+
+    .block-header-user-money {
+        padding-left: 20px;
+        color: #4C6468;
+    }
+
+    .block-header-user-auth {
+        display: table;
+        float: left;
+        background: #E77E4F;
+        height: 40px;
+        padding-left: 25px;
+        padding-right: 25px;
+        cursor: pointer;
+    }
+
+        .block-header-user-auth span {
+            display: table-cell;
+            color: #F9F4FA;
+            font-size: 12pt;
+            width: auto;
+            vertical-align: middle;
+        }
