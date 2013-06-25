@@ -12,6 +12,9 @@ $this->breadcrumbs=array(
     <p>Ваш ID в сервисе <?php echo Yii::app()->user->service_user_id; ?></p>
 <?php endif; ?>
 
+<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/password') ; ?>">Сменить пароль</a></p>
+
+
 <h4>Ваши аккаунты в других сетях:</h4>
 <ul>
 <?php foreach ( $user->services as $service ): ?>

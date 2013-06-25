@@ -25,7 +25,7 @@ class PrivateController extends Controller {
     {
         return array(
             array('allow',
-                'actions'=>array('index','services', 'deleteService','account'),
+                'actions'=>array('index','services', 'deleteService','account', 'password'),
                 'roles'=>array('user'),
             ),
             array('deny',  // deny all users
@@ -102,5 +102,24 @@ class PrivateController extends Controller {
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if(!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('private/services'));
+    }
+
+    public function actionPassword() {
+        $model = new ChangePasswordForm();
+        // if it is ajax validation request
+        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        if(isset($_POST['ChangePasswordForm']))
+        {
+            $model->attributes=$_POST['ChangePasswordForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $model->validate() && $model->changePassword() ) {
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+        $this->render('password',array('model'=>$model));
     }
 }

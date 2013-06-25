@@ -204,13 +204,17 @@ class User extends CActiveRecord
         return $this->role;
     }
 
+    public static function cryptPassword($password) {
+        return crypt($password);
+    }
+
     protected function beforeSave() {
         if ( $this->getIsNewRecord() ) {
-            $this->password = crypt($this->password);
+            $this->password = self::cryptPassword($this->password);
         } else {
             $old_password = self::model()->findByPk($this->id)->password;
             if ( $old_password != $this->password ) {
-                $this->password = crypt($this->password);
+                $this->password = self::cryptPassword($this->password);
             }
         }
        return parent::beforeSave();
