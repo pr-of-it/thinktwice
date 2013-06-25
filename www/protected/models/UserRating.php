@@ -46,8 +46,8 @@ class UserRating extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'user' => array(self::BELONG_TO, 'User', 'user_id'),
-            'rater' => array(self::BELONG_TO, 'User', 'rater_id'),
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'rater' => array(self::BELONGS_TO, 'User', 'rater_id'),
         );
     }
 
@@ -64,6 +64,17 @@ class UserRating extends CActiveRecord
 			'date' => 'Date',
 		);
 	}
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'date',
+                'updateAttribute' => 'date',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            )
+        );
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

@@ -65,6 +65,8 @@ class User extends CActiveRecord
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'operations' => array(self::HAS_MANY, 'UserAccountOperation', 'user_id'),
+            #'rating' => array(self::HAS_MANY, 'UserRating', 'user_id', 'rater_id'),
+
         );
 	}
 
@@ -89,6 +91,20 @@ class User extends CActiveRecord
                 ORDER BY id DESC
                 LIMIT 1
             ")->queryScalar();
+        } else {
+            return 0;
+        }
+    }
+
+
+    public function getRating() {
+        if ( !$this->isNewRecord ) {
+            $result=Yii::app()->db->createCommand("
+                SELECT AVG(rate)
+                FROM ". UserRating::model()->tableName() ."
+                WHERE user_id=" . $this->id . "
+            ")->queryScalar();
+            return floatval($result);
         } else {
             return 0;
         }

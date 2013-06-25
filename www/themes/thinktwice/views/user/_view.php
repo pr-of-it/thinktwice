@@ -50,6 +50,10 @@
     <?php echo implode('|', $followers); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>
+    <?php echo sprintf("%01.1f", CHtml::encode($data->rating)); ?>
+    <br />
+
 
     <h1>comments</h1>
 
