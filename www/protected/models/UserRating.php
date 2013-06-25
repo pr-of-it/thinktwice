@@ -30,6 +30,7 @@ class UserRating extends CActiveRecord
 		return array(
 			array('user_id, rater_id, rate', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
+            array('rate','in','range'=>array(1,2,3,4,5)),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, rater_id, rate, date', 'safe', 'on'=>'search'),
@@ -44,8 +45,10 @@ class UserRating extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		);
-	}
+            'user' => array(self::BELONG_TO, 'User', 'user_id'),
+            'rater' => array(self::BELONG_TO, 'User', 'rater_id'),
+        );
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
