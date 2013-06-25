@@ -31,6 +31,7 @@ class UserRating extends CActiveRecord
 			array('user_id, rater_id, rate', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
             array('rate','in','range'=>array(1,2,3,4,5)),
+            array('rate','numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, rater_id, rate, date', 'safe', 'on'=>'search'),
