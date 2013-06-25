@@ -1,12 +1,12 @@
 <?php
 
 /**
- * This is the model class for table "tt_rating_users".
+ * This is the model class for table "tt_user_rating".
  *
- * The followings are the available columns in table 'tt_rating_users':
+ * The followings are the available columns in table 'tt_user_rating':
  * @property integer $id
  * @property integer $user_id
- * @property integer $who_made_id
+ * @property integer $rater_id
  * @property integer $rate
  * @property string $date
  */
@@ -17,7 +17,7 @@ class UserRating extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tt_rating_users';
+		return 'tt_user_rating';
 	}
 
 	/**
@@ -28,11 +28,11 @@ class UserRating extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, who_made_id, rate', 'numerical', 'integerOnly'=>true),
+			array('user_id, rater_id, rate', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, who_made_id, rate, date', 'safe', 'on'=>'search'),
+			array('id, user_id, rater_id, rate, date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +55,7 @@ class UserRating extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'who_made_id' => 'Who Made',
+			'rater_id' => 'Rater',
 			'rate' => 'Rate',
 			'date' => 'Date',
 		);
@@ -81,7 +81,7 @@ class UserRating extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('who_made_id',$this->who_made_id);
+		$criteria->compare('rater_id',$this->rater_id);
 		$criteria->compare('rate',$this->rate);
 		$criteria->compare('date',$this->date,true);
 
