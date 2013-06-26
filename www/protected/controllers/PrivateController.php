@@ -124,12 +124,29 @@ class PrivateController extends Controller {
     }
 
     public function actionDeposit() {
+
         $user = User::model()->findByPk(Yii::app()->user->id);
         $model = new DepositForm();
+
+        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        if(isset($_POST['DepositForm']))
+        {
+            $model->attributes=$_POST['DepositForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $model->validate() )
+                $model->deposit();
+        }
+
         $this->render('deposit', array(
             'user' => $user,
             'model' => $model,
         ));
+
     }
 
 }

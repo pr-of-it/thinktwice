@@ -27,6 +27,8 @@ return array(
         'ext.eauth.*',
         'ext.eauth.services.*',
 
+        'ext.paymentUniteller.*',
+
     ),
 
     'modules'=>array(
