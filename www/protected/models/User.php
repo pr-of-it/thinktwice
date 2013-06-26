@@ -49,7 +49,6 @@ class User extends CActiveRecord
             array('email, password', 'required'),
             array('email', 'unique'),
             array('active, can_consult', 'boolean'),
-            array('consult_price', 'numerical'),
             array('password, name, email', 'length', 'max'=>255),
 			array('register_time, update_time, roleid, avatar, phone', 'safe'),
 			// The following rule is used by search().
@@ -211,8 +210,8 @@ class User extends CActiveRecord
         return $this->role;
     }
 
-    public static function cryptPassword($password) {
-        return crypt($password);
+    public static function cryptPassword($password, $salt=null) {
+        return crypt($password, $salt);
     }
 
     protected function beforeSave() {
@@ -229,10 +228,12 @@ class User extends CActiveRecord
 
     protected function afterSave() {
         $file = CUploadedFile::getInstance($this, 'avatar');
-        $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_FILE . $file->getName();
-        $file->saveAs($uploaded);
-        $this->avatar = self::AVATAR_UPLOAD_FILE . $file->getName();
-        $this->saveAttributes(array('avatar'=>$this->avatar));
+        if ( $file ) {
+            $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_FILE . $file->getName();
+            $file->saveAs($uploaded);
+            $this->avatar = self::AVATAR_UPLOAD_FILE . $file->getName();
+            $this->saveAttributes(array('avatar'=>$this->avatar));
+        }
         return parent::afterSave();
     }
 

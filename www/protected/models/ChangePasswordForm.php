@@ -26,7 +26,7 @@ class ChangePasswordForm extends CFormModel {
 
     public function changePassword() {
         $user = User::model()->findByPk(Yii::app()->user->id);
-        if ( User::cryptPassword($this->oldPassword) != $user->password ) {
+        if ( User::cryptPassword($this->oldPassword, $user->password) !== $user->password ) {
             $this->addError('oldPassword','Неверный текущий пароль.');
             return false;
         }
