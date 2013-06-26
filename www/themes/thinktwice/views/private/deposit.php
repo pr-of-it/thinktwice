@@ -13,6 +13,8 @@ $this->breadcrumbs=array(
 
 <h1>Пополнение счета</h1>
 
+<?php if ( null === $model->acqObject ) : ?>
+
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'deposit-form',
@@ -44,3 +46,7 @@ $this->breadcrumbs=array(
 
     <?php $this->endWidget(); ?>
 </div><!-- form -->
+
+<?php else : ?>
+    <?php $this->widget($model->acqObject->getSubformWidget(), array('acquiring' => $model->acqObject)); ?>
+<?php endif; ?>

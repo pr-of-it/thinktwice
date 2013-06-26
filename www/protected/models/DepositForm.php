@@ -5,6 +5,9 @@ class DepositForm extends CFormModel {
     public $amount;
     public $acquiring;
 
+    public $subform;
+    public $acqObject;
+
     public function rules()
     {
         return array(
@@ -29,7 +32,7 @@ class DepositForm extends CFormModel {
         );
     }
 
-    public function deposit() {
+    public function depositPrepare() {
 
         $amount = floatval(str_replace(',', '.', $this->amount));
         if ( $amount <= 0 ) {
@@ -47,7 +50,13 @@ class DepositForm extends CFormModel {
 
         $acquiringClass = 'Payment' . ucfirst($this->acquiring);
         $acquiring = Yii::app()->$acquiringClass;
-        return $acquiring($incompleteTransaction);
+
+        if ( false !== $acquiring($incompleteTransaction) ) {
+            $this->acqObject = $acquiring;
+            return true;
+        };
+
+        return false;
 
     }
 

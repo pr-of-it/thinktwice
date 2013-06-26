@@ -116,6 +116,13 @@ return array(
             ),
         ),
 
+        'PaymentUniteller' => array(
+            'class' => 'ext.paymentUniteller.PaymentUniteller',
+            'Shop_IDP' => '00001754',
+            'password' => 'lAJ4LFUkEiWHu2ycOTAVoNfAloEhVgaRp9Fch8HRFjqQpl0DY1P8uz19EXVrKUyq0k8sdXCTq2gOJYEV',
+            'Lifetime' => '3600',
+        ),
+
     ),
 
     // application-level parameters that can be accessed

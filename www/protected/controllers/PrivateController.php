@@ -25,7 +25,13 @@ class PrivateController extends Controller {
     {
         return array(
             array('allow',
-                'actions'=>array('index','services', 'deleteService','account', 'password', 'deposit'),
+                'actions'=>array(
+                    'index',
+                    'services', 'deleteService',
+                    'account',
+                    'password',
+                    'deposit', 'depositFail', 'depositSuccess'
+                ),
                 'roles'=>array('user'),
             ),
             array('deny',  // deny all users
@@ -41,6 +47,7 @@ class PrivateController extends Controller {
             'user' => $user,
         ));
     }
+
     public function actionAccount(){
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
@@ -139,13 +146,26 @@ class PrivateController extends Controller {
             $model->attributes=$_POST['DepositForm'];
             // validate user input and redirect to the previous page if valid
             if( $model->validate() )
-                $model->deposit();
+                $model->depositPrepare();
         }
 
         $this->render('deposit', array(
             'user' => $user,
             'model' => $model,
         ));
+
+    }
+
+    public function actionDepositFail() {
+
+        //@todo: Тупая заглушка, обрабатывать это должно расширение эквайера
+        $transaction = UserTransactionIncomplete::model()->findByPk(intval($_GET['Order_ID']));
+
+        if ( null == $transaction )
+            $this->redirect(array('/private/deposit'));
+
+        $transaction->delete();
+        $this->render('depositFail', array('transaction' => $transaction));
 
     }
 

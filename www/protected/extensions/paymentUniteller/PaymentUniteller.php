@@ -21,8 +21,8 @@ class PaymentUniteller extends CApplicationComponent {
     public $password;
 
     public function init() {
-        $this->URL_RETURN_OK = ('private/deposit_success');
-        $this->URL_RETURN_NO = Yii::app()->baseUrl . 'private/deposit_fail';
+        $this->URL_RETURN_OK = 'private/depositSuccess';
+        $this->URL_RETURN_NO = 'private/depositFail';
         return parent::init();
     }
 
@@ -39,8 +39,12 @@ class PaymentUniteller extends CApplicationComponent {
             md5($this->PT_Code='') . '&' . md5($this->password)
         ));
 
-        Yii::app()->controller->render('form', array('form', $this));
         return true;
+
+    }
+
+    public function getSubFormWidget() {
+        return __CLASS__ . 'Widget';
     }
 
 }
