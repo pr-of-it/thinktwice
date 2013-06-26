@@ -118,9 +118,17 @@ return array(
 
         'PaymentUniteller' => array(
             'class' => 'ext.paymentUniteller.PaymentUniteller',
-            'Shop_IDP' => '00001754',
-            'password' => 'lAJ4LFUkEiWHu2ycOTAVoNfAloEhVgaRp9Fch8HRFjqQpl0DY1P8uz19EXVrKUyq0k8sdXCTq2gOJYEV',
-            'Lifetime' => '3600',
+            'mode' => 'test',
+            'real' => array(
+                'Shop_IDP' => '00001754',
+                'password' => 'lAJ4LFUkEiWHu2ycOTAVoNfAloEhVgaRp9Fch8HRFjqQpl0DY1P8uz19EXVrKUyq0k8sdXCTq2gOJYEV',
+                'Lifetime' => '3600',
+            ),
+            'test' => array(
+                'Shop_IDP' => '1957',
+                'password' => 'rQuIEh5uMtyOOGDzEu8cc8mnw5FnkfTFMQIXNUXJO5A02GptaH4EhneIUBhhZQ7RqcYyZtSb0bY19Z6Q',
+                'Lifetime' => '3600',
+            ),
         ),
 
     ),
