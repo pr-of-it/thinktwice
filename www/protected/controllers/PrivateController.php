@@ -125,8 +125,10 @@ class PrivateController extends Controller {
 
     public function actionDeposit() {
         $user = User::model()->findByPk(Yii::app()->user->id);
+        $model = new DepositForm();
         $this->render('deposit', array(
-            'user' => $user
+            'user' => $user,
+            'model' => $model,
         ));
     }
 
