@@ -105,7 +105,7 @@ class User extends CActiveRecord
                 FROM ". UserRating::model()->tableName() ."
                 WHERE user_id=" . $this->id . "
             ")->queryScalar();
-            return floatval($result);
+            return $result;
         } else {
             return 0;
         }

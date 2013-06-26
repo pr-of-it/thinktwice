@@ -51,8 +51,9 @@
 	<br />
 
     <b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>
-    <?php echo sprintf("%01.1f", CHtml::encode($data->rating)); ?>
+    <?php $this->widget('ext.StarWidget.StarWidget', array('rating'=>$data->rating)); ?>
     <br />
+
 
 
     <h1>comments</h1>
