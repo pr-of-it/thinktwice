@@ -40,23 +40,23 @@ $this->breadcrumbs=array(
     <thead>
         <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
     </thead>
-    <?php foreach (array_slice($user->operations,-10,10) as $operation ): ?>
+    <?php foreach (array_slice($user->transactions,-10,10) as $transaction ): ?>
 
     <tr>
-        <td><?php echo $operation->id; ?></td>
-        <td><?php echo strstr($operation->time,'.',true); ?></td>
-        <td><?php echo sprintf("%01.2f", $operation->amount_before); ?></td>
+        <td><?php echo $transaction->id; ?></td>
+        <td><?php echo strstr($transaction->time,'.',true); ?></td>
+        <td><?php echo sprintf("%01.2f", $transaction->amount_before); ?></td>
 
         <td><?php
-        $formatted = sprintf("%01.2f", $operation->amount);
+        $formatted = sprintf("%01.2f", $transaction->amount);
         if($formatted >0){
             echo $formatted;
         }?></td>
         <td><?php if($formatted <0){
             echo $formatted;
         }?></td>
-        <td><?php echo $operation->reason; ?></td>
-        <td><?php echo sprintf("%01.2f", $operation->amount_after) ?></td>
+        <td><?php echo $transaction->reason; ?></td>
+        <td><?php echo sprintf("%01.2f", $transaction->amount_after) ?></td>
     </tr>
 
     <?php endforeach; ?>

@@ -44,13 +44,13 @@ class PrivateController extends Controller {
     public function actionAccount(){
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
-        $count=UserAccountOperation::model()->count($criteria);
+        $count=UserTransaction::model()->count($criteria);
         $pages=new CPagination($count);
         // элементов на страницу
         $pages->pageSize=10;
         $pages->applyLimit($criteria);
         $criteria->order = 'id DESC';
-        $models = UserAccountOperation::model()->findAll($criteria);
+        $models = UserTransaction::model()->findAll($criteria);
         $this->render('account', array(
             'models' => $models,
             'pages' => $pages

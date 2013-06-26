@@ -1,6 +1,6 @@
 <?php
 /* @var $this UserAccountOperationController */
-/* @var $model UserAccountOperation */
+/* @var $model UserTransaction */
 /* @var $form CActiveForm */
 ?>
 

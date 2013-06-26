@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "tt_user_account_operations".
+ * This is the model class for table "tt_user_transactions".
  *
- * The followings are the available columns in table 'tt_user_account_operations':
+ * The followings are the available columns in table 'tt_user_transactions':
  * @property integer $id
  * @property integer $user_id
  * @property string $amount
@@ -12,14 +12,14 @@
  * @property string $reason
  * @property string $time
  */
-class UserAccountOperation extends CActiveRecord
+class UserTransaction extends CActiveRecord
 {
     /**
      * @return string the associated database table name
      */
     public function tableName()
     {
-        return 'tt_user_account_operations';
+        return 'tt_user_transactions';
     }
 
     /**
@@ -138,7 +138,7 @@ class UserAccountOperation extends CActiveRecord
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return UserAccountOperation the static model class
+     * @return UserTransaction the static model class
      */
     public static function model($className=__CLASS__)
     {
