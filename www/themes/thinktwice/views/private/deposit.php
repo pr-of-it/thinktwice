@@ -1,1 +1,46 @@
+<?php
+
+/* @var $this PrivateController */
+/* @var $model DepositForm */
+/* @var $form CActiveForm  */
+
+$this->pageTitle=Yii::app()->name . ' - Пополнение счета';
+$this->breadcrumbs=array(
+    'Личный кабинет' => array('/private'),
+    'Пополнение счета',
+);
+?>
+
 <h1>Пополнение счета</h1>
+
+<div class="form">
+    <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'deposit-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+            'validateOnSubmit'=>true,
+        ),
+    )); ?>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'amount'); ?>
+        <?php echo $form->textField($model,'amount'); ?>
+        <?php echo $form->error($model,'amount'); ?>
+        <p class="hint">
+        </p>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'acquiring'); ?>
+        <?php echo $form->dropDownList($model,'acquiring', $model->acquirings); ?>
+        <?php echo $form->error($model,'acquiring'); ?>
+        <p class="hint">
+        </p>
+    </div>
+
+    <div class="row buttons">
+        <?php echo CHtml::submitButton('Пополнить счет'); ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
+</div><!-- form -->

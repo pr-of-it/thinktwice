@@ -115,4 +115,11 @@ class UserTransactionIncomplete extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function complete() {
+        $transaction = new UserTransaction();
+        $transaction->attributes = $this->attributes;
+        unset($transaction->attributes['id']);
+        $transaction->save();
+    }
 }
