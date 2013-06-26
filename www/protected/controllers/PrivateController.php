@@ -25,7 +25,7 @@ class PrivateController extends Controller {
     {
         return array(
             array('allow',
-                'actions'=>array('index','services', 'deleteService','account', 'password'),
+                'actions'=>array('index','services', 'deleteService','account', 'password', 'deposit'),
                 'roles'=>array('user'),
             ),
             array('deny',  // deny all users
@@ -122,4 +122,12 @@ class PrivateController extends Controller {
         }
         $this->render('password',array('model'=>$model));
     }
+
+    public function actionDeposit() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('deposit', array(
+            'user' => $user
+        ));
+    }
+
 }
