@@ -19,6 +19,8 @@
  * @property UserRole $role
  * @property UserService[] $services
  * @property User[] $followers
+ * @property UserTransaction[] $transactions
+ * @property UserTransactionIncomplete[] $transactions_incomplete
  */
 class User extends CActiveRecord
 {
@@ -64,9 +66,8 @@ class User extends CActiveRecord
             'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
-            'operations' => array(self::HAS_MANY, 'UserAccountOperation', 'user_id'),
-            #'rating' => array(self::HAS_MANY, 'UserRating', 'user_id', 'rater_id'),
-
+            'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
+            'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
         );
 	}
 
@@ -86,7 +87,7 @@ class User extends CActiveRecord
         if ( !$this->isNewRecord ) {
             return Yii::app()->db->createCommand("
                 SELECT amount_after
-                FROM " . UserAccountOperation::model()->tableName() . "
+                FROM " . UserTransaction::model()->tableName() . "
                 WHERE user_id=" . $this->id . "
                 ORDER BY id DESC
                 LIMIT 1
@@ -204,13 +205,17 @@ class User extends CActiveRecord
         return $this->role;
     }
 
+    public static function cryptPassword($password) {
+        return crypt($password);
+    }
+
     protected function beforeSave() {
         if ( $this->getIsNewRecord() ) {
-            $this->password = crypt($this->password);
+            $this->password = self::cryptPassword($this->password);
         } else {
             $old_password = self::model()->findByPk($this->id)->password;
             if ( $old_password != $this->password ) {
-                $this->password = crypt($this->password);
+                $this->password = self::cryptPassword($this->password);
             }
         }
        return parent::beforeSave();

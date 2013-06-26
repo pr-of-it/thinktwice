@@ -1,6 +1,6 @@
 <?php
 /* @var $this UserAccountOperationController */
-/* @var $model UserAccountOperation */
+/* @var $model UserTransaction */
 
 $this->breadcrumbs=array(
 	'User Account Operations'=>array('index'),

@@ -1,6 +1,6 @@
 <?php
 
-class UserAccountOperationController extends Controller
+class UserTransactionIncompleteController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,10 +27,18 @@ class UserAccountOperationController extends Controller
 	public function accessRules()
 	{
 		return array(
-            array('allow',
-                'actions'=>array('index','view', 'create', 'update', 'admin', 'delete'),
-                'roles'=>array('admin'),
-            ),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -54,14 +62,14 @@ class UserAccountOperationController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new UserAccountOperation;
+		$model=new UserTransactionIncomplete;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['UserAccountOperation']))
+		if(isset($_POST['UserTransactionIncomplete']))
 		{
-			$model->attributes=$_POST['UserAccountOperation'];
+			$model->attributes=$_POST['UserTransactionIncomplete'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -83,9 +91,9 @@ class UserAccountOperationController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['UserAccountOperation']))
+		if(isset($_POST['UserTransactionIncomplete']))
 		{
-			$model->attributes=$_POST['UserAccountOperation'];
+			$model->attributes=$_POST['UserTransactionIncomplete'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -114,7 +122,7 @@ class UserAccountOperationController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('UserAccountOperation');
+		$dataProvider=new CActiveDataProvider('UserTransactionIncomplete');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -125,10 +133,10 @@ class UserAccountOperationController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new UserAccountOperation('search');
+		$model=new UserTransactionIncomplete('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['UserAccountOperation']))
-			$model->attributes=$_GET['UserAccountOperation'];
+		if(isset($_GET['UserTransactionIncomplete']))
+			$model->attributes=$_GET['UserTransactionIncomplete'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -139,12 +147,12 @@ class UserAccountOperationController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return UserAccountOperation the loaded model
+	 * @return UserTransactionIncomplete the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=UserAccountOperation::model()->findByPk($id);
+		$model=UserTransactionIncomplete::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -152,11 +160,11 @@ class UserAccountOperationController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param UserAccountOperation $model the model to be validated
+	 * @param UserTransactionIncomplete $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-account-operation-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='user-transaction-incomplete-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

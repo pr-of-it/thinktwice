@@ -1,13 +1,13 @@
 <?php
-/* @var $this UserAccountOperationController */
-/* @var $model UserAccountOperation */
+/* @var $this UserTransactionIncompleteController */
+/* @var $model UserTransactionIncomplete */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-account-operation-form',
+	'id'=>'user-transaction-incomplete-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -35,6 +35,12 @@
 		<?php echo $form->labelEx($model,'reason'); ?>
 		<?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'reason'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'time'); ?>
+		<?php echo $form->textField($model,'time'); ?>
+		<?php echo $form->error($model,'time'); ?>
 	</div>
 
 	<div class="row buttons">

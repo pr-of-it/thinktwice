@@ -12,6 +12,9 @@ $this->breadcrumbs=array(
     <p>Ваш ID в сервисе <?php echo Yii::app()->user->service_user_id; ?></p>
 <?php endif; ?>
 
+<p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/password') ; ?>">Сменить пароль</a></p>
+
+
 <h4>Ваши аккаунты в других сетях:</h4>
 <ul>
 <?php foreach ( $user->services as $service ): ?>
@@ -37,27 +40,28 @@ $this->breadcrumbs=array(
     <thead>
         <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
     </thead>
-    <?php foreach (array_slice($user->operations,-10,10) as $operation ): ?>
+    <?php foreach (array_slice($user->transactions,-10,10) as $transaction ): ?>
 
     <tr>
-        <td><?php echo $operation->id; ?></td>
-        <td><?php echo strstr($operation->time,'.',true); ?></td>
-        <td><?php echo sprintf("%01.2f", $operation->amount_before); ?></td>
+        <td><?php echo $transaction->id; ?></td>
+        <td><?php echo strstr($transaction->time,'.',true); ?></td>
+        <td><?php echo sprintf("%01.2f", $transaction->amount_before); ?></td>
 
         <td><?php
-        $formatted = sprintf("%01.2f", $operation->amount);
+        $formatted = sprintf("%01.2f", $transaction->amount);
         if($formatted >0){
             echo $formatted;
         }?></td>
         <td><?php if($formatted <0){
             echo $formatted;
         }?></td>
-        <td><?php echo $operation->reason; ?></td>
-        <td><?php echo sprintf("%01.2f", $operation->amount_after) ?></td>
+        <td><?php echo $transaction->reason; ?></td>
+        <td><?php echo sprintf("%01.2f", $transaction->amount_after) ?></td>
     </tr>
 
     <?php endforeach; ?>
 </table>
+<a href="<?php echo Yii::app()->createAbsoluteUrl('/private/deposit') ; ?>">Пополнить счет</a></p>
 <a href="<?php echo Yii::app()->createAbsoluteUrl('/private/account') ; ?>">Полный список операций</a></p>
 
 

@@ -1,6 +1,6 @@
 <?php
-/* @var $this UserAccountOperationController */
-/* @var $data UserTransaction */
+/* @var $this UserTransactionIncompleteController */
+/* @var $data UserTransactionIncomplete */
 ?>
 
 <div class="view">

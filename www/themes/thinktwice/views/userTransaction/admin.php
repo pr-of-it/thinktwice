@@ -1,15 +1,15 @@
 <?php
 /* @var $this UserAccountOperationController */
-/* @var $model UserAccountOperation */
+/* @var $model UserTransaction */
 
 $this->breadcrumbs=array(
-	'User Account Operations'=>array('index'),
+	'User Transactions'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List UserAccountOperation', 'url'=>array('index')),
-	array('label'=>'Create UserAccountOperation', 'url'=>array('create')),
+	array('label'=>'List UserTransaction', 'url'=>array('index')),
+	array('label'=>'Create UserTransaction', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage User Account Operations</h1>
+<h1>Manage UserTransactions</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,7 +41,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'user-account-operation-grid',
+	'id'=>'user-transaction-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(

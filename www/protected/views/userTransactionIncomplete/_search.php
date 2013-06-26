@@ -1,6 +1,6 @@
 <?php
-/* @var $this UserAccountOperationController */
-/* @var $model UserAccountOperation */
+/* @var $this UserTransactionIncompleteController */
+/* @var $model UserTransactionIncomplete */
 /* @var $form CActiveForm */
 ?>
 
@@ -25,14 +25,7 @@
 		<?php echo $form->label($model,'amount'); ?>
 		<?php echo $form->textField($model,'amount',array('size'=>19,'maxlength'=>19)); ?>
 	</div>
-        <div class="row">
-		<?php echo $form->label($model,'amount_before'); ?>
-		<?php echo $form->textField($model,'amount_before',array('size'=>19,'maxlength'=>19)); ?>
-	</div>
-         <div class="row">
-		<?php echo $form->label($model,'amount_after'); ?>
-		<?php echo $form->textField($model,'amount_after',array('size'=>19,'maxlength'=>19)); ?>
-	</div>
+
 	<div class="row">
 		<?php echo $form->label($model,'reason'); ?>
 		<?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>255)); ?>
