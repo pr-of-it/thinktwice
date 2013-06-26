@@ -24,7 +24,8 @@ class PrivateController extends Controller {
     public function accessRules()
     {
         return array(
-            array('allow',
+            array(
+                'allow',
                 'actions'=>array(
                     'index',
                     'services', 'deleteService',
@@ -34,7 +35,15 @@ class PrivateController extends Controller {
                 ),
                 'roles'=>array('user'),
             ),
-            array('deny',  // deny all users
+            array(
+                'allow',
+                'actions'=>array(
+                    'depositResult'
+                ),
+                'roles'=>array('guest'),
+            ),
+            array(
+                'deny',  // deny all users
                 'users'=>array('*'),
             ),
         );
@@ -168,5 +177,22 @@ class PrivateController extends Controller {
         $this->render('depositFail', array('transaction' => $transaction));
 
     }
+
+    public function actionDepositSuccess() {
+
+        //@todo: Тупая заглушка, обрабатывать это должно расширение эквайера
+        $transaction = UserTransactionIncomplete::model()->findByPk(intval($_GET['Order_ID']));
+
+        if ( null == $transaction )
+            $this->redirect(array('/private/deposit'));
+
+        $this->render('depositSuccess', array('transaction' => $transaction));
+
+    }
+
+    public function actionDepositResult() {
+
+    }
+
 
 }
