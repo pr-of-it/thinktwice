@@ -14,6 +14,7 @@
  * @property integer $active
  * @property integer $can_consult
  * @property string $consult_price
+ * @property string $avatar
  *
  * The followings are the available model relations:
  * @property UserRole $role
@@ -48,10 +49,10 @@ class User extends CActiveRecord
             array('active, can_consult', 'boolean'),
             array('consult_price', 'numerical'),
             array('password, name, email', 'length', 'max'=>255),
-			array('register_time, update_time, roleid, phone', 'safe'),
+			array('register_time, update_time, roleid, avatar, phone', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name, email, phone, register_time, update_time, roleid, active, can_consult, consult_price', 'safe', 'on'=>'search'),
+			array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar, consult_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -152,6 +153,8 @@ class User extends CActiveRecord
 			'role' => Yii::t('User', 'Role'),
 			'can_consult' => Yii::t('User', 'Can consult'),
 			'consult_price' => Yii::t('User', 'Consult price'),
+            'avatar' => Yii::t('User', 'Avatar'),
+
 		);
 
 	}
@@ -183,6 +186,7 @@ class User extends CActiveRecord
 		$criteria->compare('update_time',$this->update_time,true);
         $criteria->compare('can_consult',$this->can_consult,true);
         $criteria->compare('consult_price',$this->consult_price,true);
+        $criteria->compare('avatar',$this->avatar,true);
 
         return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
