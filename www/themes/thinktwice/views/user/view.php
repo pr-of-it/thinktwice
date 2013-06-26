@@ -30,5 +30,6 @@ $this->menu=array(
         'consult_price',
 		'register_time',
 		'update_time',
+        'avatar',
 	),
 )); ?>

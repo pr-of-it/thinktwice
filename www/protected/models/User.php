@@ -26,6 +26,8 @@
 class User extends CActiveRecord
 {
 
+    const AVATAR_UPLOAD_FILE = '/upload/avatars/';
+
     public $amount;
 
     /**
@@ -53,7 +55,7 @@ class User extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar, consult_price', 'safe', 'on'=>'search'),
-		);
+ 		);
 	}
 
 	/**
@@ -223,6 +225,15 @@ class User extends CActiveRecord
             }
         }
        return parent::beforeSave();
+    }
+
+    protected function afterSave() {
+        $file = CUploadedFile::getInstance($this, 'avatar');
+        $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_FILE . $file->getName();
+        $file->saveAs($uploaded);
+        $this->avatar = self::AVATAR_UPLOAD_FILE . $file->getName();
+        $this->saveAttributes(array('avatar'=>$this->avatar));
+        return parent::afterSave();
     }
 
 }

@@ -9,6 +9,13 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('avatar')); ?>:</b>
+    <?php
+      if ( !$data -> avatar == null ) {
+            echo CHtml::image(Yii::app()->baseUrl . $data->avatar);
+      } ?>
+    <br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
