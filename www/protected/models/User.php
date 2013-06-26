@@ -19,6 +19,8 @@
  * @property UserRole $role
  * @property UserService[] $services
  * @property User[] $followers
+ * @property UserTransaction[] $transactions
+ * @property UserTransactionIncomplete[] $transactions_incomplete
  */
 class User extends CActiveRecord
 {
@@ -65,8 +67,7 @@ class User extends CActiveRecord
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
-            #'rating' => array(self::HAS_MANY, 'UserRating', 'user_id', 'rater_id'),
-
+            'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
         );
 	}
 
