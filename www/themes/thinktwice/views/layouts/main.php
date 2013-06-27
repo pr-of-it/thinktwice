@@ -32,8 +32,6 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'User cabinet', 'url'=>array('/private'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Invites', 'url'=>array('/invite')),
-				array('label'=>'Users', 'url'=>array('/user')),
                 array('label'=>'Rating', 'url'=>array('/userRating')),
                 array('label'=>'UserTransaction', 'url'=>array('/UserTransaction')),
                 array('label'=>'UserTransactionIncomplete', 'url'=>array('/UserTransactionIncomplete')),
