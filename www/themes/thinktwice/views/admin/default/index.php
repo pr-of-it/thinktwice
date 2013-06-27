@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
     array('label'=>'Пользователи', 'url'=>array('/admin/user')),
     array('label'=>'Инвайты', 'url'=>array('/admin/invite')),
+    array('label'=>'Рейтинги пользователей', 'url'=>array('/admin/userRating')),
     array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
     array('label'=>'Незавершенные транзакции', 'url'=>array('/admin/userTransactionIncomplete')),
     array('label'=>'Заявки на звонок', 'url'=>array('/admin/callRequest')),
