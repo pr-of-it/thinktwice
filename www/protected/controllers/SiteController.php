@@ -20,6 +20,7 @@ class SiteController extends Controller
 			),
 		);
 	}
+
     public function accessRules()
     {
         return array(
@@ -171,8 +172,7 @@ class SiteController extends Controller
         $this->render('register',array('model'=>$model));
     }
 
-    public function actionUserPage($id){
-
+    public function actionUserPage($id) {
         $model = User::model()->findByPk($id);
         if($model===null)
             throw new CHttpException(404,'Страница пользователя не найдена');
@@ -180,19 +180,21 @@ class SiteController extends Controller
         $this->render('userpage',array('model'=>$model));
     }
 
-    public function actionAddFollower($follower_id){
+    public function actionAddFollower($follower_id) {
+
         $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
 
         if($model!=null)
-            throw new CHttpException(404,'Страница не найдена');
+            $this->redirect(array('site/userpage','id'=>$follower_id));
 
         $model=new UserFollower;
         $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
         if($model->save())
             $this->redirect(array('site/userpage','id'=>$follower_id));
+
     }
 
-    public function actionDelFollower($follower_id){
+    public function actionDelFollower($follower_id) {
         $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
         if($model->delete())
             $this->redirect(array('site/userpage','id'=>$follower_id));
