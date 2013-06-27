@@ -5,15 +5,6 @@ class SiteController extends Controller
 	/**
 	 * Declares class-based actions.
 	 */
-    public function accessRules()
-    {
-        return array(
-            array('allow',
-                'actions'=>array('userPage'),
-                'roles'=>array('quest'),
-            ),
-        );
-    }
 	public function actions()
 	{
 		return array(
@@ -191,16 +182,5 @@ class SiteController extends Controller
         $this->render('restore',array('model'=>$model, 'success'=>$success));
 
     }
-
-
-     public function actionUserPage($id){
-
-         $model = User::model()->findByPk($id);
-         if($model===null)
-             throw new CHttpException(404,'Страница пользователя не найдена');
-
-         $this->render('userpage',array('model'=>$model));
-     }
-
 
 }

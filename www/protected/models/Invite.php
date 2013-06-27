@@ -120,7 +120,7 @@ class Invite extends CActiveRecord
         parent::afterSave();
         $url=Yii::app()->createAbsoluteUrl('site/register/?code='.$this->code.'&email='.$this->email);
         $th = iconv ("UTF-8","koi8-r",'Приглашение');
-        $text = 'Вас пригласил на thinktwice.ru пользователь : '.$this->inviter->login.
+        $text = 'Вас пригласил на thinktwice.ru пользователь : '.$this->inviter->name.
         "\r\nДля регистрации перейдите по ссылке: ".$url."\r\nКод регистрации : ".$this->code;
         $message = iconv("UTF-8","koi8-r", $text);
         mail($this->email, $th , $message); 

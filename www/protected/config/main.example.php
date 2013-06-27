@@ -32,6 +32,9 @@ return array(
     ),
 
     'modules'=>array(
+
+        'admin' => array(),
+
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'gii',

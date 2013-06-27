@@ -32,16 +32,12 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'User cabinet', 'url'=>array('/private'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Invites', 'url'=>array('/invite')),
-				array('label'=>'Users', 'url'=>array('/user')),
                 array('label'=>'Rating', 'url'=>array('/userRating')),
-                array('label'=>'UserTransaction', 'url'=>array('/UserTransaction')),
-                array('label'=>'UserTransactionIncomplete', 'url'=>array('/UserTransactionIncomplete')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Register', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Password restore', 'url'=>array('/site/restore'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Rating', 'url'=>array('/userRating')),
+                array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> Yii::app()->user->role == 'admin' ),
             )
 		)); ?>
 	</div><!-- mainmenu -->
