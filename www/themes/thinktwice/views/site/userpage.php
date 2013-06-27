@@ -3,7 +3,7 @@
 $this->pageTitle=Yii::app()->name . ' - User page';
 ?>
 
-    <h1>Страница пользователя</h1>
+<h1>Страница пользователя</h1>
 <table>
     <tr>
         <td>
@@ -16,21 +16,20 @@ $this->pageTitle=Yii::app()->name . ' - User page';
             <p>Роль:<?php echo $model->role->desc;?></p>
             <p>Проводит консультации:<?php
                 if ($model->can_consult === 1){
-                    echo 'да'; ?>
-                    <p>Стоимость консультации:<?php echo $model->consult_price;?></p>
-<?php
-                } else {
-                    echo 'нет';
-                };?></p>
-            <p><?php ?></p>
+                echo 'да'; ?>
+            <p>Стоимость консультации:<?php echo $model->consult_price;?></p>
             <?php
-                if (! Yii::app()->user->isGuest && $model->id != Yii::app()->user->id) {
-                    echo CHtml::link($label='Добавиться в фоловеры',
+            } else {
+                echo 'нет';
+            };?>
+            <?php
+            if (! Yii::app()->user->isGuest && $model->id != Yii::app()->user->id) {
+                echo CHtml::link($label='Добавиться в фоловеры',
                     $url = Yii::app()->createAbsoluteUrl('/site/addFollower',
-                    array ('follower_id'=>$model->id)));
-                }
+                        array ('follower_id'=>$model->id)));
+            }
             ?>
-         </td>
+        </td>
     </tr>
 
 </table>
