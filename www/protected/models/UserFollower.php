@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "tt_user_roles".
+ * This is the model class for table "tt_followers".
  *
- * The followings are the available columns in table 'tt_user_roles':
+ * The followings are the available columns in table 'tt_followers':
  * @property integer $id
- * @property string $name
+ * @property integer $user_id
+ * @property integer $follower_id
  */
-class UserRole extends CActiveRecord
+class UserFollower extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tt_user_roles';
+		return 'tt_followers';
 	}
 
 	/**
@@ -25,10 +26,10 @@ class UserRole extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'length', 'max'=>255),
+			array('user_id, follower_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, user_id, follower_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -40,7 +41,6 @@ class UserRole extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            #'user' => array(self::HAS_MANY, 'User', 'id')
 		);
 	}
 
@@ -51,7 +51,8 @@ class UserRole extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'user_id' => 'User',
+			'follower_id' => 'Follower',
 		);
 	}
 
@@ -74,7 +75,8 @@ class UserRole extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('follower_id',$this->follower_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -85,30 +87,13 @@ class UserRole extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UserRole the static model class
+	 * @return UserFollower the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    public function getDesc() {
-        switch ( $this->name ) {
-            case 'guest':
-                return 'Гость';
-            case 'admin':
-                return 'Администратор';
-            case 'operator':
-                return 'Опрератор';
-            case 'moderator':
-                return 'Модератор';
-            case 'expert':
-                return 'Эксперт';
-            case 'lector':
-                return 'лектор';
-            case 'user':
-                return 'Пользователь';
-
-        }
-    }
 }
+    public function addFollower($user_id, $follower_id){
+
+    }
