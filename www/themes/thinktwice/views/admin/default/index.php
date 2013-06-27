@@ -15,6 +15,8 @@ $this->menu=array(
     array('label'=>'Инвайты', 'url'=>array('/admin/invite')),
     array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
     array('label'=>'Незавершенные транзакции', 'url'=>array('/admin/userTransactionIncomplete')),
+    array('label'=>'Заявки на звонок', 'url'=>array('/admin/callRequest')),
+
 );
 ?>
 
