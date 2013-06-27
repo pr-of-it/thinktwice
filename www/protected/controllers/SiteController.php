@@ -184,7 +184,7 @@ class SiteController extends Controller
         $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
 
         if($model!=null)
-            throw new CHttpException(404,'Страница пользователя не найдена');
+            throw new CHttpException(404,'Страница не найдена');
 
         $model=new UserFollower;
         $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
