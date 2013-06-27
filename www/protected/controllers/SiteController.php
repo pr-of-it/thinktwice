@@ -161,6 +161,16 @@ class SiteController extends Controller
         $this->render('register',array('model'=>$model));
     }
 
+    public function actionUserPage($id){
+
+        $model = User::model()->findByPk($id);
+        if($model===null)
+            throw new CHttpException(404,'Страница пользователя не найдена');
+
+        $this->render('userpage',array('model'=>$model));
+    }
+
+
     public function actionRestore() {
 
         $model = new RestoreForm();
