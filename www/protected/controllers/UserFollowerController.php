@@ -142,12 +142,7 @@ class UserFollowerController extends Controller
 			'model'=>$model,
 		));
 	}
-    public function actionAddFollower($follower_id){
-        $model=new UserFollower;
-        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
-        if($model->save())
-            $this->redirect(array('site/userpage','id'=>$follower_id));
-    }
+
 
 
 
