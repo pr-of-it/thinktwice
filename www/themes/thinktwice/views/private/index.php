@@ -31,14 +31,28 @@ $this->breadcrumbs=array(
     <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
     <h4>Ваши followers:</h4>
-    <table>
-        <?php foreach ($user->followers as $follower ): ?>
-        <tr>
-            <td><?php #echo $follower->; ?></td>
-        </tr>
-        <?php endforeach; ?>
+<?php
+$dataProvider=new CActiveDataProvider($user->model());
+$dataProvider->setData($user->followers);
+ $this->widget('zii.widgets.grid.CGridView', array(
+    'id'=>'user-grid',
+    'dataProvider'=>$dataProvider,
+    'columns'=>array(
+        array(
+            'name' => 'ссылка',
+            'type' => 'raw',
+            'value' => 'CHtml::link(CHtml::encode($data->name),
+                         array("site/userpage","id" => $data->id))',
+        ),
+        'name',
+    ),
+));
 
-</table>
+echo CHtml::link('test', 'index.php');
+
+?>
+
+
 <h4>Ваш счет:</h4>
 <p>Сумма на счету: <?php echo sprintf("%01.2f", $user->getAmount()); ?></p>
 
