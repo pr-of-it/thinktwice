@@ -23,7 +23,13 @@ $this->pageTitle=Yii::app()->name . ' - User page';
                     echo 'нет';
                 };?></p>
             <p><?php ?></p>
-            <?php echo CHtml::linkButton($label='Добавить в фоловеры', )?>
+            <?php
+                if (! Yii::app()->user->isGuest && $model->id != Yii::app()->user->id) {
+                    echo CHtml::link($label='Добавиться в фоловеры',
+                    $url = Yii::app()->createAbsoluteUrl('/site/addFollower',
+                    array ('follower_id'=>$model->id)));
+                }
+            ?>
          </td>
     </tr>
 

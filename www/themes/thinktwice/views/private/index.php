@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
     <table>
         <?php foreach ($user->followers as $follower ): ?>
         <tr>
-            <td><?php echo $follower->login; ?></td>
+            <td><?php #echo $follower->; ?></td>
         </tr>
         <?php endforeach; ?>
 

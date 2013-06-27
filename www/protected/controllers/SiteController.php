@@ -20,6 +20,15 @@ class SiteController extends Controller
 			),
 		);
 	}
+    public function accessRules()
+    {
+        return array(
+            array('allow',  // allow all users to perform 'index' and 'view' actions
+                'actions'=>array('index','view',),
+                'users'=>array('*'),
+            )
+        );
+    }
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -161,6 +170,23 @@ class SiteController extends Controller
         // display the login form
         $this->render('register',array('model'=>$model));
     }
+
+    public function actionUserPage($id){
+
+        $model = User::model()->findByPk($id);
+        if($model===null)
+            throw new CHttpException(404,'Страница пользователя не найдена');
+
+        $this->render('userpage',array('model'=>$model));
+    }
+
+    public function actionAddFollower($follower_id){
+        $model=new UserFollower;
+        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
+        if($model->save())
+            $this->redirect(array('site/userpage','id'=>$follower_id));
+    }
+
 
     public function actionRestore() {
 
