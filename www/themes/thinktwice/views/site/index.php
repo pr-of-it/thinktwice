@@ -4,7 +4,6 @@
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'user-grid',
     'dataProvider'=>User::model()->search(),
-    'filter'=>$user,
     'columns'=>array(
         'id',
         array(
