@@ -187,6 +187,11 @@ class SiteController extends Controller
             $this->redirect(array('site/userpage','id'=>$follower_id));
     }
 
+    public function actionDelFollower($follower_id){
+        $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
+        if($model->delete())
+            $this->redirect(array('site/userpage','id'=>$follower_id));
+    }
 
     public function actionRestore() {
 
