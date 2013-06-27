@@ -32,7 +32,7 @@ class UserFollowerController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','addfollower'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -142,6 +142,15 @@ class UserFollowerController extends Controller
 			'model'=>$model,
 		));
 	}
+    public function actionAddFollower($follower_id){
+        $model=new UserFollower;
+        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
+        if($model->save())
+            $this->redirect(array('site/userpage','id'=>$follower_id));
+    }
+
+
+
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

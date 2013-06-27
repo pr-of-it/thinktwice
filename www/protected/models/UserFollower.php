@@ -93,7 +93,7 @@ class UserFollower extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-}
-    public function addFollower($user_id, $follower_id){
 
-    }
+
+}
+

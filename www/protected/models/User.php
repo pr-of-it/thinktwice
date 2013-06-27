@@ -179,7 +179,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
         $criteria->compare('password',$this->password,true);
-        $criteria->compare('name',$this->name,true);
+        $criteria->compare('name',$this->password,true);
 		$criteria->compare('email',$this->email,true);
         $criteria->compare('roleid',$this->roleid,true);
         $criteria->compare('active',$this->active,true);
