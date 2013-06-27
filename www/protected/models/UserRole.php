@@ -91,4 +91,24 @@ class UserRole extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getDesc() {
+        switch ( $this->name ) {
+            case 'guest':
+                return 'Гость';
+            case 'admin':
+                return 'Администратор';
+            case 'operator':
+                return 'Опрератор';
+            case 'moderator':
+                return 'Модератор';
+            case 'expert':
+                return 'Эксперт';
+            case 'lector':
+                return 'лектор';
+            case 'user':
+                return 'Пользователь';
+
+        }
+    }
 }
