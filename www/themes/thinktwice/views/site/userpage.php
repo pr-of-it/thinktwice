@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name . ' - User page';
                     echo 'нет';
                 };?></p>
             <p><?php ?></p>
-            <?php echo CHtml::linkButton($label='Добавить в фоловеры')?>
+            <?php echo CHtml::linkButton($label='Добавить в фоловеры', )?>
          </td>
     </tr>
 

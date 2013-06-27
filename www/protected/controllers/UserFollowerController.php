@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller
+class UserFollowerController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,9 +27,17 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',
-				'actions'=>array('index','view', 'create', 'update', 'admin', 'delete'),
-				'roles'=>array('admin'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -46,7 +54,6 @@ class UserController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
-
 	}
 
 	/**
@@ -55,18 +62,17 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model=new UserFollower;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['UserFollower']))
 		{
-			$model->attributes=$_POST['User'];
-			if($model->save()) {
-                $this->redirect(array('view','id'=>$model->id));
-            }
-        }
+			$model->attributes=$_POST['UserFollower'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -85,9 +91,9 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['UserFollower']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['UserFollower'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -116,7 +122,7 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$dataProvider=new CActiveDataProvider('UserFollower');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -127,10 +133,10 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+		$model=new UserFollower('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		if(isset($_GET['UserFollower']))
+			$model->attributes=$_GET['UserFollower'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -141,12 +147,12 @@ class UserController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return User the loaded model
+	 * @return UserFollower the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		$model=UserFollower::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -154,17 +160,14 @@ class UserController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param User $model the model to be validated
+	 * @param UserFollower $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='user-follower-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-     
 }
-
-
