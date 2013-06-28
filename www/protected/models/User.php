@@ -219,6 +219,10 @@ class User extends CActiveRecord
         return $this->role;
     }
 
+    public function getOperatorCallRequests() {
+        return CallRequest::model()->findAllByAttributes(array('status' => CallRequest::STATUS_CREATED));
+    }
+
     public static function cryptPassword($password, $salt=null) {
         return crypt($password, $salt);
     }
