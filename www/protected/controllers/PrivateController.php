@@ -31,7 +31,7 @@ class PrivateController extends Controller {
                     'services', 'deleteService',
                     'account',
                     'password',
-                    'deposit', 'depositFail', 'depositSuccess'
+                    'deposit', 'depositFail', 'depositSuccess','callRequest',
                 ),
                 'roles'=>array('user'),
             ),
@@ -140,7 +140,7 @@ class PrivateController extends Controller {
     }
 
     public function actionDeposit() {
-
+        var_dump($_SESSION);
         $user = User::model()->findByPk(Yii::app()->user->id);
         $model = new DepositForm();
 
@@ -194,5 +194,17 @@ class PrivateController extends Controller {
 
     }
 
-    
+    public function actionCallRequest($expert_id) {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $expert = User::model()->findByPk($expert_id);
+
+        if ( $user->getAmount() < $expert->consult_price ) {
+            $amount = $expert->consult_price - $user->getAmount();
+            Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
+            $this->redirect(array('/private/deposit'));
+        }else{
+
+        }
+    }
+
 }

@@ -22,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' - User page';
                 <br />
                 <?php
                 if ( $user->role->name == 'expert' ) {
-                    echo CHtml::link($label='Заказать консультацию', $url = Yii::app()->createAbsoluteUrl('/private/orderConsult',
-                        array ('consult_price'=>$user->consult_price)));
+                    echo CHtml::link($label='Заказать консультацию', $url = Yii::app()->createAbsoluteUrl('/private/callrequest',
+                        array ('expert_id'=> $user->id,'consult_price'=>$user->consult_price)));
                 }
                 ?>
             </p>
