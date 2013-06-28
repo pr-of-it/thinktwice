@@ -24,6 +24,7 @@ $this->pageTitle=Yii::app()->name . ' - User page';
                 echo 'нет';
             };?>
             <?php
+            var_dump($model->followers);
             if (! Yii::app()->user->isGuest && $model->id != Yii::app()->user->id) {
                 echo CHtml::link($label='Добавиться в фоловеры',
                     $url = Yii::app()->createAbsoluteUrl('/site/addFollower',
