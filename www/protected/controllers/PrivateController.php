@@ -194,5 +194,5 @@ class PrivateController extends Controller {
 
     }
 
-
+    
 }
