@@ -16,12 +16,17 @@ $this->pageTitle=Yii::app()->name . ' - User page';
             <p>Роль:<?php echo $user->role->desc;?></p>
             <p>Проводит консультации:<?php
                 if ($user->can_consult === 1){
-                echo 'да'; ?>
+                echo 'да';
+                ?>
             <p>Стоимость консультации:<?php echo $user->consult_price;?></p>
             <?php
             } else {
                 echo 'нет';
             };?>
+            <?php if ( $user->roleid == 4 && $user->can_consult === 1 )
+                echo CHtml::link($label='заказать услугу', $url = '#');
+                ?>
+            </br>
             <?php
             if ( !Yii::app()->user->isGuest && $user->id != Yii::app()->user->id ) {
 
