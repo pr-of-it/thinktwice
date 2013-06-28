@@ -206,7 +206,11 @@ class PrivateController extends Controller {
 
             $this->redirect(array('/private/deposit','amount'=>$amount));
         }else{
-
+            $model = new CallRequest();
+            $model->attributes = array('user_id'=>Yii::app()->user->id,'caller_id'=>$expert_id);
+            if ( $model->save() ) {
+                $this->redirect(array('site/userpage','id'=>$expert_id));
+            }
         }
     }
 
