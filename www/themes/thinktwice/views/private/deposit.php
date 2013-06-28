@@ -13,7 +13,6 @@ $this->breadcrumbs=array(
 
 <h1>Пополнение счета</h1>
 <?php echo Yii::app()->user->getFlash("NO_AMOUNT"); ?>
-
 <?php if ( null === $model->acqObject ) : ?>
 
 <div class="form">

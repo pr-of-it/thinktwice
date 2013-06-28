@@ -6,19 +6,19 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-    'htmlOptions' => array('enctype' => 'multipart/form-data'),
-)); ?>
+    <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'user-form',
+        // Please note: When you enable ajax validation, make sure the corresponding
+        // controller action is handling ajax validation correctly.
+        // There is a call to performAjaxValidation() commented in generated controller code.
+        // See class documentation of CActiveForm for details on this.
+        'enableAjaxValidation'=>false,
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
+    )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
@@ -27,33 +27,33 @@
     </div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
+        <?php echo $form->labelEx($model,'password'); ?>
+        <?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
+        <?php echo $form->error($model,'password'); ?>
+    </div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name'); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
+        <?php echo $form->labelEx($model,'name'); ?>
+        <?php echo $form->textField($model,'name'); ?>
+        <?php echo $form->error($model,'name'); ?>
+    </div>
     <div class="row">
-		<?php echo $form->labelEx($model,'phone'); ?>
-		<?php echo $form->textField($model,'phone'); ?>
-		<?php echo $form->error($model,'phone'); ?>
-	</div>
+        <?php echo $form->labelEx($model,'phone'); ?>
+        <?php echo $form->textField($model,'phone'); ?>
+        <?php echo $form->error($model,'phone'); ?>
+    </div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'active'); ?>
-		<?php echo $form->checkBox($model,'active'); ?>
-		<?php echo $form->error($model,'active'); ?>
-	</div>
+        <?php echo $form->labelEx($model,'active'); ?>
+        <?php echo $form->checkBox($model,'active'); ?>
+        <?php echo $form->error($model,'active'); ?>
+    </div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'can_consult'); ?>
-		<?php echo $form->checkBox($model,'can_consult'); ?>
-		<?php echo $form->error($model,'can_consult'); ?>
-	</div>
+        <?php echo $form->labelEx($model,'can_consult'); ?>
+        <?php echo $form->checkBox($model,'can_consult'); ?>
+        <?php echo $form->error($model,'can_consult'); ?>
+    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'consult_price'); ?>
@@ -73,10 +73,10 @@
         <?php echo $form->error($model,'avatar'); ?>
     </div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+    <div class="row buttons">
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    </div>
 
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- form -->
