@@ -14,14 +14,24 @@ $this->pageTitle=Yii::app()->name . ' - User page';
             <p>Имя пользователя:<?php echo $user->name;?></p>
             <p>Email:<?php echo $user->email;?></p>
             <p>Роль:<?php echo $user->role->desc;?></p>
-            <p>Проводит консультации:<?php
-                if ($user->can_consult === 1){
+            <p>Проводит консультации:
+                <?php
+                if ($user->can_consult == 1){
                 echo 'да'; ?>
-            <p>Стоимость консультации:<?php echo $user->consult_price;?></p>
+            <p>Стоимость консультации: <?php echo $user->consult_price; ?>
+                <br />
+                <?php
+                if ( $user->role->name == 'expert' ) {
+                    echo CHtml::link($label='Заказать консультацию', $url='#');
+                }
+                ?>
+            </p>
             <?php
             } else {
                 echo 'нет';
-            };?>
+            }
+            ?>
+            <br />
             <?php
             if ( !Yii::app()->user->isGuest && $user->id != Yii::app()->user->id ) {
 
