@@ -139,10 +139,12 @@ class PrivateController extends Controller {
         $this->render('password',array('model'=>$model));
     }
 
-    public function actionDeposit() {
+    public function actionDeposit($amount=null) {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $model = new DepositForm();
-
+        if ( null != $amount ) {
+            $model->amount = $amount;
+        }
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
             echo CActiveForm::validate($model);
