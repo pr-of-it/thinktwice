@@ -7,26 +7,33 @@ $this->pageTitle=Yii::app()->name . ' - User page';
 <table>
     <tr>
         <td>
-            <p> <?php echo  CHtml::image(Yii::app()->baseUrl . $model->avatar);?> </p>
+            <p> <?php echo  CHtml::image(Yii::app()->baseUrl . $user->avatar);?> </p>
 
         </td>
         <td>
-            <p>Имя пользователя:<?php echo $model->name;?></p>
-            <p>Email:<?php echo $model->email;?></p>
-            <p>Роль:<?php echo $model->role->desc;?></p>
+            <p>Имя пользователя:<?php echo $user->name;?></p>
+            <p>Email:<?php echo $user->email;?></p>
+            <p>Роль:<?php echo $user->role->desc;?></p>
             <p>Проводит консультации:<?php
-                if ($model->can_consult === 1){
+                if ($user->can_consult === 1){
                 echo 'да'; ?>
-            <p>Стоимость консультации:<?php echo $model->consult_price;?></p>
+            <p>Стоимость консультации:<?php echo $user->consult_price;?></p>
             <?php
             } else {
                 echo 'нет';
             };?>
             <?php
-            if (! Yii::app()->user->isGuest && $model->id != Yii::app()->user->id) {
-                echo CHtml::link($label='Добавиться в фоловеры',
-                    $url = Yii::app()->createAbsoluteUrl('/site/addFollower',
-                        array ('follower_id'=>$model->id)));
+            if ( !Yii::app()->user->isGuest && $user->id != Yii::app()->user->id ) {
+
+                if ( !$currentUser->doesFollow($user->id) ) {
+                    echo CHtml::link($label='Добавиться в фоловеры',
+                        $url = Yii::app()->createAbsoluteUrl('/site/addFollower',
+                            array ('follower_id'=>$user->id)));
+                }else{
+                    echo CHtml::link($label = 'Удалиться из фолловеров',
+                        $url = Yii::app()->createAbsoluteUrl('/site/delFollower',
+                            array ( 'follower_id'=>$user->id )));
+                }
             }
             ?>
         </td>

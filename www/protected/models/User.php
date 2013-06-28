@@ -113,6 +113,15 @@ class User extends CActiveRecord
         }
     }
 
+    public function doesFollow($follower_id) {
+
+    foreach ( $this->followers as $follow ) {
+        if ( $follower_id == $follow->id )
+            return true;
+    }
+    return false;
+}
+
 
     /**
      * @return array behaviors
