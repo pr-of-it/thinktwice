@@ -201,12 +201,14 @@ class PrivateController extends Controller {
 
         if ( $user->getAmount() < $expert->consult_price ) {
             $amount = $expert->consult_price - $user->getAmount();
+
             Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
+
             $this->redirect(array('/private/deposit','amount'=>$amount));
         }else{
             $model = new CallRequest();
             $model->attributes = array('user_id'=>Yii::app()->user->id,'caller_id'=>$expert_id);
-            if ( $model->save() ){
+            if ( $model->save() ) {
                 $this->redirect(array('site/userpage','id'=>$expert_id));
             }
         }
