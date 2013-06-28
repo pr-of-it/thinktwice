@@ -31,7 +31,7 @@ class PrivateController extends Controller {
                     'services', 'deleteService',
                     'account',
                     'password',
-                    'deposit', 'depositFail', 'depositSuccess'
+                    'deposit', 'depositFail', 'depositSuccess','callRequest',
                 ),
                 'roles'=>array('user'),
             ),
@@ -139,11 +139,12 @@ class PrivateController extends Controller {
         $this->render('password',array('model'=>$model));
     }
 
-    public function actionDeposit() {
-
+    public function actionDeposit($amount=null) {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $model = new DepositForm();
-
+        if ( null != $amount ) {
+            $model->amount = $amount;
+        }
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
             echo CActiveForm::validate($model);
@@ -194,5 +195,23 @@ class PrivateController extends Controller {
 
     }
 
+    public function actionCallRequest($expert_id) {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $expert = User::model()->findByPk($expert_id);
+
+        if ( $user->getAmount() < $expert->consult_price ) {
+            $amount = $expert->consult_price - $user->getAmount();
+
+            Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
+
+            $this->redirect(array('/private/deposit','amount'=>$amount));
+        }else{
+            $model = new CallRequest();
+            $model->attributes = array('user_id'=>Yii::app()->user->id,'caller_id'=>$expert_id);
+            if ( $model->save() ) {
+                $this->redirect(array('site/userpage','id'=>$expert_id));
+            }
+        }
+    }
 
 }
