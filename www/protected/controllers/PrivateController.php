@@ -199,9 +199,7 @@ class PrivateController extends Controller {
 
         if ( $user->getAmount() < $expert->consult_price ) {
             $amount = $expert->consult_price - $user->getAmount();
-
             Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
-
             $this->redirect(array('/private/deposit','amount'=>$amount));
         }else{
 
