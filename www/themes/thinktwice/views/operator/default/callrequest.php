@@ -34,8 +34,8 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php echo $form->labelEx($callRequest,'Причина отклонения'); ?>
-        <?php echo $form->textField($callRequest,'title',array('size'=>40,'maxlength'=>255)); ?>
-        <?php echo $form->error($callRequest,'title'); ?>
+        <?php echo $form->textField($callRequest,'comments'); ?>
+        <?php echo $form->error($callRequest,'comments'); ?>
     </div>
 
     <div class="row buttons">

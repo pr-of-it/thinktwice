@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 /* @var $model RegisterForm */
 /* @var $form CActiveForm  */
+/* @var $success boolean  */
 
 $this->pageTitle=Yii::app()->name . ' - Password restore';
 $this->breadcrumbs=array(

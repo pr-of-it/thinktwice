@@ -121,13 +121,16 @@ class PrivateController extends Controller {
     }
 
     public function actionPassword() {
+
         $model = new ChangePasswordForm();
+
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+
         if(isset($_POST['ChangePasswordForm']))
         {
             $model->attributes=$_POST['ChangePasswordForm'];
@@ -136,7 +139,9 @@ class PrivateController extends Controller {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
+
         $this->render('password',array('model'=>$model));
+
     }
 
     public function actionDeposit($amount=null) {
