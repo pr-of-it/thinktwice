@@ -133,13 +133,13 @@ class CallRequest extends CActiveRecord
 	}
 
     public function beforeSave() {
-        parent::beforeSave();
         $this->comments_json = json_encode($this->comments);
+        return parent::beforeSave();
     }
 
     public function afterFind() {
-        parent::afterFind();
         $this->comments = json_decode($this->comments_json);
+        return parent::afterFind();
     }
 
     public function getStatusDesc() {
