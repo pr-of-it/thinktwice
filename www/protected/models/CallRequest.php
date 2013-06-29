@@ -128,4 +128,16 @@ class CallRequest extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getStatusDesc() {
+        switch ( $this->status ) {
+            case '0':
+                return 'Новая заявка';
+            case '1':
+                return 'Заявка принята';
+            case '100':
+                return 'Заявка отклонена';
+
+        }
+    }
 }

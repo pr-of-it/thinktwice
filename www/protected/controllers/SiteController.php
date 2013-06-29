@@ -203,7 +203,7 @@ class SiteController extends Controller
             $this->redirect(array('site/userpage','id'=>$follower_id));
     }
 
-    public function actionCallrequest($id){
+    public function actionCallRequest($id){
         $callRequest = CallRequest::model()->findByPk($id);
         $this->render( 'callrequest',array (
               'callRequest' => $callRequest,
