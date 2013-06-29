@@ -37,6 +37,8 @@ return array(
 
         'operator' => array(),
 
+        'expert' => array(),
+
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'gii',

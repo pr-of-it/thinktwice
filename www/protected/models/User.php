@@ -220,8 +220,17 @@ class User extends CActiveRecord
     }
 
     public function getOperatorCallRequests() {
-        return CallRequest::model()->findAllByAttributes(array('status' => CallRequest::STATUS_CREATED));
+        return CallRequest::model()->findAllByAttributes(array(
+            'status' => CallRequest::STATUS_CREATED));
     }
+
+    public function getExpertCallRequests() {
+        return CallRequest::model()->findAllByAttributes(array(
+            'status' => CallRequest::STATUS_MODERATED,
+            'caller_id' => $this->id
+        ));
+    }
+
 
     public function sendMessage($subject, $message, $methods = array()) {
 

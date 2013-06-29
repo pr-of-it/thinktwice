@@ -18,7 +18,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
 <?php echo CHtml::link('Подтвердить', array(
     'default/updatestatus/',
     'id'=>$callRequest->id,
-    'status'=>1,
+    'status'=>CallRequest::STATUS_MODERATED,
 )); ?>
 
 <div class="form">
