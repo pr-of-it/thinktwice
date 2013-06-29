@@ -12,6 +12,7 @@ $this->breadcrumbs=array(
     $dataProvider = new CActiveDataProvider($user->model());
     $dataProvider->setData($user->getOperatorCallRequests());
 echo '<pre>';
+var_dump($callRequest->user->name);
     $this->widget('zii.widgets.grid.CGridView', array(
         'id'=>'callrequest-grid',
         'dataProvider'=>$dataProvider,
