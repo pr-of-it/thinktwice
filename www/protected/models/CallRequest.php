@@ -26,7 +26,7 @@ class CallRequest extends CActiveRecord
     const STATUS_REJECTED = 100;
     const STATUS_COMPLETE = 200;
 
-    public $commments = array();
+    public $comments = array();
 
 	/**
 	 * @return string the associated database table name
@@ -139,6 +139,7 @@ class CallRequest extends CActiveRecord
 
     public function afterFind() {
         parent::afterFind();
+        $this->comments = json_decode($this->comments_json);
     }
 
     public function getStatusDesc() {
