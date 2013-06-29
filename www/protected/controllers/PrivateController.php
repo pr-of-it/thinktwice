@@ -27,7 +27,7 @@ class PrivateController extends Controller {
             array(
                 'allow',
                 'actions'=>array(
-                    'index',
+                    'index', 'profile',
                     'services', 'deleteService',
                     'account',
                     'password',
@@ -50,11 +50,28 @@ class PrivateController extends Controller {
     }
 
     public function actionIndex() {
-
         $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
         $this->render('index', array(
             'user' => $user,
         ));
+    }
+
+
+    public function actionProfile() {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        if(isset($_POST['User']))
+        {
+            $user->attributes=$_POST['User'];
+            if($user->save())
+                $this->redirect(array('/private'));
+        }
+
+        $this->render('profile', array(
+            'user' => $user,
+        ));
+
     }
 
     public function actionAccount(){
@@ -121,13 +138,16 @@ class PrivateController extends Controller {
     }
 
     public function actionPassword() {
+
         $model = new ChangePasswordForm();
+
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+
         if(isset($_POST['ChangePasswordForm']))
         {
             $model->attributes=$_POST['ChangePasswordForm'];
@@ -136,7 +156,9 @@ class PrivateController extends Controller {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
+
         $this->render('password',array('model'=>$model));
+
     }
 
     public function actionDeposit($amount=null) {

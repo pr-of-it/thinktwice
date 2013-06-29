@@ -14,7 +14,8 @@
  * @property string $alter_call_time_1
  * @property string $alter_call_time_2
  * @property string $duration
- * @property string $comments
+ * @property string $comments_json
+ * @property array $comments
  */
 class CallRequest extends CActiveRecord
 {
@@ -24,6 +25,8 @@ class CallRequest extends CActiveRecord
     const STATUS_ACCEPTED = 2;
     const STATUS_REJECTED = 100;
     const STATUS_COMPLETE = 200;
+
+    public $comments = array();
 
 	/**
 	 * @return string the associated database table name
@@ -43,10 +46,10 @@ class CallRequest extends CActiveRecord
 		return array(
 			array('user_id, caller_id, status', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
-			array('text, call_time, alter_call_time_1, alter_call_time_2, duration, comments', 'safe'),
+			array('text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, caller_id, title, text, status, call_time, alter_call_time_1, alter_call_time_2, duration, comments', 'safe', 'on'=>'search'),
+			array('id, user_id, caller_id, title, text, status, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,6 +82,7 @@ class CallRequest extends CActiveRecord
 			'alter_call_time_1' => 'Alter Call Time 1',
 			'alter_call_time_2' => 'Alter Call Time 2',
 			'duration' => 'Duration',
+			'comments_json' => 'Comments JSON',
 			'comments' => 'Comments',
 		);
 	}
@@ -111,7 +115,6 @@ class CallRequest extends CActiveRecord
 		$criteria->compare('alter_call_time_1',$this->alter_call_time_1,true);
 		$criteria->compare('alter_call_time_2',$this->alter_call_time_2,true);
 		$criteria->compare('duration',$this->duration,true);
-		$criteria->compare('comments',$this->comments,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -128,4 +131,26 @@ class CallRequest extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function beforeSave() {
+        $this->comments_json = json_encode($this->comments);
+        return parent::beforeSave();
+    }
+
+    public function afterFind() {
+        $this->comments = json_decode($this->comments_json);
+        return parent::afterFind();
+    }
+
+    public function getStatusDesc() {
+        switch ( $this->status ) {
+            case '0':
+                return 'Новая заявка';
+            case '1':
+                return 'Заявка принята';
+            case '100':
+                return 'Заявка отклонена';
+
+        }
+    }
 }

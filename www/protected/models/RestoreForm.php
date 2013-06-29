@@ -37,6 +37,7 @@ class RestoreForm extends CFormModel
 	 */
 	public function restore()
 	{
+
         $user = User::model()->findByAttributes(array('email' => $this->email));
         if ( null == $user ) {
             $this->addError('email', 'Пользователь с таким адресом не зарегистрирован');
@@ -45,20 +46,19 @@ class RestoreForm extends CFormModel
 
         $user->password = substr(md5(time().uniqid()), 0, 12 );
 
-        $name='=?UTF-8?B?'.base64_encode(Yii::app()->name).'?=';
-        $subject='=?UTF-8?B?'.base64_encode('Восстановление пароля на ').'?=';
-        $headers="From: $name <{Yii::app()->params['adminEmail']}>\r\n".
-            "Reply-To: {Yii::app()->params['adminEmail']}\r\n".
-            "MIME-Version: 1.0\r\n".
-            "Content-type: text/plain; charset=UTF-8";
-        $body = 'Уважаемый пользователь! Ваш пароль изменен на ' . $user->password;
-        if ( !mail($user->email,$subject,$body,$headers) ) {
+        $mailResult = $user->sendMessage(
+            'Восстановление пароля на thinktwice.ru',
+            'Уважаемый пользователь! Ваш пароль изменен на ' . $user->password,
+            array('email')
+        );
+
+        if ( !$mailResult ) {
             Yii::app()->user->setFlash('restore','Передача письма с новым паролем не удалась');
             return false;
         };
 
         $user->save();
-        Yii::app()->user->setFlash('restore','Письмо с новым паролем отправлено Вам на указанный адрес.');
+        Yii::app()->user->setFlash('restore','Письмо с новым паролем отправлено Вам на Ваш адрес e-mail.');
 
         return true;
 

@@ -19,6 +19,7 @@ $this->breadcrumbs=array(
             <?php endif; ?>
 
             <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/password') ; ?>">Сменить пароль</a></p>
+            <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/profile') ; ?>">Редактировать профиль</a></p>
         </td>
     </tr>
 </table>
@@ -29,32 +30,6 @@ $this->breadcrumbs=array(
     <?php endforeach; ?>
 </ul>
 <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
-
-<?php if ( $user->role->name == 'operator' ) {?>
-    <h4>Заявки на звонок:</h4>
-<?php
-
-    $dataProvider = new CActiveDataProvider($user->model());
-    $dataProvider->setData($user->getOperatorCallRequests());
-   // var_dump($user->getOperatorCallRequests());
-    $this->widget('zii.widgets.grid.CGridView', array(
-        'id'=>'callrequest-grid',
-        'dataProvider'=>$dataProvider,
-        'columns'=>array(
-              array(
-                 'name' => 'заявка',
-                 'type' => 'raw',
-                 'value' => 'CHtml::link(CHtml::encode($data->id),
-                         array("site/callrequest","id" => $data->id))',
-         ),
-
-            'title',
-            'call_time',
-            'duration',
-        ),
-    ));
-
-}?>
 
 
 

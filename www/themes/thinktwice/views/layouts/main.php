@@ -37,6 +37,8 @@
 				array('label'=>'Password restore', 'url'=>array('/site/restore'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> Yii::app()->user->role == 'admin' ),
+                array('label'=>'Панель оператора', 'url'=>array('/operator'), 'visible'=> Yii::app()->user->role == 'operator' ),
+                array('label'=>'Панель эксперта', 'url'=>array('/expert'), 'visible'=> Yii::app()->user->role == 'expert' ),
             )
 		)); ?>
 	</div><!-- mainmenu -->
