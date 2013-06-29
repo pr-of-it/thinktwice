@@ -11,7 +11,7 @@ class Sms extends CComponent {
         if ( false === $result ) {
             return false;
         }
-        echo $result;die;
+       return true;
     }
 
 }
