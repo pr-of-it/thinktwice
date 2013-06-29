@@ -3,7 +3,10 @@ $this->pageTitle=Yii::app()->name . ' - Заявка';
 $this->breadcrumbs=array(
     'Все заявки'=>array('index'),
     'Заявка №:' . $callRequest->id,
-);?>
+);
+
+echo Yii::app()->user->getFlash('FAIL_WRITE');
+?>
 <p>Тема заявки: <?php echo $callRequest->title;?></p>
 <p>Текст заявки: <?php echo $callRequest->text;?></p>
 <p>Желаемое время истполнения заявки: <?php echo $callRequest->call_time;?></p>
@@ -21,7 +24,10 @@ $this->breadcrumbs=array(
 <div class="form">
 
     <?php $form=$this->beginWidget('CActiveForm', array(
-        'id'=>'callrequest-form',
+        'id'=>'status-form',
+        'method'=>'post',
+        'action'=>$this->createAbsoluteUrl('/operator/default/updatestatus/',array('id'=>$callRequest->id,
+            'status'=>100,)),
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
@@ -39,7 +45,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton($callRequest->isNewRecord ? 'Отправить' : 'Отклонить'); ?>
+        <?php echo CHtml::submitButton('Отклонить'); ?>
     </div>
 
     <?php $this->endWidget(); ?>
