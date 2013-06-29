@@ -35,6 +35,8 @@ return array(
 
         'admin' => array(),
 
+        'operator' => array(),
+
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'gii',
