@@ -26,11 +26,13 @@
         <?php echo $form->error($model,'email'); ?>
     </div>
 
+    <?php if ($model->isNewRecord): ?>
     <div class="row">
         <?php echo $form->labelEx($model,'password'); ?>
         <?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
         <?php echo $form->error($model,'password'); ?>
     </div>
+    <?php endif; ?>
 
     <div class="row">
         <?php echo $form->labelEx($model,'name'); ?>
@@ -39,7 +41,7 @@
     </div>
     <div class="row">
         <?php echo $form->labelEx($model,'phone'); ?>
-        <?php echo $form->textField($model,'phone'); ?>
+        +&nbsp;<?php echo $form->telField($model,'phone'); ?>
         <?php echo $form->error($model,'phone'); ?>
     </div>
 
