@@ -27,7 +27,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
         'id'=>'status-form',
         'method'=>'post',
         'action'=>$this->createAbsoluteUrl('/operator/default/updatestatus/',array('id'=>$callRequest->id,
-            'status'=>100,)),
+            'status'=>CallRequest::STATUS_REJECTED,)),
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
