@@ -29,7 +29,7 @@ class DefaultController extends OperatorController
 
                 User::model()->findByPk($model->user_id)->sendMessage(
                     'Статус заявки на звонок на thinktwice.ru',
-                    'Уважаемый пользователь! Ваша заявка на звонок эксперту отклонена оператором по причине: ' . $model->comments[STATUS_REJECTED],
+                    'Уважаемый пользователь! Ваша заявка на звонок эксперту отклонена оператором по причине: ' . $model->comments[CallRequest::STATUS_REJECTED],
                     array('email','sms')
                 );
                 break;
