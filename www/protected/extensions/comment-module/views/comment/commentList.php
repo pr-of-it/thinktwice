@@ -1,7 +1,7 @@
 <?php
 
 /** @var CArrayDataProvider $comments */
-$comments = $user->getCommentDataProvider();
+$comments = $model->getCommentDataProvider();
 $comments->setPagination(false);
 
 $this->widget('zii.widgets.CListView', array(
@@ -10,6 +10,6 @@ $this->widget('zii.widgets.CListView', array(
 ));
 
 $this->renderPartial('comment.views.comment._form', array(
-	'comment'=>$user->commentInstance
+	'comment'=>$model->commentInstance
 ));
 
