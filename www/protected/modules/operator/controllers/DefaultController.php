@@ -17,4 +17,13 @@ class DefaultController extends OperatorController
             'callRequest' => $callRequest,
         ));
     }
+
+    public function actionUpdateStatus($id, $status)
+    {
+        $model = CallRequest::model()->findByPk($id);
+        $model->status = $status;
+        if( $model->save() ){
+            $this->redirect(array('callrequest','id'=>$id));
+        }
+    }
 }
