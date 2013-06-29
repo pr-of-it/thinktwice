@@ -22,8 +22,18 @@ class DefaultController extends OperatorController
     {
         $model = CallRequest::model()->findByPk($id);
         $model->status = $status;
-        if( $model->save() ){
-            $this->redirect(array('callrequest','id'=>$id));
+
+        switch ( $model->status ) {
+            case CallRequest::STATUS_REJECTED:
+                $model->comments = json_encode( array(CallRequest::STATUS_REJECTED => $_POST['CallRequest']['comments']) );
+                break;
+        }
+
+        if( $model->save() ) {
+            $this->redirect(array('index'));
+        } else {
+            Yii::app()->user->setFlash('FAIL_WRITE', 'Ошибка записи');
+            $this->redirect(array('callrequest', 'id' => $id));
         }
     }
 }
