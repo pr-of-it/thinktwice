@@ -228,15 +228,16 @@ class User extends CActiveRecord
         if ( empty($methods) )
             $methods = array('email', 'sms');
 
-        switch ( true ) {
-            case in_array('email', $methods):
-                Email::sendMail($this->email, $subject, $message);
-            case in_array('sms', $methods):
-                if ( !empty($this->phone) )
-                    Sms::send($this->phone, $message);
-            case in_array('facebook', $methods):
-                break;
+        if ( in_array('email', $methods) ) {
+            Email::sendMail($this->email, $subject, $message);
         }
+
+        if (in_array('sms', $methods)) {
+            if ( !empty($this->phone) )
+                Sms::send($this->phone, $message);
+        }
+
+        return true;
 
     }
 

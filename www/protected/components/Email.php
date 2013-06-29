@@ -4,9 +4,11 @@ class Email extends CComponent {
 
     public static function sendMail($email, $subject, $message) {
 
+        $siteName='=?UTF-8?B?'.base64_encode(Yii::app()->name).'?=';
         $adminEmail = Yii::app()->params['adminEmail'];
+
         $headers =
-            "From: {$adminEmail}\r\n" .
+            "From: {$siteName} <{$adminEmail}>\r\n" .
             "Reply-To: {$adminEmail}\r\n" .
             "MIME-Version: 1.0\r\n" .
             "Content-Type: text/html; charset=\"utf-8\"\r\n" .
