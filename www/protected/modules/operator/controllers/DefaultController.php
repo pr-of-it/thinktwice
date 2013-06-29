@@ -2,8 +2,19 @@
 
 class DefaultController extends OperatorController
 {
-	public function actionIndex()
+    public function actionIndex()
+    {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('index',array(
+            'user' => $user
+        ));
+    }
+
+	public function actionCallRequest($id)
 	{
-		$this->render('index');
-	}
+        $callRequest = CallRequest::model()->findByPk($id);
+        $this->render( 'callRequest',array (
+            'callRequest' => $callRequest,
+        ));
+    }
 }
