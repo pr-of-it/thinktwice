@@ -52,7 +52,7 @@
     <?php
     $followers = array();
     foreach ( $data->followers as $follower ):
-	    $followers[] = CHtml::link(CHtml::encode($follower->login), array('view', 'id'=>$follower->id));
+	    $followers[] = CHtml::link(CHtml::encode($follower->name), array('view', 'id'=>$follower->id));
     endforeach; ?>
     <?php echo implode('|', $followers); ?>
 	<br />

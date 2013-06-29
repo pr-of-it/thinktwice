@@ -235,7 +235,7 @@ class PrivateController extends Controller {
             {
                 $model->attributes=$_POST['CallRequest'];
                 if($model->save()) {
-                    $this->redirect(array('site/userpage','id'=>$expert_id));
+                    $this->redirect(array('site/userPage','id'=>$expert_id));
                 }
             }
             Yii::app()->user->setFlash("FORM_REQUEST", 'Заполните пожалуйста форму заказа консультации');
