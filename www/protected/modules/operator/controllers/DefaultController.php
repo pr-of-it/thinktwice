@@ -26,6 +26,12 @@ class DefaultController extends OperatorController
         switch ( $model->status ) {
             case CallRequest::STATUS_REJECTED:
                 $model->comments[STATUS_REJECTED] = $_POST['CallRequest']['comments'];
+
+                User::model()->sendMessage(
+                    'Статус заявки на thinktwice.ru',
+                    'Уважаемый пользователь! Ваша заявка отклонена по причине: ' . $model->comments[STATUS_REJECTED],
+                    array('email','sms')
+                );
                 break;
         }
 
