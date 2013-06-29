@@ -1,0 +1,59 @@
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+    'id'=>'callrequest-form',
+    // Please note: When you enable ajax validation, make sure the corresponding
+    // controller action is handling ajax validation correctly.
+    // There is a call to performAjaxValidation() commented in generated controller code.
+    // See class documentation of CActiveForm for details on this.
+    'enableAjaxValidation'=>false,
+    'htmlOptions' => array('enctype' => 'multipart/form-data'),
+)); ?>
+
+<h1>Форма заказа консультации</h1>
+    <?php echo Yii::app()->user->getFlash("FORM_REQUEST"); ?>
+<?php echo $form->errorSummary($model); ?>
+
+<div class="row">
+    <?php echo $form->labelEx($model,'Тема'); ?>
+    <?php echo $form->textField($model,'title',array('size'=>40,'maxlength'=>255)); ?>
+    <?php echo $form->error($model,'title'); ?>
+</div>
+
+<div class="row">
+    <?php echo $form->labelEx($model,'Вопрос'); ?>
+    <?php echo $form->textField($model,'text',array('size'=>40,'maxlength'=>255)); ?>
+    <?php echo $form->error($model,'text'); ?>
+</div>
+
+
+<div class="row">
+    <?php echo $form->labelEx($model,'Желаемое время звонка'); ?>
+    <?php echo $form->textField($model,'call_time'); ?>
+    <?php echo $form->error($model,'call_time'); ?>
+</div>
+<div class="row">
+    <?php echo $form->labelEx($model,'Альтернативное желаемое время 1'); ?>
+    <?php echo $form->textField($model,'alter_call_time_1'); ?>
+    <?php echo $form->error($model,'alter_call_time_1'); ?>
+</div>
+
+<div class="row">
+    <?php echo $form->labelEx($model,'Альтернативное желаемое время 2'); ?>
+    <?php echo $form->textField($model,'alter_call_time_2'); ?>
+    <?php echo $form->error($model,'alter_call_time_2'); ?>
+</div>
+
+<div class="row">
+    <?php echo $form->labelEx($model,'Примерная продолжительность'); ?>
+    <?php echo $form->textField($model,'duration'); ?>
+    <?php echo $form->error($model,'duration'); ?>
+</div>
+
+<div class="row buttons">
+    <?php echo CHtml::submitButton($model->isNewRecord ? 'Отправить' : 'Save'); ?>
+</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->

@@ -207,11 +207,20 @@ class PrivateController extends Controller {
             $this->redirect(array('/private/deposit','amount'=>$amount));
         }else{
             $model = new CallRequest();
-
-            $model->attributes = array('user_id'=>Yii::app()->user->id,'caller_id'=>$expert_id);
-            if ( $model->save() ) {
-                $this->redirect(array('site/userpage','id'=>$expert_id));
+            $model->user_id = Yii::app()->user->id;
+            $model->caller_id = $expert_id;
+            if(isset($_POST['CallRequest']))
+            {
+                $model->attributes=$_POST['CallRequest'];
+                if($model->save()) {
+                    $this->redirect(array('site/userpage','id'=>$expert_id));
+                }
             }
+            Yii::app()->user->setFlash("FORM_REQUEST", 'Заполните пожалуйста форму заказа консультации');
+            $this->render('createcallrequest',array(
+                'model'=>$model,
+            ));
+
         }
     }
 
