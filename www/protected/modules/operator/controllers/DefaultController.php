@@ -29,7 +29,7 @@ class DefaultController extends OperatorController
                 break;
         }
 
-        if( $model->save() ) {
+        if( !$model->save() ) {
             $this->redirect(array('index'));
         } else {
             Yii::app()->user->setFlash('FAIL_WRITE', 'Ошибка записи');
