@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
 <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
 <?php if ( $user->role->name == 'operator' ) {?>
-    <h4>Заявки на звонок:</h4>
+    <h4>Заявки на консультации:</h4>
 <?php
 
     $dataProvider = new CActiveDataProvider($user->model());
@@ -47,7 +47,6 @@ $this->breadcrumbs=array(
                  'value' => 'CHtml::link(CHtml::encode($data->id),
                          array("site/callrequest","id" => $data->id))',
          ),
-
             'title',
             'call_time',
             'duration',
