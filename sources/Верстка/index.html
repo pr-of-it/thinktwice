@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Modern UI CSS">
+    <meta name="author" content="Sergey Pimenov">
+    <meta name="keywords" content="windows 8, modern style, modern ui, style, modern, css, framework">
+
+    <link href="css/modern.css" rel="stylesheet">
+    <link href="css/theme-dark.css" rel="stylesheet">
+    <link href="css/modern-responsive.css" rel="stylesheet">
+
+    <script src="js/assets/jquery-1.8.2.min.js"></script>
+    <script src="js/assets/google-analytics.js"></script>
+    <script src="js/assets/jquery.mousewheel.min.js"></script>
+    <script src="js/assets/github.info.js"></script>
+    <script src="js/modern/tile-slider.js"></script>
+    <script src="js/modern/start-menu.js"></script>
+    <script src="js/modern/tile-drag.js"></script>
+
+    <title>Modern UI CSS</title>
+
+    
+</head>
+<body class="metrouicss">
+<div class="page secondary fixed-header">
+    <div class="page-header ">
+        <div class="page-header-content">
+            <div class="user-login">
+                <div class="userpic">
+                    <img src="images/tt-userpic.png" width="54" height="53" />
+                </div>            
+                <div class="name">
+	                Тим Черный
+                </div>
+                <div class="balance">
+	                1000 руб.
+                </div>                
+            </div>
+            <div class="logo-holder">
+            	<a href="#"><img src="images/tt-dashboard.png" width="46" height="33" title="Дашборд" /></a>
+            	<a href="#"><img src="images/tt-logo.png" width="225" height="33" title="think twice" /></a>            	
+            </div>
+            <div style="clear: both;"></div>
+            <div class="controls">
+            	<div class="my-interests">
+					<label class="input-control switch">
+						<input type="checkbox">
+					    <span class="helper">Мои интересы</span>
+					</label>
+				</div>
+            	<a href="#" class="archive">Архив</a>
+            	<a href="#" class="filter">Фильтр</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-region">
+        <div class="page-region-content tiles">
+                    <div class="tile-group">
+                    
+                        <div class="tile tile-small bg-color-blueLight">
+                        	<div class="tile-rubric">#GAZP</div>
+                        	<div class="tile-triangle"></div>
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-graph.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-text">
+                            	<span>Ведомости</span>
+                                <h2>США и Газпром</h2>
+                                <p>Состоялась поездка аналитиков и инвесторов на объекты «Газпрома» по производству газа и нефти...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tile tile-small bg-color-blueLight">
+                        	<div class="tile-rubric">#GAZP</div>                        
+                        	<div class="tile-triangle"></div>
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-graph.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-text">
+                            	<span>Ведомости</span>
+                                <h2>США и Газпром</h2>
+                                <p>Состоялась поездка аналитиков и инвесторов на объекты «Газпрома» по производству газа и нефти...</p>
+                            </div>
+                        </div>                        
+
+                    </div>        
+	        	<div class="tile-group">
+                        <div class="tile tile-large bg-color-blueLight">
+                        	<div class="tile-rubric">Новости</div>                         
+                        	<div class="tile-triangle"></div>
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-building.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-image"><img src="images/tt-img-1.jpg"></div>
+                            <div class="tile-text">
+                            	<span>Даниил Маслов</span>
+                                <h2>Основной проект 55-й Венецианской биеннале посвящен базовой потребности...</h2>
+                            </div>
+                        </div> 
+                   </div>
+	        	<div class="tile-group">
+                        <div class="tile tile-medium bg-color-blueLight">
+                        	<div class="tile-rubric">События</div>                        
+                        	<div class="tile-triangle"></div>                       
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-glass.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-image"><img src="images/tt-img-2.jpg"></div>
+                            <div class="tile-text">
+                            	<span>Анна Карпова</span>
+                                <h2>Интервью с Ромео Ласерда</h2>
+                                <p>По моему мнению, которое, честно скажу, коллеги не разделяют, выставка Джони гуманистическая, принимающая человека... </p>
+                            </div>
+                        </div>
+                        
+                        <div class="tile tile-medium bg-color-white">
+                        	<div class="tile-rubric">Прогнозы</div>                        
+                        	<div class="tile-triangle"></div>                        
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-person.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-image"><img src="images/tt-img-3.jpg"></div>                            
+                            <div class="tile-text">
+                            	<span>Вася Пупкин</span>
+                                <h2>Персональное финансовое планирование для тех, кто хочет уехать жить за рубеж</h2>
+                            </div>
+                        </div> 
+                </div>        
+            <div class="tile-group">
+            
+                           <div class="tile tile-medium bg-color-blueLight">
+                        	<div class="tile-triangle"></div>                        
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-glass.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-text">
+                            	<span>Егор Репин</span>
+                                <h2>Современный рынок искусства</h2>
+                                <p>Выставкой достижений мирового современного искусства основной проект биеннале в этом году назвать невозможно. Обычно назначенный...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tile tile-medium bg-color-blueLight">
+                        	<div class="tile-triangle"></div>                        
+                            <div class="tile-icon">
+                                <img src="images/tt-ico-graph.png"/>
+                            </div>
+                            <div class="tile-counter">10</div>
+                            <div class="tile-text">
+                                <h2>mattberg@live.com</h2>
+                                <p>RE: Wedding Announcement!</p>
+                                <p>Congratulations! I'm realy looking forward to celebrating with you all. Thanks for the ...</p>
+                            </div>
+                        </div>                                         
+            </div>
+            <div class="tile-group">            
+
+                <div class="tile icon tile-large">
+                    <div class="tile-content">
+                        <i class="icon-calculate"></i>
+                    </div>
+                    <div class="brand">
+                        <span class="name">Calculator</span>
+                    </div>
+                </div> 
+           </div>
+           <div class="tile-group">
+                <div class="tile tile-medium icon">
+                    <div class="tile-content">
+                        <img src="images/Mail128.png"/>
+                    </div>
+                    <div class="brand">
+                        <div class="badge">10</div>
+                        <div class="name">Mail</div>
+                    </div>
+                </div>
+
+                <div class="tile tile-medium bg-color-orangeDark icon">
+                    <b class="check"></b>
+                    <div class="tile-content">
+                        <img src="images/Video128.png" alt="" />
+                    </div>
+                    <div class="brand">
+                        <span class="name">Video</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tile-group">
+                <div class="tile tile-medium">
+                    <div class="tile-content">
+                        <img src="images/5.jpg" alt="" />
+                    </div>
+                    <div class="brand">
+                        <span class="name">Pictures</span>
+                        <div class="badge bg-color-orange">5</div>
+                    </div>
+                </div>
+
+                <div class="tile bg-color-green tile-medium">
+                    <div class="tile-content">
+                        <img src="images/Market128.png"/>
+                    </div>
+                    <div class="brand">
+                        <span class="name">Store</span>
+                        <span class="badge">6</span>
+                    </div>
+                </div>
+             </div>
+
+
+            <div class="tile-group">
+                <div class="tile tile-small image">
+                    <div class="tile-content">
+                        <img src="images/4.jpg" alt="" />
+                    </div>
+                    <div class="brand bg-color-orange">
+                        <img class="icon" src="images/Rss128.png"/>
+                        <p class="text">This is a desert eagle. He is very hungry and angry bird.</p>
+                        <div class="badge">10</div>
+                    </div>
+                </div>
+
+                <div class="tile tile-small bg-color-blue icon">
+                    <div class="tile-content">
+                        <img src="images/InternetExplorer128.png"/>
+                    </div>
+                    <div class="brand">
+                        <span class="name">Internet Explorer</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
