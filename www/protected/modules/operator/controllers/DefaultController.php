@@ -26,7 +26,7 @@ class DefaultController extends OperatorController
         switch ( $model->status ) {
             case CallRequest::STATUS_REJECTED:
                 $model->comments[STATUS_REJECTED] = $_POST['CallRequest']['comments'];
-                break;
+            break;
         }
 
         if( $model->save() ) {
