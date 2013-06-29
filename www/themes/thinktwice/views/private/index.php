@@ -19,6 +19,7 @@ $this->breadcrumbs=array(
             <?php endif; ?>
 
             <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/password') ; ?>">Сменить пароль</a></p>
+            <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/profile') ; ?>">Редактировать профиль</a></p>
         </td>
     </tr>
 </table>

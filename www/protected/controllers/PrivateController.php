@@ -27,7 +27,7 @@ class PrivateController extends Controller {
             array(
                 'allow',
                 'actions'=>array(
-                    'index',
+                    'index', 'profile',
                     'services', 'deleteService',
                     'account',
                     'password',
@@ -50,11 +50,28 @@ class PrivateController extends Controller {
     }
 
     public function actionIndex() {
-
         $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
         $this->render('index', array(
             'user' => $user,
         ));
+    }
+
+
+    public function actionProfile() {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        if(isset($_POST['User']))
+        {
+            $user->attributes=$_POST['User'];
+            if($user->save())
+                $this->redirect(array('/private'));
+        }
+
+        $this->render('profile', array(
+            'user' => $user,
+        ));
+
     }
 
     public function actionAccount(){
