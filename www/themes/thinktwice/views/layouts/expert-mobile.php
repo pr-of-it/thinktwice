@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/js/modernizr.custom.32617.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/js/iscroll.js?v4"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/mobilejs/main.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/js/main.js"></script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 <body>

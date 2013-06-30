@@ -18,12 +18,12 @@ $this->breadcrumbs=array(
     <a href="" title="" class="block bg-green">Ожидают подтверждения:<span class="count f-r"><?php echo count($user->getExpertCallRequests()); ?></span></a>
     <a href="" title="" class="block bg-green">Ближайшие консультации:<span class="count f-r">**</span></a>
     <a href="" title="" class="block bg-green">График консультаций:<span class="count f-r">**</span></a>
-    <a href="" title="" class="block bg-green">Стоимость моих консультаций: <?php echo sprintf('%0.2f', $user->consult_price); ?>&nbsp;руб.</a>
+    <a href="<?php echo $this->createUrl('price'); ?>" title="" class="block bg-green">Стоимость моих консультаций: <?php echo sprintf('%0.2f', $user->consult_price); ?>&nbsp;руб.</a>
     <a href="" title="" class="block bg-green">Статистика:</a>
 
 
 <?php /* ?>
-    <h4>Заявки на консультации:</h4>
+    <h1>Заявки на консультации:</h1>
 <?php
 
 $dataProvider = new CActiveDataProvider($user->model());
