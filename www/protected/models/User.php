@@ -208,7 +208,7 @@ class User extends CActiveRecord
         $criteria->compare('update_time',$this->update_time,true);
         $criteria->compare('can_consult',$this->can_consult,true);
         $criteria->compare('consult_price',$this->consult_price,true);
-        $criteria->compare('avatar_file',$this->avatar,true);
+        $criteria->compare('avatar_file',$this->avatar_file,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -279,11 +279,11 @@ class User extends CActiveRecord
     }
 
     protected function afterSave() {
-        $file = CUploadedFile::getInstance($this, 'avatar_file');
+        $file = CUploadedFile::getInstance($this, 'avatar');
         if ( $file ) {
             $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_PATH . $file->getName();
             $file->saveAs($uploaded);
-            $this->avatar = self::AVATAR_UPLOAD_PATH . $file->getName();
+            $this->avatar_file = self::AVATAR_UPLOAD_PATH . $file->getName();
             $this->saveAttributes(array('avatar_file'=>$this->avatar_file));
         }
         return parent::afterSave();

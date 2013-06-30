@@ -20,16 +20,17 @@ $this->breadcrumbs=array(
             ));
             ?>
 
-            <?php echo CHtml::image($user->avatar); ?>
+            <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>108, 'height'=>108)));?>
 
             <?php if ( !$user->hasAvatar() ): ?>
             <div class="row">
-                <?php echo CHtml::activeFileField($user, 'avatar'); ?>
-                <?php echo $form->error($user,'avatar'); ?>
+                <?php echo CHtml::activeFileField($user, 'avatar_file'); ?>
+                <?php echo $form->error($user,'avatar_file'); ?>
             </div>
             <div class="row">
                 <?php echo CHtml::submitButton('Сохранить'); ?>
             </div>
+
                <?php endif; ?>
 
              <?php $this->endWidget(); ?>

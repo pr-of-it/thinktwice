@@ -32,6 +32,7 @@ class PrivateController extends Controller {
                     'account',
                     'password',
                     'deposit', 'depositFail', 'depositSuccess','callRequest',
+                    'deleteAvatar',
                 ),
                 'roles'=>array('user'),
             ),
@@ -71,6 +72,16 @@ class PrivateController extends Controller {
         $this->render('profile', array(
             'user' => $user,
         ));
+
+    }
+
+    public function actionDeleteAvatar($id) {
+
+        $user = User::model()->findByPk($id);
+        unlink(Yii::getPathOfAlias('webroot') . $user->avatar_file);
+        $user->avatar_file = '';
+        $user->save();
+        $this->redirect(array('/private/profile'));
 
     }
 

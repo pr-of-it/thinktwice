@@ -4,6 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
+<?php echo Yii::app()->easyImage->thumbOf($model->avatar, array('resize'=>array('width'=>150, 'height'=>150)));?>
 <div class="form">
 
     <?php $form=$this->beginWidget('CActiveForm', array(
@@ -17,6 +18,7 @@
     )); ?>
 
     <?php echo $form->errorSummary($model); ?>
+
 
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
@@ -53,7 +55,7 @@
     <div class="row">
         <?php echo $form->labelEx($model,'avatar'); ?>
         <?php echo CHtml::activeFileField($model, 'avatar'); ?>
-        <?php echo CHtml::link('Удалить аватар', Yii::app()->baseUrl . '/private/delAvatar/', array()); ?>
+        <?php echo CHtml::link('Удалить аватар', Yii::app()->createUrl('/private/deleteAvatar', array('id' => $model->id))); ?>
         <?php echo $form->error($model,'avatar'); ?>
     </div>
 
