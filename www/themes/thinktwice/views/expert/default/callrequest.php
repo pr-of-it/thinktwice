@@ -18,7 +18,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
 <?php echo CHtml::link('Подтвердить', array(
     'default/updatestatus/',
     'id'=>$callRequest->id,
-    'status'=>CallRequest::STATUS_MODERATED,
+    'status'=>CallRequest::STATUS_ACCEPTED,
 )); ?>
 
 <div class="form">
@@ -26,8 +26,8 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'status-form',
         'method'=>'post',
-        'action'=>$this->createAbsoluteUrl('/operator/default/updatestatus/',array('id'=>$callRequest->id,
-            'status'=>CallRequest::STATUS_REJECTED,)),
+        'action'=>$this->createAbsoluteUrl('/expert/default/updatestatus/',array('id'=>$callRequest->id,
+            'status'=>100,)),
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
