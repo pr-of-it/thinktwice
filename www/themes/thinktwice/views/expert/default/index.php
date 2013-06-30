@@ -19,4 +19,4 @@ $this->breadcrumbs=array(
 <a href="" title="" class="block bg-green">Ближайшие консультации:<span class="count f-r">**</span></a>
 <a href="" title="" class="block bg-green">График консультаций:<span class="count f-r">**</span></a>
 <a href="<?php echo $this->createUrl('price'); ?>" title="" class="block bg-green">Стоимость моих консультаций: <?php echo sprintf('%0.2f', $user->consult_price); ?>&nbsp;руб.</a>
-<a href="" title="" class="block bg-green">Статистика:</a>
+<a href="<?php echo $this->createUrl('stat'); ?>" title="" class="block bg-green">Статистика:</a>
