@@ -159,6 +159,14 @@ class User extends CActiveRecord
         return false;
     }
 
+    /*
+     * Блоги
+     */
+
+    public function hasBlog() {
+        return !empty($this->blog);
+    }
+
     /**
      * @return array behaviors
      */
