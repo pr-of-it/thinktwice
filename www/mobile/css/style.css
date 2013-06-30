@@ -288,6 +288,8 @@ table {
 	text-align:center;
 	margin-bottom:20px;
 	height:80px;
+    border: none;
+    width: 100%;
 }
 .but-yellow{
 	background: #fbc228; /* Old browsers */
@@ -492,7 +494,7 @@ header{position:relative;}
 	padding-bottom:20px;
 }
 
-.price input{
+.price input[type=text]{
 	display:inline-block;
 	vertical-align:middle;
 	color:#000 !important;

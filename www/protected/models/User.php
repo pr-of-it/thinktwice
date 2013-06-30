@@ -16,6 +16,8 @@
  * @property string $consult_price
  * @property string $avatar
  *
+ * @property string $amount
+ *
  * The followings are the available model relations:
  * @property UserRole $role
  * @property UserService[] $services
@@ -27,8 +29,6 @@ class User extends CActiveRecord
 {
 
     const AVATAR_UPLOAD_PATH = '/upload/avatars/';
-
-    public $amount;
 
     /**
      * @return string the associated database table name
