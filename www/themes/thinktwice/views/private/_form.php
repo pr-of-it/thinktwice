@@ -50,9 +50,15 @@
     </div>
     <?php endif; ?>
 
+    <div class="row">
+        <?php echo $form->labelEx($model,'avatar'); ?>
+        <?php echo CHtml::activeFileField($model, 'avatar'); ?>
+        <?php echo CHtml::link('Удалить аватар', Yii::app()->baseUrl . '/private/delAvatar/', array()); ?>
+        <?php echo $form->error($model,'avatar'); ?>
+    </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Сохранить'); ?>
+        <?php echo CHtml::submitButton('Сохранить') ?>
     </div>
 
     <?php $this->endWidget(); ?>

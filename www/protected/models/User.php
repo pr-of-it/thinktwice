@@ -26,7 +26,7 @@
 class User extends CActiveRecord
 {
 
-    const AVATAR_UPLOAD_FILE = '/upload/avatars/';
+    const AVATAR_UPLOAD_PATH = '/upload/avatars/';
 
     public $amount;
 
@@ -269,9 +269,9 @@ class User extends CActiveRecord
     protected function afterSave() {
         $file = CUploadedFile::getInstance($this, 'avatar');
         if ( $file ) {
-            $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_FILE . $file->getName();
+            $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_PATH . $file->getName();
             $file->saveAs($uploaded);
-            $this->avatar = self::AVATAR_UPLOAD_FILE . $file->getName();
+            $this->avatar = self::AVATAR_UPLOAD_PATH . $file->getName();
             $this->saveAttributes(array('avatar'=>$this->avatar));
         }
         return parent::afterSave();

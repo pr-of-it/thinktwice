@@ -6,10 +6,31 @@ $this->breadcrumbs=array(
 ?>
 <table>
     <tr>
-        <td><p><?php
-                if ( !$user -> avatar == null ) {
+        <td><?php
+
+            $form=$this->beginWidget('CActiveForm', array(
+                'id'=>'profile-form',
+                'action'=>$this->createAbsoluteUrl('/private/profile/'),
+                // Please note: When you enable ajax validation, make sure the corresponding
+                // controller action is handling ajax validation correctly.
+                // There is a call to performAjaxValidation() commented in generated controller code.
+                // See class documentation of CActiveForm for details on this.
+                'enableAjaxValidation'=>false,
+                'htmlOptions' => array('enctype' => 'multipart/form-data'),
+            ));
+
+                if ( $user->avatar != null ) {
                     echo CHtml::image(Yii::app()->baseUrl . $user->avatar);
-                } ?></p>
+                } else {
+                    echo CHtml::image(Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg');   ?>
+            <div class="row">
+                <?php echo CHtml::activeFileField($user, 'avatar'); ?>
+                <?php echo $form->error($user,'avatar'); ?>
+                </br>
+                <?php echo CHtml::submitButton('Сохранить'); ?>
+            </div>
+               <?php }?>
+             <?php $this->endWidget(); ?>
         </td>
         <td><p>Ваша роль <?php echo $user->role->name; ?></p>
             <p>Ваш e-mail <?php echo $user->email; ?></p>
