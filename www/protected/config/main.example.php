@@ -29,6 +29,8 @@ return array(
 
         'ext.paymentUniteller.*',
 
+        'ext.easyimage.EasyImage',
+
     ),
 
     'modules'=>array(
@@ -111,6 +113,10 @@ return array(
                     'client_secret' => '62e1b00024612a3a385ad34c4296a4c5',
                 ),
             )
+        ),
+
+        'easyImage' => array(
+            'class' => 'application.extensions.easyimage.EasyImage',
         ),
 
         'log'=>array(
