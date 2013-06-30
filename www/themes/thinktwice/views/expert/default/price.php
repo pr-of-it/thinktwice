@@ -10,6 +10,10 @@ $user->consult_price = floatval($user->consult_price);
 $this->breadcrumbs=array(
     $this->module->id,
 );
+$this->breadcrumbs=array(
+    'Интерфейс эксперта' => array('/expert'),
+    'Стоимость консультаций'
+);
 ?>
 
 <h1>Стоимость консультаций</h1>

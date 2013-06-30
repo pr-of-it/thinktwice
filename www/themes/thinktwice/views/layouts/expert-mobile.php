@@ -31,24 +31,13 @@
 <div id="wrapper">
     <div id="content">
 
-        <?php echo $content; ?>
+        <?php if(isset($this->breadcrumbs)):?>
+            <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+                'links'=>$this->breadcrumbs,
+            )); ?>
+        <?php endif?>
 
-        <!--
-        <div id="user-info" class="clearfix">
-            <span class="ava"><img src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/i/130711.jpg" alt=""></span>
-            <h1 style="margin:6px 0;">Тим Черный</h1>
-            <h2>1000 руб.</h2>
-        </div>
-        <div class="block bg-red">Ближайшая консультация: <b style="margin:8px 0;">26 апреля 2013</b></div>
-        <a href="" title="" class="block bg-green">Ожидают подтверждения:<span class="count f-r">234</span></a>
-        <a href="" title="" class="block bg-green">Ближайшие консультации:<span class="count f-r">234</span></a>
-        <a href="" title="" class="block bg-green">График консультаций:<span class="count f-r">234</span></a>
-        <a href="" title="" class="block bg-green">Стоимость моих консультаций:</a>
-        <a href="" title="" class="block bg-green">Статистика:</a>
-        <a href="" title="" class="block bg-green">Ближайшая консультация:</a>
-        <a href="" title="" class="block bg-green">Ближайшая консультация:<span class="count f-r">234</span></a>
-        <a href="" title="" class="block bg-green">Ближайшая консультация:</a>
-        -->
+        <?php echo $content; ?>
 
     </div>
 </div>

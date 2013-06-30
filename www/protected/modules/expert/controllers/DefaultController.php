@@ -25,6 +25,13 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public function actionRequests() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('requests',array(
+            'user' => $user
+        ));
+    }
+
     public function actionCallRequest($id)
     {
         $callRequest = CallRequest::model()->findByPk($id);
