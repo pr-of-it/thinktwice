@@ -1,7 +1,7 @@
 <?php
 /* @var $this PrivateController */
 /* @var $model RegisterForm */
-/* @var $form CActiveForm  */
+/* @var $form ActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Смена пароля';
 $this->breadcrumbs=array(
@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 <h1>Смена пароля</h1>
 
 <div class="form">
-    <?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'register-form',
         'enableClientValidation'=>true,
         'clientOptions'=>array(

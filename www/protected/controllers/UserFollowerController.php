@@ -170,7 +170,7 @@ class UserFollowerController extends Controller
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='user-follower-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}

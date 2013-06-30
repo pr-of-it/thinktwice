@@ -2,7 +2,7 @@
 /*
  * @var $this DefaultController
  * @var $user User
- * @var $form CActiveForm
+ * @var $form ActiveForm
  */
 
 $user->consult_price = floatval($user->consult_price);
@@ -18,13 +18,13 @@ $this->breadcrumbs=array(
 
     <div>Текущая стоимость:<span> <?php echo sprintf('%0.2f', $user->consult_price); ?>&nbsp;руб./мин.</span></div>
 
-    <?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'price-form',
         'method'=>'post',
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
-        // See class documentation of CActiveForm for details on this.
+        // See class documentation of ActiveForm for details on this.
         'enableAjaxValidation'=>false,
         'htmlOptions' => array('enctype' => 'multipart/form-data'),
     )); ?>

@@ -166,7 +166,7 @@ class UserTransactionIncompleteController extends AdminController
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='user-transaction-incomplete-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}

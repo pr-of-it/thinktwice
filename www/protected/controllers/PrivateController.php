@@ -155,7 +155,7 @@ class PrivateController extends Controller {
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
-            echo CActiveForm::validate($model);
+            echo ActiveForm::validate($model);
             Yii::app()->end();
         }
 
@@ -180,7 +180,7 @@ class PrivateController extends Controller {
         }
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
-            echo CActiveForm::validate($model);
+            echo ActiveForm::validate($model);
             Yii::app()->end();
         }
 

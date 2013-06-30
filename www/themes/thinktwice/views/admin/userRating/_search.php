@@ -1,12 +1,12 @@
 <?php
 /* @var $this UserRatingController */
 /* @var $model UserRating */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class="wide form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('ActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>

@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 /* @var $model RegisterForm */
-/* @var $form CActiveForm  */
+/* @var $form ActiveForm  */
 /* @var $success boolean  */
 
 $this->pageTitle=Yii::app()->name . ' - Password restore';
@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
 <?php else : ?>
 
 <div class="form">
-    <?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'restore-form',
         'enableClientValidation'=>true,
         'clientOptions'=>array(

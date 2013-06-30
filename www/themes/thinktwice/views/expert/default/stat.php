@@ -2,7 +2,7 @@
 /*
  * @var $this DefaultController
  * @var $user User
- * @var $form CActiveForm
+ * @var $form ActiveForm
  */
 
 $this->breadcrumbs=array(

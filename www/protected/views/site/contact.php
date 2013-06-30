@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 /* @var $model ContactForm */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 
 $this->pageTitle=Yii::app()->name . ' - Contact Us';
 $this->breadcrumbs=array(
@@ -25,7 +25,7 @@ If you have business inquiries or other questions, please fill out the following
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('ActiveForm', array(
 	'id'=>'contact-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(

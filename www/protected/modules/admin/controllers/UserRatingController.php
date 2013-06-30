@@ -123,7 +123,7 @@ class UserRatingController extends AdminController
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='user-rating-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}

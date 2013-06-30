@@ -124,7 +124,7 @@ class BlogController extends AdminController
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='blog-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}

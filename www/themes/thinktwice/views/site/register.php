@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 /* @var $model RegisterForm */
-/* @var $form CActiveForm  */
+/* @var $form ActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Register';
 $this->breadcrumbs=array(
@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 <h1>Регистрация</h1>
 
 <div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('ActiveForm', array(
 	'id'=>'register-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(

@@ -1,17 +1,17 @@
 <?php
 /* @var $this BlogController */
 /* @var $model Blog */
-/* @var $form CActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('ActiveForm', array(
 	'id'=>'blog-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
+	// See class documentation of ActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
 

@@ -2,7 +2,7 @@
 
 /* @var $this PrivateController */
 /* @var $model DepositForm */
-/* @var $form CActiveForm  */
+/* @var $form ActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Пополнение счета';
 $this->breadcrumbs=array(
@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 <?php if ( null === $model->acqObject ) : ?>
 
 <div class="form">
-    <?php $form=$this->beginWidget('CActiveForm', array(
+    <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'deposit-form',
         'enableClientValidation'=>true,
         'clientOptions'=>array(

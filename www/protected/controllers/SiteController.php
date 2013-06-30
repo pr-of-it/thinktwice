@@ -129,7 +129,7 @@ class SiteController extends Controller
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
         {
-            echo CActiveForm::validate($model);
+            echo ActiveForm::validate($model);
             Yii::app()->end();
         }
 
@@ -163,7 +163,7 @@ class SiteController extends Controller
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
-            echo CActiveForm::validate($model);
+            echo ActiveForm::validate($model);
             Yii::app()->end();
         }
 
@@ -234,7 +234,7 @@ class SiteController extends Controller
         $model = new RestoreForm();
         if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
         {
-            echo CActiveForm::validate($model);
+            echo ActiveForm::validate($model);
             Yii::app()->end();
         }
         $success = false;

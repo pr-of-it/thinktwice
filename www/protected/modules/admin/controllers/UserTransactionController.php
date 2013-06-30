@@ -123,7 +123,7 @@ class UserTransactionController extends AdminController
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='user-transaction-form')
 		{
-			echo CActiveForm::validate($model);
+			echo ActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
