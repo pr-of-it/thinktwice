@@ -52,7 +52,7 @@ class Image_GD extends Image
 			$version = $matches[0];
 		}
 
-		if (!version_compare($version, '2.0.1', '>=')) {
+		if (!version_compare($version, '2.0', '>=')) {
 			throw new CException('Image_GD requires GD version 2.0.1 or greater, you have ' . $version);
 		}
 
