@@ -25,6 +25,9 @@
  * @property User[] $followers
  * @property UserTransaction[] $transactions
  * @property UserTransactionIncomplete[] $transactions_incomplete
+ *
+ * @property Blog $blog
+ *
  */
 class User extends CActiveRecord
 {
@@ -72,20 +75,29 @@ class User extends CActiveRecord
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
+            'blog' => array(self::HAS_ONE, 'Blog', 'user_id'),
         );
     }
 
-    public function hasService($service) {
-        foreach ( $this->services as $s ) {
-            if (
-            $s->service = $service->getServiceName()
-                && $s->service_user_id = $service->id
-            ) {
-                return true;
-            }
-        }
-        return false;
+    /*
+     * Аватар
+     */
+
+    public function hasAvatar() {
+        return !empty($this->avatar_file);
     }
+
+    public function getAvatar() {
+        if ( !empty($this->avatar_file) ) {
+            return Yii::app()->baseUrl . $this->avatar_file;
+        } else {
+            return Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
+        }
+    }
+
+    /*
+     * Финансы
+     */
 
     public function getAmount() {
         if ( !$this->isNewRecord ) {
@@ -101,6 +113,9 @@ class User extends CActiveRecord
         }
     }
 
+    /*
+     * Рейтинг
+     */
 
     public function getRating() {
         if ( !$this->isNewRecord ) {
@@ -115,6 +130,26 @@ class User extends CActiveRecord
         }
     }
 
+    /*
+     * Социальные сети
+     */
+
+    public function hasService($service) {
+        foreach ( $this->services as $s ) {
+            if (
+            $s->service = $service->getServiceName()
+                && $s->service_user_id = $service->id
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+     * Отслеживание (дружба)
+     */
+
     public function doesFollow($follower_id) {
 
         foreach ( $this->followers as $follow ) {
@@ -124,17 +159,6 @@ class User extends CActiveRecord
         return false;
     }
 
-    public function hasAvatar() {
-        return !empty($this->avatar_file);
-    }
-
-    public function getAvatar() {
-        if ( !empty($this->avatar_file) ) {
-            return Yii::app()->baseUrl . $this->avatar_file;
-        } else {
-            return Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
-        }
-    }
     /**
      * @return array behaviors
      */
@@ -279,7 +303,7 @@ class User extends CActiveRecord
     }
 
     protected function afterSave() {
-        $file = CUploadedFile::getInstance($this, 'avatar');
+        $file = CUploadedFile::getInstance($this, 'avatar_file');
         if ( $file ) {
             $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_PATH . $file->getName();
             $file->saveAs($uploaded);
