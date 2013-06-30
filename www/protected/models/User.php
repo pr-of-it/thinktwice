@@ -14,6 +14,7 @@
  * @property integer $active
  * @property integer $can_consult
  * @property string $consult_price
+ * @property string $avatar_file
  * @property string $avatar
  *
  * @property string $amount
@@ -29,6 +30,7 @@ class User extends CActiveRecord
 {
 
     const AVATAR_UPLOAD_PATH = '/upload/avatars/';
+
 
     /**
      * @return string the associated database table name
@@ -50,10 +52,10 @@ class User extends CActiveRecord
             array('email', 'unique'),
             array('active, can_consult', 'boolean'),
             array('password, name, email', 'length', 'max'=>255),
-            array('register_time, update_time, roleid, avatar, phone, can_consult, consult_price', 'safe'),
+            array('register_time, update_time, roleid, avatar_file, phone, can_consult, consult_price', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar, consult_price', 'safe', 'on'=>'search'),
+            array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar_file, consult_price', 'safe', 'on'=>'search'),
         );
     }
 
@@ -122,7 +124,17 @@ class User extends CActiveRecord
         return false;
     }
 
+    public function hasAvatar() {
+        return !empty($this->avatar_file);
+    }
 
+    public function getAvatar() {
+        if ( !empty($this->avatar_file) ) {
+            return Yii::app()->baseUrl . $this->avatar_file;
+        } else {
+            return Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
+        }
+    }
     /**
      * @return array behaviors
      */
@@ -163,7 +175,7 @@ class User extends CActiveRecord
             'role' => Yii::t('User', 'Role'),
             'can_consult' => Yii::t('User', 'Can consult'),
             'consult_price' => Yii::t('User', 'Consult price'),
-            'avatar' => Yii::t('User', 'Avatar'),
+            'avatar_file' => Yii::t('User', 'Avatar file'),
 
         );
 
@@ -196,7 +208,7 @@ class User extends CActiveRecord
         $criteria->compare('update_time',$this->update_time,true);
         $criteria->compare('can_consult',$this->can_consult,true);
         $criteria->compare('consult_price',$this->consult_price,true);
-        $criteria->compare('avatar',$this->avatar,true);
+        $criteria->compare('avatar_file',$this->avatar,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -267,12 +279,12 @@ class User extends CActiveRecord
     }
 
     protected function afterSave() {
-        $file = CUploadedFile::getInstance($this, 'avatar');
+        $file = CUploadedFile::getInstance($this, 'avatar_file');
         if ( $file ) {
             $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_PATH . $file->getName();
             $file->saveAs($uploaded);
             $this->avatar = self::AVATAR_UPLOAD_PATH . $file->getName();
-            $this->saveAttributes(array('avatar'=>$this->avatar));
+            $this->saveAttributes(array('avatar_file'=>$this->avatar_file));
         }
         return parent::afterSave();
     }

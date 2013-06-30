@@ -18,18 +18,20 @@ $this->breadcrumbs=array(
                 'enableAjaxValidation'=>false,
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
             ));
+            ?>
 
-                if ( $user->avatar != null ) {
-                    echo CHtml::image(Yii::app()->baseUrl . $user->avatar);
-                } else {
-                    echo CHtml::image(Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg');   ?>
+            <?php echo CHtml::image($user->avatar); ?>
+
+            <?php if ( !$user->hasAvatar() ): ?>
             <div class="row">
                 <?php echo CHtml::activeFileField($user, 'avatar'); ?>
                 <?php echo $form->error($user,'avatar'); ?>
-                </br>
+            </div>
+            <div class="row">
                 <?php echo CHtml::submitButton('Сохранить'); ?>
             </div>
-               <?php }?>
+               <?php endif; ?>
+
              <?php $this->endWidget(); ?>
         </td>
         <td><p>Ваша роль <?php echo $user->role->name; ?></p>
