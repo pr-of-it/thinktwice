@@ -38,10 +38,13 @@ $this->breadcrumbs=array(
 		<?php echo CHtml::submitButton('Login'); ?>
 	</div>
 
+    <?php if ($this->layout != 'expert-mobile'): ?>
     <h2>Либо Вы можете войти через следующие сервисы:</h2>
     <?php Yii::app()->eauth->renderWidget(); ?>
     <?php
     #$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
     ?>
+    <?php endif; ?>
+
     <?php $this->endWidget(); ?>
 </div><!-- form -->
