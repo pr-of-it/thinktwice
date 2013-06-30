@@ -28,7 +28,7 @@ class OperatorController extends Controller
     {
         return array(
             array('allow',
-                'roles'=>array('operator'),
+                'roles'=>array('operator', 'admin'),
             ),
             array('deny',  // deny all users
                 'users'=>array('*'),
