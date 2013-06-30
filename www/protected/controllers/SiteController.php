@@ -31,6 +31,13 @@ class SiteController extends Controller
         );
     }
 
+    public function beforeAction($action) {
+        if ( false !== strpos(Yii::app()->user->returnUrl, 'expert') ) {
+            $this->layout = 'expert-mobile';
+        };
+        return parent::beforeAction($action);
+    }
+
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.

@@ -73,12 +73,6 @@
 		<?php echo $form->error($model,'duration'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'comments'); ?>
-		<?php echo $form->textArea($model,'comments',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'comments'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

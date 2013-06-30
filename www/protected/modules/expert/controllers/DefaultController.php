@@ -2,6 +2,9 @@
 
 class DefaultController extends ExpertController
 {
+    /*
+     * Главная страница интерфейса эксперта
+     */
     public function actionIndex()
     {
         $user = User::model()->findByPk(Yii::app()->user->id);
@@ -10,7 +13,11 @@ class DefaultController extends ExpertController
         ));
     }
 
+    /*
+     * Изменение стоимости консультации экспертом
+     */
     public function actionPrice() {
+
         $user = User::model()->findByPk(Yii::app()->user->id);
 
         if(isset($_POST['User']))
@@ -23,6 +30,20 @@ class DefaultController extends ExpertController
         $this->render('price',array(
             'user' => $user
         ));
+
+    }
+
+    /*
+     * Статистика эксперта
+     */
+    public function actionStat() {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        $this->render('stat',array(
+            'user' => $user
+        ));
+
     }
 
     public function actionRequests() {
