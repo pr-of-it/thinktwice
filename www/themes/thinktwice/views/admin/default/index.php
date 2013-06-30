@@ -18,6 +18,7 @@ $this->menu=array(
     array('label'=>'Незавершенные транзакции', 'url'=>array('/admin/userTransactionIncomplete')),
     array('label'=>'Заявки на звонок', 'url'=>array('/admin/callRequest')),
     array('label'=>'Блоги', 'url'=>array('/admin/blog')),
+    array('label'=>'RSS для блогов', 'url'=>array('/admin/blogRss')),
 );
 ?>
 
