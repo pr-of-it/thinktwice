@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 ?>
 
 <div id="user-info" class="clearfix">
-    <span class="ava"><img src="<?php echo Yii::app()->request->baseUrl; ?>/mobile/i/130711.jpg" alt=""></span>
+    <span class="ava"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>108, 'height'=>108))); ?></span>
     <h1 style="margin:6px 0;"><?php echo $user->name; ?></h1>
     <h2><?php echo sprintf('%0.2f', $user->amount); ?>&nbsp;руб.</h2>
 </div>
