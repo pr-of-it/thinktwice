@@ -12,6 +12,14 @@ class DefaultController extends ExpertController
 
     public function actionPrice() {
         $user = User::model()->findByPk(Yii::app()->user->id);
+
+        if(isset($_POST['User']))
+        {
+            $user->attributes=$_POST['User'];
+            if($user->save())
+                $this->redirect(array('index'));
+        }
+
         $this->render('price',array(
             'user' => $user
         ));
