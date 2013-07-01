@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+    const LAST_POST = 5;
     /**
      * Declares class-based actions.
      */
@@ -44,10 +45,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $users = User::model()->findAll();
-        $this->render('index', array(
-            'users' => $users,
+
+        $criteria=new CDbCriteria(array(
+            'order' => 'time DESC',
+            'with' => 'blog',
         ));
+
+        $dataProvider=new CActiveDataProvider('BlogPost', array(
+            'pagination'=>array(
+                'pageSize'=>self::LAST_POST,
+            ),
+            'criteria'=>$criteria,
+        ));
+
+        $this->render('index',array (
+            'dataProvider' => $dataProvider,
+        ));
+
+
     }
 
     /**
@@ -201,8 +216,6 @@ class SiteController extends Controller
         ));
 
     }
-
-
 
     public function actionAddFollower($follower_id) {
 

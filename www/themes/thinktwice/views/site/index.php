@@ -1,21 +1,15 @@
-<h1>Будущая главная страница</h1>
+<h3>Последние записи в блогах</h3>
+<?php foreach ( $dataProvider->getData() as $post ) : ?>
 
-<h3>Список всех пользователей сайта</h3>
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-    'id'=>'user-grid',
-    'dataProvider'=>User::model()->search(),
-    'columns'=>array(
-        'id',
-        array(
-            'name' => 'Роль',
-            'value' => '$data->role->desc',
-        ),
-        'email',
-        'name',
-        'phone',
-        'active',
-        'can_consult',
-        'consult_price',
-        'avatar',
-    ),
-)); ?>
+    <div>
+        <h4><?php echo $post->title ;?></h4>
+    </div>
+    <div>
+        <?php echo $post->text;?>
+    </div>
+    <div>
+        <?php echo strstr($post->time,'.',true)?>
+    </div>
+    <br>
+
+<?php endforeach; ?>
