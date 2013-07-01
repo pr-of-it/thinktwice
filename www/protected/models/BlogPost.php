@@ -45,6 +45,7 @@ class BlogPost extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'blog' => array(self::BELONGS_TO, 'Blog', 'blog_id'),
 		);
 	}
 
@@ -61,6 +62,18 @@ class BlogPost extends CActiveRecord
 			'time' => 'Time',
 		);
 	}
+
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'time',
+                'updateAttribute' => 'time',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            ),
+        );
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

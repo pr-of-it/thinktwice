@@ -189,15 +189,26 @@ class SiteController extends Controller
      * @param $id ID пользователя
      * @throws CHttpException
      */
-    public function actionUserPage($id) {
+    public function actionUserPage() {
 
-        $user = User::model()->findByPk($id);
+        $user = User::model()->findAll();
         if( $user === null )
             throw new CHttpException( 404,'Страница пользователя не найдена' );
 
         $this->render( 'userpage',array (
             'user' => $user,
             'currentUser' => User::model()->findByPk(Yii::app()->user->id),
+        ));
+
+    }
+
+    public function actionBlog($id) {
+        $blog = Blog::model()->findByPk($id);
+        if( $blog === null )
+            throw new CHttpException( 404,'Страница пользователя не найдена' );
+
+        $this->render( 'blog',array (
+            'blog' => $blog,
         ));
 
     }
