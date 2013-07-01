@@ -12,12 +12,26 @@ class RssCommand extends CConsoleCommand {
             $title = isset($rss->channel) && isset($rss->channel->title) ? $rss->channel->title : $rss->title;
             echo "RSS recieved. Title is {$title}\n";
 
-            $items = isset($rss->channel) && isset($rss->channel->item) ? $rss->channel->item : $rss->item;
+            $rssItems = ( isset($rss->channel) && isset($rss->channel->item) ? $rss->channel->item : $rss->item );
+
+            $items = array();
+            foreach ( $rssItems as $item ) {
+                $items[] = $item;
+            }
+            uasort($items, function($a, $b) {
+                if ( $a->pubDate == $b->pubDate )
+                    return 0;
+                if ( strtotime($a->pubDate) < strtotime($b->pubDate) )
+                    return 1;
+                return -1;
+            });
+
             foreach ( $items as $item ) {
                 $this->proceedRssItem($stream->blog->id, $stream->id, $item);
             }
 
             $rss = null;unset($rss);
+            $items = null; unset($items);
             echo "RSS stream {$stream->title} (#{$stream->id}) processing finish\n";
 
         }
@@ -50,6 +64,8 @@ class RssCommand extends CConsoleCommand {
 
         $post->rss_id = $rss_id;
         $post->rss_guid = $guid;
+
+        $post->save();
 
         return true;
 
