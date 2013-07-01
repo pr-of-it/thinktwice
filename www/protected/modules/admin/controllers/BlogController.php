@@ -140,30 +140,6 @@ class BlogController extends AdminController
 		return $model;
 	}
 
-
-    public function actionBlog($id) {
-
-        $blog = Blog::model()->findByPk($id);
-        if( $blog === null )
-            throw new CHttpException( 404,'Блог не найден' );
-
-        $dataProvider = new CArrayDataProvider('BlogPost', array(
-            'criteria' => array(
-                'condition' => 'blog_id=:blog_id',
-                'params' => array(':blog_id' => $blog->id),
-                'with' => array('blog'),
-            ),
-            'sort' => array(
-                'defaultOrder' => 'time DESC',
-            ),
-        ));
-
-        $this->render( 'blog',array (
-            'blog' => $blog,
-            'provider' => $dataProvider,
-        ));
-    }
-
 	/**
 	 * Performs the AJAX validation.
 	 * @param Blog $model the model to be validated
