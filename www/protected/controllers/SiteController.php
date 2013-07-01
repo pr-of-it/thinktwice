@@ -45,8 +45,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        $criteria=new CDbCriteria(array(
+         $criteria=new CDbCriteria(array(
             'order' => 'time DESC',
             'with' => 'blog',
         ));
@@ -217,7 +216,7 @@ class SiteController extends Controller
 
     }
 
-    public function actionAddFollower($follower_id) {
+     public function actionAddFollower($follower_id) {
 
         $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
 
