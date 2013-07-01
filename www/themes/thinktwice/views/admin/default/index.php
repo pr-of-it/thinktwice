@@ -19,6 +19,7 @@ $this->menu=array(
     array('label'=>'Заявки на звонок', 'url'=>array('/admin/callRequest')),
     array('label'=>'Блоги', 'url'=>array('/admin/blog')),
     array('label'=>'RSS для блогов', 'url'=>array('/admin/blogRss')),
+    array('label'=>'Посты для блогов', 'url'=>array('/admin/BlogPost')),
 );
 ?>
 
