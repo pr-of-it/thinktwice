@@ -9,6 +9,8 @@
  * @property string $title
  * @property string $text
  * @property string $time
+ * @property integer $rss_id
+ * @property string $rss_guid
  */
 class BlogPost extends CActiveRecord
 {
@@ -29,8 +31,8 @@ class BlogPost extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('blog_id', 'numerical', 'integerOnly'=>true),
-			array('title, text', 'length', 'max'=>255),
-			array('time', 'safe'),
+			array('title', 'length', 'max'=>255),
+			array('blog_id, title, text, rss_id, rss_guid, time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, blog_id, title, text, time', 'safe', 'on'=>'search'),

@@ -9,7 +9,13 @@ return array(
 	// preloading 'log' component
 	'preload'=>array('log'),
 
-	// application components
+    // autoloading model and component classes
+    'import'=>array(
+        'application.models.*',
+        'application.components.*',
+    ),
+
+    // application components
 	'components'=>array(
         'db'=>array(
             'connectionString' => 'pgsql:host=localhost;port=5432;dbname=tt',
