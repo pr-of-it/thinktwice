@@ -217,7 +217,7 @@ class SiteController extends Controller
 
     }
 
-    public function actionAddFollower($follower_id) {
+     public function actionAddFollower($follower_id) {
 
         $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
 
