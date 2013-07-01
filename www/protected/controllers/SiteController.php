@@ -202,17 +202,7 @@ class SiteController extends Controller
 
     }
 
-    public function actionBlog($id) {
-        $blog = Blog::model()->findByPk($id);
-        if( $blog === null )
-            throw new CHttpException( 404,'Блог не найден' );
 
-        $this->render( 'blog',array (
-            'blog' => $blog,
-        ));
-
-
-    }
 
     public function actionAddFollower($follower_id) {
 

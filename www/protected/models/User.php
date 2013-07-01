@@ -113,6 +113,8 @@ class User extends CActiveRecord
         }
     }
 
+
+
     /*
      * Рейтинг
      */

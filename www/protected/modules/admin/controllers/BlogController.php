@@ -61,6 +61,30 @@ class BlogController extends AdminController
 		));
 	}
 
+    public function actionBlog($id) {
+
+        $blog = Blog::model()->findByPk($id);
+        if( $blog === null )
+            throw new CHttpException( 404,'Блог не найден' );
+
+        $dataProvider = new CArrayDataProvider('BlogPost', array(
+            'criteria' => array(
+                'condition' => 'blog_id=:blog_id',
+                'params' => array(':blog_id' => $blog->id),
+                'with' => array('blog'),
+            ),
+            'sort' => array(
+                'defaultOrder' => 'time DESC',
+            ),
+        ));
+
+        $this->render( 'blog',array (
+            'blog' => $blog,
+            'provider' => $dataProvider,
+        ));
+
+    }
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -115,6 +139,30 @@ class BlogController extends AdminController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+
+    public function actionBlog($id) {
+
+        $blog = Blog::model()->findByPk($id);
+        if( $blog === null )
+            throw new CHttpException( 404,'Блог не найден' );
+
+        $dataProvider = new CArrayDataProvider('BlogPost', array(
+            'criteria' => array(
+                'condition' => 'blog_id=:blog_id',
+                'params' => array(':blog_id' => $blog->id),
+                'with' => array('blog'),
+            ),
+            'sort' => array(
+                'defaultOrder' => 'time DESC',
+            ),
+        ));
+
+        $this->render( 'blog',array (
+            'blog' => $blog,
+            'provider' => $dataProvider,
+        ));
+    }
 
 	/**
 	 * Performs the AJAX validation.
