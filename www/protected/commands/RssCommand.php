@@ -26,9 +26,13 @@ class RssCommand extends CConsoleCommand {
                 return -1;
             });
 
+            $processedCount = 0;
             foreach ( $items as $item ) {
-                $this->proceedRssItem($stream->blog->id, $stream->id, $item);
+                if ( $this->proceedRssItem($stream->blog->id, $stream->id, $item) ) {
+                    $processedCount++;
+                };
             }
+            echo "{$processedCount} items added\n";
 
             $rss = null;unset($rss);
             $items = null; unset($items);
@@ -65,9 +69,7 @@ class RssCommand extends CConsoleCommand {
         $post->rss_id = $rss_id;
         $post->rss_guid = $guid;
 
-        $post->save();
-
-        return true;
+        return $post->save();
 
     }
 
