@@ -2,7 +2,6 @@
 
 $this->pageTitle=Yii::app()->name . ' - User page';
 ?>
-
 <h1>Страница пользователя</h1>
 <table>
     <tr>

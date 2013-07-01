@@ -19,7 +19,9 @@ $this->breadcrumbs=array(
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
             ));
             ?>
+
             <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>108, 'height'=>108)));?>
+
             <?php if ( !$user->hasAvatar() ): ?>
             <div class="row">
                 <?php echo CHtml::activeFileField($user, 'avatar_file'); ?>

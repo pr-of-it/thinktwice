@@ -189,9 +189,9 @@ class SiteController extends Controller
      * @param $id ID пользователя
      * @throws CHttpException
      */
-    public function actionUserPage() {
+    public function actionUserPage($id) {
 
-        $user = User::model()->findAll();
+        $user = User::model()->findByPk($id);
         if( $user === null )
             throw new CHttpException( 404,'Страница пользователя не найдена' );
 
@@ -205,11 +205,12 @@ class SiteController extends Controller
     public function actionBlog($id) {
         $blog = Blog::model()->findByPk($id);
         if( $blog === null )
-            throw new CHttpException( 404,'Страница пользователя не найдена' );
+            throw new CHttpException( 404,'Блог не найден' );
 
         $this->render( 'blog',array (
             'blog' => $blog,
         ));
+
 
     }
 
