@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Вёрстка</title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
     <!--[if lte IE 8]>
@@ -86,67 +86,83 @@
         </ul>
         <div class="button-ok"></div>
 
-        <div class="interest-menu">
-            <table>
-                <tr>
-                    <td>
-                        <header>Альтернативные инвестиции</header>
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/wine-big.png" alt=""/>
-                    </td>
-                    <td>
-                        <h6>#LKOH</h6>
-                        <p>Лукоил</p>
-                    </td>
-                    <td>
-                        <h6>#GAZP</h6>
-                        <p>Газпром</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <header>Фондовый рынок</header>
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/grap-big.png" alt=""/>
-                    </td>
-                    <td>
-                        <header>Недвижимость</header>
+        <ul class="interest-menu">
+            <li>
+                <a href="">
+                    <header>Альтернативные инвестиции</header>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/wine-big.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <h6>#LKOH</h6>
 
-                        <p>
-                            Загородная недвижимость:
-                            коттеджи, тайнхаусы, и если назва...
-                        </p>
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/realty-big.png" alt=""/>
-                    </td>
-                    <td>
-                        <header>Альтернативные инвестиции</header>
+                    <p>Лукоил</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <h6>#GAZP</h6>
 
-                        <p>Вина Нового света</p>
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/wine-big.png" alt=""/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h6>#TATN</h6>
-                        <p>Ростелеком</p>
-                    </td>
-                    <td>
-                        <header>Недвижимость</header>
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/realty-big.png" alt=""/>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <h6>#VTBR</h6>
-                        <p>Обыкновенные акции ВТБ</p>
-                    </td>
-                    <td>
-                        <h6>#RTKM</h6>
-                        <p>Ростелеком</p>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
+                    <p>Газпром</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <header>Фондовый рынок</header>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/grap-big.png" alt=""/>
+                </a>
+            </li>
+            <li class="im-desc">
+                <a href="">
+                    <header>Недвижимость</header>
+
+                    <p>
+                        Загородная недвижимость:
+                        коттеджи, тайнхаусы, и если назва...
+                    </p>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/realty-big.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <header>Альтернативные инвестиции</header>
+
+                    <p>Вина Нового света</p>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/wine-big.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <h6>#TATN</h6>
+
+                    <p>Ростелеком</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <header>Недвижимость</header>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/icons/realty-big.png" alt=""/>
+                </a>
+            </li>
+            <li class="im-empty">
+                <div></div>
+            </li>
+            <li>
+                <a href="">
+                    <h6>#VTBR</h6>
+
+                    <p>Обыкновенные акции ВТБ</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <h6>#RTKM</h6>
+
+                    <p>Ростелеком</p>
+                </a>
+            </li>
+        </ul>
     </nav>
 
 </header>
@@ -164,6 +180,7 @@
 
 
 <?php /* ?>
+
 <ul class="news-list">
     <li class="news-item">
 
@@ -199,6 +216,8 @@
             <span>10:02</span>
         </div>
     </li>
+
+
 
     <li class="news-item">
 
@@ -244,7 +263,7 @@
             <div class="news-tag">Новости</div>
             <!-- Если картинка задана через CSS то она будет автоматически маштабироваться -->
             <div style="background-image: url(img/tmp/gallery-image-big.png);" class="image-gallery-min-full">
-                <!--<img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image-big.png" alt=""/>-->
+                <!--<img src="img/tmp/gallery-image-big.png" alt=""/>-->
             </div>
             <div class="news-body">
 
@@ -500,15 +519,15 @@
             <!-- Если картинка задана через CSS то она будет автоматически маштабироваться -->
             <div style="background-image: url(img/tmp/gallery-image-big.png);"
                  class="image-gallery-min-full">
-                <!--<img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image-big.png" alt=""/>-->
+                <!--<img src="img/tmp/gallery-image-big.png" alt=""/>-->
             </div>
             <div class="news-body">
 
                 <ul class="image-gallery-min">
-                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
                 </ul>
                 <div class="time-create">15 минут назад</div>
                 <header class="news-author">Даниил Маслов</header>
@@ -544,7 +563,7 @@
         <div class="news-box">
             <div class="news-tag">События</div>
             <div class="news-body">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float.png" alt=""/>
+                <img src="img/tmp/image-float.png" alt=""/>
                 <header class="news-author">Анна Карпова</header>
                 <h6>Интервью с Ромео Ласерд</h6>
 
@@ -578,12 +597,13 @@
         </div>
     </li>
 
+
     <li class="news-item white-style">
 
         <div class="news-box">
             <div class="news-tag">Покупка недвижимости за рубежом</div>
             <div class="news-body">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/ava-white.png" alt=""/>
+                <img src="img/tmp/ava-white.png" alt=""/>
                 <header class="news-author">Василий Ежевикин</header>
                 <h6>Выручка «Синергии» по МСФО в 2012 году может вырмасти на 9% на фоне роста объемов
                     продаж водки.</h6>
@@ -621,7 +641,7 @@
         <div class="news-box">
             <div class="news-tag">Прогнозы</div>
             <div class="news-body">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float-2.png" alt=""/>
+                <img src="img/tmp/image-float-2.png" alt=""/>
                 <header class="news-author">Вася Пупкин</header>
                 <h6>Персональное финансовое планирование для тех, кто хочет уехать жить за рубеж</h6>
 
@@ -642,7 +662,7 @@
         <div class="news-box">
             <div class="news-tag">Прогнозы</div>
             <div class="news-body">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float.png" alt=""/>
+                <img src="img/tmp/image-float.png" alt=""/>
                 <header class="news-author">Егор Репин</header>
                 <h6>Современный рынок искусства</h6>
 
@@ -672,7 +692,7 @@
 </ul>
 </div>
 </div>
-<?php */ ?>
+  <?php */ ?>
 
 <div class="create-post opacity-hide">
     <form action="/" class="create-post-content">
@@ -754,7 +774,7 @@
 				</span>
                 <span class="shared">Поделилось: 5</span>
             </div>
-            <article>
+            <article class="content">
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
                 <p>
                     Уже есть депозит на фондовом рынке? Заключаете сделки чаще одного раза в неделю? Тогда вы, если не
@@ -762,12 +782,116 @@
                 </p>
                 <p>
                     В рамках своего вебинара Михаил Сапенюк начнет с самых азов. Расскажет, что такое торговая
-                    стратегия, и
+                    стратегия,
+                    и
                     чем ожидание точки входа лучше слепого следования чьим-то сигналам или выполнения чьих-то
                     рекомендаций.Как написать систему и получить теоретическое обоснование ее работы.
                 </p>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
+            </article>
+        </div>
+    </section>
+    <div class="close-popup"></div>
+</div>
+
+<div class="popup window-post-edit">
+    <section class="popup-content">
+        <div class="scroll">
+            <header class="popup-head">Редактировать совет</header>
+            <div class="create-post opacity-hide">
+                <form action="/" class="create-post-content">
+                    <header>
+                        <input placeholder="Тема моего совета" type="text" name=""/>
+                        <ul class="controlls-fonts">
+                            <li class="set_font-bold">b</li>
+                            <li class="set_font-italic">i</li>
+                            <li class="set_font-link">link</li>
+                            <li class="set_font-fullscreen">на весь экран</li>
+                        </ul>
+                    </header>
+                    <div class="text-field" contenteditable="true">
+                        Я понимаю, что на iMac'е рисовать интерфейс клёво и крупные блоки в нём смотрятся отлично, но
+                        нужно
+                        ориентироваться и на экраны поменьше. А на экране поменьше более 2-х рядов блоков не помещается.
+                        Сделайте компактную плитку.
+                    </div>
+                    <div class="tag-attach-box">
+                        <input placeholder="Теги" type="text" name=""/>
+                        <ul class="attach-list">
+                            <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
+                            <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
+                            <li class="add-attach"></li>
+                        </ul>
+                    </div>
+                    <footer>
+                        <table>
+                            <tr>
+                                <!--<td><a class="add-element" href=""><span></span></a></td>-->
+                                <td class="width-select-1">
+                                    <select name="">
+                                        <option value="">Название моей подписки</option>
+                                        <option value="">Выбор 1</option>
+                                        <option value="">Выбор 2</option>
+                                    </select>
+                                </td>
+                                <td class="width-select-2">
+                                    <select name="">
+                                        <option value="">для всех</option>
+                                        <option value="">Выбор 1</option>
+                                        <option value="">Выбор 2</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="line-buttons" colspan="3">
+                                    <a class="button-cancel" href="">Отменить</a>
+                                    <input class="button-yellow" type="submit" value="Опубликовать изменения"/>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </section>
+    <div class="close-popup"></div>
+</div>
+
+<div class="popup window-post-2">
+    <section class="popup-content">
+        <div class="scroll">
+            <header class="popup-head">Торговая рекомендация</header>
+            <article class="content">
+                <h3>Потенциал — 15% на росте акций Сбербанка</h3>
+                <h4>Что требуется: </h4>
+                <ul>
+                    <li>от 1000 руб. свободные денежные средства</li>
+                    <li>2-3 месяца что ожидать через 6 месяцев?</li>
+                    <li>брокерский счет</li>
+                </ul>
+
+                <h4>Стратегия</h4>
+                <p>
+                    Приобретать обыкновенные акции Сбербанка по цене ниже 82 рублей за акцию и продавать, когда цена
+                    достигнет 94 рублей. Заемные денежные средства не использовать.
+                </p>
+
+                <h4>Почему</h4>
+
+                <p>
+                    Иностранные и российские инвесторы не заинтересованы долго держать в низкодоходных активах
+                    свободные деньги. Сбербанк выглядит самым инвестиционно привлекательным активом в банковском
+                    секторе. ссылка на источник. Учитывая недооцененность акций (на 50%) даже при намеке на
+                    стабилизацию экономики ЕС рост котировок может быть взрывным.
+                    <br /><br/>
+                    <a href="">Ссылка на аналитику</a>
+                </p>
+
+                <h3>Как купить?</h3>
             </article>
         </div>
     </section>
