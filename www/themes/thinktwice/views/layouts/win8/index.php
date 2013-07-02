@@ -186,11 +186,13 @@
             var docViewRight = docViewLeft + $(window).width();
             var elemLeft = $('ul.empty').offset().left;
             if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
+                $('ul.empty').removeClass('empty');
                 $.get(
                     '/index.php/site/index',
                     {'BlogPost_page': 2},
                     function (data) {
                         $('#rails').append('<div class="step-day"><header class="day-name">Сегодня</header>' + data + '</div>');
+                        Config.setWidth('set');
                     }
                 );
             };
