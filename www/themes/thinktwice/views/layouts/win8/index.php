@@ -192,7 +192,8 @@
                     '/index.php/site/index',
                     {'BlogPost_page': ++page},
                     function (data) {
-                        $('#rails').append('<div class="step-day" style="visibility: hidden;"><header class="day-name">Сегодня</header>' + data + '</div>');
+                        $('#rails').width( $('#rails').width() * 2.5 );
+                        $('#rails').append('<div class="step-day" style="visibility: hidden;"><header class="day-name">Далее...</header>' + data + '</div>');
                         Config.setWidth('set');
                         $('#rails .step-day').css({"visibility": "visible"});
                     }
