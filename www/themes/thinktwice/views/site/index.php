@@ -29,4 +29,7 @@
     <?php if ( $counter == 1 ): ?></ul><?php endif; ?>
 
     <?php $counter = ++$counter % 2 ; ?>
+
 <?php endforeach; ?>
+
+<ul class="news-list empty"></ul>

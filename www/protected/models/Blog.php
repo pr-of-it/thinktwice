@@ -10,6 +10,7 @@
  */
 class Blog extends CActiveRecord
 {
+
 	/**
 	 * @return string the associated database table name
 	 */
