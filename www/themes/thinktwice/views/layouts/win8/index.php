@@ -524,10 +524,10 @@
             <div class="news-body">
 
                 <ul class="image-gallery-min">
-                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
-                    <li><a href=""><img src="img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
+                    <li><a href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/gallery-image.png" alt=""/></a></li>
                 </ul>
                 <div class="time-create">15 минут назад</div>
                 <header class="news-author">Даниил Маслов</header>
@@ -563,7 +563,7 @@
         <div class="news-box">
             <div class="news-tag">События</div>
             <div class="news-body">
-                <img src="img/tmp/image-float.png" alt=""/>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float.png" alt=""/>
                 <header class="news-author">Анна Карпова</header>
                 <h6>Интервью с Ромео Ласерд</h6>
 
@@ -603,7 +603,7 @@
         <div class="news-box">
             <div class="news-tag">Покупка недвижимости за рубежом</div>
             <div class="news-body">
-                <img src="img/tmp/ava-white.png" alt=""/>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/ava-white.png" alt=""/>
                 <header class="news-author">Василий Ежевикин</header>
                 <h6>Выручка «Синергии» по МСФО в 2012 году может вырмасти на 9% на фоне роста объемов
                     продаж водки.</h6>
@@ -641,7 +641,7 @@
         <div class="news-box">
             <div class="news-tag">Прогнозы</div>
             <div class="news-body">
-                <img src="img/tmp/image-float-2.png" alt=""/>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float-2.png" alt=""/>
                 <header class="news-author">Вася Пупкин</header>
                 <h6>Персональное финансовое планирование для тех, кто хочет уехать жить за рубеж</h6>
 
@@ -662,7 +662,7 @@
         <div class="news-box">
             <div class="news-tag">Прогнозы</div>
             <div class="news-body">
-                <img src="img/tmp/image-float.png" alt=""/>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image-float.png" alt=""/>
                 <header class="news-author">Егор Репин</header>
                 <h6>Современный рынок искусства</h6>
 

@@ -1,5 +1,4 @@
 <?php $counter = 0; ?>
-
 <?php foreach ( $dataProvider->getData() as $post ) : ?>
 
     <?php $white = intval(rand(0,3)) == 0; ?>
