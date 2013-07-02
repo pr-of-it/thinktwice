@@ -69,7 +69,11 @@ class RssCommand extends CConsoleCommand {
         $post->rss_id = $rss_id;
         $post->rss_guid = $guid;
 
-        return $post->save();
+        if ( !$post->save() )
+            return false;
+
+        $post->time = date('Y-m-d H:i:s',strtotime($item->pubDate));
+        return $post->saveAttributes(array('time'));
 
     }
 
