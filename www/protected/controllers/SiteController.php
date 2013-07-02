@@ -59,10 +59,18 @@ class SiteController extends Controller
             'criteria'=>$criteria,
         ));
 
-        $this->render('index',array (
-            'dataProvider' => $dataProvider,
+        if( Yii::app()->request->isAjaxRequest ) {
+            $this->renderPartial('index',array (
+                'dataProvider' => $dataProvider,
+                'pages' => $dataProvider->getPagination()
+            ));
+            Yii::app()->end();
+        } else {
+            $this->render('index',array (
+                'dataProvider' => $dataProvider,
+                'pages' => $dataProvider->getPagination()
         ));
-
+        }
     }
 
     /**
