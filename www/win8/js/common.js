@@ -74,32 +74,27 @@ function CConfig() { // для наследования класса внутр�
 		/**
 		 * Скроллим ленту по прокрутке колесика вверх - вниз
 		 */
-		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
-			this.scrollLeft += (deltaX * 30); // трекпад на маке
-			this.scrollLeft -= (deltaY * 30); // колесико мыши
+        $("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+            this.scrollLeft += (deltaX * 100); // трекпад на маке
+            this.scrollLeft -= (deltaY * 100); // колесико мыши
 
-			return false;
-		});
+            return false;
+        });
 
 		/**
 		 * Скроллим ленту по нажатию клавиш
 		 */
-		$(doc).keydown(function (e) {
-			if (e.keyCode == 37) {
-				$('#container').animate({
-					scrollLeft: '-=360'
-				}, 300);
+        $(document).keydown(function (e) {
+            var container = document.getElementById('container');
 
-				return false;
-
-			} else if (e.keyCode == 39) {
-				$('#container').animate({
-					scrollLeft: '+=360'
-				}, 300);
-
-				return false;
-			}
-		});
+            if (e.keyCode == 37) {
+                container.scrollLeft -= 100;
+                return false;
+            } else if (e.keyCode == 39) {
+                container.scrollLeft += 100;
+                return false;
+            }
+        });
 
 		/**
 		 * Открываем новость
