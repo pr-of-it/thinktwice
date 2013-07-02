@@ -45,7 +45,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-         $criteria=new CDbCriteria(array(
+        $this->layout = '//layouts/win8/index';
+
+        $criteria=new CDbCriteria(array(
             'order' => 'time DESC',
             'with' => 'blog',
         ));
@@ -60,6 +62,7 @@ class SiteController extends Controller
         $this->render('index',array (
             'dataProvider' => $dataProvider,
         ));
+
     }
 
     /**
