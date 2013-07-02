@@ -1,8 +1,11 @@
 <?php $counter = 0; ?>
 
 <?php foreach ( $dataProvider->getData() as $post ) : ?>
+
+    <?php $white = intval(rand(0,3)) == 0; ?>
+
     <?php if ( $counter == 0 ): ?><ul class="news-list"><?php endif; ?>
-    <li class="news-item">
+    <li class="news-item<?php if ($white): ?> white-style<?php endif; ?>">
 
         <div class="news-box">
             <div class="news-tag">#GAZP</div>
@@ -27,9 +30,3 @@
 
     <?php $counter = ++$counter % 2 ; ?>
 <?php endforeach; ?>
-
-<ul class="news-list">
-<?php foreach ( $dataProvider->getData() as $post ) : ?>
-
-<?php endforeach; ?>
-</ul>
