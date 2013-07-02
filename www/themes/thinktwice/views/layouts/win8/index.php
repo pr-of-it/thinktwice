@@ -180,6 +180,7 @@
 
 <script>
     $(function () {
+        var page = 1;
         $("#container").scroll(function () {
 
             var docViewLeft = $(window).scrollLeft();
@@ -189,7 +190,7 @@
                 $('ul.empty').removeClass('empty');
                 $.get(
                     '/index.php/site/index',
-                    {'BlogPost_page': 2},
+                    {'BlogPost_page': ++page},
                     function (data) {
                         $('#rails').append('<div class="step-day"><header class="day-name">Сегодня</header>' + data + '</div>');
                         Config.setWidth('set');
