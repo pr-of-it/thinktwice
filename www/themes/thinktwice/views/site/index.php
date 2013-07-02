@@ -1,10 +1,10 @@
 <?php $counter = 0; ?>
 <?php foreach ( $dataProvider->getData() as $post ) : ?>
 
-    <?php $white = intval(rand(0,3)) == 0; ?>
+    <?php $white = intval(rand(0,2)) == 0; ?>
 
     <?php if ( $counter == 0 ): ?><ul class="news-list"><?php endif; ?>
-    <li class="news-item<?php if ($white): ?> white-style<?php endif; ?>">
+    <li class="news-item<?php if ($white && $counter == 1): ?> white-style<?php endif; ?>">
 
         <div class="news-box">
             <div class="news-tag">#GAZP</div>
@@ -23,6 +23,7 @@
         <div style="left:10%" class="time-dott">
             <span><?php echo date("H:i", strtotime($post->time)); ?></span>
         </div>
+
     </li>
 
     <?php if ( $counter == 1 ): ?></ul><?php endif; ?>
