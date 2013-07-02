@@ -2,7 +2,7 @@
 
 class SiteController extends Controller
 {
-    const LAST_POST = 5;
+    const LAST_POST = 2;
     /**
      * Declares class-based actions.
      */
