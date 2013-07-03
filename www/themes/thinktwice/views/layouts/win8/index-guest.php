@@ -6,7 +6,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Вёрстка</title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
     <!--[if lte IE 8]>
