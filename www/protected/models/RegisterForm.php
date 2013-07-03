@@ -7,7 +7,6 @@
  */
 class RegisterForm extends CFormModel
 {
-	public $login;
 	public $password;
 	public $password_repeat;
         public $email;
@@ -23,7 +22,7 @@ class RegisterForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('login, password, password_repeat, email, invite_code', 'required'),
+			array('password, password_repeat, email, invite_code', 'required'),
             array('password_repeat', 'compare', 'compareAttribute'=>'password'),
         );
 	}
@@ -34,6 +33,10 @@ class RegisterForm extends CFormModel
     public function attributeLabels()
     {
         return array(
+            'email' => 'Адрес электронной почты',
+            'password' => 'Желаемый пароль',
+            'password_repeat' => 'Повторите пароль',
+            'invite_code' => 'Код инвайта',
         );
     }
 
@@ -46,12 +49,12 @@ class RegisterForm extends CFormModel
 
         $invite = Invite::model()->find('email=:email', array(':email'=>$this->email));
         if ( null === $invite ) {
-            $this->addError('email','No invite for this email.');
+            $this->addError('email','Для данного адреса e-mail нет инвайта.');
             return false;
         }
 
         if ( $invite->code != $this->invite_code ) {
-            $this->addError('invite_code','Invalid invite code.');
+            $this->addError('invite_code','Неверный код инвайта.');
             return false;
         }
 
