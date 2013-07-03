@@ -102,13 +102,14 @@ class User extends CActiveRecord
 
     public function getAmount() {
         if ( !$this->isNewRecord ) {
-            return Yii::app()->db->createCommand("
+            $result = Yii::app()->db->createCommand("
                 SELECT amount_after
                 FROM " . UserTransaction::model()->tableName() . "
                 WHERE user_id=" . $this->id . "
                 ORDER BY id DESC
                 LIMIT 1
             ")->queryScalar();
+            return $result ?: 0;
         } else {
             return 0;
         }

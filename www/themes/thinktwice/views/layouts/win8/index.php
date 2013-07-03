@@ -1,5 +1,7 @@
 <?php
-/* @var $this Controller */
+/* @var $this Controller
+ * $user User
+ */
 $user = User::model()->findByPk(Yii::app()->user->id);
 ?><!DOCTYPE html>
 <html lang="en-US">
@@ -44,9 +46,9 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
-        <a class="user-avatar" href=""><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
-        <div class="user-money">1000 руб.</div>
-        <div class="user-name">Тим Черный</div>
+        <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
+        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.2f', $user->getAmount()); ?> руб.</a></div>
+        <div class="user-name"><?php echo $user->name; ?></div>
     </section>
 
     <nav class="lenta-settings">
