@@ -1,4 +1,12 @@
-<?php /* @var $this Controller */ ?><!DOCTYPE html>
+<?php
+/* @var $this Controller */
+    if ( Yii::app()->user->isGuest ) {
+        $user = new stdClass();
+        $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';die;
+    } else {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+    }
+?><!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -41,7 +49,7 @@
     <a href=""><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
-        <a href=""><img class="user-avatar" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/user-avatar.png" alt=""/></a>
+        <a class="user-avatar" href=""><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
         <div class="user-money">1000 руб.</div>
         <div class="user-name">Тим Черный</div>
     </section>
@@ -192,7 +200,7 @@
                     '/index.php/site/index',
                     {'BlogPost_page': ++page},
                     function (data) {
-                        $('#rails').append('<div class="step-day"><header class="day-name">Сегодня</header>' + data + '</div>');
+                        $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
                         Config.setWidth('set');
                     }
                 );

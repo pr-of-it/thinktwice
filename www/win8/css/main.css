@@ -1,10 +1,3 @@
-@font-face{
-	font-family:'Helvetica';
-	src:local('Helvetica'),
-	src:url('fonts/helveticaneuecyr-light.eot');
-	src:url('fonts/helveticaneuecyr-light.eot') format('embedded-opentype'), url('fonts/helveticaneuecyr-light.woff') format('woff'), url('fonts/helveticaneuecyr-light.ttf') format('truetype'), url('fonts/helveticaneuecyr-light.svg#HelveticaNeueCyrLight') format('svg');
-}
-
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{ margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{ display:block }
 body{ line-height:1 }
@@ -13,7 +6,7 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:12px "Segoe UI semilight", "Segoe UI", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", Verdana, Arial, sans-serif;
+	font:400 12px "Helvetica", Verdana, sans-serif;
 	height:100%; width:100%;
 	color:#fff;
 	background:#081c24; /* Old browsers */
@@ -272,6 +265,19 @@ input.error{ border:1px solid red !important }
 	position:absolute;
 	left:0; top:18px;
 	width:50px; height:49px;
+	border-radius:100px;
+	border:2px solid #fff;
+	overflow:hidden;
+}
+.user-bar .user-avatar img{
+	width:50px; height:49px;
+}
+.user-bar .user-avatar span{
+	position:absolute;
+	left:0; top:0;
+	width:100%; height:100%;
+	box-shadow:0 2px 5px #000 inset;
+	border-radius:100px;
 }
 .user-bar .user-money{
 	color:#678c91;
@@ -298,7 +304,7 @@ input.error{ border:1px solid red !important }
 }
 .lenta-settings li a{
 	display:block;
-	padding:9px 5px 9px 47px;
+	padding:11px 5px 9px 47px;
 	text-decoration:none;
 	color:#2e757c;
 	overflow:hidden;
@@ -340,7 +346,7 @@ icon-archive{
 
 .lenta-settings li .my-interest{
 	font-size:16px;
-	padding:5px 5px 8px 47px;
+	padding:8px 5px 8px 47px;
 }
 .lenta-settings li .my-interest span{
 	position:absolute;
@@ -398,8 +404,10 @@ icon-archive{
 }
 #rails.page-lenta{
 	top:87px; left:0;
-	bottom:85px;
+	bottom:80px;
 	width:100%;
+	overflow:hidden;
+	padding-bottom:5px;
 }
 .step-day{
 	position:relative;
