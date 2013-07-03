@@ -6,7 +6,7 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:400 12px "Helvetica", Verdana, sans-serif;
+	font:400 12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif, Verdana, sans-serif;
 	height:100%; width:100%;
 	color:#fff;
 	background:#081c24; /* Old browsers */
@@ -19,7 +19,7 @@ body{
 
 /** h group **/
 h1, h2, h3, h4, h5, h6{
-	font:300 24px "Helvetica";
+	font:300 24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 15px
 }
 h1{
@@ -33,7 +33,7 @@ h3{
 	margin:0 0 29px;
 }
 h4, h5, h6{
-	font:700 18px "Helvetica";
+	font:700 18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 25px;
 }
 /** h group **/
@@ -110,7 +110,7 @@ input[type=password],
 input[type=email],
 input[type=tel],
 textarea{
-	font:700 16px "Helvetica";
+	font:700 16px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	outline:none;
 	padding:9px; height:22px;
 	border:1px solid #fff;
@@ -470,7 +470,7 @@ icon-archive{
 }
 .news-box .news-tag{
 	position:relative;
-	font:19px "Helvetica";
+	font: 19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	text-align:right;
 	padding:10px 10px 8px;
 	cursor:pointer;
@@ -487,15 +487,15 @@ icon-archive{
 	margin:0 10px 10px 0;
 }
 .news-box .news-author{
-	font:700 14px "Helvetica";
+	font:700 14px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 15px;
 }
 .news-box h6{
-	font:300 24px "Helvetica";
+	font:300 24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 7px;
 }
 .news-box p{
-	font:17px/22px "Helvetica";
+	font:17px/22px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	overflow:hidden;
 	letter-spacing:-.17px;
 }
@@ -511,7 +511,7 @@ icon-archive{
 	width:15px; height:14px;
 	cursor:pointer;
 	text-indent:23px;
-	font:14px/19px "Helvetica";
+	font:14px/19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background: url(../img/sprites/main.png) no-repeat -243px -1px transparent;
 }
 .icon-category{
@@ -539,7 +539,7 @@ icon-archive{
 	left:10%; bottom:-15px;
 	width:17px; height:18px;
 	margin-left:-8.5px;
-	font:12px "Helvetica";
+	font:12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	white-space:nowrap;
 	background: url(../img/sprites/main.png) no-repeat -284px -2px transparent;
 }
@@ -641,7 +641,7 @@ icon-archive{
 }
 .footer-body a{
 	color:#27666c;
-	font:13px "Helvetica";
+	font:13px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 .footer-body .icon-mc a,
 .footer-body .icon-visa a,
@@ -697,7 +697,7 @@ icon-archive{
 	float:left;
 	color:#fff;
 	cursor:pointer;
-	font:15px "Helvetica";
+	font:15px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	padding:5px; margin:0 14px 7px 0;
 	border:1px solid transparent;
 }
@@ -764,7 +764,7 @@ icon-archive{
 }
 .popup .popup-head{
 	color:#121212;
-	font:38px "Helvetica";
+	font:38px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 12px;
 }
 .popup .popup-content{
@@ -858,7 +858,7 @@ icon-archive{
 	text-align:center;
 	color:#464646;
 	min-width:8px;
-	font:12px/24px "Helvetica";
+	font:12px/24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	cursor:pointer;
 }
 .controlls-fonts .set_font-bold{
@@ -876,7 +876,7 @@ icon-archive{
 	bottom:246px; right:22px;
 	padding:8px 11px;
 	color:#112d36;
-	font:16px/20px "Helvetica";
+	font:16px/20px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background:#fff;
 	overflow:auto;
 }
@@ -1046,7 +1046,7 @@ icon-archive{
 	border:2px solid #414141;
 	padding:13px 30px 8px 7px;
 	color:#202020;
-	font:18px "Helvetica";
+	font:18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 .jq-selectbox__select:hover{
 	background-color:#e6e6e6;
@@ -1383,7 +1383,7 @@ input[type="reset"].styler:active{
 	margin:11px 0 5px;
 }
 .interest-menu p{
-	font:15px/17px "Helvetica";
+	font:15px/17px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 /*****   interest-menu:end   *****/
@@ -1414,7 +1414,7 @@ input[type="reset"].styler:active{
 	overflow:visible;
 }
 .window-post-edit .popup-content article p{
-	font:16px/18px "Helvetica";
+	font:16px/18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 19px;
 }
 
