@@ -39,6 +39,10 @@ class SiteController extends Controller
         return parent::beforeAction($action);
     }
 
+    /*
+     * ------------------------ ГЛАВНАЯ СТРАНИЦА ------------------------
+     */
+
     /**
      * Главная страница сайта
      * This is the default 'index' action that is invoked
@@ -78,6 +82,85 @@ class SiteController extends Controller
         }
     }
 
+    /*
+     * ------------------------ РЕГИСТРАЦИЯ, ВХОД И ВЫХОД ------------------------
+     */
+
+
+    /**
+     * Вход на сайт
+     * Возможна регистрация по инвайту или вход для зарегистрированных пользователей
+     *
+     * @param string $code
+     * @param string $email
+     */
+    public function actionEnter($code = null, $email = null) {
+
+        $this->layout = '//layouts/win8/index-guest';
+
+        // Часть регистрации
+
+        $registerForm = new RegisterForm();
+        $registerForm->invite_code = $code ?: null;
+        $registerForm->email = $email ?: null;
+
+        if(isset($_POST['RegisterForm']))
+        {
+            $registerForm->attributes=$_POST['RegisterForm'];
+            if( $registerForm->validate() && $registerForm->register() ) {
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+
+        // Часть входа на сайт
+
+        $service = Yii::app()->request->getQuery('service');
+
+        if (isset($service)) {
+
+            $authIdentity = Yii::app()->eauth->getIdentity($service);
+            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/enter');
+
+            if ($authIdentity->authenticate()) {
+
+                $identity = new ServiceUserIdentity($authIdentity);
+
+                // Успешный вход
+                if ($identity->authenticate()) {
+                    Yii::app()->user->login($identity, 3600*24*30);
+                    // Специальный редирект с закрытием popup окна
+                    $authIdentity->redirect();
+                }
+                else {
+                    // Закрываем popup окно и перенаправляем на cancelUrl
+                    $authIdentity->cancel();
+                }
+            }
+
+            // Что-то пошло не так, перенаправляем на страницу входа
+            $this->redirect(array('site/login'));
+        }
+
+        $loginForm = new LoginForm;
+
+        // collect user input datac
+        if(isset($_POST['LoginForm']))
+        {
+            $loginForm->attributes=$_POST['LoginForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $loginForm->validate() && $loginForm->login() )
+                $this->redirect(Yii::app()->user->returnUrl);
+        }
+
+
+        $this->render('enter', array(
+            'registerForm' => $registerForm,
+            'loginForm' => $loginForm,
+        ));
+
+    }
+
     /**
      * Регистрация на сайте
      * @param string $code Код инвайта
@@ -112,49 +195,8 @@ class SiteController extends Controller
 
     }
 
-
     /**
-     * This is the action to handle external exceptions.
-     */
-    public function actionError()
-    {
-        if($error=Yii::app()->errorHandler->error)
-        {
-            if(Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-            else
-                $this->render('error', $error);
-        }
-    }
-
-    /**
-     * Displays the contact page
-     */
-    public function actionContact()
-    {
-        $model=new ContactForm;
-        if(isset($_POST['ContactForm']))
-        {
-            $model->attributes=$_POST['ContactForm'];
-            if($model->validate())
-            {
-                $name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-                $subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-                $headers="From: $name <{$model->email}>\r\n".
-                    "Reply-To: {$model->email}\r\n".
-                    "MIME-Version: 1.0\r\n".
-                    "Content-type: text/plain; charset=UTF-8";
-
-                mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
-                Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-                $this->refresh();
-            }
-        }
-        $this->render('contact',array('model'=>$model));
-    }
-
-    /**
-     * Displays the login page
+     * Авторизация на сайте
      */
     public function actionLogin()
     {
@@ -216,6 +258,50 @@ class SiteController extends Controller
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
+
+
+
+
+    /**
+     * This is the action to handle external exceptions.
+     */
+    public function actionError()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
+            else
+                $this->render('error', $error);
+        }
+    }
+
+    /**
+     * Displays the contact page
+     */
+    public function actionContact()
+    {
+        $model=new ContactForm;
+        if(isset($_POST['ContactForm']))
+        {
+            $model->attributes=$_POST['ContactForm'];
+            if($model->validate())
+            {
+                $name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+                $subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+                $headers="From: $name <{$model->email}>\r\n".
+                    "Reply-To: {$model->email}\r\n".
+                    "MIME-Version: 1.0\r\n".
+                    "Content-type: text/plain; charset=UTF-8";
+
+                mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+                Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+                $this->refresh();
+            }
+        }
+        $this->render('contact',array('model'=>$model));
+    }
+
 
     /**mail(
      * Личная страничка пользователя
