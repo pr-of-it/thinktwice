@@ -74,12 +74,12 @@ function CConfig() { // для наследования класса внутр�
 		/**
 		 * Скроллим ленту по прокрутке колесика вверх - вниз
 		 */
-        /*$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+        $("#container").mousewheel(function (event, delta, deltaX, deltaY) {
             this.scrollLeft += (deltaX * 100); // трекпад на маке
             this.scrollLeft -= (deltaY * 100); // колесико мыши
 
             return false;
-        });*.
+        });
 
 		/**
 		 * Скроллим ленту по нажатию клавиш

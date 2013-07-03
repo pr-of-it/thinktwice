@@ -376,6 +376,7 @@ icon-archive{
 	-ms-transition:all .5s;
 	-o-transition:all .5s;
 	transition:all .5s;
+	-webkit-overflow-scrolling: touch;
 }
 #container:after{
 	content:".";
@@ -405,7 +406,7 @@ icon-archive{
 #rails.page-lenta{
 	top:87px; left:0;
 	bottom:80px;
-	width:100%;
+	width: 4160px;;
 	overflow:hidden;
 	padding-bottom:5px;
 }
