@@ -45,7 +45,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = '//layouts/win8/index';
+        if ( Yii::app()->user->isGuest ) {
+            $this->layout = '//layouts/win8/index-guest';
+        } else {
+            $this->layout = '//layouts/win8/index';
+        }
 
         $criteria=new CDbCriteria(array(
             'order' => 'time DESC',

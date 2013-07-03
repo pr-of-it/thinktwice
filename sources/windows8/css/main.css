@@ -1,3 +1,9 @@
+@font-face{
+	font-family:'NoteworthyLight';
+	src:url('fonts/noteworthy.eot');
+	src:url('fonts/noteworthy.eot') format('embedded-opentype'), url('fonts/noteworthy.woff') format('woff'), url('fonts/noteworthy.ttf') format('truetype'), url('fonts/noteworthy.svg#NoteworthyLight') format('svg');
+}
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{ margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{ display:block }
 body{ line-height:1 }
@@ -393,6 +399,7 @@ icon-archive{
 
 #rails{
 	position:absolute;
+	width:900%;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -406,7 +413,6 @@ icon-archive{
 	top:87px; left:0;
 	bottom:80px;
 	width:100%;
-	overflow:hidden;
 	padding-bottom:5px;
 }
 .step-day{
@@ -1418,3 +1424,88 @@ input[type="reset"].styler:active{
 }
 
 /*****   window-post-edit:end   *****/
+
+.reg-helper{
+	color:#ffffff;
+	font:14px "NoteworthyLight";
+	height:91px;
+	left:-345px;
+	position:absolute;
+	top:-5px;
+	width:322px;
+	padding:0;
+	background:url(../img/reg-helper.png) no-repeat center bottom transparent;
+}
+.user-bar .link-reg{
+	position:absolute;
+	left:-90px; top:25px;
+	color:#000;
+	box-shadow:0 1px 2px #000;
+	z-index:1;
+}
+.notify-reg{
+	position:absolute;
+	left:-42px; top:40px;
+	padding:20px 21px 13px;
+	width:175px;
+	color:#333335;
+	font:13px/16px "Helvetica";
+	background:#dfded9;
+	box-shadow:0 4px 8px #000;
+}
+.lenta-settings li .notify-reg a{
+	color:#313131;
+	font-size:12px;
+	display:inline;
+	padding:0;
+	text-decoration:underline;
+}
+.lenta-settings li .notify-reg a:hover{
+	text-decoration:none;
+}
+.notify-reg .arrow{
+	position:absolute;
+	left:50%; top:-10px;
+	margin-left:-12px;
+	width:25px; height:10px;
+	background:url(../img/reg-arrow.png) no-repeat transparent;
+}
+
+
+#rails.quick-start{
+	left:900px;
+}
+#rails.quick-start .step-day{
+	padding-left:0;
+}
+
+.quick-start-box{
+	position:absolute;
+	left:179px; top:157px;
+	z-index:10;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	-ms-transition:all .5s;
+	-o-transition:all .5s;
+	transition:all .5s;
+}
+.quick-start-box.qsb-hide{
+	left:-1000px;
+	opacity:0; filter:alpha(opacity=0);
+}
+.quick-start-box header{
+	color:#4a6f78;
+	font:23px "Helvetica";
+	margin:0 0 11px;
+}
+.video-box{
+	position:relative;
+	width:685px; height:385px;
+}
+.video-box .close{
+	position:absolute;
+	right:-56px; top:-33px;
+	width:45px; height:45px;
+	cursor:pointer;
+	background:url(../img/icons/close.jpg) no-repeat transparent;
+}

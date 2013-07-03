@@ -109,8 +109,8 @@ return array(
             'services' => array( // You can change the providers and their classes.
                 'facebook' => array(
                     'class' => 'FacebookOAuthService',
-                    'client_id' => '391290324321632',
-                    'client_secret' => '62e1b00024612a3a385ad34c4296a4c5',
+                    'client_id' => '576818149002895',
+                    'client_secret' => '0b919ad82ae179b34d1a8ed8de972587',
                 ),
             )
         ),

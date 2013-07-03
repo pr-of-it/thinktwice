@@ -41,9 +41,11 @@
 	<a href=""><img id="logo" src="img/logo.png" alt=""/></a>
 
 	<section class="user-bar">
-		<a class="user-avatar" href=""><img src="img/tmp/image-float.png" alt=""/><span></span></a>
-		<div class="user-money">1000 руб.</div>
-		<div class="user-name">Тим Черный</div>
+		<a class="link-reg button-yellow" href="">Регистрация</a>
+		<div class="reg-helper">
+			Настройте watchlist, чтобы вся интересная <br />
+			информация собиралась в ленте
+		</div>
 	</section>
 
 	<nav class="lenta-settings">
@@ -82,7 +84,16 @@
 					</ul>
 				</div>
 			</li>
-			<li><a class="my-interest" href=""><span></span> Мои интересы</a></li>
+			<li>
+				<a class="my-interest" href=""><span></span> Мои интересы</a>
+				<p class="notify-reg">
+					<b>Зарегистрируйтесь</b>, чтобы
+					установить персональные
+					фильтры. <a href="">Смотреть видео</a>
+					о работе сервиса.
+					<span class="arrow"></span>
+				</p>
+			</li>
 		</ul>
 		<div class="button-ok"></div>
 
@@ -167,10 +178,17 @@
 
 </header>
 <div id="wrapper">
-	<!--header-->
-	<div id="container">
 
-		<div id="rails" class="page-lenta">
+	<div class="quick-start-box">
+		<header>Что такое Лента?</header>
+		<div class="video-box">
+			<img src="img/tmp/video.jpg" alt=""/>
+			<div class="close"></div>
+		</div>
+	</div>
+
+	<div id="container">
+		<div id="rails" class="page-lenta quick-start">
 			<div class="step-day">
 				<header class="day-name">Сегодня</header>
 				<ul class="news-list">
@@ -682,59 +700,6 @@
 			</div>
 		</div>
 
-		<div class="create-post opacity-hide">
-			<form action="/" class="create-post-content">
-				<header>
-					<input placeholder="Тема моего совета" type="text" name=""/>
-					<ul class="controlls-fonts">
-						<li class="set_font-bold">b</li>
-						<li class="set_font-italic">i</li>
-						<li class="set_font-link">link</li>
-						<li class="set_font-fullscreen">на весь экран</li>
-					</ul>
-				</header>
-				<div class="text-field" contenteditable="true">
-					Я понимаю, что на iMac'е рисовать интерфейс клёво и крупные блоки в нём смотрятся отлично, но нужно
-					ориентироваться и на экраны поменьше. А на экране поменьше более 2-х рядов блоков не помещается.
-					Сделайте компактную плитку.
-				</div>
-				<div class="tag-attach-box">
-					<input placeholder="Теги" type="text" name=""/>
-					<ul class="attach-list">
-						<li><img src="img/tmp/city.png" alt=""/></li>
-						<li><img src="img/tmp/city.png" alt=""/></li>
-						<li class="add-attach"></li>
-					</ul>
-				</div>
-				<footer>
-					<table>
-						<tr>
-							<!--<td><a class="add-element" href=""><span></span></a></td>-->
-							<td class="width-select-1">
-								<select name="">
-									<option value="">Название моей подписки</option>
-									<option value="">Выбор 1</option>
-									<option value="">Выбор 2</option>
-								</select>
-							</td>
-							<td class="width-select-2">
-								<select name="">
-									<option value="">для всех</option>
-									<option value="">Выбор 1</option>
-									<option value="">Выбор 2</option>
-								</select>
-							</td>
-							<td>
-								<input class="button-yellow" type="submit" value="Опубликовать"/>
-							</td>
-						</tr>
-					</table>
-
-
-
-				</footer>
-			</form>
-		</div>
 	</div>
 	<!--container-->
 

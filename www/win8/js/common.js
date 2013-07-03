@@ -71,30 +71,24 @@ function CConfig() { // для наследования класса внутр�
 			return false;
 		})
 
-		/**
-		 * Скроллим ленту по прокрутке колесика вверх - вниз
-		 */
-        $("#container").mousewheel(function (event, delta, deltaX, deltaY) {
-            this.scrollLeft += (deltaX * 100); // трекпад на маке
-            this.scrollLeft -= (deltaY * 100); // колесико мыши
+		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+			this.scrollLeft += (deltaX * 100); // трекпад на маке
+			this.scrollLeft -= (deltaY * 100); // колесико мыши
 
-            return false;
-        });
+			return false;
+		});
 
-		/**
-		 * Скроллим ленту по нажатию клавиш
-		 */
-        $(document).keydown(function (e) {
-            var container = document.getElementById('container');
+		$(document).keydown(function (e) {
+			var container = $('#container');
 
-            if (e.keyCode == 37) {
-                container.scrollLeft -= 100;
-                return false;
-            } else if (e.keyCode == 39) {
-                container.scrollLeft += 100;
-                return false;
-            }
-        });
+			if (e.keyCode == 37) {
+				container.scrollLeft -= 100;
+				return false;
+			} else if (e.keyCode == 39) {
+				container.scrollLeft += 100;
+				return false;
+			}
+		});
 
 		/**
 		 * Открываем новость
@@ -105,11 +99,7 @@ function CConfig() { // для наследования класса внутр�
 			var target = $(e.target)
 			if(!target.hasClass('news-like') && !target.hasClass('icon-category') && !target.hasClass('news-tag'))
 			{
-                var window = $('.window-post');
-                window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-                window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
-                window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
-				window.popup();
+				$('.window-post').popup()
 			}
 		})
 
@@ -142,6 +132,11 @@ function CConfig() { // для наследования класса внутр�
 		})
 		$('.news-item img').click(function(){
 			$('.window-post-2').popup()
+		})
+
+		$('.video-box .close').click(function(){
+			$(this).closest('.quick-start-box').addClass('qsb-hide')
+			$('#rails').removeClass('quick-start')
 		})
 	}
 

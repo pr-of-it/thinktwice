@@ -133,6 +133,11 @@ function CConfig() { // для наследования класса внутр�
 		$('.news-item img').click(function(){
 			$('.window-post-2').popup()
 		})
+
+		$('.video-box .close').click(function(){
+			$(this).closest('.quick-start-box').addClass('qsb-hide')
+			$('#rails').removeClass('quick-start')
+		})
 	}
 
 	/**
