@@ -12,7 +12,7 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:400 12px "Helvetica", Verdana, sans-serif;
+	font:400 12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	height:100%; width:100%;
 	color:#fff;
 	background:#081c24; /* Old browsers */
@@ -382,6 +382,7 @@ icon-archive{
 	-ms-transition:all .5s;
 	-o-transition:all .5s;
 	transition:all .5s;
+	-webkit-overflow-scrolling:touch;
 }
 #container:after{
 	content:".";
@@ -412,7 +413,7 @@ icon-archive{
 #rails.page-lenta{
 	top:87px; left:0;
 	bottom:80px;
-	width:100%;
+	width:4160px;
 	padding-bottom:5px;
 }
 .step-day{
@@ -475,7 +476,7 @@ icon-archive{
 }
 .news-box .news-tag{
 	position:relative;
-	font:19px "Helvetica";
+	font:19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	text-align:right;
 	padding:10px 10px 8px;
 	cursor:pointer;
@@ -1449,7 +1450,7 @@ input[type="reset"].styler:active{
 	padding:20px 21px 13px;
 	width:175px;
 	color:#333335;
-	font:13px/16px "Helvetica";
+	font:13px/16px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background:#dfded9;
 	box-shadow:0 4px 8px #000;
 }
@@ -1495,7 +1496,7 @@ input[type="reset"].styler:active{
 }
 .quick-start-box header{
 	color:#4a6f78;
-	font:23px "Helvetica";
+	font:23px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 11px;
 }
 .video-box{

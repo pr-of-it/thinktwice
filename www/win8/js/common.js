@@ -79,7 +79,7 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = document.getElementById('container');
+			var container = $('#container');
 
 			if (e.keyCode == 37) {
 				container.scrollLeft -= 100;
@@ -99,11 +99,7 @@ function CConfig() { // для наследования класса внутр�
 			var target = $(e.target)
 			if(!target.hasClass('news-like') && !target.hasClass('icon-category') && !target.hasClass('news-tag'))
 			{
-                var window = $('.window-post');
-                window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-                window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
-                window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
-				window.popup();
+				$('.window-post').popup()
 			}
 		})
 
