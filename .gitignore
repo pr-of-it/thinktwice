@@ -4,3 +4,5 @@ nbproject
 /www/assets
 main.php
 console.php
+.DS_Store
+/www/test.php
