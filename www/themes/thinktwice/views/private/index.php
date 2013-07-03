@@ -55,7 +55,32 @@ $this->breadcrumbs=array(
 </ul>
 <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
+<p>Название блога:
 
+<?php $form=$this->beginWidget('ActiveForm', array(
+    'id'=>'blog-form',
+    'action'=>$this->createAbsoluteUrl('/private/blog/'),
+    // Please note: When you enable ajax validation, make sure the corresponding
+    // controller action is handling ajax validation correctly.
+    // There is a call to performAjaxValidation() commented in generated controller code.
+    // See class documentation of ActiveForm for details on this.
+    'enableAjaxValidation'=>false,
+    'htmlOptions' => array('enctype' => 'multipart/form-data'),
+)); ?>
+
+<?php echo $form->errorSummary($user->blog); ?>
+
+
+<div class="row">
+    <?php echo $form->textField($user->blog,'title',array('size'=>60,'maxlength'=>255));?>
+    <?php echo $form->error($user->blog,'title'); ?>
+</div>
+
+<div class="row">
+    <?php echo CHtml::submitButton('Сохранить'); ?>
+</div>
+
+<?php $this->endWidget(); ?></p>
 
 <h4>Ваши followers:</h4>
 

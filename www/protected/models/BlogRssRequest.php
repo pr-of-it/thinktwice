@@ -1,20 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "tt_user_roles".
+ * This is the model class for table "tt_blog_rss_requests".
  *
- * The followings are the available columns in table 'tt_user_roles':
+ * The followings are the available columns in table 'tt_blog_rss_requests':
  * @property integer $id
- * @property string $name
+ * @property integer $blog_id
+ * @property string $title
+ * @property string $url
  */
-class UserRole extends CActiveRecord
+class BlogRssRequest extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tt_user_roles';
+		return 'tt_blog_rss_requests';
 	}
 
 	/**
@@ -25,10 +27,11 @@ class UserRole extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'length', 'max'=>255),
+			array('blog_id', 'numerical', 'integerOnly'=>true),
+			array('title, url', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, blog_id, title, url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -40,7 +43,6 @@ class UserRole extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            #'user' => array(self::HAS_MANY, 'User', 'id')
 		);
 	}
 
@@ -51,7 +53,9 @@ class UserRole extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'blog_id' => 'Blog',
+			'title' => 'Title',
+			'url' => 'Url',
 		);
 	}
 
@@ -74,7 +78,9 @@ class UserRole extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('blog_id',$this->blog_id);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('url',$this->url,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -85,32 +91,10 @@ class UserRole extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UserRole the static model class
+	 * @return BlogRssRequest the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    public function getDesc() {
-        switch ( $this->name ) {
-            case 'guest':
-                return 'Гость';
-            case 'admin':
-                return 'Администратор';
-            case 'operator':
-                return 'Опрератор';
-            case 'moderator':
-                return 'Модератор';
-            case 'expert':
-                return 'Эксперт';
-            case 'lector':
-                return 'лектор';
-            case 'user':
-                return 'Пользователь';
-            case 'rss' :
-                return 'Rss';
-
-        }
-    }
 }

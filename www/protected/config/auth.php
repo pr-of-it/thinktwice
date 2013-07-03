@@ -15,6 +15,15 @@ return array(
         'bizRule' => null,
         'data' => null
     ),
+    'rss' => array(
+        'type' => CAuthItem::TYPE_ROLE,
+        'description' => 'Rss',
+        'children' => array(
+            'user', // унаследуемся от пользователя
+        ),
+        'bizRule' => null,
+        'data' => null
+    ),
     'operator' => array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'Operator',

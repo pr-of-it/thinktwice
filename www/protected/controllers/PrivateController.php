@@ -30,6 +30,7 @@ class PrivateController extends Controller {
                     'index', 'profile',
                     'services', 'deleteService',
                     'account',
+                    'blog',
                     'password',
                     'deposit', 'depositFail', 'depositSuccess','callRequest',
                     'deleteAvatar',
@@ -138,6 +139,18 @@ class PrivateController extends Controller {
             'user' => $user,
         ));
 
+    }
+
+   public function actionBlog(){
+
+       $blog = Blog::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
+
+       if(isset($_POST['Blog']))
+       {
+           $blog->attributes=$_POST['Blog'];
+           if($blog->save())
+               $this->redirect(array('/private'));
+       }
     }
 
     public function actionDeleteService($id) {

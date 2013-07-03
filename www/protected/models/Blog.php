@@ -7,10 +7,13 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $title
+ * @property integer $type
  */
 class Blog extends CActiveRecord
 {
-
+    const SIMPLE_BLOG = 1;
+    const NEWS_BLOG = 2;
+    const SUBSCRIPT_BLOG =3;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,7 +47,8 @@ class Blog extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-            'posts' => array(self::HAS_MANY, 'BlogPost', 'blog_id')
+            'posts' => array(self::HAS_MANY, 'BlogPost', 'blog_id'),
+            'rss' => array(self::HAS_MANY, 'BlogRss', 'user_id')
 		);
 	}
 
@@ -57,6 +61,7 @@ class Blog extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'title' => 'Title',
+            'type' => 'Type',
 		);
 	}
 
@@ -80,7 +85,7 @@ class Blog extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('title',$this->title,true);
+        $criteria->compare('type',$this->type,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

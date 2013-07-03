@@ -76,6 +76,7 @@ class User extends CActiveRecord
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
             'blog' => array(self::HAS_ONE, 'Blog', 'user_id'),
+
         );
     }
 
@@ -320,7 +321,14 @@ class User extends CActiveRecord
             $this->avatar_file = self::AVATAR_UPLOAD_PATH . $file->getName();
             $this->saveAttributes(array('avatar_file'=>$this->avatar_file));
         }
-        return parent::afterSave();
+
+            $blog = new Blog;
+            $blog->user_id = $this->id;
+            $blog->title = '';
+            $blog->type = Blog::SIMPLE_BLOG;
+            $blog->save();
+
+            return parent::afterSave();
     }
 
 }
