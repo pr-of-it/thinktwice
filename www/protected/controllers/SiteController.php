@@ -40,6 +40,7 @@ class SiteController extends Controller
     }
 
     /**
+     * Главная страница сайта
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
      */
@@ -76,6 +77,41 @@ class SiteController extends Controller
         ));
         }
     }
+
+    /**
+     * Регистрация на сайте
+     * @param string $code Код инвайта
+     * @param string $email E-mail
+     */
+    public function actionRegister($code = null, $email = null) {
+
+        $this->layout = '//layouts/win8/index-guest';
+
+        $model = new RegisterForm();
+        // if it is ajax validation request
+        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+        {
+            echo ActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        $model->invite_code = $code ?: null;
+        $model->email = $email ?: null;
+        // collect user input data
+        if(isset($_POST['RegisterForm']))
+        {
+            $model->attributes=$_POST['RegisterForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $model->validate() && $model->register() ) {
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+
+        // display the login form
+        $this->render('register',array('model'=>$model));
+
+    }
+
 
     /**
      * This is the action to handle external exceptions.
@@ -180,36 +216,6 @@ class SiteController extends Controller
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
-
-    /**
-     * @param string $code Код инвайта
-     * @param string $email E-mail
-     */
-    public function actionRegister($code = null, $email = null) {
-        $model = new RegisterForm();
-        // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
-        {
-            echo ActiveForm::validate($model);
-            Yii::app()->end();
-        }
-
-        $model->invite_code = $code ?: null;
-        $model->email = $email ?: null;
-        // collect user input data
-        if(isset($_POST['RegisterForm']))
-        {
-            $model->attributes=$_POST['RegisterForm'];
-            // validate user input and redirect to the previous page if valid
-            if( $model->validate() && $model->register() ) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
-        }
-
-        // display the login form
-        $this->render('register',array('model'=>$model));
-    }
-
 
     /**mail(
      * Личная страничка пользователя
