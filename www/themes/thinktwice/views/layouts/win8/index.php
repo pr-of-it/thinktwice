@@ -1,11 +1,6 @@
 <?php
 /* @var $this Controller */
-    if ( Yii::app()->user->isGuest ) {
-        $user = new stdClass();
-        $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';die;
-    } else {
-        $user = User::model()->findByPk(Yii::app()->user->id);
-    }
+$user = User::model()->findByPk(Yii::app()->user->id);
 ?><!DOCTYPE html>
 <html lang="en-US">
 <head>
