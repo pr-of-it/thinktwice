@@ -71,21 +71,34 @@ function CConfig() { // для наследования класса внутр�
 			return false;
 		})
 
-		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
-			this.scrollLeft += (deltaX * 100); // трекпад на маке
-			this.scrollLeft -= (deltaY * 100); // колесико мыши
+		/**
+		 * Скроллим ленту по прокрутке колесика вверх - вниз
+		 */
+        $("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+            this.scrollLeft += (deltaX * 100); // трекпад на маке
+            this.scrollLeft -= (deltaY * 100); // колесико мыши
 
-			return false;
-		});
+            return false;
+        });
 
-		$(document).keydown(function (e) {
-			var container = document.getElementById('container');
+		/**
+		 * Скроллим ленту по нажатию клавиш
+		 */
+		$(doc).keydown(function (e) {
+			var container = $('#container');
 
 			if (e.keyCode == 37) {
-				container.scrollLeft -= 100;
+				container.animate({
+					scrollLeft: '-=360',
+				}, 300);
+
 				return false;
+
 			} else if (e.keyCode == 39) {
-				container.scrollLeft += 100;
+				container.animate({
+					scrollLeft: '+=360',
+				}, 300);
+
 				return false;
 			}
 		});
@@ -136,11 +149,6 @@ function CConfig() { // для наследования класса внутр�
 		})
 		$('.news-item img').click(function(){
 			$('.window-post-2').popup()
-		})
-
-		$('.video-box .close').click(function(){
-			$(this).closest('.quick-start-box').addClass('qsb-hide')
-			$('#rails').removeClass('quick-start')
 		})
 	}
 
