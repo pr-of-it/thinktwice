@@ -42,7 +42,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 <header id="header">
 
     <div class="dashboard-link"></div>
-    <a href=""><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
+    <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
         <a class="link-reg button-yellow" href="<?php echo $this->createAbsoluteUrl('/site/register');?>">Регистрация</a>
