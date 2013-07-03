@@ -328,6 +328,7 @@ class User extends CActiveRecord
             $blog->type = Blog::SIMPLE_BLOG;
             $blog->save();
 
+
             return parent::afterSave();
     }
 

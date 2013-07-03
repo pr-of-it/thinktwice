@@ -55,33 +55,33 @@ $this->breadcrumbs=array(
 </ul>
 <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
-<p>Название блога:
+<!-- Форма Блога -->
+<?php $this->renderPartial('_blog', array('user'=>$user)); ?>
 
-<?php $form=$this->beginWidget('ActiveForm', array(
-    'id'=>'blog-form',
-    'action'=>$this->createAbsoluteUrl('/private/blog/'),
-    // Please note: When you enable ajax validation, make sure the corresponding
-    // controller action is handling ajax validation correctly.
-    // There is a call to performAjaxValidation() commented in generated controller code.
-    // See class documentation of ActiveForm for details on this.
-    'enableAjaxValidation'=>false,
-    'htmlOptions' => array('enctype' => 'multipart/form-data'),
-)); ?>
+<!--Форма вывода ленты RSS для пользователя - RSS -->
+<?php if ( $user->role->name == 'rss' ) :;?>
+    <?php $this->renderPartial('_rss', array('user' => $user, 'rss' => $rss)); ?>
 
-<?php echo $form->errorSummary($user->blog); ?>
+    <p> Список rss лент
+        <?php
+        $dataProvider = new CActiveDataProvider($user->model());
+        $dataProvider->setData($user->blog->rss);
+        $this->widget('zii.widgets.grid.CGridView', array(
+            'id'=>'rss-grid',
+            'dataProvider'=>$dataProvider,
+            'columns'=>array(
+                'title',
+                'url',
+            ),
+        ));
 
-
-<div class="row">
-    <?php echo $form->textField($user->blog,'title',array('size'=>60,'maxlength'=>255));?>
-    <?php echo $form->error($user->blog,'title'); ?>
-</div>
-
-<div class="row">
-    <?php echo CHtml::submitButton('Сохранить'); ?>
-</div>
-
-<?php $this->endWidget(); ?></p>
-
+        ?></p>
+<?php endif;?>
+<!-- Форма заявки на подключение Rss для User-->
+<?php if ( $user->role->name == 'user' ) :;?>
+    <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
+<?php endif;?>
+<!-- Список фолловеров-->
 <h4>Ваши followers:</h4>
 
 <?php

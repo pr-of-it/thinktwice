@@ -34,6 +34,8 @@ class PrivateController extends Controller {
                     'password',
                     'deposit', 'depositFail', 'depositSuccess','callRequest',
                     'deleteAvatar',
+                    'rssRequest',
+                    'rss',
                 ),
                 'roles'=>array('user'),
             ),
@@ -51,10 +53,16 @@ class PrivateController extends Controller {
         );
     }
 
+
     public function actionIndex() {
         $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
+        $rss = new BlogRss;
+        $rssRequest = new BlogRssRequest;
+
         $this->render('index', array(
             'user' => $user,
+            'rss' => $rss,
+            'rssRequest' => $rssRequest,
         ));
     }
 
@@ -151,6 +159,27 @@ class PrivateController extends Controller {
            if($blog->save())
                $this->redirect(array('/private'));
        }
+    }
+
+
+    public function actionRss() {
+        $rss = new BlogRss;
+
+        if ( isset($_POST['BlogRss']) ) {
+            $rss->attributes = $_POST['BlogRss'];
+            if ( $rss->save() )
+                $this->redirect(array('/private'));
+        }
+    }
+
+    public function actionRssRequest() {
+        $rss = new BlogRssRequest;
+
+        if ( isset($_POST['BlogRssRequest']) ) {
+            $rss->attributes = $_POST['BlogRssRequest'];
+            if ( $rss->save() )
+                $this->redirect(array('/private'));
+        }
     }
 
     public function actionDeleteService($id) {

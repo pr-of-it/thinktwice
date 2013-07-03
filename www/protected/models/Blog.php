@@ -12,7 +12,7 @@
 class Blog extends CActiveRecord
 {
     const SIMPLE_BLOG = 1;
-    const NEWS_BLOG = 2;
+    const RSS_BLOG = 2;
     const SUBSCRIPT_BLOG =3;
 	/**
 	 * @return string the associated database table name
@@ -48,7 +48,8 @@ class Blog extends CActiveRecord
 		return array(
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'posts' => array(self::HAS_MANY, 'BlogPost', 'blog_id'),
-            'rss' => array(self::HAS_MANY, 'BlogRss', 'user_id')
+            'rss' => array(self::HAS_MANY, 'BlogRss', 'blog_id'),
+            'rssRequests' => array(self::HAS_MANY, 'BlogRssRequest', 'blog_id'),
 		);
 	}
 

@@ -43,6 +43,7 @@ class BlogRssRequest extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'blog' => array(self::BELONGS_TO, 'Blog', 'blog_id'),
 		);
 	}
 
@@ -53,7 +54,7 @@ class BlogRssRequest extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'blog_id' => 'Blog',
+			'blog_id' => 'Blog ID',
 			'title' => 'Title',
 			'url' => 'Url',
 		);
