@@ -60,6 +60,7 @@ $this->breadcrumbs=array(
 
 <!--Форма вывода и добавления ленты RSS для пользователя - RSS -->
 <?php if ( $user->role->name == 'rss' ) :;?>
+
     <?php $this->renderPartial('_rss', array('user' => $user, 'rss' => $rss)); ?>
 
     <p> Список rss лент
@@ -78,8 +79,8 @@ $this->breadcrumbs=array(
         ?></p>
 <?php endif;?>
 
-<!-- Форма заявки на подключение Rss для User-->
-<?php if ( $user->role->name == 'user' ) :;?>
+<!-- Форма заявки на подключение Rss для всех кроме пользователя Rss-->
+<?php if ( $user->role->name != 'Rss' ) :;?>
     <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
 
@@ -97,6 +98,7 @@ $this->breadcrumbs=array(
             'columns'=>array(
                 'title',
                 'month_price',
+                'week_price',
 
             ),
         ));

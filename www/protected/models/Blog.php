@@ -9,6 +9,7 @@
  * @property string $title
  * @property integer $type
  * @property integer $month_price
+ *  * @property integer $week_price
  */
 class Blog extends CActiveRecord
 {
@@ -33,6 +34,7 @@ class Blog extends CActiveRecord
 		return array(
 			array('user_id', 'numerical', 'integerOnly'=>true),
             array('month_price', 'numerical', 'integerOnly'=>true),
+            array('week_price', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -65,7 +67,8 @@ class Blog extends CActiveRecord
 			'user_id' => 'User',
 			'title' => 'Title',
             'type' => 'Type',
-            'month_price' => 'Month price'
+            'month_price' => 'Month price',
+            'week_price' => 'Week price',
 		);
 	}
 
@@ -91,6 +94,7 @@ class Blog extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
         $criteria->compare('type',$this->type,true);
         $criteria->compare('month_price',$this->month_price,true);
+        $criteria->compare('week_price',$this->week_price,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
