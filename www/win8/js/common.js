@@ -129,20 +129,26 @@ function CConfig() { // для наследования класса внутр�
 		 *  Подгрузка контетна в ленту
 		 */
 
-		var page = 1;
+		var page = 1,
+			newsBlockWidth = $('.news-list').width();
+
         $("#container").scroll(function () {
 
             var docViewLeft = $(window).scrollLeft();
             var docViewRight = docViewLeft + $(window).width();
-            var elemLeft = $('ul.empty').offset().left;
+
+            var elemOffset = $('ul.empty').offset();
+            var elemLeft = elemOffset ? elemOffset.left : 0;
             if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
                 $('ul.empty').removeClass('empty');
                 $.get(
                     '/index.php/site/index',
                     {'BlogPost_page': ++page},
                     function (data) {
+                    	var numItems = $(data).filter('.news-list:not(.empty)').length;
+                    	self.setWidth('set', numItems*5 + 175);
                         $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
-                        Config.setWidth('set');
+                        self.setWidth('set');
                     }
                 );
             };
@@ -230,13 +236,16 @@ function CConfig() { // для наследования класса внутр�
 	/**
 	 * устанавливаем ширину блока
 	 */
-	self.setWidth = function(is_set){
+	self.setWidth = function(is_set, extra){
 		var width = 0
 		$('.news-list', self.rails).each(function(){
 			width += $(this).outerWidth(true)
 		})
-		if(is_set == 'set')
-			self.rails.width(width + 175)
+		if(is_set == 'set') {
+			if (typeof extra === 'undefined')
+				extra = 175
+			self.rails.width(width + extra)
+		}
 		return width
 	}
 }
