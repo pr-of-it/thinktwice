@@ -325,6 +325,8 @@ class User extends CActiveRecord
             $blog = new Blog;
             $blog->user_id = $this->id;
             $blog->title = '';
+            $blog->month_price = 0;
+            $blog->week_price = 0;
             $blog->type = Blog::SIMPLE_BLOG;
             $blog->save();
         }

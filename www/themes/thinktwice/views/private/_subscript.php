@@ -1,3 +1,7 @@
+<?php
+/* @var $form ActiveForm */
+?>
+
 <p><h5>Подписка: <h5>
         <?php $form=$this->beginWidget('ActiveForm', array(
             'id'=>'blog-form',
@@ -20,9 +24,13 @@
         </div>
 
         <div class="row">
-            <?php echo $form->labelEx($subscript,'Стоимость подписки'); ?>
-            <?php echo $form->textField($subscript,'month_price',array('size'=>40,'maxlength'=>255));?>
-            <?php echo $form->error($subscript,'month_price'); ?>
+            Стоимость:
+            <select name='time'>
+                <option value="month_price">За месяц</option>
+                <option value="week_price">За неделю</option>
+            </select>
+
+           <input type='text' name='price' value='' />
         </div>
 
         <div class="row">

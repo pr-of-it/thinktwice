@@ -1,4 +1,4 @@
-<h4>Заявка на подключение RSS</h4>
+<h5>Заявка на подключение RSS: </h5>
 <?php $form=$this->beginWidget('ActiveForm', array(
     'id'=>'rssrequest-form',
     'action'=>$this->createAbsoluteUrl('/private/rssrequest/'),
