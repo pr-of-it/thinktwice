@@ -77,10 +77,34 @@ $this->breadcrumbs=array(
 
         ?></p>
 <?php endif;?>
+
 <!-- Форма заявки на подключение Rss для User-->
 <?php if ( $user->role->name == 'user' ) :;?>
     <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
+
+<!--Форма создания подписок для пользователя Expert-->
+<?php if ( $user->role->name == 'expert' ) :;?>
+    <?php $this->renderPartial('_subscript', array('user' => $user, 'subscript'=>$subscript)); ?>
+
+        <p> Список подписок
+        <?php
+        $dataProvider = new CActiveDataProvider($user->model());
+        $dataProvider->setData($user->subscriptions);
+        $this->widget('zii.widgets.grid.CGridView', array(
+            'id'=>'subscript-grid',
+            'dataProvider'=>$dataProvider,
+            'columns'=>array(
+                'title',
+                'month_price',
+
+            ),
+        ));
+
+        ?></p>
+
+<?php endif;?>
+
 <!-- Список фолловеров-->
 <h4>Ваши followers:</h4>
 

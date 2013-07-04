@@ -36,6 +36,7 @@ class PrivateController extends Controller {
                     'deleteAvatar',
                     'rssRequest',
                     'rss',
+                    'subscript',
                 ),
                 'roles'=>array('user'),
             ),
@@ -58,11 +59,15 @@ class PrivateController extends Controller {
         $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
         $rss = new BlogRss;
         $rssRequest = new BlogRssRequest;
+        $subscript = new Blog;
+
 
         $this->render('index', array(
             'user' => $user,
             'rss' => $rss,
             'rssRequest' => $rssRequest,
+            'subscript' => $subscript,
+
         ));
     }
 
@@ -182,12 +187,24 @@ class PrivateController extends Controller {
         }
     }
 
+    public function actionSubscript(){
+        $subscript = new Blog;
+        $subscript->user_id = Yii::app()->user->id;
+        $subscript->type = Blog::SUBSCRIPT_BLOG;
+        if ( isset($_POST['Blog'])) {
+            $subscript->attributes = $_POST['Blog'];
+            if ( $subscript->save())
+                $this->redirect(array('/private'));
+        }
+    }
+
     public function actionDeleteService($id) {
         $service = UserService::model()->findByPk($id);
         $service->delete();
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if(!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('private/services'));
+
     }
 
     public function actionPassword() {
