@@ -12,7 +12,7 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:400 12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:400 12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	height:100%; width:100%;
 	color:#fff;
 	background:#081c24; /* Old browsers */
@@ -25,7 +25,8 @@ body{
 
 /** h group **/
 h1, h2, h3, h4, h5, h6{
-	font:300 24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 24px;
+	font-weight: 300;
 	margin:0 0 15px
 }
 h1{
@@ -39,7 +40,8 @@ h3{
 	margin:0 0 29px;
 }
 h4, h5, h6{
-	font:700 18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 700;
+	font-size: 18px;
 	margin:0 0 25px;
 }
 /** h group **/
@@ -116,7 +118,8 @@ input[type=password],
 input[type=email],
 input[type=tel],
 textarea{
-	font:700 16px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
 	outline:none;
 	padding:9px; height:22px;
 	border:1px solid #fff;
@@ -476,7 +479,7 @@ icon-archive{
 }
 .news-box .news-tag{
 	position:relative;
-	font:19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size:19px;
 	display:inline-block;
 	float:right;
 	padding:10px 10px 8px;
@@ -494,15 +497,18 @@ icon-archive{
 	margin:0 10px 10px 0;
 }
 .news-box .news-author{
-	font:700 14px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 700;
+	font-size: 14px;
 	margin:0 0 15px;
 }
 .news-box h6{
-	font:300 24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 300;
+	font-size: 24px;
 	margin:0 0 7px;
 }
 .news-box p{
-	font:17px/22px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	line-height: 22px;
+	font-size: 17px;
 	overflow:hidden;
 	letter-spacing:-.17px;
 }
@@ -518,7 +524,8 @@ icon-archive{
 	width:15px; height:14px;
 	cursor:pointer;
 	text-indent:23px;
-	font:14px/19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	line-height: 19px;
+	font-size: 14px;
 	background: url(../img/sprites/main.png) no-repeat -243px -1px transparent;
 }
 .icon-category{
@@ -546,7 +553,7 @@ icon-archive{
 	left:10%; bottom:-15px;
 	width:17px; height:18px;
 	margin-left:-8.5px;
-	font:12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 12px;
 	white-space:nowrap;
 	background: url(../img/sprites/main.png) no-repeat -284px -2px transparent;
 }
@@ -648,7 +655,7 @@ icon-archive{
 }
 .footer-body a{
 	color:#27666c;
-	font:13px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 13px;
 }
 .footer-body .icon-mc a,
 .footer-body .icon-visa a,
@@ -704,7 +711,7 @@ icon-archive{
 	float:left;
 	color:#fff;
 	cursor:pointer;
-	font:15px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 15px;
 	padding:5px; margin:0 14px 7px 0;
 	border:1px solid transparent;
 }
@@ -771,7 +778,7 @@ icon-archive{
 }
 .popup .popup-head{
 	color:#121212;
-	font:38px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 38px;
 	margin:0 0 12px;
 }
 .popup .popup-content{
@@ -865,7 +872,8 @@ icon-archive{
 	text-align:center;
 	color:#464646;
 	min-width:8px;
-	font:12px/24px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 12px;
+	line-height: 24px;
 	cursor:pointer;
 }
 .controlls-fonts .set_font-bold{
@@ -883,7 +891,8 @@ icon-archive{
 	bottom:246px; right:22px;
 	padding:8px 11px;
 	color:#112d36;
-	font:16px/20px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 16px;
+	line-height: 20px;
 	background:#fff;
 	overflow:auto;
 }
@@ -1053,7 +1062,7 @@ icon-archive{
 	border:2px solid #414141;
 	padding:13px 30px 8px 7px;
 	color:#202020;
-	font:18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 18px;
 }
 .jq-selectbox__select:hover{
 	background-color:#e6e6e6;
@@ -1390,7 +1399,8 @@ input[type="reset"].styler:active{
 	margin:11px 0 5px;
 }
 .interest-menu p{
-	font:15px/17px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 15px;
+	line-height: 17px;
 }
 
 /*****   interest-menu:end   *****/
@@ -1421,7 +1431,8 @@ input[type="reset"].styler:active{
 	overflow:visible;
 }
 .window-post-edit .popup-content article p{
-	font:16px/18px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 16px;
+	line-height: 18px;
 	margin:0 0 19px;
 }
 
@@ -1451,7 +1462,8 @@ input[type="reset"].styler:active{
 	padding:20px 21px 13px;
 	width:175px;
 	color:#333335;
-	font:13px/16px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 13px;
+	line-height: 16px;
 	background:#dfded9;
 	box-shadow:0 4px 8px #000;
 }
@@ -1497,7 +1509,7 @@ input[type="reset"].styler:active{
 }
 .quick-start-box header{
 	color:#4a6f78;
-	font:23px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 23px;
 	margin:0 0 11px;
 }
 .video-box{
