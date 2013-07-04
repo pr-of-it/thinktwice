@@ -146,7 +146,7 @@ function CConfig() { // для наследования класса внутр�
                     {'BlogPost_page': ++page},
                     function (data) {
                     	var numItems = $(data).filter('.news-list:not(.empty)').length;
-                    	self.setWidth('set', numItems*5 + 175);
+                    	self.setWidth('set', numItems * newsBlockWidth + 175);
                         $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
                         self.setWidth('set');
                     }
