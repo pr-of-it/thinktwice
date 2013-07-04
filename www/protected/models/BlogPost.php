@@ -8,6 +8,7 @@
  * @property integer $blog_id
  * @property string $title
  * @property string $text
+ * @property string $image
  * @property string $time
  * @property integer $rss_id
  * @property string $rss_guid
@@ -32,7 +33,7 @@ class BlogPost extends CActiveRecord
 		return array(
 			array('blog_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
-			array('blog_id, title, text, rss_id, rss_guid, time', 'safe'),
+			array('blog_id, title, text, image, rss_id, rss_guid, time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, blog_id, title, text, time', 'safe', 'on'=>'search'),
@@ -61,6 +62,7 @@ class BlogPost extends CActiveRecord
 			'blog_id' => 'Blog',
 			'title' => 'Title',
 			'text' => 'Text',
+			'image' => 'Main image',
 			'time' => 'Time',
 		);
 	}
