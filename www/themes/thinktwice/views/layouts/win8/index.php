@@ -183,32 +183,6 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <?php echo $content; ?>
 <!-- / Content -->
 
-<script>
-    $(function () {
-        var page = 1;
-        $("#container").scroll(function () {
-
-            var docViewLeft = $(window).scrollLeft();
-            var docViewRight = docViewLeft + $(window).width();
-            var elemLeft = $('ul.empty').offset().left;
-            if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
-                $('ul.empty').removeClass('empty');
-                $.get(
-                    '/index.php/site/index',
-                    {'BlogPost_page': ++page},
-                    function (data) {
-                        $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
-                        Config.setWidth('set');
-                    }
-                );
-            };
-
-            return false;
-
-        });
-    });
-</script>
-
 <?php /* ?>
 
 <ul class="news-list">
