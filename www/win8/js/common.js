@@ -129,33 +129,55 @@ function CConfig() { // для наследования класса внутр�
 		 *  Подгрузка контетна в ленту
 		 */
 
-		var page = 1,
-			newsBlockWidth = $('.news-list').width();
+		var page = 1;
+		var newsBlockWidth = $('.news-list').outerWidth() + 30;
 
-        $("#container").scroll(function () {
+		$("#container").scroll(function () {
 
-            var docViewLeft = $(window).scrollLeft();
-            var docViewRight = docViewLeft + $(window).width();
+			var docViewLeft = $(window).scrollLeft();
+			var docViewRight = docViewLeft + $(window).width();
 
-            var elemOffset = $('ul.empty').offset();
-            var elemLeft = elemOffset ? elemOffset.left : 0;
-            if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
-                $('ul.empty').removeClass('empty');
-                $.get(
-                    '/index.php/site/index',
-                    {'BlogPost_page': ++page},
-                    function (data) {
-                    	var numItems = $(data).filter('.news-list:not(.empty)').length;
-                    	self.setWidth('set', numItems * newsBlockWidth + 175);
-                        $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
-                        self.setWidth('set');
-                    }
-                );
-            };
+			var elemOffset = $('ul.empty').offset();
 
-            return false;
+			if (self.rails.find('.step-day').length !== page || !elemOffset)
+				return true; // загрузка еще не завершена
 
-        });
+
+			var elemLeft = elemOffset.left;
+			if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
+				$('ul.empty').removeClass('empty');
+				page += 1;
+
+				var loader = $('<div id="ajax-loader" class="step-day"><header class="day-name" style="top:25%">Загрузка...</header></div>');
+
+				self.setWidth('set', 175 + 360 + 30);
+				self.rails.append(loader);
+				$.get(
+					'/index.php/site/index',
+					{'BlogPost_page': page},
+					function (data) {
+
+						var numItems = $(data).filter('.news-list:not(.empty)').length;
+
+						self.setWidth('set', (numItems + 1) * newsBlockWidth + 175);
+						var newContent = $('<div class="step-day" style="display:none"><header class="day-name">Далее...</header>' + data + '</div>');
+
+						self.rails.append(newContent);
+						loader.fadeOut(self.anim, function() {
+							loader.remove();
+
+						});
+
+						newContent.fadeIn(self.anim);
+
+						self.setWidth('set');
+					}
+				);
+			};
+
+			return false;
+
+		});
 
 
 		/**
@@ -181,15 +203,7 @@ function CConfig() { // для наследования класса внутр�
 			window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
 			window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			window.popup();
-
-			/*window.css({right: -window.width()})
-			self.bgPopup.show();
-			window.show()
-			window.animate({
-				right: 0,
-				duration: Config.anim
-			})*/
-			return false;
+			return true;
 
 		})
 
