@@ -142,20 +142,27 @@ function CConfig() { // для наследования класса внутр�
 			if (self.rails.find('.step-day').length !== page || !elemOffset)
 				return true; // загрузка еще не завершена
 
+
 			var elemLeft = elemOffset.left;
 			if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
 				$('ul.empty').removeClass('empty');
 				page += 1;
+
+				var loader = $('<div id="ajax-loader" class="step-day"><header class="day-name" style="top:25%">Загрузка...</header></div>');
+
+				self.rails.append(loader);
 				$.get(
 					'/index.php/site/index',
 					{'BlogPost_page': page},
 					function (data) {
-						var width = 0;
 						var numItems = $(data).filter('.news-list:not(.empty)').length;
 
 						self.setWidth('set', numItems * newsBlockWidth + 175);
 						var newContent = $('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
 
+						loader.fadeOut(self.anim, function() {
+							loader.remove();
+						});
 						self.rails.append(newContent);
 
 						self.setWidth('set');
