@@ -100,7 +100,7 @@ class RssCommand extends CConsoleCommand {
             $imageFileDirBase = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR;
             $imageFileDir = 'upload' . DIRECTORY_SEPARATOR . 'rss' . DIRECTORY_SEPARATOR . substr($imageFileName, 0, 2);
 
-            if ( false !== ($imageStr = file_get_contents($imageUrl))  ) {
+            if ( false !== ($imageStr = @file_get_contents($imageUrl))  ) {
 
                 @mkdir($imageFileDirBase . $imageFileDir, 0777, true);
                 $file = fopen( $imageFileDirBase . $imageFileDir . DIRECTORY_SEPARATOR . $imageFileName . '.' . $imageExtension, 'w' );
