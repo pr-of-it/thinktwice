@@ -477,7 +477,8 @@ icon-archive{
 .news-box .news-tag{
 	position:relative;
 	font:19px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	text-align:right;
+	display:inline-block;
+	float:right;
 	padding:10px 10px 8px;
 	cursor:pointer;
 	z-index:1;
