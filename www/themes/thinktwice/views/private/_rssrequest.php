@@ -12,6 +12,11 @@
 
 <?php echo $form->errorSummary($rssRequest); ?>
 
+<div class="row">
+    <?php echo $form->labelEx($user->blog,'Блог'); ?>
+    <?php echo $form->dropDownList($user->blog,'title', CHtml::listData( Blog::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id)), 'id', 'title' )); ?>
+    <?php echo $form->error($user->blog,'title'); ?>
+</div>
 
 <div class="row">
     <?php echo $form->labelEx($rssRequest,'Тема'); ?>
@@ -25,7 +30,6 @@
     <?php echo $form->error($rssRequest,'url'); ?>
 </div>
 
-<?php echo $form->hiddenField($rssRequest, 'blog_id', array('value'=>$user->blog->id)) ?>
 
 <div class="row">
     <?php echo CHtml::submitButton('Сохранить'); ?>

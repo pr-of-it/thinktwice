@@ -56,8 +56,14 @@ $this->breadcrumbs=array(
 <p></p><a href="<?php echo Yii::app()->createAbsoluteUrl('/private/services') ; ?>">Добавить аккаунт</a></p>
 
 <!-- Форма Блога -->
-<?php $this->renderPartial('_blog', array('user'=>$user)); ?>
 
+<?php
+if ( $user->blog != null ) {
+    $this->renderPartial('_blog', array('user'=>$user));
+} else {
+    $this->redirect(array('/private/blog'));
+}
+?>
 <!--Форма вывода и добавления ленты RSS для пользователя - RSS -->
 <?php if ( $user->role->name == 'rss' ) :;?>
 
@@ -77,11 +83,6 @@ $this->breadcrumbs=array(
         ));
 
         ?></p>
-<?php endif;?>
-
-<!-- Форма заявки на подключение Rss для всех кроме пользователя Rss-->
-<?php if ( $user->role->name != 'Rss' ) :;?>
-    <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
 
 <!--Форма создания подписок для пользователя Expert-->
@@ -105,6 +106,11 @@ $this->breadcrumbs=array(
 
         ?></p>
 
+<?php endif;?>
+
+<!-- Форма заявки на подключение Rss для всех кроме пользователя Rss-->
+<?php if ( $user->role->name != 'rss' ) :;?>
+    <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
 
 <!-- Список фолловеров-->

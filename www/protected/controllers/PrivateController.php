@@ -156,15 +156,31 @@ class PrivateController extends Controller {
 
    public function actionBlog(){
 
+
        $blog = Blog::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
 
-       if(isset($_POST['Blog']))
-       {
-           $blog->attributes=$_POST['Blog'];
+       if ($blog == null) {
+
+           $blog = new Blog;
+           $blog->user_id = Yii::app()->user->id;
+           $blog->title = '';
+           $blog->month_price = 0;
+           $blog->week_price = 0;
+           $blog->type = Blog::SIMPLE_BLOG;
+
            if($blog->save())
                $this->redirect(array('/private'));
+       } else {
+           if(isset($_POST['Blog']))
+           {
+               $blog->attributes=$_POST['Blog'];
+               if($blog->save())
+                   $this->redirect(array('/private'));
+           }
        }
     }
+
+
 
 
     public function actionRss() {
@@ -179,6 +195,10 @@ class PrivateController extends Controller {
 
     public function actionRssRequest() {
         $rss = new BlogRssRequest;
+
+        if ( isset($_POST['Blog']) ) {
+            $rss->blog_id = $_POST['Blog']['title'];
+        }
 
         if ( isset($_POST['BlogRssRequest']) ) {
             $rss->attributes = $_POST['BlogRssRequest'];

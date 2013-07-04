@@ -1,4 +1,4 @@
-<h4>Добавить RSS ленту</h4>
+<h5>Добавить RSS ленту</h5>
 <?php $form=$this->beginWidget('ActiveForm', array(
     'id'=>'rss-form',
     'action'=>$this->createAbsoluteUrl('/private/rss/'),
