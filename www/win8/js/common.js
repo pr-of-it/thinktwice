@@ -31,9 +31,6 @@ function CConfig() { // для наследования класса внутр�
 		// устанавливаем ширину блока
 		self.setWidth('set')
 
-		// delegate events
-		self.bind()
-
 		var popupCss = {
 			position:"absolute",
 			top:0, left:0, display:"none",
@@ -53,7 +50,12 @@ function CConfig() { // для наследования класса внутр�
 		}
 
 		self.bgPopup = $('#bg-popup')
+
+
+		// delegate events
+		self.bind()
 	}
+
 
 	self.bind = function(){
 
@@ -122,6 +124,33 @@ function CConfig() { // для наследования класса внутр�
 				return false;
 			}
 		});
+
+		/**
+		 *  Подгрузка контетна в ленту
+		 */
+
+		var page = 1;
+        $("#container").scroll(function () {
+
+            var docViewLeft = $(window).scrollLeft();
+            var docViewRight = docViewLeft + $(window).width();
+            var elemLeft = $('ul.empty').offset().left;
+            if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
+                $('ul.empty').removeClass('empty');
+                $.get(
+                    '/index.php/site/index',
+                    {'BlogPost_page': ++page},
+                    function (data) {
+                        $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
+                        Config.setWidth('set');
+                    }
+                );
+            };
+
+            return false;
+
+        });
+
 
 		/**
 		 * Открываем новость
