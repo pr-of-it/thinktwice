@@ -58,7 +58,7 @@ $this->breadcrumbs=array(
 <!-- Форма Блога -->
 <?php $this->renderPartial('_blog', array('user'=>$user)); ?>
 
-<!--Форма вывода ленты RSS для пользователя - RSS -->
+<!--Форма вывода и добавления ленты RSS для пользователя - RSS -->
 <?php if ( $user->role->name == 'rss' ) :;?>
     <?php $this->renderPartial('_rss', array('user' => $user, 'rss' => $rss)); ?>
 
