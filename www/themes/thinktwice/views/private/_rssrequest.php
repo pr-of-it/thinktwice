@@ -1,7 +1,7 @@
 <h5>Заявка на подключение RSS: </h5>
 <?php $form=$this->beginWidget('ActiveForm', array(
     'id'=>'rssrequest-form',
-    'action'=>$this->createAbsoluteUrl('/private/rssrequest/'),
+    'action'=>$this->createAbsoluteUrl('/privateblog/rssrequest/'),
     // Please note: When you enable ajax validation, make sure the corresponding
     // controller action is handling ajax validation correctly.
     // There is a call to performAjaxValidation() commented in generated controller code.
@@ -26,7 +26,7 @@
 
 <div class="row">
     <?php echo $form->labelEx($rssRequest,'Ссылка'); ?>
-    <?php echo $form->textField($rssRequest,'url',array('size'=>60,'maxlength'=>255));?>
+    <?php echo $form->textField($rssRequest,'url',array('size'=>50,'maxlength'=>255));?>
     <?php echo $form->error($rssRequest,'url'); ?>
 </div>
 
