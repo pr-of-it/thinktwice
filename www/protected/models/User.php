@@ -75,7 +75,8 @@ class User extends CActiveRecord
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
-            'blog' => array(self::HAS_ONE, 'Blog', 'user_id'),
+            'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'type = 1'),
+            'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'type = 3'),
 
         );
     }
@@ -114,8 +115,6 @@ class User extends CActiveRecord
             return 0;
         }
     }
-
-
 
     /*
      * Рейтинг
@@ -322,13 +321,13 @@ class User extends CActiveRecord
             $this->avatar_file = self::AVATAR_UPLOAD_PATH . $file->getName();
             $this->saveAttributes(array('avatar_file'=>$this->avatar_file));
         }
-
+        if ( $this->isNewRecord ) {
             $blog = new Blog;
             $blog->user_id = $this->id;
             $blog->title = '';
             $blog->type = Blog::SIMPLE_BLOG;
             $blog->save();
-
+        }
 
             return parent::afterSave();
     }
