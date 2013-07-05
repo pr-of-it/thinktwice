@@ -15,7 +15,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns'=>array(
 
         'id',
-        'blog_id',
+        'blog.title',
+        'blog.user.name',
         'title',
         'url',
         array(

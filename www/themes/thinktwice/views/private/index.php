@@ -69,7 +69,7 @@ if ( $user->blog != null ) {
 
     <?php $this->renderPartial('_rss', array('user' => $user, 'rss' => $rss)); ?>
 
-    <p> Список rss лент
+    <p> <h5>Список rss лент:</h5>
         <?php
         $dataProvider = new CActiveDataProvider($user->model());
         $dataProvider->setData($user->blog->rss);
@@ -89,7 +89,7 @@ if ( $user->blog != null ) {
 <?php if ( $user->role->name == 'expert' ) :;?>
     <?php $this->renderPartial('_subscript', array('user' => $user, 'subscript'=>$subscript)); ?>
 
-        <p> Список подписок
+        <p> <h5>Список подписок:</h5>
         <?php
         $dataProvider = new CActiveDataProvider($user->model());
         $dataProvider->setData($user->subscriptions);

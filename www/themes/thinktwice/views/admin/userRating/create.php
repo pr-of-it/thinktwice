@@ -15,4 +15,4 @@ $this->menu=array(
 
 <h1>Create UserRating</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'user'=>$user)); ?>
