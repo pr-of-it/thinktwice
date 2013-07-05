@@ -12,22 +12,20 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:400 12px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	height:100%; width:100%;
-	color:#fff;
-	background:#081c24; /* Old browsers */
+	font:400 12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	height: 100%; width:100%;
+	color: #fff;
+	background: #081c24; /* Old browsers */
 }
 body{
 	/*height:auto !important;
 	height:100%;
 	min-height:100%;*/
-	overflow-x: hidden;
 }
 
 /** h group **/
 h1, h2, h3, h4, h5, h6{
-	font-size: 24px;
-	font-weight: 300;
+	font:300 24px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 15px
 }
 h1{
@@ -41,8 +39,7 @@ h3{
 	margin:0 0 29px;
 }
 h4, h5, h6{
-	font-weight: 700;
-	font-size: 18px;
+	font:700 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 25px;
 }
 /** h group **/
@@ -119,8 +116,7 @@ input[type=password],
 input[type=email],
 input[type=tel],
 textarea{
-	font-weight: 700;
-	font-size: 16px;
+	font:700 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	outline:none;
 	padding:9px; height:22px;
 	border:1px solid #fff;
@@ -261,6 +257,26 @@ input.error{ border:1px solid red !important }
 	cursor:pointer;
 	background: url(../img/sprites/main.png) no-repeat transparent;
 }
+.dashboard-link:hover div{
+	display:block;
+}
+.dashboard-link div{
+	position:absolute;
+	left:0; top:35px;
+	color:#31312f;
+	padding:10px;
+	background:#dedfd9;
+	box-shadow:0 2px 8px #000;
+	font:700 14px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	display:none;
+	z-index:1;
+}
+.dashboard-link span{
+	position:absolute;
+	left:10px; top:-7px;
+	width:15px; height:7px;
+	background:url(../img/icons/dashboard-arrow.png) no-repeat transparent;
+}
 .user-bar{
 	position:absolute;
 	right:0; top:0;
@@ -380,14 +396,12 @@ icon-archive{
 	top:0;
 	width:100%;
 	cursor:default !important;
-	overflow-x:auto;
-	overflow-y:hidden;
+	overflow:auto;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
 	-o-transition:all .5s;
 	transition:all .5s;
-	-webkit-overflow-scrolling:touch;
 }
 #container:after{
 	content:".";
@@ -400,12 +414,12 @@ icon-archive{
 /* временная линия */
 .page-lenta{
 	margin-top:125px;
-	background:url(../img/bg/line-x.png) repeat-x 0 51% transparent;
+	background:url(../img/bg/line-x.png) repeat-x 0 54.5% transparent;
 }
 
 #rails{
 	position:absolute;
-	width:100%;
+	width:900%;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -416,10 +430,11 @@ icon-archive{
 	opacity:.5; filter:alpha(opacity=50);
 }
 #rails.page-lenta{
-	top:87px; left:0;
+	top:50px; left:0;
 	bottom:80px;
-	width:1000%;
-	padding-bottom:5px;
+	width:100%;
+	padding-top:37px;
+	overflow:hidden;
 }
 .step-day{
 	position:relative;
@@ -481,9 +496,8 @@ icon-archive{
 }
 .news-box .news-tag{
 	position:relative;
-	font-size:19px;
-	display:inline-block;
-	float:right;
+	font:19px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-align:right;
 	padding:10px 10px 8px;
 	cursor:pointer;
 	z-index:1;
@@ -499,18 +513,15 @@ icon-archive{
 	margin:0 10px 10px 0;
 }
 .news-box .news-author{
-	font-weight: 700;
-	font-size: 14px;
+	font:700 14px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 15px;
 }
 .news-box h6{
-	font-weight: 300;
-	font-size: 24px;
+	font:100 18pt/21pt "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 7px;
 }
 .news-box p{
-	line-height: 22px;
-	font-size: 17px;
+	font:200 12pt/16pt "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	overflow:hidden;
 	letter-spacing:-.17px;
 }
@@ -526,8 +537,7 @@ icon-archive{
 	width:15px; height:14px;
 	cursor:pointer;
 	text-indent:23px;
-	line-height: 19px;
-	font-size: 14px;
+	font:14px/19px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background: url(../img/sprites/main.png) no-repeat -243px -1px transparent;
 }
 .icon-category{
@@ -555,7 +565,7 @@ icon-archive{
 	left:10%; bottom:-15px;
 	width:17px; height:18px;
 	margin-left:-8.5px;
-	font-size: 12px;
+	font:12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	white-space:nowrap;
 	background: url(../img/sprites/main.png) no-repeat -284px -2px transparent;
 }
@@ -581,7 +591,7 @@ icon-archive{
 	bottom:0;
 }
 .news-list.full-item .time-dott{
-	bottom:auto; top:51%;
+	bottom:auto; top:51.5%;
 	left:-31px;
 	margin:-11.5px 0 0;
 	width:31px; height:23px;
@@ -605,10 +615,10 @@ icon-archive{
 	background-position:center;
 }
 .image-gallery-min-full, .image-gallery-min-full img{
-	width:560px; height:245px;
+	width:560px; height:52%;
 }
 .news-list.full-item .news-body{
-	top:244px;
+	top:52%;
 }
 .news-list .time-create{
 	font-size:14px;
@@ -657,7 +667,7 @@ icon-archive{
 }
 .footer-body a{
 	color:#27666c;
-	font-size: 13px;
+	font:13px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 .footer-body .icon-mc a,
 .footer-body .icon-visa a,
@@ -713,7 +723,7 @@ icon-archive{
 	float:left;
 	color:#fff;
 	cursor:pointer;
-	font-size: 15px;
+	font:15px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	padding:5px; margin:0 14px 7px 0;
 	border:1px solid transparent;
 }
@@ -763,12 +773,22 @@ icon-archive{
 
 .popup{
 	position:fixed;
-	right:0 !important; top:0; left:auto !important;
+	right:-1000px !important; top:0; left:auto !important;
 	height:100%; width:713px;
 	border-left:1px solid #a6aca8;
 	border-right:1px solid #a6aca8;
 	background:#dfdfd9;
-	display:none;
+	opacity:0; filter:alpha(opacity=0);
+	z-index:-20;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	-ms-transition:all .5s;
+	-o-transition:all .5s;
+	transition:all .5s;
+}
+.popup.visible-on{
+	right:0 !important;
+	opacity:1; filter:alpha(opacity=100);
 	z-index:101;
 }
 .close-popup{
@@ -780,7 +800,7 @@ icon-archive{
 }
 .popup .popup-head{
 	color:#121212;
-	font-size: 38px;
+	font:38px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 12px;
 }
 .popup .popup-content{
@@ -790,7 +810,7 @@ icon-archive{
 	padding:65px 46px;
 }
 .popup .scroll{
-	overflow:auto;
+	overflow:hidden;
 	height:100%;
 }
 .article-info span{
@@ -834,8 +854,8 @@ icon-archive{
 /*****   create-post   *****/
 
 .create-post{
-	position:fixed;
-	top:212px; bottom:100px;
+	position:absolute;
+	top:212px; bottom:95px;
 	left:0; width:739px;
 	min-height:343px;
 	background:#e1e1db;
@@ -874,8 +894,7 @@ icon-archive{
 	text-align:center;
 	color:#464646;
 	min-width:8px;
-	font-size: 12px;
-	line-height: 24px;
+	font:12px/24px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	cursor:pointer;
 }
 .controlls-fonts .set_font-bold{
@@ -893,8 +912,7 @@ icon-archive{
 	bottom:246px; right:22px;
 	padding:8px 11px;
 	color:#112d36;
-	font-size: 16px;
-	line-height: 20px;
+	font:16px/20px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background:#fff;
 	overflow:auto;
 }
@@ -1064,7 +1082,7 @@ icon-archive{
 	border:2px solid #414141;
 	padding:13px 30px 8px 7px;
 	color:#202020;
-	font-size: 18px;
+	font:18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 .jq-selectbox__select:hover{
 	background-color:#e6e6e6;
@@ -1401,8 +1419,7 @@ input[type="reset"].styler:active{
 	margin:11px 0 5px;
 }
 .interest-menu p{
-	font-size: 15px;
-	line-height: 17px;
+	font:15px/17px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 /*****   interest-menu:end   *****/
@@ -1433,8 +1450,7 @@ input[type="reset"].styler:active{
 	overflow:visible;
 }
 .window-post-edit .popup-content article p{
-	font-size: 16px;
-	line-height: 18px;
+	font:16px/18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 19px;
 }
 
@@ -1460,14 +1476,17 @@ input[type="reset"].styler:active{
 }
 .notify-reg{
 	position:absolute;
-	left:-42px; top:40px;
+	left:-42px; top:50px;
 	padding:20px 21px 13px;
 	width:175px;
 	color:#333335;
-	font-size: 13px;
-	line-height: 16px;
+	font:13px/16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	background:#dfded9;
 	box-shadow:0 4px 8px #000;
+	display:none;
+}
+.notify-reg.notify-show{
+	display:block;
 }
 .lenta-settings li .notify-reg a{
 	color:#313131;
@@ -1489,7 +1508,7 @@ input[type="reset"].styler:active{
 
 
 #rails.quick-start{
-	left:900px;
+	padding-left:900px;
 }
 #rails.quick-start .step-day{
 	padding-left:0;
@@ -1497,8 +1516,7 @@ input[type="reset"].styler:active{
 
 .quick-start-box{
 	position:absolute;
-	left:179px; top:157px;
-	z-index:10;
+	left:175px; top:2px;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -1511,7 +1529,7 @@ input[type="reset"].styler:active{
 }
 .quick-start-box header{
 	color:#4a6f78;
-	font-size: 23px;
+	font:23px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 11px;
 }
 .video-box{
@@ -1523,5 +1541,29 @@ input[type="reset"].styler:active{
 	right:-56px; top:-33px;
 	width:45px; height:45px;
 	cursor:pointer;
-	background:url(../img/icons/close.jpg) no-repeat transparent;
+	background:url(../img/icons/close.png) no-repeat transparent;
+}
+.ajax-loader{
+	position:absolute;
+	right:0; top:50%;
+	margin-top:-30px;
+	height:60px; width:500px;
+	text-align:center;
+}
+.ajax-loader img{
+	position:absolute;
+	left:50%; top:-10px;
+	margin-left:-10px;
+}
+.ajax-loader span{
+	position:relative;
+	top:25px;
+	font-size:22px;
+	color:#bad9da;
+	cursor:pointer;
+	padding:14px 10px 10px 50px;
+	background:url(../img/icons/refresh.png) no-repeat left center transparent;
+}
+.step-day.ajax-loader-wrap{
+	width:500px;
 }

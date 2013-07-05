@@ -31,35 +31,23 @@ function CConfig() { // для наследования класса внутр�
 		// устанавливаем ширину блока
 		self.setWidth('set')
 
-		var popupCss = {
-			position:"absolute",
-			top:0, left:0, display:"none",
-			height:$(doc).height(),
-			width:$(window).width(),
-			background:'#000',
-			opacity:.6,
-			filter:"alpha(opacity=60)",
-			zIndex:100,
-			cursor:"pointer"
-		};
-
-		if(document.getElementById("bg-popup") == null) {
-			$("<div/>", {id: "bg-popup", css:popupCss}).appendTo("body")
-		} else {
-			$("#bg-popup").css(popupCss);
-		}
-
-		self.bgPopup = $('#bg-popup')
-
-
 		// delegate events
 		self.bind()
-	}
 
+		$('.reg-helper').delay(3000).fadeOut(2000)
+
+		window.onload = function(){
+			Config.setWidth('set')
+		}
+	}
 
 	self.bind = function(){
 
 		$('.my-interest').click(function(e){
+			if(window.user_id === 'null') return false;
+
+			$('.create-post').addClass('opacity-hide')
+
 			if($(e.target).is('span'))
 			{
 				if ($(this).hasClass('active'))
@@ -93,20 +81,43 @@ function CConfig() { // для наследования класса внутр�
 			return false;
 		})
 
-		/**
-		 * Скроллим ленту по прокрутке колесика вверх - вниз
-		 */
+		;(function(){
+			var notify_interest = null
+			$('.my-interest').on({
+				mouseover: function () {
+					if(notify_interest) clearTimeout(notify_interest)
+					if (window.user_id === 'null')
+						$(this).next().addClass('notify-show')
+				},
+				mouseout: function () {
+					var _this = $(this)
+					if (window.user_id === 'null')
+						notify_interest = setTimeout(function () {
+							_this.next().removeClass('notify-show')
+						}, 500)
+				}
+			})
+			$('.notify-reg').on({
+				mouseover: function(){
+					if(notify_interest) clearTimeout(notify_interest)
+				},
+				mouseout:function(){
+					var _this = $(this)
+					notify_interest = setTimeout(function () {
+						_this.removeClass('notify-show')
+					}, 500)
+				}
+			})
+		})();
+
 		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
-			this.scrollLeft += (deltaX * 100); // трекпад на маке
-			this.scrollLeft -= (deltaY * 100); // колесико мыши
+			this.scrollLeft += (deltaX * 30); // трекпад на маке
+			this.scrollLeft -= (deltaY * 30); // колесико мыши
 
 			return false;
 		});
 
-		/**
-		 * Скроллим ленту по нажатию клавиш
-		 */
-		$(doc).keydown(function (e) {
+		$(document).keydown(function (e) {
 			var container = $('#container');
 
 			if (e.keyCode == 37) {
@@ -126,109 +137,39 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		/**
-		 *  Подгрузка контетна в ленту
-		 */
-
-		var page = 1;
-		//var newsBlockWidth = $('.news-list').outerWidth() + 30;
-
-		$("#container").scroll(function () {
-
-			var stepBlocks = self.rails.find('.step-day');
-			if (stepBlocks.length !== page || $('ul.empty').length === 0)
-				return true; // загрузка еще не завершена
-
-			var railsWidth = 0,
-				railsScroll = $('#container').scrollLeft() + $(window).scrollLeft()
-					+ $(window).width(); //FIXME
-
-			stepBlocks.each(function() {
-				railsWidth += $(this).width();
-			});
-
-			railsWidth += 360;
-
-			if (self.rails.outerWidth() < railsWidth)
-				railsWidth = self.rails.outerWidth();
-
-			if ( railsScroll >= railsWidth ) {
-				$('ul.empty').removeClass('empty');
-				page += 1;
-
-				var loader = $('<div id="ajax-loader" class="step-day"><header class="day-name" style="top:25%">Загрузка...</header></div>');
-				self.rails.append(loader);
-				
-				$.get(
-					'/index.php/site/index',
-					{'BlogPost_page': page},
-					function (data) {
-						var dataBlock = $(data),
-							newContent = $('<div class="step-day" />'),
-							header = $('<header class="day-name">Далее...</header>');
-						newContent.append(header).append(dataBlock);
-						
-						loader.fadeOut(self.anim, function() {
-							loader.remove();
-							self.rails.append(newContent);
-						});
-
-						self.setWidth('set');
-					}
-				);
-			};
-
-			return false;
-
-		});
-
-
-		/**
 		 * Открываем новость
 		 * Если клик имеет другой обработчик
 		 * Не выполнять этот бинд
 		 */
-		self.rails.on('click', '.news-box', function(e) {
+		self.rails.on('click', '.news-box', function(e){
 			var target = $(e.target)
-
-			if (target.hasClass('icon-category')) {
-				alert('TODO: Показать категорию')
-				return false;
-			} else if (target.hasClass('news-tag')) {
-				alert('TODO: Включить фильрацию по тегу ' + target.text())
-				return false;
+			if(!target.hasClass('news-like') && !target.hasClass('icon-category') && !target.hasClass('news-tag'))
+			{
+				$('.window-post').popup()
 			}
-			if (!target.hasClass('news-box')) {
-				target = target.parents('.news-box')
-			}
-			var window = $('.window-post');
-			window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
-			window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
-			window.popup();
-			return true;
-
 		})
 
 		// скрываем окно
-		$('body').on('click', '.close-popup', function() {
-			var window = $(this).parent();
-
-			window.fadeOut(Config.anim)
-			self.bgPopup.fadeOut(Config.anim)
+		$('body').on('click', '.close-popup', function(){
+			$(this).parent().add('#bg-popup').removeClass('visible-on')
 		})
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
-			if($(this).hasClass('opacity-hide'))
+			if($(this).hasClass('opacity-hide')){
 				$(this).removeClass('opacity-hide')
+				$('#rails').addClass('disabled')
+			}
 
 			else return false;
 		})
 		// скрываем его
 		$(doc).on('click', '*', function(e){
 			var target = $(e.target)
-			if(!target.hasClass('create-post') && !target.closest('.create-post').length)
+			if(!target.hasClass('create-post') && !target.closest('.create-post').length){
+				$('#rails').removeClass('disabled')
 				$('.create-post').addClass('opacity-hide')
+			}
 
 			// скрываем основное меню
 			if(!target.is('.interest-menu a') && $('.interest-menu').is(':visible'))
@@ -236,9 +177,9 @@ function CConfig() { // для наследования класса внутр�
 		})
 
 		// todo: удалить
-		/*$('.news-like').click(function(){
+		$('.news-like').click(function(){
 			$('.window-post-edit').popup()
-		})*/
+		})
 		$('.news-item img').click(function(){
 			$('.window-post-2').popup()
 		})
@@ -254,12 +195,12 @@ function CConfig() { // для наследования класса внутр�
 	 */
 	self.setWidth = function(is_set){
 		var width = 0
-		$('.news-list', self.rails).each(function(){
+		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true)
+			width += parseInt(self.rails.css('padding-left'))
 		})
-		if (is_set == 'set') {
-			self.rails.width(width * 2.5)
-		}
+		if(is_set == 'set')
+			self.rails.width(width + 175)
 		return width
 	}
 }
@@ -281,6 +222,10 @@ function CFilter(config){
 			var li = $(this).parent(),
 				menu = $(this).next()
 
+			$('.create-post').addClass('opacity-hide')
+			if($('.interest-menu').is(':visible'))
+				$('.my-interest').click()
+
 			li.addClass('active')
 
 			$(this).closest('ul').find('> li').not(li).hide(Config.anim)
@@ -292,7 +237,10 @@ function CFilter(config){
 
 			// засвечиваем рельс ленты
 			Config.rails.addClass('disabled')
-			$('#container').css('top', menu_height + 'px')
+			$('#container').css({
+				top: menu_height +'px',
+				bottom: -menu_height + 'px'
+			})
 
 			return false;
 		})
@@ -312,7 +260,10 @@ function CFilter(config){
 			$('.lenta-set-menu', panel).hide()
 
 			Config.rails.removeClass('disabled')
-			$('#container').css('top', 0)
+			$('#container').css({
+				top: 0,
+				bottom: 0
+			})
 		})
 
 		// сорт. по дате
