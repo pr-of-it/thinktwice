@@ -148,6 +148,8 @@ function CConfig() { // для наследования класса внутр�
 
 			railsWidth += 360;
 
+			if (self.rails.outerWidth() < railsWidth)
+				railsWidth = self.rails.outerWidth();
 
 			if ( railsScroll >= railsWidth ) {
 				$('ul.empty').removeClass('empty');
@@ -256,7 +258,7 @@ function CConfig() { // для наследования класса внутр�
 			width += $(this).outerWidth(true)
 		})
 		if (is_set == 'set') {
-			self.rails.width(width * 2.25)
+			self.rails.width(width * 2.5)
 		}
 		return width
 	}
