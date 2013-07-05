@@ -19,6 +19,16 @@
 
     <?php echo $form->errorSummary($model); ?>
 
+    <?php if ( $model->avatar_file == null ) :?>
+        <div class="row">
+            <?php echo $form->labelEx($model,'avatar_file'); ?>
+            <?php echo CHtml::activeFileField($model, 'avatar_file'); ?>
+            <?php echo $form->error($model,'avatar_file'); ?>
+        </div>
+
+    <?php else:?>
+        <?php echo CHtml::link('Удалить аватар', Yii::app()->createUrl('/private/deleteAvatar', array('id' => $model->id))); ?>
+    <?php endif;?>
 
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
@@ -51,13 +61,6 @@
         <?php echo $form->error($model,'consult_price'); ?>
     </div>
     <?php endif; ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($model,'avatar'); ?>
-        <?php echo CHtml::activeFileField($model, 'avatar'); ?>
-        <?php echo CHtml::link('Удалить аватар', Yii::app()->createUrl('/private/deleteAvatar', array('id' => $model->id))); ?>
-        <?php echo $form->error($model,'avatar'); ?>
-    </div>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Сохранить') ?>
