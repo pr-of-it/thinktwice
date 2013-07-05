@@ -5,6 +5,7 @@
 	<title>Вёрстка</title>
 	<link type="text/css" rel="stylesheet" href="css/main.css"/>
 	<link media="print" type="text/css" rel="stylesheet" href="css/print.css"/>
+	<meta name= "viewport" content="width=device-width, initial-scale=.9, user-scalable=yes">
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/>
 	<script type="text/javascript" src="js/selectivizr-min.js"></script>
@@ -32,6 +33,11 @@
 	<![endif]-->
 
 	<script type="text/javascript" src="js/common.js"></script>
+	<script>
+		$(function() {
+			alert(document.body.offsetHeight)
+		})
+	</script>
 </head>
 <body>
 

@@ -194,14 +194,14 @@ function CConfig() { // для наследования класса внутр�
 	 * устанавливаем ширину блока
 	 */
 	self.setWidth = function(is_set){
-		var width = 0
+		/*var width = 0
 		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true)
 			width += parseInt(self.rails.css('padding-left'))
 		})
 		if(is_set == 'set')
 			self.rails.width(width + 175)
-		return width
+		return width*/
 	}
 }
 Config = new CConfig(); // init classes

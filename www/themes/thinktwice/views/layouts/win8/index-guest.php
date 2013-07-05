@@ -9,6 +9,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
+    <meta name= "viewport" content="width=device-width, initial-scale=.85, user-scalable=yes">
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/ie.css" media="screen"/>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/selectivizr-min.js"></script>
@@ -193,42 +194,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 
 <div id="container">
 <div id="rails" class="page-lenta quick-start">
-<div class="step-day">
-<header class="day-name">Сегодня</header>
-
-<?php echo $content; ?>
-
-<script>
-    $(function () {
-        var page = 1;
-        $("#container").scroll(function () {
-
-            var docViewLeft = $(window).scrollLeft();
-            var docViewRight = docViewLeft + $(window).width();
-            var elemLeft = $('ul.empty').offset().left;
-            if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
-                $('ul.empty').removeClass('empty');
-                $.get(
-                    '/index.php/site/index',
-                    {'BlogPost_page': ++page},
-                    function (data) {
-                        $('#rails').append('<div class="step-day"><header class="day-name">Далее...</header>' + data + '</div>');
-                        Config.setWidth('set');
-                    }
-                );
-            };
-
-            return false;
-
-        });
-    });
-</script>
-
 </div>
-
-
-</div>
-
 </div>
 <!--container-->
 
