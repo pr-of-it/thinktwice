@@ -130,45 +130,47 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		var page = 1;
-		var newsBlockWidth = $('.news-list').outerWidth() + 30;
+		//var newsBlockWidth = $('.news-list').outerWidth() + 30;
 
 		$("#container").scroll(function () {
 
-			var docViewLeft = $(window).scrollLeft();
-			var docViewRight = docViewLeft + $(window).width();
-
-			var elemOffset = $('ul.empty').offset();
-
-			if (self.rails.find('.step-day').length !== page || !elemOffset)
+			var stepBlocks = self.rails.find('.step-day');
+			if (stepBlocks.length !== page || $('ul.empty').length === 0)
 				return true; // загрузка еще не завершена
 
+			var railsWidth = 0,
+				railsScroll = $('#container').scrollLeft() + $(window).scrollLeft()
+					+ $(window).width(); //FIXME
 
-			var elemLeft = elemOffset.left;
-			if ( ((elemLeft <= docViewRight) && (elemLeft >= docViewLeft)) ) {
+			stepBlocks.each(function() {
+				railsWidth += $(this).width();
+			});
+
+			railsWidth += 360;
+
+			if (self.rails.outerWidth() < railsWidth)
+				railsWidth = self.rails.outerWidth();
+
+			if ( railsScroll >= railsWidth ) {
 				$('ul.empty').removeClass('empty');
 				page += 1;
 
 				var loader = $('<div id="ajax-loader" class="step-day"><header class="day-name" style="top:25%">Загрузка...</header></div>');
-
-				self.setWidth('set', 175 + 360 + 30);
 				self.rails.append(loader);
+				
 				$.get(
 					'/index.php/site/index',
 					{'BlogPost_page': page},
 					function (data) {
-
-						var numItems = $(data).filter('.news-list:not(.empty)').length;
-
-						self.setWidth('set', (numItems + 1) * newsBlockWidth + 175);
-						var newContent = $('<div class="step-day" style="display:none"><header class="day-name">Далее...</header>' + data + '</div>');
-
-						self.rails.append(newContent);
+						var dataBlock = $(data),
+							newContent = $('<div class="step-day" />'),
+							header = $('<header class="day-name">Далее...</header>');
+						newContent.append(header).append(dataBlock);
+						
 						loader.fadeOut(self.anim, function() {
 							loader.remove();
-
+							self.rails.append(newContent);
 						});
-
-						newContent.fadeIn(self.anim);
 
 						self.setWidth('set');
 					}
@@ -250,15 +252,13 @@ function CConfig() { // для наследования класса внутр�
 	/**
 	 * устанавливаем ширину блока
 	 */
-	self.setWidth = function(is_set, extra){
+	self.setWidth = function(is_set){
 		var width = 0
 		$('.news-list', self.rails).each(function(){
 			width += $(this).outerWidth(true)
 		})
-		if(is_set == 'set') {
-			if (typeof extra === 'undefined')
-				extra = 175
-			self.rails.width(width + extra)
+		if (is_set == 'set') {
+			self.rails.width(width * 2.5)
 		}
 		return width
 	}
