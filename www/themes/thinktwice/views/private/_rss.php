@@ -1,7 +1,7 @@
 <h5>Добавить RSS ленту</h5>
 <?php $form=$this->beginWidget('ActiveForm', array(
     'id'=>'rss-form',
-    'action'=>$this->createAbsoluteUrl('/privateblog/rss/'),
+    'action'=>$this->createAbsoluteUrl('/privateBlog/rss/'),
     // Please note: When you enable ajax validation, make sure the corresponding
     // controller action is handling ajax validation correctly.
     // There is a call to performAjaxValidation() commented in generated controller code.
