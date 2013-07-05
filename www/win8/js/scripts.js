@@ -20,10 +20,65 @@ return isNaN(e)?d:e},f=p(u[0]),m=Math.max(f,p(u[1]||"")),f=s?Math.max(f,s.getFul
 	 * author: medium
 	 * version: 2.0
 	 * website: http://csscode.ru
-	 * $('#elem').popup({ color: '#000', opacity: .5, zIndex: 100, fade: 500 });
+	 * $('#elem').popup({ color: '#000', opacity: .5, zIndex: 100 });
 	 */
 
-;(function(e){e.fn.extend({popup:function(t){t=e.extend({color:"#000",opacity:.6,zIndex:100,fade:500},t);var n={position:"absolute",top:0,left:0,display:"none",height:e(document).height(),width:e(window).width(),background:t.color,opacity:t.opacity,filter:"alpha(opacity="+t.opacity*100+")",zIndex:t.zIndex,cursor:"pointer"};if(document.getElementById("bg-popup")==null){e("<div/>",{id:"bg-popup",css:n}).appendTo("body")}else e("#bg-popup").css(n);var r=e(this);r.css({top:e(window).height()/2-r.height()/2,left:e(window).width()/2-r.width()/2,position:"fixed"});r.fadeIn(t.fade);e("body").on({click:function(){e("#bg-popup").fadeOut(t.fade);r.fadeOut(t.fade);return false}},"#bg-popup, .closewinpop");e("#bg-popup").fadeIn(t.fade);e(window).resize(function(){e("#bg-popup").height(e(document).height());e("#bg-popup").width(e(window).width());r.css({top:e(window).height()/2-r.height()/2,left:e(window).width()/2-r.width()/2})})}})})(jQuery);
+;(function ($) {
+	$.fn.extend({
+		popup: function (prop) {
+			prop = $.extend({
+				color: '#000',
+				opacity: .6,
+				zIndex: 100
+			}, prop)
+			var css = {
+				position: 'absolute',
+				top: 0,
+				left: 0,
+				display: 'none',
+				height: $(document).height(),
+				width: $(window).width(),
+				background: prop.color,
+				opacity: prop.opacity,
+				filter: 'alpha(opacity=' + prop.opacity * 100 + ')',
+				zIndex: prop.zIndex,
+				cursor: 'pointer'
+			}
+			if (document.getElementById("bg-popup") == null)
+				$('<div/>', {
+					id: 'bg-popup',
+					css: css
+				}).appendTo('body')
+			else
+				$('#bg-popup').css(css)
+
+
+			var $this = $(this)
+			$this.css({
+				top: $(window).height() / 2 - $this.height() / 2,
+				left: $(window).width() / 2 - $this.width() / 2,
+				position: 'fixed'
+			})
+			$this.add('#bg-popup').addClass('visible-on')
+
+			$('body').on({
+				click: function () {
+					$('#bg-popup').add($this).removeClass('visible-on');
+					return false
+				}
+			}, '#bg-popup, .close');
+
+			$(window).resize(function () {
+				$('#bg-popup').height($(document).height());
+				$('#bg-popup').width($(window).width());
+				$this.css({
+					top: $(window).height() / 2 - $this.height() / 2,
+					left: $(window).width() / 2 - $this.width() / 2
+				});
+			})
+		}
+	})
+})(jQuery);
 
 /* jQuery Form Styler v1.3.7 | (c) Dimox | http://dimox.name/jquery-form-styler/ */
 ;(function(d){d.fn.styler=function(n){n=d.extend({idSuffix:"-styler",browseText:"\u041e\u0431\u0437\u043e\u0440...",selectVisibleOptions:0,singleSelectzIndex:"100",selectSmartPositioning:!0},n);return this.each(function(){var a=d(this),l="",q="",t="",r="";void 0!==a.attr("id")&&""!=a.attr("id")&&(l=' id="'+a.attr("id")+n.idSuffix+'"');void 0!==a.attr("class")&&""!=a.attr("class")&&(q=" "+a.attr("class"));void 0!==a.attr("title")&&""!=a.attr("title")&&(t=' title="'+a.attr("title")+'"');var s=a.data(),

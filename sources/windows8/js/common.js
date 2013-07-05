@@ -33,11 +33,21 @@ function CConfig() { // для наследования класса внутр�
 
 		// delegate events
 		self.bind()
+
+		$('.reg-helper').delay(3000).fadeOut(2000)
+
+		window.onload = function(){
+			Config.setWidth('set')
+		}
 	}
 
 	self.bind = function(){
 
 		$('.my-interest').click(function(e){
+			if(window.user_id === 'null') return false;
+
+			$('.create-post').addClass('opacity-hide')
+
 			if($(e.target).is('span'))
 			{
 				if ($(this).hasClass('active'))
@@ -70,6 +80,35 @@ function CConfig() { // для наследования класса внутр�
 			}
 			return false;
 		})
+
+		;(function(){
+			var notify_interest = null
+			$('.my-interest').on({
+				mouseover: function () {
+					if(notify_interest) clearTimeout(notify_interest)
+					if (window.user_id === 'null')
+						$(this).next().addClass('notify-show')
+				},
+				mouseout: function () {
+					var _this = $(this)
+					if (window.user_id === 'null')
+						notify_interest = setTimeout(function () {
+							_this.next().removeClass('notify-show')
+						}, 500)
+				}
+			})
+			$('.notify-reg').on({
+				mouseover: function(){
+					if(notify_interest) clearTimeout(notify_interest)
+				},
+				mouseout:function(){
+					var _this = $(this)
+					notify_interest = setTimeout(function () {
+						_this.removeClass('notify-show')
+					}, 500)
+				}
+			})
+		})();
 
 		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
 			this.scrollLeft += (deltaX * 100); // трекпад на маке
@@ -105,21 +144,25 @@ function CConfig() { // для наследования класса внутр�
 
 		// скрываем окно
 		$('body').on('click', '.close-popup', function(){
-			$(this).parent().add('#bg-popup').fadeOut(Config.anim)
+			$(this).parent().add('#bg-popup').removeClass('visible-on')
 		})
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
-			if($(this).hasClass('opacity-hide'))
+			if($(this).hasClass('opacity-hide')){
 				$(this).removeClass('opacity-hide')
+				$('#rails').addClass('disabled')
+			}
 
 			else return false;
 		})
 		// скрываем его
 		$(doc).on('click', '*', function(e){
 			var target = $(e.target)
-			if(!target.hasClass('create-post') && !target.closest('.create-post').length)
+			if(!target.hasClass('create-post') && !target.closest('.create-post').length){
+				$('#rails').removeClass('disabled')
 				$('.create-post').addClass('opacity-hide')
+			}
 
 			// скрываем основное меню
 			if(!target.is('.interest-menu a') && $('.interest-menu').is(':visible'))
@@ -145,8 +188,9 @@ function CConfig() { // для наследования класса внутр�
 	 */
 	self.setWidth = function(is_set){
 		var width = 0
-		$('.news-list', self.rails).each(function(){
+		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true)
+			width += parseInt(self.rails.css('padding-left'))
 		})
 		if(is_set == 'set')
 			self.rails.width(width + 175)
@@ -171,6 +215,10 @@ function CFilter(config){
 			var li = $(this).parent(),
 				menu = $(this).next()
 
+			$('.create-post').addClass('opacity-hide')
+			if($('.interest-menu').is(':visible'))
+				$('.my-interest').click()
+
 			li.addClass('active')
 
 			$(this).closest('ul').find('> li').not(li).hide(Config.anim)
@@ -182,7 +230,10 @@ function CFilter(config){
 
 			// засвечиваем рельс ленты
 			Config.rails.addClass('disabled')
-			$('#container').css('top', menu_height + 'px')
+			$('#container').css({
+				top: menu_height +'px',
+				bottom: -menu_height + 'px'
+			})
 
 			return false;
 		})
@@ -202,7 +253,10 @@ function CFilter(config){
 			$('.lenta-set-menu', panel).hide()
 
 			Config.rails.removeClass('disabled')
-			$('#container').css('top', 0)
+			$('#container').css({
+				top: 0,
+				bottom: 0
+			})
 		})
 
 		// сорт. по дате

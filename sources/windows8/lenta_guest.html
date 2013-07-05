@@ -32,12 +32,19 @@
 	<![endif]-->
 
 	<script type="text/javascript" src="js/common.js"></script>
+
+	<script type="text/javascript">
+		// если юзер авторизован то эта переменная несет имя
+		var user_id = 'null'
+	</script>
 </head>
 <body>
 
 <header id="header">
 
-	<div class="dashboard-link"></div>
+	<div class="dashboard-link">
+		<div>Дашборд <span></span></div>
+	</div>
 	<a href=""><img id="logo" src="img/logo.png" alt=""/></a>
 
 	<section class="user-bar">
@@ -178,17 +185,16 @@
 
 </header>
 <div id="wrapper">
-
-	<div class="quick-start-box">
-		<header>Что такое Лента?</header>
-		<div class="video-box">
-			<img src="img/tmp/video.jpg" alt=""/>
-			<div class="close"></div>
-		</div>
-	</div>
-
 	<div id="container">
 		<div id="rails" class="page-lenta quick-start">
+		<div class="quick-start-box">
+			<header>Что такое Лента?</header>
+			<div class="video-box">
+				<img src="img/tmp/video.jpg" alt=""/>
+
+				<div class="close"></div>
+			</div>
+		</div>
 			<div class="step-day">
 				<header class="day-name">Сегодня</header>
 				<ul class="news-list">
@@ -697,6 +703,13 @@
 					</div>
 				</li>
 			</ul>
+			</div>
+
+			<div class="step-day ajax-loader-wrap">
+				<div class="ajax-loader">
+					<img src="img/ajax-loader-lenta.gif" alt=""/>
+					<span>Возобновить загрузку</span>
+				</div>
 			</div>
 		</div>
 
