@@ -22,11 +22,9 @@ class DefaultController extends OperatorController
     {
         $model = CallRequest::model()->findByPk($id);
         $model->status = $status;
-
         switch ( $model->status ) {
-            case CallRequest::STATUS_REJECTED:
+            case CallRequest::STATUS_REJECTED :
                 $model->comments[CallRequest::STATUS_REJECTED] = $_POST['CallRequest']['comments'];
-
                 User::model()->findByPk($model->user_id)->sendMessage(
                     'Статус заявки на звонок на thinktwice.ru',
                     'Уважаемый пользователь! Ваша заявка на звонок эксперту отклонена оператором по причине: ' . $model->comments[CallRequest::STATUS_REJECTED],

@@ -6,7 +6,7 @@ $this->pageTitle=Yii::app()->name . ' - User page';
 <table>
     <tr>
         <td>
-            <p> <?php echo  CHtml::image(Yii::app()->baseUrl . $user->avatar);?> </p>
+            <p> <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>108, 'height'=>108)));?> </p>
 
         </td>
         <td>

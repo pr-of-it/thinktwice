@@ -9,10 +9,9 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('avatar')); ?>:</b>
     <?php
       if ( !$data -> avatar == null ) {
-            echo CHtml::image(Yii::app()->baseUrl . $data->avatar);
+            echo Yii::app()->easyImage->thumbOf($data->avatar, array('resize'=>array('width'=>108, 'height'=>108)));
       } ?>
     <br />
 

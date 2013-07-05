@@ -14,7 +14,6 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
 <p>Альтернативное желаемое время истполнения заявки 2: <?php echo $callRequest->alter_call_time_2;?></p>
 <p>Примерная продолжительность консультации: <?php echo $callRequest->duration;?></p>
 <p>Статус заявки: <?php echo $callRequest->statusDesc;?></p>
-
 <?php echo CHtml::link('Подтвердить', array(
     'default/updatestatus/',
     'id'=>$callRequest->id,
@@ -35,9 +34,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
         'enableAjaxValidation'=>false,
         'htmlOptions' => array('enctype' => 'multipart/form-data'),
     )); ?>
-
     <?php echo $form->errorSummary($callRequest); ?>
-
     <div class="row">
         <?php echo $form->labelEx($callRequest,'Причина отклонения'); ?>
         <?php echo $form->textField($callRequest,'comments'); ?>

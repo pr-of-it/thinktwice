@@ -278,6 +278,9 @@ class User extends CActiveRecord
         ));
     }
 
+    public  function getModeratorRssRequest() {
+        return BlogRssRequest::model()->findAll();
+    }
 
     public function sendMessage($subject, $message, $methods = array()) {
 

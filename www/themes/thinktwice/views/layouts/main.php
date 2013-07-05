@@ -39,6 +39,7 @@
                 array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> Yii::app()->user->role == 'admin' ),
                 array('label'=>'Панель оператора', 'url'=>array('/operator'), 'visible'=> Yii::app()->user->role == 'operator' ),
                 array('label'=>'Панель эксперта', 'url'=>array('/expert'), 'visible'=> Yii::app()->user->role == 'expert' ),
+                array('label'=>'Панель модератора', 'url'=>array('/moderator'), 'visible'=> Yii::app()->user->role == 'moderator' ),
             )
 		)); ?>
 	</div><!-- mainmenu -->
