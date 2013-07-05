@@ -130,7 +130,7 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		var page = 1;
-		var newsBlockWidth = $('.news-list').outerWidth() + 30;
+		//var newsBlockWidth = $('.news-list').outerWidth() + 30;
 
 		$("#container").scroll(function () {
 
@@ -157,20 +157,29 @@ function CConfig() { // для наследования класса внутр�
 					{'BlogPost_page': page},
 					function (data) {
 
-						var numItems = $(data).filter('.news-list:not(.empty)').length;
+						var dataBlock = $(data);
+						var numItems = dataBlock.filter('.news-list').length;
 
-						self.setWidth('set', (numItems + 1) * newsBlockWidth + 175);
-						var newContent = $('<div class="step-day" style="display:none"><header class="day-name">Далее...</header>' + data + '</div>');
+						console.log(numItems)
+
+						self.setWidth('set', (numItems * 390) + 175);
+						console.log(self.rails.width());
+
+						var newContent = $('<div class="step-day" style="display:none"/>');
+						var header = $('<header class="day-name">Далее...</header>');
+						newContent.append(header);
+						newContent.append(dataBlock);
+
 
 						self.rails.append(newContent);
 						loader.fadeOut(self.anim, function() {
 							loader.remove();
-
 						});
 
 						newContent.fadeIn(self.anim);
 
 						self.setWidth('set');
+						console.log(self.rails.width() + '\n');
 					}
 				);
 			};
