@@ -37,11 +37,28 @@ function CConfig() { // для наследования класса внутр�
 
 		$('.reg-helper').delay(3000).fadeOut(2000)
 
+		var popupCss = {
+			position:"absolute",
+			top:0, left:0, display:"none",
+			height:$(doc).height(),
+			width:$(window).width(),
+			background:'#000',
+			opacity:.6,
+			filter:"alpha(opacity=60)",
+			zIndex:100,
+			cursor:"pointer"
+		};
+
+		if(document.getElementById("bg-popup") == null) {
+			$("<div/>", {id: "bg-popup", css: popupCss}).appendTo("body")
+		} else {
+			$("#bg-popup").css(popupCss);
+		}
+
+		self.bgPopup = $('#bg-popup').addClass('close-popup');
+
 		window.onload = function(){
-			Config.loadData();
-			//Config.makeRails();
-			//Config.fixPostPositions();
-			//Config.setWidth('set');
+			self.loadData();
 		}
 	}
 
@@ -162,12 +179,26 @@ function CConfig() { // для наследования класса внутр�
 			window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
 			window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
 			window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
-			window.popup();
+			
+			var imgTarget = target.find('.image-gallery-min-full'),
+				img = window.find('img:first');
+			if (imgTarget.length) {
+				var src = imgTarget.css('background-image');
+				img[0].src = src.replace(/^url\(/, '').replace(/\)$/, '');
+				img.show();
+			} else {
+				img.hide();
+			}
+
+			self.bgPopup.show();
+			window.addClass('visible-on');
 		})
 
 		// скрываем окно
 		$('body').on('click', '.close-popup', function(){
-			$(this).parent().add('#bg-popup').removeClass('visible-on')
+			self.bgPopup.hide();
+			$('.window-post').removeClass('visible-on');
+			
 		})
 
 		// открываем редактор для поста
@@ -221,8 +252,12 @@ function CConfig() { // для наследования класса внутр�
 		'<li class="news-item{{extraClass}}">' +
 			'<div class="news-box">' +
 				'<div class="news-tag">{{tag}}</div>' +
+				'{{#image}}' +
+				'<div style="background-image: url({{image}});" class="image-gallery-min-full">' +
+				'</div>' +
+				'{{/image}}' +
 				'<div class="news-body">' +
-					'{{#preview}}<img src="{{preview}}" alt=""/>{{/preview}}' +
+					'{{#preview}}<img src="{{preview}}" alt="{{title}}"/>{{/preview}}' +
 					'<header class="news-author">{{author}}</header>' +
 					'<h6>{{title}}</h6>' +
 					'<p>{{text}}</p>' +
@@ -248,30 +283,57 @@ function CConfig() { // для наследования класса внутр�
 		}, function(data) {
 			var ul = $('<ul class="news-list"/>'),
 				running = false;
+
 			for(var i=0; i<data.length; i++) {
-				var item = data[i];
-				var post = lentaTemplate({
+				zFill = function(s) {
+					return ('00' + s).substr((s+'').length, 2);
+				}
+
+				var item = data[i],
+					date = new Date(item.time),
+					now = new Date(),
+					time = zFill(date.getHours()) + ':' + zFill(date.getMinutes()),
+					timeFormat;
+				
+				
+				if (date.getDay() == now.getDay() &&
+						date.getMonth() == now.getMonth() &&
+						date.getFullYear() == now.getFullYear()) {
+					timeFormat = time;
+				} else {
+					timeFormat = date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDay()) + ' ' + time;
+				}
+				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
+				var post = $(lentaTemplate({
 					extraClass: '',
 					tag: item.tag || '#TODO',
-					preview: item.preview,
+					preview: preview,
 					author: item.author || '<TODO: Автор Новости>',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
 					timeClass: '',
-					time: new Date(item.time)
-				});
-				ul.append(post);
-				running = true;
+					time: timeFormat,
+					image: item.image
+				}));
+				if (preview) {
+					post.addClass('medium-width');
+				}
 				if (item.image) {
 					if (running) {
 						self.rails.append(ul);
 						ul = $('<ul class="news-list"/>');
 						running = false;
 					}
+					ul.append(post);
 					ul.addClass('full-item').appendTo(self.rails)
+					ul = $('<ul class="news-list"/>');
 				} else if (running && i === (data.length + 1)) {
+					ul.append(post);
 					self.rails.append(ul);
+				} else {
+					ul.append(post);
+					running = true;
 				}
 			}
 			Config.makeRails();

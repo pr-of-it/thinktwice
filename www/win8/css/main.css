@@ -773,14 +773,14 @@ icon-archive{
 /*****   popup   *****/
 
 .popup{
-	position:fixed;
+	position:absolute;
 	right:-1000px !important; top:0; left:auto !important;
 	height:100%; width:713px;
 	border-left:1px solid #a6aca8;
 	border-right:1px solid #a6aca8;
 	background:#dfdfd9;
 	opacity:0; filter:alpha(opacity=0);
-	z-index:-20;
+	z-index:101;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -1509,7 +1509,7 @@ input[type="reset"].styler:active{
 
 
 #rails.quick-start:first-child{
-	padding-left:900px;
+	padding-left:955px;
 }
 #rails.quick-start .step-day{
 	padding-left:0;
