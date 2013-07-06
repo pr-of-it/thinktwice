@@ -43,8 +43,8 @@ function CConfig() { // для наследования класса внутр�
 		var popupCss = {
 			position:"absolute",
 			top:0, left:0, display:"none",
-			height:$(doc).height(),
-			width:$(window).width(),
+			height: '100%',
+			width: '100%',
 			background:'#000',
 			opacity:.6,
 			filter:"alpha(opacity=60)",
