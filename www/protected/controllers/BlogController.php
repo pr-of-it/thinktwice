@@ -48,4 +48,25 @@ class BlogController extends Controller {
 
     }
 
+    // AJAX actions
+
+    public function actionGetIndexBlogPosts($limit, $offset=0) {
+        $criteria = new CDbCriteria(array(
+            'order' => 'time DESC',
+            'with' => 'blog',
+            'limit' => $limit,
+            'offset' => $offset,
+        ));
+        $posts = BlogPost::model()->findAll($criteria);
+        echo CJSON::encode($posts);
+        Yii::app()->end();
+    }
+
+    public function actionGetIndexBlogPost($id) {
+        $post = BlogPost::model()->findByPk($id);
+        echo CJSON::encode($post);
+        Yii::app()->end();
+    }
+
+
 }
