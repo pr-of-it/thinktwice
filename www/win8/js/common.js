@@ -37,7 +37,8 @@ function CConfig() { // для наследования класса внутр�
 		$('.reg-helper').delay(3000).fadeOut(2000)
 
 		window.onload = function(){
-			Config.setWidth('set')
+			Config.makeRails();
+			Config.setWidth('set');
 		}
 	}
 
@@ -143,10 +144,22 @@ function CConfig() { // для наследования класса внутр�
 		 */
 		self.rails.on('click', '.news-box', function(e){
 			var target = $(e.target)
-			if(!target.hasClass('news-like') && !target.hasClass('icon-category') && !target.hasClass('news-tag'))
-			{
-				$('.window-post').popup()
+
+			if (target.hasClass('icon-category')) {
+				alert('TODO: Показать категорию')
+				return false;
+			} else if (target.hasClass('news-tag')) {
+				alert('TODO: Включить фильрацию по тегу ' + target.text())
+				return false;
 			}
+			if (!target.hasClass('news-box')) {
+				target = target.parents('.news-box')
+			}
+			var window = $('.window-post');
+			window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
+			window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
+			window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
+			window.popup();
 		})
 
 		// скрываем окно
@@ -190,18 +203,35 @@ function CConfig() { // для наследования класса внутр�
 		})
 	}
 
+	/*
+		Проставим нужные классы для правильного построения ленты
+	*/
+	self.makeRails = function() {
+		$('.news-list:not(.full-item)', self.rails).each(function () {
+			var step = $(this),
+				counter = 0;
+
+			var numItems = $('.news-item', step).length;
+			var br =  $('.news-item', step).eq((numItems/2)|0 );
+			br.addClass('line-break');
+			//console.log((numItems/2)|0, numItems, br)
+		});
+	}
+
 	/**
 	 * устанавливаем ширину блока
 	 */
-	self.setWidth = function(is_set){
-		/*var width = 0
-		$('> .step-day', self.rails).each(function(){
+	self.setWidth = function(is_set) {
+		var width = 0;
+		$('> .news-list', self.rails).each(function(){
 			width += $(this).outerWidth(true)
-			width += parseInt(self.rails.css('padding-left'))
+			console.log($(this).outerWidth(true))
+			//width += parseInt(self.rails.css('padding-left'))
 		})
 		if(is_set == 'set')
 			self.rails.width(width + 175)
-		return width*/
+
+		return width
 	}
 }
 Config = new CConfig(); // init classes
