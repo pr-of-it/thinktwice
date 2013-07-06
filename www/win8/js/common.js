@@ -7,6 +7,9 @@ function CConfig() { // для наследования класса внутр�
 	 */
 
 	self.viewLines = 1;
+	self.numPosts = 0;
+	self.postsAreLoading = false;
+	self.everythingWasLoaded = false;
 	self.anim = 200;     // time animation
 	self.ajaxError = function (e, usertext) {
 		alert('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
@@ -240,10 +243,22 @@ function CConfig() { // для наследования класса внутр�
 		$(window).resize(function() {
 			self.fixPostPositions();
 			self.setWidth('set');
+		});
 
-			/*setTimeout(function() {
+		/**
+		 *  Подгрузка контетна в ленту
+		 */
 
-			}, 1000);*/
+		$("#container").scroll(function () {
+			var loader = self.rails.find('.ajax-loader');
+
+			var width = self.rails.width();
+			var scroll = $('#container').scrollLeft() + $(window).width();
+
+			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width)
+				self.loadData();
+
+
 		});
 	}
 
@@ -274,11 +289,13 @@ function CConfig() { // для наследования класса внутр�
 
 	self.loadData = function(opts) {
 		opts = opts || {};
-		var loader = self.rails.find('.ajax-loader');
+		var loader = self.rails.find('.ajax-loader').show();
 
+		self.postsAreLoading = true;
+		console.log('loading data...')
 		$.getJSON('/index.php/blog/getIndexBlogPosts', {
 			limit: opts['limit'] | 20,
-			offset: opts['offset'] | 0
+			offset: opts['offset'] | self.numPosts
 		}, function(data) {
 			var ul = $('<ul class="news-list"/>'),
 				running = false;
@@ -307,9 +324,9 @@ function CConfig() { // для наследования класса внутр�
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
 				var post = $(lentaTemplate({
 					extraClass: '',
-					tag: item.tag || '#TODO',
+					tag: '#' + (i+1) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
-					author: item.author || '<TODO: Автор Новости>',
+					author: item.author || 'Автор',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
@@ -337,9 +354,16 @@ function CConfig() { // для наследования класса внутр�
 					running = true;
 				}
 			}
+			self.numPosts += data.length;
 			self.rails.append(loader);
+			self.postsAreLoading = false;
+			if (data.length === 0) {
+				loader.hide();
+				self.everythingWasLoaded = true;
+			}
+			console.log('...loaded ' + data.length + ' items.')
 			Config.makeRails();
-			Config.fixPostPositions();
+			Config.fixPostPositions(true);
 			Config.setWidth('set');
 		})
 		.fail(function() {})
@@ -370,8 +394,9 @@ function CConfig() { // для наследования класса внутр�
 		});
 	}
 
-	self.fixPostPositions = function() {
-		if (self.viewLines === 1 && $(window).height() > 768) {
+	self.fixPostPositions = function(force) {
+		if ( (self.viewLines === 1 && $(window).height() > 768) ||
+		     (self.viewLines === 2 && force) ) {
 			//console.log('fixing for 2 lines')
 			self.viewLines = 2;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
@@ -384,7 +409,8 @@ function CConfig() { // для наследования класса внутр�
 				bottomItems.appendTo($(this));
 
 			});
-		} else if (self.viewLines === 2 && $(window).height() <= 768) {
+		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
+		            (self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
