@@ -190,9 +190,9 @@ function CConfig() { // для наследования класса внутр�
 		})
 
 		// todo: удалить
-		$('.news-like').click(function(){
+		/*$('.news-like').click(function(){
 			$('.window-post-edit').popup()
-		})
+		})*/
 		$('.news-item img').click(function(){
 			$('.window-post-2').popup()
 		})
@@ -201,6 +201,15 @@ function CConfig() { // для наследования класса внутр�
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
 			$('#rails').removeClass('quick-start')
 		})
+
+
+		$(window).resize(function() {
+			self.setWidth();
+
+			/*setTimeout(function() {
+
+			}, 1000);*/
+		});
 	}
 
 	/*
@@ -211,10 +220,12 @@ function CConfig() { // для наследования класса внутр�
 			var step = $(this),
 				counter = 0;
 
-			var numItems = $('.news-item', step).length;
-			var br =  $('.news-item', step).eq((numItems/2)|0 );
+			var breakNum = ($('.news-item', step).length/2)|0;
+
+			var br =  $('.news-item', step).eq(breakNum);
 			br.addClass('line-break');
 			//console.log((numItems/2)|0, numItems, br)
+			$('.news-item:gt(' + (breakNum-1) + ')', step).addClass('bottom');
 		});
 	}
 
@@ -225,8 +236,6 @@ function CConfig() { // для наследования класса внутр�
 		var width = 0;
 		$('> .news-list', self.rails).each(function(){
 			width += $(this).outerWidth(true)
-			console.log($(this).outerWidth(true))
-			//width += parseInt(self.rails.css('padding-left'))
 		})
 		if(is_set == 'set')
 			self.rails.width(width + 175)
