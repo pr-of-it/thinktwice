@@ -6,6 +6,7 @@ function CConfig() { // для наследования класса внутр�
 	 * main configuration
 	 */
 
+	self.viewLines = 1;
 	self.anim = 200;     // time animation
 	self.ajaxError = function (e, usertext) {
 		alert('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
@@ -37,8 +38,10 @@ function CConfig() { // для наследования класса внутр�
 		$('.reg-helper').delay(3000).fadeOut(2000)
 
 		window.onload = function(){
-			Config.makeRails();
-			Config.setWidth('set');
+			Config.loadData();
+			//Config.makeRails();
+			//Config.fixPostPositions();
+			//Config.setWidth('set');
 		}
 	}
 
@@ -204,12 +207,79 @@ function CConfig() { // для наследования класса внутр�
 
 
 		$(window).resize(function() {
-			self.setWidth();
+			self.fixPostPositions();
+			self.setWidth('set');
 
 			/*setTimeout(function() {
 
 			}, 1000);*/
 		});
+	}
+
+	//var Mustache = Mustache || { compile: function(a) {return function(b){ return a;}} };
+	var lentaTemplate = Mustache.compile(
+		'<li class="news-item{{extraClass}}">' +
+			'<div class="news-box">' +
+				'<div class="news-tag">{{tag}}</div>' +
+				'<div class="news-body">' +
+					'{{#preview}}<img src="{{preview}}" alt=""/>{{/preview}}' +
+					'<header class="news-author">{{author}}</header>' +
+					'<h6>{{title}}</h6>' +
+					'<p>{{text}}</p>' +
+				'</div>' +
+				'<div class="news-like">{{likes}}</div>' +
+				'<a href="" class="icon-users"></a>' +
+				'<div class="time-slider" class="{{timeClass}}"></div>' +
+			'</div>' +
+			'<div class="time-dott" class="{{timeClass}}">' +
+				'<span>{{time}}</span>' +
+			'</div>' +
+		'</li>'
+	);
+
+	self.loadData = function(opts) {
+		opts = opts || {};
+		var loader = self.rails.find('.ajax-loader');
+		//loader.css({visibility: 'visible'});
+
+		$.getJSON('/index.php/blog/getIndexBlogPosts', {
+			limit: opts['limit'] | 20,
+			offset: opts['offset'] | 0
+		}, function(data) {
+			var ul = $('<ul class="news-list"/>'),
+				running = false;
+			for(var i=0; i<data.length; i++) {
+				var item = data[i];
+				var post = lentaTemplate({
+					extraClass: '',
+					tag: item.tag || '#TODO',
+					preview: item.preview,
+					author: item.author || '<TODO: Автор Новости>',
+					title: item.title,
+					text: item.text,
+					likes: item.likes || 0,
+					timeClass: '',
+					time: new Date(item.time)
+				});
+				ul.append(post);
+				running = true;
+				if (item.image) {
+					if (running) {
+						self.rails.append(ul);
+						ul = $('<ul class="news-list"/>');
+						running = false;
+					}
+					ul.addClass('full-item').appendTo(self.rails)
+				} else if (running && i === (data.length + 1)) {
+					self.rails.append(ul);
+				}
+			}
+			Config.makeRails();
+			Config.fixPostPositions();
+			Config.setWidth('set');
+		})
+		.fail(function() {})
+		.always(function() {});
 	}
 
 	/*
@@ -218,15 +288,53 @@ function CConfig() { // для наследования класса внутр�
 	self.makeRails = function() {
 		$('.news-list:not(.full-item)', self.rails).each(function () {
 			var step = $(this),
-				counter = 0;
+				numItems = $('.news-item', step).length;
 
-			var breakNum = ($('.news-item', step).length/2)|0;
+			var topWidth = 0, bottomWidth = 0;
 
-			var br =  $('.news-item', step).eq(breakNum);
-			br.addClass('line-break');
-			//console.log((numItems/2)|0, numItems, br)
-			$('.news-item:gt(' + (breakNum-1) + ')', step).addClass('bottom');
+			$('.news-item', step).each(function(i) {
+				$(this).data({position: i});
+				if (topWidth <= (bottomWidth + 60)) {
+					topWidth += $(this).outerWidth() + 30;
+					$(this).addClass('line-1').removeClass('line-2');
+				} else {
+					bottomWidth += $(this).outerWidth() + 30;
+					$(this).addClass('line-2').removeClass('line-1');
+				}
+				//console.log(i, i&1,  $(this))
+			});
 		});
+	}
+
+	self.fixPostPositions = function() {
+		if (self.viewLines === 1 && $(window).height() > 768) {
+			//console.log('fixing for 2 lines')
+			self.viewLines = 2;
+			$('.news-list:not(.full-item)', self.rails).each(function () {
+				var allItems = $('.news-item', $(this)),
+					topItems = allItems.filter('.line-1'),
+					bottomItems = allItems.filter('.line-2');
+				allItems.removeClass('line-break');
+				bottomItems.first().addClass('line-break');
+				bottomItems.detach();
+				bottomItems.appendTo($(this));
+
+			});
+		} else if (self.viewLines === 2 && $(window).height() <= 768) {
+			//console.log('fixing for 1 line')
+			self.viewLines = 1;
+			$('.news-list:not(.full-item)', self.rails).each(function () {
+				var allItems = $('.news-item', $(this));
+				allItems.detach().sort(function (a, b) {
+					var aPos = $(a).data('position'),
+						bPos = $(b).data('position');
+					if (aPos < bPos) return -1;
+					if (aPos > bPos) return 1;
+					return 0;
+				});
+				$(this).append(allItems);
+			});
+		}
 	}
 
 	/**

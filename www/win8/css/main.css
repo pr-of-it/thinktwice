@@ -1544,20 +1544,23 @@ input[type="reset"].styler:active{
 	cursor:pointer;
 	background:url(../img/icons/close.png) no-repeat transparent;
 }
-.ajax-loader{
+.ajax-loader {
+	visibility: hidden;
+}
+.ajax-loader div {
 	position:absolute;
 	left:0; top:50%;
 	margin-top:-30px;
 	height:60px; width:500px;
 	text-align:center;
 }
-.ajax-loader img{
+.ajax-loader img {
 	position:absolute;
 	left:50%; top:-10px;
 	margin-left:-10px;
 }
-.ajax-loader span{
-	position:relative;
+.ajax-loader span {
+	position:relative; visibility: hidden;
 	top:25px;
 	font-size:22px;
 	color:#bad9da;
@@ -1565,17 +1568,17 @@ input[type="reset"].styler:active{
 	padding:14px 10px 10px 50px;
 	background:url(../img/icons/refresh.png) no-repeat left center transparent;
 }
-.step-day.ajax-loader-wrap{
+.ajax-loader .ajax-loader-wrap{
 	width:500px;
 }
 
 @media screen and (min-height: 768px) {
 
-	.news-item.bottom .time-slider{
+	.news-item.line-2 .time-slider{
 		bottom:auto; top:-11px;
 		background-position:-281px -28px;
 	}
-	.news-item.bottom .news-box{
+	.news-item.line-2 .news-box{
 		top: 31px; bottom: 0;
 	}
 
@@ -1605,11 +1608,11 @@ input[type="reset"].styler:active{
 	}
 
 
-	.news-item.bottom .time-dott{
+	.news-item.line-2 .time-dott{
 		top: -7px;
 		bottom: 0;
 	}
-	.news-item.bottom .time-dott span{
+	.news-item.line-2 .time-dott span{
 		top:21px;
 	}
 
@@ -1631,7 +1634,7 @@ input[type="reset"].styler:active{
 		right: 15px;
 	}
 
-	.news-item.white-style.bottom .time-slider{
+	.news-item.white-style.line-2 .time-slider{
 		background-position: 0 -10px;
 	}
 }
