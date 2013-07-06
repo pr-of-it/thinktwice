@@ -1,3 +1,15 @@
+(function() {
+    var days = ['воскрусенье','понедельни','вторник','среда','четверг','пятница','суббота'];
+
+    var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+    Date.prototype.getMonthName = function() {
+        return months[ this.getMonth() ];
+    };
+    Date.prototype.getDayName = function() {
+        return days[ this.getDay() ];
+    };
+})();
 function CConfig() { // для наследования класса внутри нового клаcса - CConfig.apply(this);
 	var self = this,
 		kineticSide = null;
@@ -250,8 +262,6 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		$("#container").scroll(function () {
-			var loader = self.rails.find('.ajax-loader');
-
 			var width = self.rails.width();
 			var scroll = $('#container').scrollLeft() + $(window).width();
 
@@ -262,13 +272,12 @@ function CConfig() { // для наследования класса внутр�
 		});
 	}
 
-	//var Mustache = Mustache || { compile: function(a) {return function(b){ return a;}} };
 	var lentaTemplate = Mustache.compile(
 		'<li class="news-item{{extraClass}}">' +
 			'<div class="news-box">' +
 				'<div class="news-tag">{{tag}}</div>' +
 				'{{#image}}' +
-				'<div style="background-image: url({{image}});" class="image-gallery-min-full">' +
+				'<div style="background-image: url(/{{image}});" class="image-gallery-min-full">' +
 				'</div>' +
 				'{{/image}}' +
 				'<div class="news-body">' +
@@ -314,12 +323,22 @@ function CConfig() { // для наследования класса внутр�
 					timeFormat;
 				
 				
-				if (date.getDay() == now.getDay() &&
+				if (date.getDate() == now.getDate() &&
 						date.getMonth() == now.getMonth() &&
 						date.getFullYear() == now.getFullYear()) {
-					timeFormat = time;
+					if (date.getHours() == now.getHours()) {
+						if (now.getMinutes() - date.getMinutes() <= 3)
+							timeFormat = 'сейчас';
+						else if (now.getMinutes() - date.getMinutes() <= 60)
+							timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+					} else timeFormat = time;
+				} else if (date.getFullYear() == now.getFullYear()) {
+					if (date.getDate() == now.getDate() - 1)
+						timeFormat = 'вчера ' + time;
+					else
+						timeFormat = date.getDate() + ' ' + date.getMonthName() + ' ' + time;
 				} else {
-					timeFormat = date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDay()) + ' ' + time;
+					timeFormat = date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDate()) + ' ' + time;
 				}
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
 				var post = $(lentaTemplate({
