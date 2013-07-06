@@ -275,7 +275,6 @@ function CConfig() { // для наследования класса внутр�
 	self.loadData = function(opts) {
 		opts = opts || {};
 		var loader = self.rails.find('.ajax-loader');
-		//loader.css({visibility: 'visible'});
 
 		$.getJSON('/index.php/blog/getIndexBlogPosts', {
 			limit: opts['limit'] | 20,
@@ -283,6 +282,8 @@ function CConfig() { // для наследования класса внутр�
 		}, function(data) {
 			var ul = $('<ul class="news-list"/>'),
 				running = false;
+
+			loader.detach();
 
 			for(var i=0; i<data.length; i++) {
 				zFill = function(s) {
@@ -336,6 +337,7 @@ function CConfig() { // для наследования класса внутр�
 					running = true;
 				}
 			}
+			self.rails.append(loader);
 			Config.makeRails();
 			Config.fixPostPositions();
 			Config.setWidth('set');

@@ -194,14 +194,14 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
             <div class="close"></div>
         </div>
     </div>
-    <!--<ul class="news-list full-item ajax-loader">
+    <ul class="news-list full-item ajax-loader">
         <li class="ajax-loader-wrap">
-            <div class="ajax-loader">
+            <div>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/ajax-loader-lenta.gif" alt=""/>
                 <span>Возобновить загрузку</span>
             </div>
         </li>
-    </ul>-->
+    </ul>
 </div>
 </div>
 <!--container-->

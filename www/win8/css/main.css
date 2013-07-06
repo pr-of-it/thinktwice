@@ -1544,9 +1544,6 @@ input[type="reset"].styler:active{
 	cursor:pointer;
 	background:url(../img/icons/close.png) no-repeat transparent;
 }
-.ajax-loader {
-	visibility: hidden;
-}
 .ajax-loader div {
 	position:absolute;
 	left:0; top:50%;
