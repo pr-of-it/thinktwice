@@ -118,4 +118,27 @@ class BlogPost extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Для корректного формирования JSON из моделей
+     * @return CMapIterator the iterator for the foreach statement
+     */
+    public function getIterator()
+    {
+        $attributes=$this->getAttributes();
+        $relations = array();
+
+        foreach ($this->relations() as $key => $related)
+        {
+            if ($this->hasRelated($key))
+            {
+                $relations[$key] = $this->$key;
+            }
+        }
+
+        $all = array_merge($attributes, $relations);
+
+        return new CMapIterator($all);
+    }
+
 }

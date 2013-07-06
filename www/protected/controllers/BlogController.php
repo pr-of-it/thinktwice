@@ -63,7 +63,7 @@ class BlogController extends Controller {
     }
 
     public function actionGetIndexBlogPost($id) {
-        $post = BlogPost::model()->findByPk($id);
+        $post = BlogPost::model()->with('blog')->findByPk($id);
         echo CJSON::encode($post);
         Yii::app()->end();
     }
