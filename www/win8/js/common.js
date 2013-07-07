@@ -333,6 +333,7 @@ function CConfig() { // для наследования класса внутр�
 	self.formatTimelineHeader = function(s) {
 		var date = new Date(s),
 			now = new Date();
+		console.log(date, now, s)
 		if (date.getDate() == now.getDate() &&
 				date.getMonth() == now.getMonth() &&
 				date.getFullYear() == now.getFullYear()) {
@@ -371,8 +372,10 @@ function CConfig() { // для наследования класса внутр�
 
 			var header, headerText, oldHeaderText;
 			for(var i=0; i<data.length; i++) {
-				var item = data[i],
-					timeFormat = self.formatTimelineDate(item.time),
+				var item = data[i];
+
+				item.time = item.time.replace(/(\d) (\d)/, '$1T$2');
+				var timeFormat = self.formatTimelineDate(item.time),
 					timelineHeader = self.timelineHeaderKey(item.time);
 
 				if (!self.timelineHeaders[timelineHeader]) {
