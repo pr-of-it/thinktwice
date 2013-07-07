@@ -22,6 +22,8 @@ function CConfig() { // для наследования класса внутр�
 	self.numPosts = 0;
 	self.postsAreLoading = false;
 	self.everythingWasLoaded = false;
+	self.timelineHeaders = {};
+
 	self.anim = 200;     // time animation
 	self.ajaxError = function (e, usertext) {
 		alert('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
@@ -43,9 +45,6 @@ function CConfig() { // для наследования класса внутр�
 
 		// init
 		$('input, select').styler();
-
-		// устанавливаем ширину блока
-		self.setWidth('set')
 
 		// delegate events
 		self.bind()
@@ -262,7 +261,7 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		$("#container").scroll(function () {
-			var width = self.rails.width();
+			var width = self.rails.width() - 440;
 			var scroll = $('#container').scrollLeft() + $(window).width();
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width)
@@ -285,16 +284,67 @@ function CConfig() { // для наследования класса внутр�
 					'<header class="news-author">{{author}}</header>' +
 					'<h6>{{title}}</h6>' +
 					'<p>{{text}}</p>' +
+					'<span class="text-hide"></span>' +
 				'</div>' +
 				'<div class="news-like">{{likes}}</div>' +
 				'<a href="" class="icon-users"></a>' +
-				'<div class="time-slider" class="{{timeClass}}"></div>' +
+				'<div class="time-slider"></div>' +
 			'</div>' +
-			'<div class="time-dott" class="{{timeClass}}">' +
+			'<div class="time-dott">' +
 				'<span>{{time}}</span>' +
 			'</div>' +
 		'</li>'
 	);
+
+	var zFill = function(s) {
+		return ('00' + s).substr((s+'').length, 2);
+	}
+
+	self.formatTimelineDate = function(s) {
+		var date = new Date(s),
+			now = new Date(),
+			time = zFill(date.getHours()) + ':' + zFill(date.getMinutes()),
+			timeFormat;
+		if (date.getDate() == now.getDate() &&
+				date.getMonth() == now.getMonth() &&
+				date.getFullYear() == now.getFullYear()) {
+			if (date.getHours() == now.getHours()) {
+				if (now.getMinutes() - date.getMinutes() <= 3)
+					timeFormat = 'сейчас';
+				else if (now.getMinutes() - date.getMinutes() <= 60)
+					timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+			} else timeFormat = time;
+		} else if (date.getFullYear() == now.getFullYear()) {
+			if (date.getDate() == now.getDate() - 1)
+				timeFormat = 'вчера ' + time;
+			else
+				timeFormat = date.getDate() + ' ' + date.getMonthName() + ' ' + time;
+		} else {
+			timeFormat = date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDate()) + ' ' + time;
+		}
+		return timeFormat;
+	}
+
+	self.timelineHeaderKey = function(s) {
+		var date = new Date(s);
+		return ( date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDate()));
+	}
+
+	self.formatTimelineHeader = function(s) {
+		var date = new Date(s),
+			now = new Date();
+		if (date.getDate() == now.getDate() &&
+				date.getMonth() == now.getMonth() &&
+				date.getFullYear() == now.getFullYear()) {
+			return 'сегодня'
+		} else if (date.getFullYear() == now.getFullYear()) {
+			if (date.getDate() == now.getDate() - 1)
+				return 'вчера';
+			
+			return date.getDate() + ' ' + date.getMonthName();
+		}
+		return self.timelineHeaderKey(s);
+	}
 
 	self.loadData = function(opts) {
 		opts = opts || {};
@@ -306,84 +356,100 @@ function CConfig() { // для наследования класса внутр�
 			limit: opts['limit'] | 20,
 			offset: opts['offset'] | self.numPosts
 		}, function(data) {
-			var ul = $('<ul class="news-list"/>'),
-				running = false;
+			var	stepDay = $('<div class="step-day"/>'),
+				ul = $('<ul class="news-list"/>'),
+				running = false,
+				dayRunning = false;
 
 			loader.detach();
 
+			var lastUl = self.rails.find('.news-list:not(.ajax-loader):last');
+			if (lastUl.length && !lastUl.hasClass('full-item')) {
+				ul = lastUl;
+				running = true;
+			}
+
+			var header, headerText, oldHeaderText;
 			for(var i=0; i<data.length; i++) {
-				zFill = function(s) {
-					return ('00' + s).substr((s+'').length, 2);
+				var item = data[i],
+					timeFormat = self.formatTimelineDate(item.time),
+					timelineHeader = self.timelineHeaderKey(item.time);
+
+				if (!self.timelineHeaders[timelineHeader]) {
+					header = $('<header class="day-name" />')
+					header.data('key', timelineHeader);
+					oldHeaderText = headerText;
+					headerText = self.formatTimelineHeader(item.time);
+					self.timelineHeaders[timelineHeader] = headerText;
+
+					if (dayRunning) {
+						if (!ul.is(lastUl)) stepDay.append(ul);
+						ul = $('<ul class="news-list"/>');
+						running = false;
+						stepDay.prepend(header.text(oldHeaderText));
+						//console.log('appending stepday', oldHeaderText, stepDay.find('.news-item').length)
+						self.rails.append(stepDay);
+						stepDay = $('<div class="step-day"/>');
+						dayRunning = false;
+					}
 				}
 
-				var item = data[i],
-					date = new Date(item.time),
-					now = new Date(),
-					time = zFill(date.getHours()) + ':' + zFill(date.getMinutes()),
-					timeFormat;
-				
-				
-				if (date.getDate() == now.getDate() &&
-						date.getMonth() == now.getMonth() &&
-						date.getFullYear() == now.getFullYear()) {
-					if (date.getHours() == now.getHours()) {
-						if (now.getMinutes() - date.getMinutes() <= 3)
-							timeFormat = 'сейчас';
-						else if (now.getMinutes() - date.getMinutes() <= 60)
-							timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
-					} else timeFormat = time;
-				} else if (date.getFullYear() == now.getFullYear()) {
-					if (date.getDate() == now.getDate() - 1)
-						timeFormat = 'вчера ' + time;
-					else
-						timeFormat = date.getDate() + ' ' + date.getMonthName() + ' ' + time;
-				} else {
-					timeFormat = date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDate()) + ' ' + time;
-				}
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
 				var post = $(lentaTemplate({
 					extraClass: '',
-					tag: '#' + (i+1) + ' ' + (item.tag || '#TODO'),
+					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
 					author: item.author || 'Автор',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
-					timeClass: '',
 					time: timeFormat,
 					image: item.image
 				}));
+				post.data({position: i + self.numPosts});
 				if (preview) {
 					post.addClass('medium-width');
 				}
 				if (item.image) {
 					if (running) {
-						self.rails.append(ul);
+						if (!ul.is(lastUl)) stepDay.append(ul);
 						ul = $('<ul class="news-list"/>');
 						running = false;
 					}
 					ul.append(post);
-					ul.addClass('full-item').appendTo(self.rails)
+					ul.addClass('full-item').appendTo(stepDay);
 					ul = $('<ul class="news-list"/>');
-				} else if (running && i === (data.length + 1)) {
+					if (i === (data.length - 1)) {
+						header = $('<header class="day-name" />')
+						stepDay.prepend(header.text(headerText));
+						self.rails.append(stepDay);
+					}
+				} else if (i === (data.length - 1)) {
 					ul.append(post);
-					self.rails.append(ul);
+					if (!ul.is(lastUl)) stepDay.append(ul);
+					header = $('<header class="day-name" />')
+					stepDay.prepend(header.text(headerText));
+					self.rails.append(stepDay);
 				} else {
 					ul.append(post);
 					running = true;
+					dayRunning = true;
 				}
 			}
-			self.numPosts += data.length;
+
 			self.rails.append(loader);
 			self.postsAreLoading = false;
+			self.numPosts += data.length;
 			if (data.length === 0) {
 				loader.hide();
 				self.everythingWasLoaded = true;
 			}
 			console.log('...loaded ' + data.length + ' items.')
-			Config.makeRails();
-			Config.fixPostPositions(true);
-			Config.setWidth('set');
+			self.makeRails();
+			self.fixPostPositions(true);
+			self.fixTimelineHeaders();
+
+			self.setWidth('set');
 		})
 		.fail(function() {})
 		.always(function() {});
@@ -394,23 +460,26 @@ function CConfig() { // для наследования класса внутр�
 	*/
 	self.makeRails = function() {
 		$('.news-list:not(.full-item)', self.rails).each(function () {
-			var step = $(this),
-				numItems = $('.news-item', step).length;
+			var step = $(this);
 
 			var topWidth = 0, bottomWidth = 0;
 
 			$('.news-item', step).each(function(i) {
-				$(this).data({position: i});
 				if (topWidth <= (bottomWidth + 60)) {
+					//console.log('line-1', i, topWidth, bottomWidth)
 					topWidth += $(this).outerWidth() + 30;
 					$(this).addClass('line-1').removeClass('line-2');
 				} else {
+					//console.log('line-2', i, topWidth, bottomWidth)
 					bottomWidth += $(this).outerWidth() + 30;
 					$(this).addClass('line-2').removeClass('line-1');
 				}
-				//console.log(i, i&1,  $(this))
 			});
 		});
+	}
+
+	self.fixTimelineHeaders = function() {
+		
 	}
 
 	self.fixPostPositions = function(force) {
@@ -427,6 +496,25 @@ function CConfig() { // для наследования класса внутр�
 				bottomItems.detach();
 				bottomItems.appendTo($(this));
 
+				var dots = [];
+				$('.time-dott', $(this)).each(function() {
+					var parent = $(this).parent();
+					$(this).removeClass('alt-pos');
+					parent.find('.time-slider').removeClass('alt-pos');
+					dots.push([
+						$(this).offset().left,
+						parent.hasClass('line-2'),
+						$(this), parent.find('.time-slider')
+					])
+				});
+				dots.sort();
+				for (var i=1; i < dots.length; i++) {
+					var dot = dots[i];
+					if (Math.abs(dot[0] - dots[i-1][2].offset().left) < 60) {
+						dot[2].toggleClass('alt-pos');
+						dot[3].toggleClass('alt-pos');
+					}
+				}
 			});
 		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
 		            (self.viewLines === 1 && force) ) {
@@ -451,12 +539,12 @@ function CConfig() { // для наследования класса внутр�
 	 */
 	self.setWidth = function(is_set) {
 		var width = 0;
-		$('> .news-list', self.rails).each(function(){
-			width += $(this).outerWidth(true)
+		$('> .step-day', self.rails).each(function(){
+			width += $(this).outerWidth(true);
 		})
 		if(is_set == 'set')
-			self.rails.width(width + 175)
-
+			self.rails.width(width + 175);
+		//console.log(width)
 		return width
 	}
 }
