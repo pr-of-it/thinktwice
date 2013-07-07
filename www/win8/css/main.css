@@ -465,7 +465,7 @@ icon-archive{
 }
 .news-list{
 	height:100%;
-	float:left;
+	float:left; overflow:hidden;
 	position: relative;
 }
 /*#rails header + .news-list{
