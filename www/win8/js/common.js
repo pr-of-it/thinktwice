@@ -447,9 +447,7 @@ function CConfig() { // для наследования класса внутр�
 			console.log('...loaded ' + data.length + ' items.')
 			self.makeRails();
 			self.fixPostPositions(true);
-			self.fixTimelineHeaders();
-
-			self.setWidth('set');
+			//self.fixTimelineHeaders();
 		})
 		.fail(function() {})
 		.always(function() {});
@@ -516,6 +514,7 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 			});
+			self.setWidth('set');
 		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
 		            (self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
@@ -531,6 +530,7 @@ function CConfig() { // для наследования класса внутр�
 				});
 				$(this).append(allItems);
 			});
+			self.setWidth('set');
 		}
 	}
 
