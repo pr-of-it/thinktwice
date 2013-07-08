@@ -56,7 +56,10 @@ class SiteController extends Controller
             $this->layout = '//layouts/win8/index';
         }
 
+        $post = new BlogPost();
+
         $this->render('index',array (
+            'post' => $post,
         ));
 
     }
