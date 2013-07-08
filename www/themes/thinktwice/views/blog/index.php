@@ -1,20 +1,11 @@
-<?php
-/* @var $this BlogController */
-/* @var $dataProvider CActiveDataProvider */
-
-$this->breadcrumbs=array(
-	'Blogs',
-);
-
-$this->menu=array(
-	array('label'=>'Create Blog', 'url'=>array('create')),
-	array('label'=>'Manage Blog', 'url'=>array('admin')),
-);
+<?php $this->pageTitle=Yii::app()->name . ' - Blog';
 ?>
 
-<h1>Blogs</h1>
+    <h1>Страница блога</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<?php foreach ( $dataProvider->getData() as $post ) : ?>
+    <?php $this->renderPartial('_post', array('post'=>$post)); ?>
+<?php endforeach; ?>
+<?php $this->widget('CLinkPager', array(
+    'pages' => $dataProvider->pagination,
+))?>

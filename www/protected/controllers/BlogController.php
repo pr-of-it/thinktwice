@@ -2,6 +2,8 @@
 
 class BlogController extends Controller {
 
+    public $layout = '//layouts/win8/index';
+
     public function filters()
     {
         return array(
@@ -41,7 +43,7 @@ class BlogController extends Controller {
         ));
 
         $pages = new CPagination($dataProvider->getCountCriteria());
-        $this->render('blog',array (
+        $this->render('index',array (
             'blog' => $blog,
             'dataProvider' => $dataProvider,
             'pages' => $pages,

@@ -55,9 +55,8 @@ class SiteController extends Controller
         $post = new BlogPost();
         if(isset($_POST['BlogPost'])) {
             $post->attributes=$_POST['BlogPost'];
-            var_dump($post);die;
             if($post->save())
-                $this->redirect(array('/blog','id'=>$post->blog->id));
+                $this->redirect(array('/blog/index','id'=>$post->blog->id));
         }
 
         if ( Yii::app()->user->isGuest ) {

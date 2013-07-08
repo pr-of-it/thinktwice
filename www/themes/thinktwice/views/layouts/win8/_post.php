@@ -8,7 +8,7 @@
     <?php $form = $this->beginWidget('ActiveForm', array(
         'id'=>'blog-form',
         'enableAjaxValidation'=>false,
-        //'method' => 'post',
+        'method' => 'post',
         'htmlOptions' => array(
             'class' => 'create-post-content',
         ),
