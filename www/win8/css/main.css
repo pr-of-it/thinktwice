@@ -467,8 +467,16 @@ icon-archive{
 	position: relative;
 	background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
 }
-.news-list:first-child {
+
+.step-day > header, .step-day > header + .news-list {
 	padding-left: 90px;
+}
+
+.step-day > header + .news-list {
+	padding-left: 90px;
+}
+#lenta-template + .step-day > header, #lenta-template + .step-day > header + .news-list {
+	padding-left: 0;
 }
 /*#rails header + .news-list{
 	margin-left:55px;
@@ -507,7 +515,7 @@ icon-archive{
 }
 .news-box .news-body{
 	position:absolute;
-	left:24px; top:39px;
+	left:24px; top:30px;
 	right:24px; bottom:44px;
 	overflow:hidden;
 }
@@ -517,7 +525,7 @@ icon-archive{
 }
 .news-box .news-author{
 	font:700 14px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin:0 0 15px;
+	margin:0 0 10px;
 }
 .news-box h6{
 	font:100 18pt/21pt "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;

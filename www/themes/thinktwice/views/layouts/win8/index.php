@@ -38,7 +38,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1001"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1003"></script>
 </head>
 <body>
 
@@ -174,68 +174,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
 </header>
 <div id="wrapper">
-<!--header-->
-<div id="container">
-<div id="rails" class="page-lenta">
+
 <?php echo $content; ?>
-</div>
-</div>
-
-<div class="create-post opacity-hide">
-    <form action="/" class="create-post-content">
-        <header>
-            <input placeholder="Тема моего совета" type="text" name=""/>
-            <ul class="controlls-fonts">
-                <li class="set_font-bold">b</li>
-                <li class="set_font-italic">i</li>
-                <li class="set_font-link">link</li>
-                <li class="set_font-fullscreen">на весь экран</li>
-            </ul>
-        </header>
-        <div class="text-field" contenteditable="true">
-            Я понимаю, что на iMac'е рисовать интерфейс клёво и крупные блоки в нём смотрятся отлично, но нужно
-            ориентироваться и на экраны поменьше. А на экране поменьше более 2-х рядов блоков не помещается.
-            Сделайте компактную плитку.
-        </div>
-        <div class="tag-attach-box">
-            <input placeholder="Теги" type="text" name=""/>
-            <ul class="attach-list">
-                <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                <li class="add-attach"></li>
-            </ul>
-        </div>
-        <footer>
-            <table>
-                <tr>
-                    <!--<td><a class="add-element" href=""><span></span></a></td>-->
-                    <td class="width-select-1">
-                        <select name="">
-                            <option value="">Название моей подписки</option>
-                            <option value="">Выбор 1</option>
-                            <option value="">Выбор 2</option>
-                        </select>
-                    </td>
-                    <td class="width-select-2">
-                        <select name="">
-                            <option value="">для всех</option>
-                            <option value="">Выбор 1</option>
-                            <option value="">Выбор 2</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input class="button-yellow" type="submit" value="Опубликовать"/>
-                    </td>
-                </tr>
-            </table>
-
-
-
-        </footer>
-    </form>
-</div>
-</div>
-<!--container-->
 
 <footer id="footer">
     <ul class="footer-body clear">
@@ -281,6 +221,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <div class="close-popup"></div>
 </div>
 
+<!--
 <div class="popup window-post-edit">
     <section class="popup-content">
         <div class="scroll">
@@ -314,6 +255,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         <table>
                             <tr>
                                 <!--<td><a class="add-element" href=""><span></span></a></td>-->
+<!--
                                 <td class="width-select-1">
                                     <select name="">
                                         <option value="">Название моей подписки</option>
@@ -346,6 +288,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
+-->
 
 <div class="popup window-post-2">
     <section class="popup-content">
