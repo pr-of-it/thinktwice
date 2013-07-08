@@ -9,6 +9,12 @@
     Date.prototype.getDayName = function() {
         return days[ this.getDay() ];
     };
+    Date.fromDateTimeString = function(dateStr) {
+		var dt = dateStr.split(/[ T]/),
+			d = dt[0].split('-'),
+			t = dt[1].split(':');
+		return new Date(d[0], (d[1]-1), d[2], t[0], t[1], t[2]);
+    };
 })();
 function CConfig() { // для наследования класса внутри нового клаcса - CConfig.apply(this);
 	var self = this,
@@ -301,8 +307,8 @@ function CConfig() { // для наследования класса внутр�
 	}
 
 	self.formatTimelineDate = function(s) {
-		var date = new Date(s),
-			now = new Date(),
+		var now = new Date(),
+			date = Date.fromDateTimeString(s),
 			time = zFill(date.getHours()) + ':' + zFill(date.getMinutes()),
 			timeFormat;
 		if (date.getDate() == now.getDate() &&
@@ -326,14 +332,14 @@ function CConfig() { // для наследования класса внутр�
 	}
 
 	self.timelineHeaderKey = function(s) {
-		var date = new Date(s);
+		var date = Date.fromDateTimeString(s);
 		return ( date.getFullYear() + '.' + zFill(date.getMonth()+1) + '.' + zFill(date.getDate()));
 	}
 
 	self.formatTimelineHeader = function(s) {
-		var date = new Date(s),
+		var date = Date.fromDateTimeString(s),
 			now = new Date();
-		console.log(date, now, s)
+
 		if (date.getDate() == now.getDate() &&
 				date.getMonth() == now.getMonth() &&
 				date.getFullYear() == now.getFullYear()) {
@@ -373,8 +379,6 @@ function CConfig() { // для наследования класса внутр�
 			var header, headerText, oldHeaderText;
 			for(var i=0; i<data.length; i++) {
 				var item = data[i];
-
-				item.time = item.time.replace(/(\d) (\d)/, '$1T$2');
 				var timeFormat = self.formatTimelineDate(item.time),
 					timelineHeader = self.timelineHeaderKey(item.time);
 
@@ -535,6 +539,7 @@ function CConfig() { // для наследования класса внутр�
 			});
 			self.setWidth('set');
 		}
+		$('.step-day:first .news-list:first').css('width', '100%'); //IE8 fix
 	}
 
 	/**
