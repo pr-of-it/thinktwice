@@ -507,7 +507,7 @@ icon-archive{
 }
 .news-box .news-body{
 	position:absolute;
-	left:24px; top:39px;
+	left:24px; top:30px;
 	right:24px; bottom:44px;
 	overflow:hidden;
 }
@@ -517,7 +517,7 @@ icon-archive{
 }
 .news-box .news-author{
 	font:700 14px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin:0 0 15px;
+	margin:0 0 10px;
 }
 .news-box h6{
 	font:100 18pt/21pt "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
