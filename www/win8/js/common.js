@@ -517,7 +517,7 @@ function CConfig() { // для наследования класса внутр�
 			});
 			self.setWidth('set');
 		}
-		$('.step-day:first .news-list:first').css('width', '100%'); //IE8 fix
+		//$('.step-day:first .news-list:first').css('width', '100%'); //IE8 fix
 	}
 
 	/**
