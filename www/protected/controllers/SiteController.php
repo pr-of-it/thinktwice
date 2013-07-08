@@ -56,30 +56,9 @@ class SiteController extends Controller
             $this->layout = '//layouts/win8/index';
         }
 
-        $criteria=new CDbCriteria(array(
-            'order' => 'time DESC',
-            'with' => 'blog',
+        $this->render('index',array (
         ));
 
-        $dataProvider=new CActiveDataProvider('BlogPost', array(
-            'pagination'=>array(
-                'pageSize'=>self::LAST_POST,
-            ),
-            'criteria'=>$criteria,
-        ));
-
-        if( Yii::app()->request->isAjaxRequest ) {
-            $this->renderPartial('index',array (
-                'dataProvider' => $dataProvider,
-                'pages' => $dataProvider->getPagination()
-            ));
-            Yii::app()->end();
-        } else {
-            $this->render('index',array (
-                'dataProvider' => $dataProvider,
-                'pages' => $dataProvider->getPagination()
-        ));
-        }
     }
 
     /*

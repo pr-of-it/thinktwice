@@ -1,29 +1,10 @@
-<?php $counter = 0; ?>
-<?php foreach ( $dataProvider->getData() as $post ) : ?>
-
-    <?php if ( $counter == 0 && !empty($post->image) ): ?>
-        <ul class="news-list full-item">
-    <?php elseif ($counter == 0) : ?>
-        <ul class="news-list">
-    <?php endif; ?>
-
-    <li class="news-item">
-        <?php if ( $counter == 0 && !empty($post->image) ): ?>
-            <?php
-            $this->renderPartial('_index_post_full', array('post' => $post));
-            $counter = 1;
-            ?>
-        <?php else: ?>
-            <?php
-            $this->renderPartial('_index_post', array('post' => $post));
-            ?>
-        <?php endif; ?>
-    </li>
-
-    <?php if ( $counter == 1 ): ?></ul><?php endif; ?>
-
-    <?php $counter = ++$counter % 2 ; ?>
-
-<?php endforeach; ?>
-
-<ul class="news-list empty"></ul>
+<div class="step-day ajax-loader">
+    <ul class="news-list full-item">
+        <li class="ajax-loader-wrap">
+            <div>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/ajax-loader-lenta.gif" alt=""/>
+                <span>Возобновить загрузку</span>
+            </div>
+        </li>
+    </ul>
+</div>
