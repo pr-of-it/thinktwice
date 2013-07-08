@@ -58,7 +58,7 @@ class BlogController extends Controller {
             'limit' => $limit,
             'offset' => $offset,
         ));
-        
+
         $posts = BlogPost::model()->findAll($criteria);
 
         header('Content-type: application/json');
