@@ -48,6 +48,9 @@ function CConfig() { // для наследования класса внутр�
 		} }
 		doc = document
 		self.rails = $('#rails')
+		var tmpl = document.getElementById('lenta-template')
+		self.lentaTemplate = Mustache.compile(tmpl.innerHTML);
+
 
 		// init
 		$('input, select').styler();
@@ -277,31 +280,6 @@ function CConfig() { // для наследования класса внутр�
 		});
 	}
 
-	var lentaTemplate = Mustache.compile(
-		'<li class="news-item{{extraClass}}">' +
-			'<div class="news-box">' +
-				'<div class="news-tag">{{tag}}</div>' +
-				'{{#image}}' +
-				'<div style="background-image: url(/{{image}});" class="image-gallery-min-full">' +
-				'</div>' +
-				'{{/image}}' +
-				'<div class="news-body">' +
-					'{{#preview}}<img src="{{preview}}" alt="{{title}}"/>{{/preview}}' +
-					'<header class="news-author">{{author}}</header>' +
-					'<h6>{{title}}</h6>' +
-					'<p>{{text}}</p>' +
-					'<span class="text-hide"></span>' +
-				'</div>' +
-				'<div class="news-like">{{likes}}</div>' +
-				'<a href="" class="icon-users"></a>' +
-				'<div class="time-slider"></div>' +
-			'</div>' +
-			'<div class="time-dott">' +
-				'<span>{{time}}</span>' +
-			'</div>' +
-		'</li>'
-	);
-
 	var zFill = function(s) {
 		return ('00' + s).substr((s+'').length, 2);
 	}
@@ -402,7 +380,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
-				var post = $(lentaTemplate({
+				var post = $(self.lentaTemplate({
 					extraClass: '',
 					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
