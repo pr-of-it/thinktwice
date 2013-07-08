@@ -68,11 +68,10 @@ class DefaultController extends ExpertController
 
         switch ( $model->status ) {
             case CallRequest::STATUS_REJECTED:
-                $model->comments[CallRequest::STATUS_REJECTED] = $_POST['CallRequest']['comments'];
-
+                $model->comments[CallRequest::STATUS_REJECTED] = $_POST['comments'];
                 User::model()->findByPk($model->user_id)->sendMessage(
                     'Статус заявки на звонок на thinktwice.ru',
-                    'Уважаемый пользователь! Ваша заявка на звонок эксперту отклонена экспертом по причине: ' . $model->comments[CallRequest::STATUS_REJECTED],
+                    'Уважаемый пользователь! Ваша заявка на звонок эксперту отклонена экспертом по причине: ' . $_POST['comments'],
                     array('email','sms')
                 );
                 break;

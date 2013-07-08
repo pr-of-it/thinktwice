@@ -18,7 +18,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
     'default/updatestatus/',
     'id'=>$callRequest->id,
     'status'=>CallRequest::STATUS_MODERATED,
-)); ?>
+));?>
 
 <div class="form">
 
@@ -35,11 +35,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
         'htmlOptions' => array('enctype' => 'multipart/form-data'),
     )); ?>
     <?php echo $form->errorSummary($callRequest); ?>
-    <div class="row">
-        <?php echo $form->labelEx($callRequest,'Причина отклонения'); ?>
-        <?php echo $form->textField($callRequest,'comments'); ?>
-        <?php echo $form->error($callRequest,'comments'); ?>
-    </div>
+    <input type='text' name='comments' value='' />
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Отклонить'); ?>
