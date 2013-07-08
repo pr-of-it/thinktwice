@@ -56,11 +56,22 @@ class PrivateController extends Controller {
 
 
     public function actionIndex() {
-        $user = User::model()->with(array('followers', 'services'))->findByPk(Yii::app()->user->id);
+
+        $user = User::model()->with(array('followers', 'services',))->findByPk(Yii::app()->user->id);
+        if ( $user->blog == null ) {
+            $blog = new Blog;
+            $blog->user_id = $user->id;
+            $blog->title = '';
+            $blog->month_price = 0;
+            $blog->week_price = 0;
+            $blog->type = Blog::SIMPLE_BLOG;
+            $blog->save();
+            $user->blog = $blog;
+        }
+
         $rss = new BlogRss;
         $rssRequest = new BlogRssRequest;
         $subscript = new Blog;
-
 
         $this->render('index', array(
             'user' => $user,
@@ -69,6 +80,7 @@ class PrivateController extends Controller {
             'subscript' => $subscript,
 
         ));
+
     }
 
 

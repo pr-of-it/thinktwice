@@ -49,6 +49,7 @@ class BlogPost extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'blog' => array(self::BELONGS_TO, 'Blog', 'blog_id'),
+            'post_images' => array(self::HAS_MANY, 'BlogPostImage', 'post_id'),
 		);
 	}
 

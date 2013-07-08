@@ -58,11 +58,7 @@ $this->breadcrumbs=array(
 <!-- Форма Блога -->
 
 <?php
-if ( $user->blog != null ) {
     $this->renderPartial('_blog', array('user'=>$user));
-} else {
-    $this->redirect(array('/privateBlog/blog'));
-}
 ?>
 <!--Форма вывода и добавления ленты RSS для пользователя - RSS -->
 <?php if ( $user->role->name == 'rss' ) :;?>

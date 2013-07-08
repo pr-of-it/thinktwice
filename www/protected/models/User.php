@@ -75,8 +75,8 @@ class User extends CActiveRecord
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
-            'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'type = 1'),
-            'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'type = 3'),
+            'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'type=' . Blog::SIMPLE_BLOG),
+            'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'type=' . Blog::SUBSCRIPT_BLOG),
 
         );
     }
