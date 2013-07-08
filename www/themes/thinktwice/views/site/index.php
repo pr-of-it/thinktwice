@@ -51,5 +51,3 @@
 
     </div> <!-- /rails -->
 </div> <!-- /container -->
-
-

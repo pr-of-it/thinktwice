@@ -180,8 +180,6 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <?php $this->renderPartial('//layouts/win8/_post', array(
     'model' => $post,
 )); ?>
-</div>
-<!--container-->
 
 <footer id="footer">
     <ul class="footer-body clear">
