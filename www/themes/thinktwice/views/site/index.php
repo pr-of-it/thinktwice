@@ -16,7 +16,7 @@
 			<div class="news-like">{{likes}}</div>
 			<a href="" class="icon-users"></a>
 			<div class="time-slider"></div>
-		</div>' +
+		</div>
 		<div class="time-dott">
 			<span>{{time}}</span>
 		</div>
