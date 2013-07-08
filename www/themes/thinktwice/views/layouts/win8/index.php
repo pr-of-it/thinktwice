@@ -221,6 +221,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <div class="close-popup"></div>
 </div>
 
+<!--
 <div class="popup window-post-edit">
     <section class="popup-content">
         <div class="scroll">
@@ -254,6 +255,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         <table>
                             <tr>
                                 <!--<td><a class="add-element" href=""><span></span></a></td>-->
+<!--
                                 <td class="width-select-1">
                                     <select name="">
                                         <option value="">Название моей подписки</option>
@@ -286,6 +288,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
+-->
 
 <div class="popup window-post-2">
     <section class="popup-content">
