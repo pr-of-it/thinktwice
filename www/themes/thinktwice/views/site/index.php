@@ -56,5 +56,6 @@
 <?php if ( !Yii::app()->user->isGuest) : ?>
     <?php $this->renderPartial('//layouts/win8/_post', array(
         'model' => $post,
+        'user' => $user,
     )); ?>
 <?php endif;?>

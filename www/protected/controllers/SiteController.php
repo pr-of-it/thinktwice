@@ -50,16 +50,28 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        // Публикация поста в блог с главной
+        $post = new BlogPost();
+        if(isset($_POST['BlogPost'])) {
+            $post->attributes=$_POST['BlogPost'];
+            var_dump($post);die;
+            if($post->save())
+                $this->redirect(array('/blog','id'=>$post->blog->id));
+        }
+
         if ( Yii::app()->user->isGuest ) {
+            $user = new stdClass();
+            $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
             $this->layout = '//layouts/win8/index-guest';
         } else {
+            $user = User::model()->with('blog')->findByPk(Yii::app()->user->id);
             $this->layout = '//layouts/win8/index';
         }
 
-        $post = new BlogPost();
-
         $this->render('index',array (
             'post' => $post,
+            'user' => $user,
         ));
 
     }

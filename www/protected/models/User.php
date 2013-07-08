@@ -75,8 +75,8 @@ class User extends CActiveRecord
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
-            'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'type=' . Blog::SIMPLE_BLOG),
-            'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'type=' . Blog::SUBSCRIPT_BLOG),
+            'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'blog.type=' . Blog::SIMPLE_BLOG),
+            'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'subscriptions.type=' . Blog::SUBSCRIPT_BLOG),
 
         );
     }
@@ -168,6 +168,13 @@ class User extends CActiveRecord
 
     public function hasBlog() {
         return !empty($this->blog);
+    }
+
+    public function getAllBlogs() {
+        $this->blog->title .= ' (Личный блог)';
+        foreach ( $this->subscriptions as $blog )
+            $blog->title .= ' (Подписка)';
+        return array_merge( array($this->blog), (array)$this->subscriptions);
     }
 
     /**
