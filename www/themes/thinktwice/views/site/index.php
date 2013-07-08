@@ -13,7 +13,7 @@
     <div id="rails" class="page-lenta">
         <?php endif; ?>
 
-        <div id="lenta-template" style="display:none">
+        <script id="lenta-template" type="text/html">
             <li class="news-item{{extraClass}}">
                 <div class="news-box">
                     <div class="news-tag">{{tag}}</div>
@@ -36,7 +36,7 @@
                     <span>{{time}}</span>
                 </div>
             </li>
-        </div>
+        </script>
 
         <div class="step-day ajax-loader">
             <ul class="news-list full-item">
