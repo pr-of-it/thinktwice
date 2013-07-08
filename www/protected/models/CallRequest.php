@@ -115,6 +115,7 @@ class CallRequest extends CActiveRecord
 		$criteria->compare('alter_call_time_1',$this->alter_call_time_1,true);
 		$criteria->compare('alter_call_time_2',$this->alter_call_time_2,true);
 		$criteria->compare('duration',$this->duration,true);
+        $criteria->compare('comments_json',$this->comments_json,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -137,9 +138,9 @@ class CallRequest extends CActiveRecord
         return parent::beforeSave();
     }
 
-    public function afterFind() {
+    public function afterSave() {
         $this->comments = json_decode($this->comments_json);
-        return parent::afterFind();
+        return parent::afterSave();
     }
 
     public function getStatusDesc() {

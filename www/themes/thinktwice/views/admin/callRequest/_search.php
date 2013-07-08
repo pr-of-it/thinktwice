@@ -61,11 +61,6 @@
 		<?php echo $form->textField($model,'duration'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'comments'); ?>
-		<?php echo $form->textArea($model,'comments',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
