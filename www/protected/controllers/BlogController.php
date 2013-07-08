@@ -32,6 +32,7 @@ class BlogController extends Controller {
             'with' => 'blog',
         ));
 
+
         $dataProvider=new CActiveDataProvider('BlogPost', array(
             'pagination'=>array(
                 'pageSize'=>5,
@@ -45,7 +46,6 @@ class BlogController extends Controller {
             'dataProvider' => $dataProvider,
             'pages' => $pages,
         ));
-
     }
 
     // AJAX actions
