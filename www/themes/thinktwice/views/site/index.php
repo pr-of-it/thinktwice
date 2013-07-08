@@ -51,3 +51,10 @@
 
     </div> <!-- /rails -->
 </div> <!-- /container -->
+
+<!-- Вывод формы добавления поста -->
+<?php if ( !Yii::app()->user->isGuest) : ?>
+    <?php $this->renderPartial('//layouts/win8/_post', array(
+        'model' => $post,
+    )); ?>
+<?php endif;?>

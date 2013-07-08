@@ -174,12 +174,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
 </header>
 <div id="wrapper">
-<!--header-->
-<?php echo $content; ?>
 
-<?php $this->renderPartial('//layouts/win8/_post', array(
-    'model' => $post,
-)); ?>
+<?php echo $content; ?>
 
 <footer id="footer">
     <ul class="footer-body clear">
