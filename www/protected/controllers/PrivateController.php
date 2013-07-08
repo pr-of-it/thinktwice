@@ -68,7 +68,6 @@ class PrivateController extends Controller {
             $blog->save();
             $user->blog = $blog;
         }
-
         $rss = new BlogRss;
         $rssRequest = new BlogRssRequest;
         $subscript = new Blog;
@@ -78,7 +77,6 @@ class PrivateController extends Controller {
             'rss' => $rss,
             'rssRequest' => $rssRequest,
             'subscript' => $subscript,
-
         ));
 
     }
