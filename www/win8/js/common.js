@@ -231,7 +231,7 @@ function CConfig() { // для наследования класса внутр�
 				$('#rails').addClass('disabled')
 			}
 
-			else return false;
+			//else return false;
 		})
 		// скрываем его
 		$(doc).on('click', '*', function(e){
