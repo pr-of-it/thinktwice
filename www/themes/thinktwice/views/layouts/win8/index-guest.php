@@ -185,19 +185,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 </header>
 <div id="wrapper">
 
-<div id="container">
-<div id="rails" class="page-lenta quick-start">
-    <div class="quick-start-box">
-        <header>Что такое Лента?</header>
-        <div class="video-box">
-            <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/video.jpg" alt=""/>
-            <div class="close"></div>
-        </div>
-    </div>
-    <?php echo $content; ?>
-</div>
-</div>
-<!--container-->
+<?php echo $content; ?>
 
 <footer id="footer">
     <ul class="footer-body clear">

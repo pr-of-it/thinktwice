@@ -175,11 +175,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 </header>
 <div id="wrapper">
 <!--header-->
-<div id="container">
-<div id="rails" class="page-lenta">
 <?php echo $content; ?>
-</div>
-</div>
+
 <?php $this->renderPartial('//layouts/win8/_post', array(
     'model' => $post,
 )); ?>
