@@ -390,7 +390,7 @@ function CConfig() { // для наследования класса внутр�
 					extraClass: '',
 					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
-					author: item.author || 'Автор',
+					author: item.blog.title || '',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
