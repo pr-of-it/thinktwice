@@ -50,19 +50,27 @@
     <?php echo $form->error($model,'duration'); ?>
 </div>
 
-    <?php echo CHtml::hiddenField($model,'')?>
+    <?php echo $form->hiddenField($expert,'consult_price')?>
 
-    <?php echo CHtml::link('Полная стоимость: ', array(
-        'private/allSumm/',
 
-        ));
-    ?>
-    <?php echo $Summ; ?>
 
 <div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? 'Отправить' : 'Save'); ?>
+    <?php echo CHtml::submitButton($model->isNewRecord ? 'Отправить' : 'Save', array(
+        'onclick' => 'return calculateCallRequest()'
+    )); ?>
 </div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script>
+    function calculateCallRequest() {
+        var price = $('#User_consult_price').val();
+        var duration = $('#CallRequest_duration').val();
+        if ( price*duration > 0 ) {
+            confirm('Стоимость консультации составит '+ price*duration + ' рублей. Подтверждаете заказ?');
+        }
+        return true;
+    }
+</script>

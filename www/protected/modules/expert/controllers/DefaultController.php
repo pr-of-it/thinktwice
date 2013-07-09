@@ -68,6 +68,13 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public function actionFinishedCallRequest($id){
+        $callRequest = CallRequest::model()->findByPk($id);
+        $this->render( 'finishedCallRequest',array (
+            'callRequest' => $callRequest,
+        ));
+    }
+
     public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
@@ -91,8 +98,11 @@ class DefaultController extends ExpertController
 
             case CallRequest::STATUS_ACCEPTED:
                 $model->call_time = $call_time;
-                $model->save();
-                $this->redirect(array('requests'));
+                $model->status = CallRequest::STATUS_ACCEPTED;
+                if ( $model->save() )
+                $this->redirect(array('closest'));
+
+
 
         }
 

@@ -154,7 +154,7 @@ function CConfig() { // для наследования класса внутр�
 			})
 		})();
 
-		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+		$("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
 			this.scrollLeft += (deltaX * 30); // трекпад на маке
 			this.scrollLeft -= (deltaY * 30); // колесико мыши
 
@@ -162,7 +162,7 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#container');
+			var container = $('#wrapper');
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -257,27 +257,29 @@ function CConfig() { // для наследования класса внутр�
 
 		$('.video-box .close').click(function(){
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
-			$('#rails').removeClass('quick-start')
+			$('#rails').removeClass('quick-start');
+			self.setWidth('set');
 		})
 
 
 		$(window).resize(function() {
 			self.fixPostPositions();
+			self.setWidth('set');
 		});
 
 		/**
 		 *  Подгрузка контетна в ленту
 		 */
 
-		$("#container").scroll(function () {
-			var width = self.setWidth() - 250;
-			var scroll = $('#container').scrollLeft() + $(window).width();
+		$("#wrapper").scroll(function () {
+			var width = self.setWidth() - 300;
+			var scroll = $(this).scrollLeft() + $(window).width();
 
-			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+			if (self.rails.hasClass('quick-start'))
 				width += ($('.quick-start-box').outerWidth() + 90);
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
-				//alert([width, scroll, parseInt($('.quick-start-box').css('left'))]);
+				//alert([width, scroll]);
 				self.loadData();
 			}
 
@@ -437,7 +439,9 @@ function CConfig() { // для наследования класса внутр�
 			self.postsAreLoading = false;
 			self.numPosts += data.length;
 			if (data.length === 0) {
-				loader.hide();
+				//loader.hide();
+				loader.find('img').hide();
+				loader.find('span').text('Все записи загружены.').show();
 				self.everythingWasLoaded = true;
 			}
 			console.log('...loaded ' + data.length + ' items.')
@@ -488,8 +492,12 @@ function CConfig() { // для наследования класса внутр�
 		return 0;
 	}
 
+	self._isTwoLinesMediaQueryActive = function () {
+		return (/50%$/.test( $('.news-list:first').css('background-position') ));
+	}
+
 	self.fixPostPositions = function(force) {
-		if ( (self.viewLines === 1 && $(window).height() > 768) ||
+		if ( (self.viewLines === 1 && self._isTwoLinesMediaQueryActive()) ||
 		     (self.viewLines === 2 && force) ) {
 
 			self.viewLines = 2;
@@ -525,7 +533,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 			});
 			self.setWidth('set');
-		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
+		} else if ( (self.viewLines === 2 && !self._isTwoLinesMediaQueryActive()) ||
 		            (self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;
@@ -547,8 +555,14 @@ function CConfig() { // для наследования класса внутр�
 		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true);
 		})
-		if(is_set == 'set')
-			self.rails.width(width*6 + 175);
+		if(is_set == 'set') {
+			var containerWidth = width;
+			if (self.rails.hasClass('quick-start'))
+				containerWidth += ($('.quick-start-box').outerWidth() + 90);
+			$('#container').width(containerWidth);
+
+			self.rails.width(width * 10);
+		}
 		//console.log(width)
 		return width;
 	}

@@ -254,39 +254,44 @@ class PrivateController extends Controller {
     }
 
     public function actionCallRequest($expert_id) {
+
         $user = User::model()->findByPk(Yii::app()->user->id);
         $expert = User::model()->findByPk($expert_id);
 
-        if ( $user->getAmount() < $expert->consult_price ) {
-            $amount = $expert->consult_price - $user->getAmount();
+        $model = new CallRequest();
 
-            Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
+        if ( isset($_POST['CallRequest']) ) {
 
-            $this->redirect(array('/private/deposit','amount'=>$amount));
-        }else{
-            $model = new CallRequest();
-            $model->user_id = Yii::app()->user->id;
-            $model->caller_id = $expert_id;
-            if(isset($_POST['CallRequest']))
-            {
-                $model->attributes=$_POST['CallRequest'];
+            $model->attributes=$_POST['CallRequest'];
+            $model->user_id = $user->id;
+            $model->caller_id = $expert->id;
+
+            if ( $model->validate() ) {
+
+                $sum = $_POST['CallRequest']['duration'] * $expert->consult_price;
+
+                if ( $user->getAmount() < $sum ) {
+
+                    $amount = $sum - $user->getAmount();
+                    Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
+                    $this->redirect(array('/private/deposit', 'amount'=>$amount));
+
+                }
+
                 if($model->save()) {
                     $this->redirect(array('site/userPage','id'=>$expert_id));
                 }
+
             }
-            Yii::app()->user->setFlash("FORM_REQUEST", 'Заполните пожалуйста форму заказа консультации');
-            $this->render('createcallrequest',array(
-                'model'=>$model,
-            ));
 
         }
-    }
-
-    public function actionAllSumm(){
 
         $this->render('createcallrequest',array(
-            'Summ'=>$Summ,
+            'model'=>$model,
+            'expert'=>$expert,
         ));
+
     }
+
 
 }
