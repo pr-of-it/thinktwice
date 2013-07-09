@@ -20,6 +20,7 @@ return array(
         'http://www.2stocks.ru/main/rss.xml' => function ($xml) {
             $xml = str_replace("enclosure", "image", $xml);
             $xml = str_replace("yandex:full-text", "text", $xml);
+            return $xml;
         }
 
     )
