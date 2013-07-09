@@ -275,7 +275,7 @@ function CConfig() { // для наследования класса внутр�
 			var width = self.setWidth() - 250;
 			var scroll = $('#container').scrollLeft() + $(window).width();
 
-			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+			if (self.rails.hasClass('quick-start'))
 				width += ($('.quick-start-box').outerWidth() + 90);
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
@@ -551,7 +551,7 @@ function CConfig() { // для наследования класса внутр�
 		})
 		if(is_set == 'set') {
 			var containerWidth = width;
-			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+			if (self.rails.hasClass('quick-start'))
 				containerWidth += ($('.quick-start-box').outerWidth() + 90);
 			$('#container').width(containerWidth);
 
