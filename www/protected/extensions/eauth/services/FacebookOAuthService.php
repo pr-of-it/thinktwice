@@ -55,7 +55,7 @@ class FacebookOAuthService extends EOAuth2Service {
 	}
 	
 	protected function getTokenUrl($code) {
-		return parent::getTokenUrl($code).'&redirect_uri='.urlencode($this->getState('redirect_uri'));
+		return parent::getTokenUrl($code).'&redirect_uri='.urlencode($this->getState('redirect_uri', 'http://dev.thinktwice.ru/index.php/site/enter?service=facebook'));
 	}
 	
 	protected function getAccessToken($code) {
