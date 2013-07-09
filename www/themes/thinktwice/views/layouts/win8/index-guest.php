@@ -198,8 +198,10 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
         <li class="icon-fb"><a href=""></a></li>
     </ul>
 </footer>
+</div>
+<!--wrapper-->
 
-
+<div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
         <div class="scroll">
@@ -325,9 +327,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     </section>
     <div class="close-popup"></div>
 </div>
-
 </div>
-<!--wrapper-->
 
 </body>
 </html>

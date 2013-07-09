@@ -189,7 +189,10 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </ul>
 </footer>
 
+</div>
+<!--wrapper-->
 
+<div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
         <div class="scroll">
@@ -318,10 +321,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
-
 </div>
-<!--wrapper-->
-
 
 
 </body>

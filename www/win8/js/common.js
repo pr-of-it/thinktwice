@@ -32,7 +32,7 @@ function CConfig() { // для наследования класса внутр�
 
 	self.anim = 200;     // time animation
 	self.ajaxError = function (e, usertext) {
-		alert('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
+		console.error('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
 	}// ошибка ajax запроса
 
 	/**
@@ -68,7 +68,7 @@ function CConfig() { // для наследования класса внутр�
 			background:'#000',
 			opacity:.6,
 			filter:"alpha(opacity=60)",
-			zIndex:100,
+			zIndex:99,
 			cursor:"pointer"
 		};
 
@@ -78,7 +78,7 @@ function CConfig() { // для наследования класса внутр�
 			$("#bg-popup").css(popupCss);
 		}
 
-		self.bgPopup = $('#bg-popup').addClass('close-popup');
+		self.bgPopup = $('#bg-popup');
 
 		window.onload = function(){
 			self.loadData();
@@ -212,16 +212,20 @@ function CConfig() { // для наследования класса внутр�
 			} else {
 				img.hide();
 			}
-
+			window.parent().css('z-index', 100);
 			self.bgPopup.show();
 			window.addClass('visible-on');
 		})
 
 		// скрываем окно
-		$('body').on('click', '.close-popup', function(){
+		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
+			var target = $(e.target);
+			if (!target.hasClass('close-popup') &&
+				(target.hasClass('window-post') || target.parents('.window-post').length))
+				return true;
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
-			
+			$('#popup-wrapper').css('z-index', 0);
 		})
 
 		// открываем редактор для поста
