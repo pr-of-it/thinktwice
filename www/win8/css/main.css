@@ -468,16 +468,11 @@ icon-archive{
 	background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
 }
 
-.step-day > header, .step-day > header + .news-list {
+.step-day + .step-day > header { padding-left: 105px; }
+.step-day + .step-day > header + .news-list {
 	padding-left: 90px;
 }
 
-.step-day > header + .news-list {
-	padding-left: 90px;
-}
-#lenta-template + .step-day > header, #lenta-template + .step-day > header + .news-list {
-	padding-left: 0;
-}
 /*#rails header + .news-list{
 	margin-left:55px;
 }*/ 
@@ -538,7 +533,7 @@ icon-archive{
 }
 .news-box .text-hide{
 	position:absolute;
-	left:0; bottom:0;
+	left:0; bottom:-2px;
 	height:10px; width:100%;
 	background:url(../img/bg/news-text-hidden.png) repeat-x transparent;
 }
