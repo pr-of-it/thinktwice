@@ -283,11 +283,6 @@ class PrivateController extends Controller {
         }
     }
 
-    public function actionAllSumm(){
-
-        $this->render('createcallrequest',array(
-            'Summ'=>$Summ,
-        ));
-    }
+ 
 
 }

@@ -55,7 +55,7 @@ class DefaultController extends ExpertController
 
     public function actionClosest() {
         $user = User::model()->findByPk(Yii::app()->user->id);
-        $this->render('requests',array(
+        $this->render('closest',array(
             'user' => $user
         ));
     }

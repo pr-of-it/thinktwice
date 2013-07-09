@@ -52,7 +52,7 @@
 
     <?php echo $form->hiddenField($expert,'consult_price')?>
 
-    <?php echo $Summ; ?>
+
 
 <div class="row buttons">
     <?php echo CHtml::submitButton($model->isNewRecord ? 'Отправить' : 'Save', array(
