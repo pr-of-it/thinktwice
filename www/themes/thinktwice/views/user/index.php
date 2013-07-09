@@ -437,7 +437,7 @@
                 <div class="expert">
                     <span class="header">Альтернативные инвестиции</span>
                     <a class="user-avatar" href=""><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>50), 'crop'=>array('width'=>50, 'height'=>50))); ?><span></span></a>
-                    <span class="user-name">Даша<br>Смирнова</span>
+                    <span class="user-name"><?php echo $user->name; ?></span>
                     <div class="call-time">
                         <span>Сегодня с 15 до 17</span><br>
                         <span>Завтра с 15 до 17</span><br>
