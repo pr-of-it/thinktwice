@@ -49,7 +49,7 @@ function CConfig() { // для наследования класса внутр�
 		doc = document
 		self.rails = $('#rails')
 		var tmpl = document.getElementById('lenta-template')
-		self.lentaTemplate = Mustache.compile(tmpl.innerHTML);
+		self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
 
 		// init
@@ -257,7 +257,8 @@ function CConfig() { // для наследования класса внутр�
 
 		$('.video-box .close').click(function(){
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
-			$('#rails').removeClass('quick-start')
+			$('#rails').removeClass('quick-start');
+			self.setWidth('set');
 		})
 
 
@@ -274,7 +275,7 @@ function CConfig() { // для наследования класса внутр�
 			var width = self.setWidth() - 250;
 			var scroll = $('#container').scrollLeft() + $(window).width();
 
-			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+			if (self.rails.hasClass('quick-start'))
 				width += ($('.quick-start-box').outerWidth() + 90);
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
@@ -392,7 +393,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
-				var post = $(self.lentaTemplate({
+				var post = $(self.postTemplate({
 					extraClass: '',
 					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
@@ -548,8 +549,14 @@ function CConfig() { // для наследования класса внутр�
 		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true);
 		})
-		if(is_set == 'set')
-			self.rails.width(width*6 + 175);
+		if(is_set == 'set') {
+			var containerWidth = width;
+			if (self.rails.hasClass('quick-start'))
+				containerWidth += ($('.quick-start-box').outerWidth() + 90);
+			$('#container').width(containerWidth);
+
+			self.rails.width(width * 10);
+		}
 		//console.log(width)
 		return width;
 	}
