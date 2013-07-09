@@ -45,8 +45,11 @@ class CallRequest extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, caller_id, status, duration', 'numerical', 'integerOnly'=>true),
+            array('user_id, caller_id, title, text, call_time, duration', 'required'),
             array('title', 'length', 'max'=>255),
-			array('text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
+            array('call_time, alter_call_time_1, alter_call_time_2', 'date' ),
+            array('duration', 'numerical', 'min' => 5, 'tooSmall' => 'Продолжительность консультации не может быть менее 5 минут'),
+			array('title, text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, caller_id, title, text, status, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe', 'on'=>'search'),

@@ -13,27 +13,27 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
     <p>Время консультации: <?php echo $callRequest->call_time;?></p>
     <p>Альтернативное время консультации: </p>
 
-    <p><?php if ( $callRequest->alter_call_time_1 != $callRequest->call_time  ) {
+    <p><?php
         echo $callRequest->alter_call_time_1;?>
         <?php echo CHtml::link('Перенести на ' . $callRequest->alter_call_time_1, array(
             'default/updateStatus/',
             'id'=>$callRequest->id,
             'call_time'=>$callRequest->alter_call_time_1,
             'status'=>null,));
-        }
+
         ?>
     </p>
-    <p> <?php if ( $callRequest->alter_call_time_2 != $callRequest->call_time  ) {
+    <p> <?php
         echo $callRequest->alter_call_time_2;?>
         <?php echo CHtml::link('Перенести на ' . $callRequest->alter_call_time_2, array(
             'default/updateStatus/',
             'id'=>$callRequest->id,
             'call_time'=>$callRequest->alter_call_time_2,
             'status'=>null,));
-        }
+
         ?>
     </p>
-    <p>Примерная продолжительность консультации: <?php echo $callRequest->duration;?></p>
+    <p>Примерная продолжительность консультации в минутах: <?php echo $callRequest->duration;?></p>
     <p>Статус заявки: <?php echo $callRequest->statusDesc;?></p>
 
     <?php echo CHtml::link('Подтвердить', array(

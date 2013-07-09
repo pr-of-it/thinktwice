@@ -68,8 +68,9 @@
     function calculateCallRequest() {
         var price = $('#User_consult_price').val();
         var duration = $('#CallRequest_duration').val();
-        if ( duration == 0 )
-            return false;
-        confirm('Стоимость консультации составит '+ price*duration + ' рублей. Подтверждаете заказ?');
+        if ( price*duration > 0 ) {
+            confirm('Стоимость консультации составит '+ price*duration + ' рублей. Подтверждаете заказ?');
+        }
+        return true;
     }
 </script>

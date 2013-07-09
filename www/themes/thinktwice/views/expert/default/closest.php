@@ -19,7 +19,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'ID',
             'type' => 'raw',
             'value' => 'CHtml::link(CHtml::encode($data->id),
-                         array("callrequest","id" => $data->id))',
+                         array("finishedcallrequest","id" => $data->id))',
         ),
         array(
             'name' => 'Заказчик',

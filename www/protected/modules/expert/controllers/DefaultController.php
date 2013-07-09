@@ -68,12 +68,19 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public  function actionFinishedCallRequest($id){
+        $callRequest = CallRequest::model()->findByPk($id);
+        $this->render( 'finishedCallRequest',array (
+            'callRequest' => $callRequest,
+        ));
+    }
+
     public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
         $model->status = $status;
-      #  var_dump($call_time);
         switch ( $model->status ) {
+
             case CallRequest::STATUS_REJECTED:
                 $model->comments[CallRequest::STATUS_REJECTED] = $_POST['comments'];
                 User::model()->findByPk($model->user_id)->sendMessage(
@@ -94,6 +101,10 @@ class DefaultController extends ExpertController
                 $model->save();
                 $this->redirect(array('requests'));
 
+            case CallRequest::STATUS_COMPLETE:
+
+
+                $this->redirect(array('closest'));
         }
 
         if( $model->save() ) {
