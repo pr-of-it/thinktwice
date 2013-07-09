@@ -3,3 +3,4 @@
 	zoom:1;
 }
 .pie, .columns, .f-row, .clear{ zoom:1; }
+#lenta-template + .step-day > .news-list { width: 100%; }
