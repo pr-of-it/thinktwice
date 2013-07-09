@@ -154,7 +154,7 @@ function CConfig() { // для наследования класса внутр�
 			})
 		})();
 
-		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+		$("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
 			this.scrollLeft += (deltaX * 30); // трекпад на маке
 			this.scrollLeft -= (deltaY * 30); // колесико мыши
 
@@ -162,7 +162,7 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#container');
+			var container = $('#wrapper');
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -271,15 +271,15 @@ function CConfig() { // для наследования класса внутр�
 		 *  Подгрузка контетна в ленту
 		 */
 
-		$("#container").scroll(function () {
-			var width = self.setWidth() - 250;
-			var scroll = $('#container').scrollLeft() + $(window).width();
+		$("#wrapper").scroll(function () {
+			var width = self.setWidth() - 300;
+			var scroll = $(this).scrollLeft() + $(window).width();
 
 			if (self.rails.hasClass('quick-start'))
 				width += ($('.quick-start-box').outerWidth() + 90);
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
-				//alert([width, scroll, parseInt($('.quick-start-box').css('left'))]);
+				//alert([width, scroll]);
 				self.loadData();
 			}
 
