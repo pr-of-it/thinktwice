@@ -198,31 +198,22 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
         <li class="icon-fb"><a href=""></a></li>
     </ul>
 </footer>
-</div>
-<!--wrapper-->
+
 
 <div class="popup window-post">
     <section class="popup-content">
         <div class="scroll">
             <header class="popup-head">Новости рынка труда</header>
             <div class="article-info">
-				<span class="viewings">
-					<span></span>
-					250
-				</span>
+                <span class="viewings">
+                    <span></span>
+                    250
+                </span>
                 <span class="shared">Поделилось: 5</span>
             </div>
             <article class="content">
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
                 <p>
-                    Уже есть депозит на фондовом рынке? Заключаете сделки чаще одного раза в неделю? Тогда вы, если не
-                    знакомы с понятием системной торговли, наверняка «сливаете» деньги. 
-                </p>
-                <p>
-                    В рамках своего вебинара Михаил Сапенюк начнет с самых азов. Расскажет, что такое торговая
-                    стратегия, и
-                    чем ожидание точки входа лучше слепого следования чьим-то сигналам или выполнения чьих-то
-                    рекомендаций.Как написать систему и получить теоретическое обоснование ее работы.
                 </p>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
@@ -334,6 +325,9 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     </section>
     <div class="close-popup"></div>
 </div>
+
+</div>
+<!--wrapper-->
 
 </body>
 </html>
