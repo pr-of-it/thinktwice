@@ -257,7 +257,8 @@ function CConfig() { // для наследования класса внутр�
 
 		$('.video-box .close').click(function(){
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
-			$('#rails').removeClass('quick-start')
+			$('#rails').removeClass('quick-start');
+			self.setWidth('set');
 		})
 
 
