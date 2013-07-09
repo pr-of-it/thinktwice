@@ -188,18 +188,17 @@ $user = User::model()->findByPk(Yii::app()->user->id);
         <li class="icon-fb"><a href=""></a></li>
     </ul>
 </footer>
-</div>
-<!--wrapper-->
+
 
 <div class="popup window-post">
     <section class="popup-content">
         <div class="scroll">
             <header class="popup-head">Новости рынка труда</header>
             <div class="article-info">
-				<span class="viewings">
-					<span></span>
-					250
-				</span>
+                <span class="viewings">
+                    <span></span>
+                    250
+                </span>
                 <span class="shared">Поделилось: 5</span>
             </div>
             <article class="content">
@@ -319,6 +318,11 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
+
+</div>
+<!--wrapper-->
+
+
 
 </body>
 </html>

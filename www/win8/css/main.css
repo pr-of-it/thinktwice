@@ -791,12 +791,10 @@ icon-archive{
 	-ms-transition:all .5s;
 	-o-transition:all .5s;
 	transition:all .5s;
-	display: none;
 }
 .popup.visible-on{
 	right:0 !important;
 	opacity:1; filter:alpha(opacity=100);
-	display: block;
 	z-index:101;
 }
 .close-popup{
@@ -1470,7 +1468,7 @@ input[type="reset"].styler:active{
 	color:#ffffff;
 	font:14px "NoteworthyLight";
 	height:91px;
-	left:-345px;
+	left:-400px;
 	position:absolute;
 	top:-5px;
 	width:322px;
