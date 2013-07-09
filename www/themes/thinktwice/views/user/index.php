@@ -8,7 +8,7 @@
 <section class="user-title">
         <a class="icon-getback" href="<?php echo Yii::app()->request->baseUrl; ?>/"><span></span></a>
         <a class="user-avatar" href=""><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>79), 'crop'=>array('width'=>79, 'height'=>79))); ?><span></span></a>
-        <div class="user-rating five"></div>
+        <div class="user-rating five"><?php $this->widget('ext.StarWidget.StarWidget', array('rating'=>$user->rating)); ?></div>
         <div class="user-name"><?php echo $user->name; ?></div>
         <div class="user-status">Независимый финансовый советник</div>
     </section>
