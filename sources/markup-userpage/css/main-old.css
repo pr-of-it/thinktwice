@@ -12,7 +12,7 @@ blockquote, q{ quotes:none }
 blockquote:before, blockquote:after, q:before, q:after{ content:''; content:none }
 table{ border-collapse:collapse; border-spacing:0 }
 html, body{
-	font:300 12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:400 12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	height: 100%; width:100%;
 	color: #fff;
 	background: #081c24; /* Old browsers */
@@ -20,12 +20,12 @@ html, body{
 body{
 	/*height:auto !important;
 	height:100%;
-	min-height:100%;*/ overflow-x: hidden;
+	min-height:100%;*/
 }
 
 /** h group **/
 h1, h2, h3, h4, h5, h6{
-	font:100 24px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:300 24px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 15px
 }
 h1{
@@ -39,7 +39,7 @@ h3{
 	margin:0 0 29px;
 }
 h4, h5, h6{
-	font:100 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:700 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 25px;
 }
 /** h group **/
@@ -414,7 +414,7 @@ icon-archive{
 /* временная линия */
 .page-lenta{
 	margin-top:125px;
-	/*background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;*/
+	background:url(../img/bg/line-x.png) repeat-x 0 54.5% transparent;
 }
 
 #rails{
@@ -432,27 +432,27 @@ icon-archive{
 #rails.page-lenta{
 	top:50px; left:0;
 	bottom:80px;
-	/*width:100%;*/
+	width:6000px;
 	padding-top:37px;
 	overflow:hidden;
 }
-.news-list {
-	position:relative; height:100%;
-	float:left; background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
-} .news-list:first-child { padding-left: 90px;}
-.step-day { position:relative; height:100%; float:left; overflow-x: hidden;}
-#rails.page-lenta:first-child{
-	padding-left:230px; /* 175+55 */
+.step-day{
+	position:relative;
+	height:100%;
+	float:left;
 }
-#rails > header > header{
+.step-day:first-child{
+	padding-left:175px;
+}
+.step-day:first-child > header{
 	padding-left:245px;
 }
-/*#rails .step-day + .step-day > header{
+#rails .step-day + .step-day > header{
 	padding-left:90px;
 }
 #rails .step-day + .step-day > header + .news-list{
 	margin-left:90px;
-}*/
+}
 .day-name{
 	position:absolute;
 	left:0; top:-30px;
@@ -461,28 +461,27 @@ icon-archive{
 	color:#678c91;
 	font-size:16px;
 	margin:0 0 20px;
-	padding-left:15px;
+	padding-left:55px;
 }
 .news-list{
 	height:100%;
-	float:left; overflow:hidden;
-	position: relative;
+	float:left;
+	margin-right:30px;
 }
-/*#rails header + .news-list{
+#rails header + .news-list{
 	margin-left:55px;
-}*/ 
-.news-item{
-	position:relative; float:left;
-	width:360px; height:50%; margin-right:30px;
-	height:100%;
 }
-.step-day:nth-last-child(2) .news-list:last-child {
-	margin-right: -30px;
+.news-item{
+	position:relative;
+	width:360px; height:50%;
+}
+.news-list .news-item:first-child .news-box{
+	bottom:31px;
 }
 .news-box{
 	position:absolute;
 	top:0; right:0;
-	bottom:31px; left:0;
+	bottom:0; left:0;
 	border-top:1px solid #34a0aa;
 	box-shadow:0 5px 15px #348a95 inset;
 	background:#348a94; /* Old browsers */
@@ -496,9 +495,9 @@ icon-archive{
 	box-shadow:0 1px 1px #0b1e24;
 }
 .news-box .news-tag{
-	position:relative; display:inline-block;
+	position:relative;
 	font:19px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	float:right;
+	text-align:right;
 	padding:10px 10px 8px;
 	cursor:pointer;
 	z-index:1;
@@ -549,43 +548,43 @@ icon-archive{
 }
 .time-slider{
 	position:absolute;
-	left:60px; bottom:-11px;
+	left:10%; bottom:-11px;
 	width:23px; height:11px;
 	margin-left:-11.5px;
 	background: url(../img/sprites/main.png) no-repeat -305px 0 transparent;
 }
-/*.news-item + .news-item .time-slider{
+.news-item + .news-item .time-slider{
 	bottom:auto; top:-11px;
 	background-position:-281px -28px;
 }
 .news-item + .news-item .news-box{
 	top:38px;
-}*/
+}
 .news-item .time-dott{
 	position:absolute;
-	left:60px; bottom:-8px;
+	left:10%; bottom:-15px;
 	width:17px; height:18px;
 	margin-left:-8.5px;
-	font: 12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	white-space:nowrap;
 	background: url(../img/sprites/main.png) no-repeat -284px -2px transparent;
 }
-/*.news-item + .news-item .time-dott{
+.news-item + .news-item .time-dott{
 	top:-3px;
 	bottom:auto;
-}*/
+}
 .time-dott span{
 	position:absolute;
 	left:25px; top:-13px;
 }
-/*.news-item + .news-item .time-dott span{
+.news-item + .news-item .time-dott span{
 	top:21px
-}*/
+}
 
 .news-list.full-item .news-item{
 	width:560px;
 }
-/*.news-list.full-item .news-item{
+.news-list.full-item .news-item{
 	height:100%;
 }
 .news-list.full-item li.news-item .news-box{
@@ -597,7 +596,7 @@ icon-archive{
 	margin:-11.5px 0 0;
 	width:31px; height:23px;
 	background: url(../img/sprites/main.png) no-repeat -306px -13px transparent;
-}*/
+}
 .image-gallery-min{
 	width:100%; height:60px;
 	padding:10px 0 19px;
@@ -632,7 +631,7 @@ icon-archive{
 	background: url(../img/sprites/main.png) no-repeat -340px -24px transparent;
 }
 
-.news-item.medium-width{
+.medium-width .news-item{
 	width:565px;
 }
 .news-item.white-style .news-box{
@@ -642,7 +641,7 @@ icon-archive{
 	border-top:1px solid #fff;
 }
 .news-item.white-style .time-slider{
-	background: url(../img/icons/timeline-arrow-white.png) no-repeat 0 0 transparent;
+	background-position:0 -24px;
 }
 .news-item.white-style .text-hide{
 	background:url(../img/bg/line-white-x.png) repeat-x transparent;
@@ -773,14 +772,14 @@ icon-archive{
 /*****   popup   *****/
 
 .popup{
-	position:absolute;
+	position:fixed;
 	right:-1000px !important; top:0; left:auto !important;
 	height:100%; width:713px;
 	border-left:1px solid #a6aca8;
 	border-right:1px solid #a6aca8;
 	background:#dfdfd9;
 	opacity:0; filter:alpha(opacity=0);
-	z-index:101;
+	z-index:-20;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -801,7 +800,7 @@ icon-archive{
 }
 .popup .popup-head{
 	color:#121212;
-	font:300 38px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font:38px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin:0 0 12px;
 }
 .popup .popup-content{
@@ -1508,8 +1507,8 @@ input[type="reset"].styler:active{
 }
 
 
-#rails.quick-start:first-child{
-	padding-left:955px;
+#rails.quick-start{
+	padding-left:900px;
 }
 #rails.quick-start .step-day{
 	padding-left:0;
@@ -1544,21 +1543,20 @@ input[type="reset"].styler:active{
 	cursor:pointer;
 	background:url(../img/icons/close.png) no-repeat transparent;
 }
-.ajax-loader .news-list { background: none;}
-.ajax-loader div {
+.ajax-loader{
 	position:absolute;
-	left:0; top:50%;
+	right:0; top:50%;
 	margin-top:-30px;
 	height:60px; width:500px;
 	text-align:center;
 }
-.ajax-loader img {
+.ajax-loader img{
 	position:absolute;
 	left:50%; top:-10px;
 	margin-left:-10px;
 }
-.ajax-loader span {
-	position:relative; visibility: hidden;
+.ajax-loader span{
+	position:relative;
 	top:25px;
 	font-size:22px;
 	color:#bad9da;
@@ -1566,327 +1564,6 @@ input[type="reset"].styler:active{
 	padding:14px 10px 10px 50px;
 	background:url(../img/icons/refresh.png) no-repeat left center transparent;
 }
-.ajax-loader .ajax-loader-wrap{
+.step-day.ajax-loader-wrap{
 	width:500px;
 }
-
-@media screen and (min-height: 768px) {
-
-	.news-item.line-2 .time-slider{
-		bottom:auto; top:-11px;
-		background-position:-281px -28px;
-	}
-	.news-item.line-2 .news-box{
-		top: 31px; bottom: 0;
-	}
-
-	.news-item{
-		height:50%;
-	}
-	.news-list{
-		background-position: 0 50%;
-	}
-	.news-item .time-dott{
-		bottom: -10px;
-	}
-	.news-item.line-break {
-		clear: left;
-	}
-
-
-	.news-item.line-2 .time-dott{
-		top: -7px;
-		bottom: 0;
-	}
-	.news-item.line-2 .time-dott span{
-		top:21px;
-	}
-
-	.news-list.full-item .news-item {
-		height:100%;
-	}
-	.news-list.full-item li.news-item .news-box{
-		bottom:0;
-	}
-	.news-list.full-item + .full-item li.news-item {
-		margin-left: 75px;
-	}
-	.news-list.full-item .time-dott {
-		bottom:auto; top:50%;
-		left:-31px;
-		margin:-11.5px 0 0;
-		width:31px; height:23px;
-		background: url(../img/sprites/main.png) no-repeat -306px -13px transparent;
-	}
-
-	.news-list.full-item .time-dott span {
-		left: auto;
-		right: 15px;
-	}
-
-	.news-list.full-item + .full-item .time-slider {
-		display: none;
-	}
-
-	.news-item.white-style.line-2 .time-slider{
-		background-position: 0 -10px;
-	}
-
-	.time-dott.alt-pos, .time-slider.alt-pos { left: 61.8%; }
-	.line-1 .time-dott.alt-pos, .line-1 .time-slider.alt-pos { left: 38.2%; }
-}
-
-
-/* Add by Max */
-
-.popup-input {
-	width: 96%;
-	float: left;
-	padding: 6px;
-	border: #fff 1px solid;
-	font: 300 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #888;
-	clear: both;
-}
-
-.popup-input:focus {
-	border: #edeac4 1px solid;
-}
-
-.popup-textarea {
-	width: 96%;
-	height: 180px;
-	float: left;
-	padding: 6px;
-	border: 0;
-	font: 200 16px/18pt "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #888;
-	border: #fff 1px solid;
-	clear: both;
-	margin: 10px 0 10px;
-}
-
-.popup-textarea:focus {
-	border: #edeac4 1px solid;
-}
-
-.popup-good {
-	width: 340px;
-	background-color: #0e6578;
-	position: absolute;
-	top: 0;
-	height: 100%;
-	right: 712px;
-	padding: 60px 20px 0 30px;
-}
-
-.popup .popup-head-good{
-	color:#fff;
-	font: 200 38px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin:0 0 42px;
-}
-
-.good-title {
-	color: #6cc4ce;
-	font: 300 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin: 0 0 8px;
-}
-
-.good-cost {
-	color: #6cc4ce;
-	font: 300 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin: 0 0 8px;
-}
-
-.good-category {
-	color: #fff;
-	font: 100 18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin: 30px 0 8px;
-}
-
-.good-user-title .user-avatar{
-	position:absolute;
-	left:30px; top:270px;
-	width:55px; height:55px;
-	border-radius:100px;
-	border:5px solid #dc9925;
-	overflow:hidden;
-}
-.good-user-title .user-avatar img{
-	width:59px; height:59px;
-}
-.good-user-title .user-avatar span{
-	position:absolute;
-	left:0; top:0;
-	width:100%; height:100%;
-	box-shadow:0 2px 5px #000 inset;
-	border-radius:100px;
-}
-
-.good-user-title .user-name {
-	position: absolute;
-	left: 110px; top: 290px;
-	font: 300 20px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
-.good-user-space {
-	margin: 0 0 120px;
-}
-
-.good-deliver-time {
-	margin: 10px 0 20px;
-}
-
-.good-deliver-time .good-deliver-time-set {
-	padding: 6px;
-	margin: 0 0 8px;
-	border: #fff 1px solid;
-	font: 100 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	width: 80%;
-}
-
-.good-order-cost {
-	position: relative;
-	font: 100 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
-.good-order-cost .dotted-line {
-	width: 100%;
-	text-align: center;
-	position: absolute;
-	top: 20px;
-	left: 0px;
-}
-
-.good-cost-count {
-	background-color: #0e6578;
-	position: absolute;
-	top: 20px;
-	left: 0px;
-	padding-right: 8px;
-}
-
-.good-cost-to-order {
-	background-color: #0e6578;
-	position: absolute;
-	top: 14px;
-	right: 0px;
-	padding-left: 8px;
-	font-size: 18pt;
-}
-
-.good-order-button {
-	margin: 90px 0 10px;
-}
-
-
-.good-order-button .button-yellow {
-	color: black;
-  background-color: #f9a61e;
-  background-image: -moz-linear-gradient(top, #f9b222, #f9a61e);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f9b222), to(#f9a61e));
-  background-image: -webkit-linear-gradient(top, #f9b222, #f9a61e);
-  background-image: -o-linear-gradient(top, #f9b222, #f9a61e);
-  background-image: linear-gradient(to bottom, #f9b222, #f9a61e);
-  background-repeat: repeat-x;
-  outline: 0;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff9b222', endColorstr='#fff9a61e', GradientType=0);	
-}
-
-.link-advice-order span {
-	width: 2px;
-	height: 22px;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.attache-section {
-	margin: 240px 0 20px;
-	position: relative;
-}
-
-.attache-section .add-first-item {
-	padding: 0 0 0 50px;
-	display: block;
-	background: url(../img/attache-icon.png) no-repeat 10px 1px transparent;
-	font: 300 12px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #999;
-	width: 280px;
-}
-
-.time-and-cost {
-	margin: 30px 0 10px 6px;
-}
-
-.time-select {
-	width: 400px;
-	height: 100px;
-	float: left;
-}
-
-.time-and-cost .time-title {
-	font: 300 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000;
-}
-
-.order-price {
-	width: 120px;
-	height: 100px;
-	float: left;
-}
-
-.time-and-cost .price {
-	font: 300 24px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000;
-	margin-top: 30px;
-}
-
-.times-select {
-	margin: 20px 0 10px;
-}
-
-.times-select .time-title {
-	font: 300 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000;
-	clear: both;
-	margin-bottom: 30px;
-}
-
-.times-select .alter-time-name {
-	font: 300 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #666;
-	float: left;
-	padding: 5px 5px 5px 0px;
-	width: 180px;
-	margin-bottom: 10px;
-}
-
-.time-select-form {
-	width: 270px;
-	border: #9b9a96 1px solid;
-	float: left;
-	position: relative;
-	background-color: #eee;
-	margin-bottom: 10px;
-}
-
-.time-select-form:hover {
-	background-color: #fff;
-	cursor: pointer;
-}
-
-.time-select-form .selected-text {
-	font: 300 16px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000;
-	float: left;
-	margin: 5px;
-	margin-left: 10px;
-}
-
-.time-select-form .selected-box-control {
-	width: 48px;
-	height: 30px;
-	float: right;
-	background: url(../img/up-down-arrow.png) no-repeat 18px 7px #f2aa22;
-}
-/* end of Max */
