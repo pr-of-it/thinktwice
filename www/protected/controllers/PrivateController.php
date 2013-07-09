@@ -277,6 +277,7 @@ class PrivateController extends Controller {
             Yii::app()->user->setFlash("FORM_REQUEST", 'Заполните пожалуйста форму заказа консультации');
             $this->render('createcallrequest',array(
                 'model'=>$model,
+                'expert'=>$expert,
             ));
 
         }
