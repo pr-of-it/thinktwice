@@ -468,7 +468,7 @@ icon-archive{
 	background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
 }
 
-.step-day + .step-day > header { padding-left: 105px; }
+.step-day + .step-day > header,
 .step-day + .step-day > header + .news-list {
 	padding-left: 90px;
 }
