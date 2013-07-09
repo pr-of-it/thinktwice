@@ -84,6 +84,9 @@ class RssCommand extends CConsoleCommand {
             $text = strip_tags($item->title);
         } else {
             $text = strip_tags($item->description, "<br><b><strong><i><quote>");
+            if ( isset($item->text) ) {
+                $text .= '<br />' . $item->text;
+            }
         }
         $post->text = $text;
 
