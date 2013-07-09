@@ -459,7 +459,7 @@ icon-archive{
 	color:#678c91;
 	font-size:16px;
 	margin:0 0 20px;
-	padding-left:15px;
+	padding-left:0;
 }
 .news-list{
 	height: 100%;
@@ -1574,7 +1574,11 @@ input[type="reset"].styler:active{
 	background:url(../img/icons/refresh.png) no-repeat left center transparent;
 }
 
-@media only screen and (min-height: 904px), only screen and (min-height: 56.5em) {
+@media
+screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-height: 960px),
+screen and (min-device-width: 1024px) and (min-height: 768px),
+screen and (min-device-width: 1024px) and (min-height: 48em)
+{
 
 	.news-item.line-2 .time-slider {
 		bottom:auto; top:-11px;
@@ -1663,4 +1667,19 @@ input[type="reset"].styler:active{
 
 	.time-dott.alt-pos, .time-slider.alt-pos { left: 61.8%; }
 	.line-1 .time-dott.alt-pos, .line-1 .time-slider.alt-pos { left: 38.2%; }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	body { min-width: auto; }
+	#header { min-width: auto; }
+	.dashboard-link { left: 40px; }
+	#logo, .lenta-settings, .quick-start-box { left: 90px;}
+	#rails.page-lenta:first-child { padding-left: 90px;}
+	#rails.quick-start:first-child { padding-left: 871px }
+	.link-reg.button-yellow { left: -105px; }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+	
+	
 }
