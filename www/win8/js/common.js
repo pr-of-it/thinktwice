@@ -439,7 +439,9 @@ function CConfig() { // для наследования класса внутр�
 			self.postsAreLoading = false;
 			self.numPosts += data.length;
 			if (data.length === 0) {
-				loader.hide();
+				//loader.hide();
+				loader.find('img').hide();
+				loader.find('span').text('Все записи загружены.').show();
 				self.everythingWasLoaded = true;
 			}
 			console.log('...loaded ' + data.length + ' items.')
@@ -490,8 +492,12 @@ function CConfig() { // для наследования класса внутр�
 		return 0;
 	}
 
+	self._isTwoLinesMediaQueryActive = function () {
+		return (/50%$/.test( $('.news-list:first').css('background-position') ));
+	}
+
 	self.fixPostPositions = function(force) {
-		if ( (self.viewLines === 1 && $(window).height() > 768) ||
+		if ( (self.viewLines === 1 && self._isTwoLinesMediaQueryActive()) ||
 		     (self.viewLines === 2 && force) ) {
 
 			self.viewLines = 2;
@@ -527,7 +533,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 			});
 			self.setWidth('set');
-		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
+		} else if ( (self.viewLines === 2 && !self._isTwoLinesMediaQueryActive()) ||
 		            (self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;

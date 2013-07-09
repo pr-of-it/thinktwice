@@ -1565,7 +1565,7 @@ input[type="reset"].styler:active{
 	margin-left:-10px;
 }
 .ajax-loader span {
-	position:relative; visibility: hidden;
+	position:relative; display: none;
 	top:25px;
 	font-size:22px;
 	color:#bad9da;
@@ -1574,10 +1574,9 @@ input[type="reset"].styler:active{
 	background:url(../img/icons/refresh.png) no-repeat left center transparent;
 }
 
+@media only screen and (min-height: 904px), only screen and (min-height: 56.5em) {
 
-@media screen and (min-height: 904px) {
-
-	.news-item.line-2 .time-slider{
+	.news-item.line-2 .time-slider {
 		bottom:auto; top:-11px;
 		background-position:-281px -28px;
 	}
