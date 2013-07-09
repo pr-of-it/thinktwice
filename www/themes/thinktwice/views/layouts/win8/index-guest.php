@@ -9,7 +9,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
-    <!--<meta name= "viewport" content="width=device-width, initial-scale=.85, user-scalable=no">-->
+    <meta name= "viewport" content="width=device-width, initial-scale=.85, user-scalable=no">
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/ie.css" media="screen"/>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/selectivizr-min.js"></script>
@@ -38,7 +38,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1005"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1006"></script>
 </head>
 <body>
 
