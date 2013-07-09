@@ -37,7 +37,7 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
     <p>Статус заявки: <?php echo $callRequest->statusDesc;?></p>
 
     <?php echo CHtml::link('Подтвердить', array(
-        'default/updatestatus/',
+        'default/updateStatus/',
         'id'=>$callRequest->id,
         'call_time'=>$callRequest->call_time,
         'status'=>CallRequest::STATUS_ACCEPTED,
