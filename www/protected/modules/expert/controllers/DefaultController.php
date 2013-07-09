@@ -53,6 +53,13 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public function actionClosest() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('requests',array(
+            'user' => $user
+        ));
+    }
+
     public function actionCallRequest($id)
     {
         $callRequest = CallRequest::model()->findByPk($id);
@@ -61,11 +68,11 @@ class DefaultController extends ExpertController
         ));
     }
 
-    public function actionUpdateStatus($id, $status)
+    public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
         $model->status = $status;
-
+      #  var_dump($call_time);
         switch ( $model->status ) {
             case CallRequest::STATUS_REJECTED:
                 $model->comments[CallRequest::STATUS_REJECTED] = $_POST['comments'];
@@ -75,6 +82,18 @@ class DefaultController extends ExpertController
                     array('email','sms')
                 );
                 break;
+
+            case null:
+                $model->call_time = $call_time;
+                $model->status = CallRequest::STATUS_MODERATED;
+                $model->save();
+                $this->redirect(array('callrequest', 'id' => $id, 'call_time'=>$call_time));
+
+            case CallRequest::STATUS_ACCEPTED:
+                $model->call_time = $call_time;
+                $model->save();
+                $this->redirect(array('requests'));
+
         }
 
         if( $model->save() ) {
@@ -83,5 +102,10 @@ class DefaultController extends ExpertController
             Yii::app()->user->setFlash('FAIL_WRITE', 'Ошибка записи');
             $this->redirect(array('callrequest', 'id' => $id));
         }
+    }
+
+    public function actionUpdateTime($id) {
+
+
     }
 }

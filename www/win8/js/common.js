@@ -233,6 +233,7 @@ function CConfig() { // для наследования класса внутр�
 
 			//else return false;
 		})
+
 		// скрываем его
 		$(doc).on('click', '*', function(e){
 			var target = $(e.target)
@@ -270,11 +271,16 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		$("#container").scroll(function () {
-			var width = self.rails.width() - 440;
+			var width = self.setWidth() - 250;
 			var scroll = $('#container').scrollLeft() + $(window).width();
 
-			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width)
+			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+				width += ($('.quick-start-box').outerWidth() + 90);
+
+			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
+				//alert([width, scroll, parseInt($('.quick-start-box').css('left'))]);
 				self.loadData();
+			}
 
 
 		});
@@ -384,7 +390,7 @@ function CConfig() { // для наследования класса внутр�
 					extraClass: '',
 					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,
-					author: item.author || 'Автор',
+					author: item.blog.title || '',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
@@ -447,37 +453,51 @@ function CConfig() { // для наследования класса внутр�
 
 			var topWidth = 0, bottomWidth = 0;
 
-			$('.news-item', step).each(function(i) {
+			$('.news-item', step).sort(sortPosts).each(function(i) {
 				if (topWidth <= (bottomWidth + 60)) {
 					//console.log('line-1', i, topWidth, bottomWidth)
 					topWidth += $(this).outerWidth() + 30;
-					$(this).addClass('line-1').removeClass('line-2');
+					$(this).addClass('line-1')//.removeClass('line-2');
 				} else {
 					//console.log('line-2', i, topWidth, bottomWidth)
 					bottomWidth += $(this).outerWidth() + 30;
-					$(this).addClass('line-2').removeClass('line-1');
+					$(this).addClass('line-2')//.removeClass('line-1');
 				}
 			});
 		});
 	}
 
 	self.fixTimelineHeaders = function() {
-		
+		var aPos = $(a).data('position'),
+			bPos = $(b).data('position');
+		if (aPos < bPos) return -1;
+		if (aPos > bPos) return 1;
+		return 0;
+	}
+
+	var sortPosts = function (a, b) {
+		var aPos = $(a).data('position'),
+			bPos = $(b).data('position');
+		if (aPos < bPos) return -1;
+		if (aPos > bPos) return 1;
+		return 0;
 	}
 
 	self.fixPostPositions = function(force) {
 		if ( (self.viewLines === 1 && $(window).height() > 768) ||
 		     (self.viewLines === 2 && force) ) {
-			//console.log('fixing for 2 lines')
+
 			self.viewLines = 2;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
-				var allItems = $('.news-item', $(this)),
-					topItems = allItems.filter('.line-1'),
+				var allItems = $('.news-item', $(this));
+				
+				var topItems = allItems.filter('.line-1'),
 					bottomItems = allItems.filter('.line-2');
+
 				allItems.removeClass('line-break');
 				bottomItems.first().addClass('line-break');
-				bottomItems.detach();
-				bottomItems.appendTo($(this));
+				bottomItems.detach().appendTo($(this));
+
 
 				var dots = [];
 				$('.time-dott', $(this)).each(function() {
@@ -506,13 +526,7 @@ function CConfig() { // для наследования класса внутр�
 			self.viewLines = 1;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
 				var allItems = $('.news-item', $(this));
-				allItems.detach().sort(function (a, b) {
-					var aPos = $(a).data('position'),
-						bPos = $(b).data('position');
-					if (aPos < bPos) return -1;
-					if (aPos > bPos) return 1;
-					return 0;
-				});
+				allItems.detach().sort(sortPosts);
 				$(this).append(allItems);
 			});
 			self.setWidth('set');
@@ -529,9 +543,9 @@ function CConfig() { // для наследования класса внутр�
 			width += $(this).outerWidth(true);
 		})
 		if(is_set == 'set')
-			self.rails.width(width + 175);
+			self.rails.width(width*2 + 175);
 		//console.log(width)
-		return width
+		return width;
 	}
 }
 Config = new CConfig(); // init classes

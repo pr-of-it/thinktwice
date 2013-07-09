@@ -821,7 +821,7 @@ icon-archive{
 	padding:65px 46px;
 }
 .popup .scroll{
-	overflow:hidden;
+	overflow:auto;
 	height:100%;
 }
 .article-info span{
