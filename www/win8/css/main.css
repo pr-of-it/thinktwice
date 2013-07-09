@@ -224,7 +224,7 @@ input.error{ border:1px solid red !important }
 #wrapper, #header, #container, #main, #content, #sideLeft, #sideRight, #footer, .pie{ position:relative }
 #wrapper{
 	height:100%;
-	overflow:hidden;
+	overflow:auto;-webkit-overflow-scrolling:touch;
 	min-height:655px;
 	/*min-width:1000px;*/ width: 100%;
 	background:-moz-linear-gradient(-45deg, #081c24 0%, #16353e 100%); /* FF3.6+ */
@@ -396,7 +396,7 @@ icon-archive{
 	top:0;
 	width:100%;
 	cursor:default !important;
-	overflow:hidden; -webkit-overflow-scrolling:touch;
+	overflow:hidden;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -1551,7 +1551,7 @@ input[type="reset"].styler:active{
 	cursor:pointer;
 	background:url(../img/icons/close.png) no-repeat transparent;
 }
-.ajax-loader .news-list { background: none;}
+.ajax-loader .news-list { width: 600px; padding-right: 200px }
 .ajax-loader div {
 	position:absolute;
 	left:0; top:50%;
@@ -1573,9 +1573,7 @@ input[type="reset"].styler:active{
 	padding:14px 10px 10px 50px;
 	background:url(../img/icons/refresh.png) no-repeat left center transparent;
 }
-.ajax-loader .ajax-loader-wrap{
-	width:500px;
-}
+
 
 @media screen and (min-height: 904px) {
 

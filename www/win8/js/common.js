@@ -263,6 +263,7 @@ function CConfig() { // для наследования класса внутр�
 
 		$(window).resize(function() {
 			self.fixPostPositions();
+			self.setWidth('set');
 		});
 
 		/**
@@ -547,8 +548,14 @@ function CConfig() { // для наследования класса внутр�
 		$('> .step-day', self.rails).each(function(){
 			width += $(this).outerWidth(true);
 		})
-		if(is_set == 'set')
-			self.rails.width(width*6 + 175);
+		if(is_set == 'set') {
+			var containerWidth = width;
+			if ($('.quick-start-box').length && parseInt($('.quick-start-box').css('left')) >= 0)
+				containerWidth += ($('.quick-start-box').outerWidth() + 90);
+			$('#container').width(containerWidth);
+
+			self.rails.width(width * 10);
+		}
 		//console.log(width)
 		return width;
 	}
