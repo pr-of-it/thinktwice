@@ -363,6 +363,7 @@ function CConfig() { // для наследования класса внутр�
 			var lastStep = self.rails.find('.step-day:last');
 			if (lastStep.length) {
 				stepDay = lastStep;
+				dayRunning = true;
 			}
 
 			var header, headerText, oldHeaderText;
@@ -382,8 +383,8 @@ function CConfig() { // для наследования класса внутр�
 						if (!ul.is(lastUl)) stepDay.append(ul);
 						ul = $('<ul class="news-list"/>');
 						running = false;
-						stepDay.prepend(header.text(oldHeaderText));
-						//console.log('appending stepday', oldHeaderText, stepDay.find('.news-item').length)
+						if (oldHeaderText)
+							stepDay.prepend(header.text(oldHeaderText));
 						self.rails.append(stepDay);
 						stepDay = $('<div class="step-day"/>');
 						dayRunning = false;
