@@ -302,7 +302,7 @@ class SiteController extends Controller
      * @throws CHttpException
      */
     public function actionUserPage($id) {
-
+        $this->layout = '//layouts/win8/user-page';
         $user = User::model()->findByPk($id);
         if( $user === null )
             throw new CHttpException( 404,'Страница пользователя не найдена' );

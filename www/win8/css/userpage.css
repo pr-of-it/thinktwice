@@ -50,7 +50,7 @@
 .user-rating.two {	left: 95px;	width: 32px; }
 .user-rating.three {	left: 90px;	width: 48px; }
 .user-rating.four {	left: 80px;	width: 63px; }
-.user-rating.five {	left: 73px;	width: 75px; }
+.user-rating.five {	left: 73px;	width: 79px; }
 
 .page-lenta.userpage {
 	margin-top: 180px;
@@ -89,7 +89,7 @@
 }
 
 .link-advice span {
-	background: url(../img/sprites/main.png) no-repeat -230px -101px transparent;	
+	background: url(../img/sprites/main.png) no-repeat -230px -101px transparent;
 	width: 15px;
 	height: 22px;
 	display: inline-block;
