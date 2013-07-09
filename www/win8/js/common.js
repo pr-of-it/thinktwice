@@ -154,7 +154,7 @@ function CConfig() { // для наследования класса внутр�
 			})
 		})();
 
-		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
+		$("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
 			this.scrollLeft += (deltaX * 30); // трекпад на маке
 			this.scrollLeft -= (deltaY * 30); // колесико мыши
 
@@ -162,7 +162,7 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#container');
+			var container = $('#wrapper');
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -271,15 +271,15 @@ function CConfig() { // для наследования класса внутр�
 		 *  Подгрузка контетна в ленту
 		 */
 
-		$("#container").scroll(function () {
-			var width = self.setWidth() - 250;
-			var scroll = $('#container').scrollLeft() + $(window).width();
+		$("#wrapper").scroll(function () {
+			var width = self.setWidth() - 300;
+			var scroll = $(this).scrollLeft() + $(window).width();
 
 			if (self.rails.hasClass('quick-start'))
 				width += ($('.quick-start-box').outerWidth() + 90);
 
 			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
-				//alert([width, scroll, parseInt($('.quick-start-box').css('left'))]);
+				//alert([width, scroll]);
 				self.loadData();
 			}
 
@@ -439,7 +439,9 @@ function CConfig() { // для наследования класса внутр�
 			self.postsAreLoading = false;
 			self.numPosts += data.length;
 			if (data.length === 0) {
-				loader.hide();
+				//loader.hide();
+				loader.find('img').hide();
+				loader.find('span').text('Все записи загружены.').show();
 				self.everythingWasLoaded = true;
 			}
 			console.log('...loaded ' + data.length + ' items.')
@@ -490,8 +492,12 @@ function CConfig() { // для наследования класса внутр�
 		return 0;
 	}
 
+	self._isTwoLinesMediaQueryActive = function () {
+		return (/50%$/.test( $('.news-list:first').css('background-position') ));
+	}
+
 	self.fixPostPositions = function(force) {
-		if ( (self.viewLines === 1 && $(window).height() > 768) ||
+		if ( (self.viewLines === 1 && self._isTwoLinesMediaQueryActive()) ||
 		     (self.viewLines === 2 && force) ) {
 
 			self.viewLines = 2;
@@ -527,7 +533,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 			});
 			self.setWidth('set');
-		} else if ( (self.viewLines === 2 && $(window).height() <= 768) ||
+		} else if ( (self.viewLines === 2 && !self._isTwoLinesMediaQueryActive()) ||
 		            (self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;
