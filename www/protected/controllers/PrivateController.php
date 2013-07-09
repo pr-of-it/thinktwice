@@ -54,7 +54,6 @@ class PrivateController extends Controller {
         );
     }
 
-
     public function actionIndex() {
 
         $user = User::model()->with(array('followers', 'services',))->findByPk(Yii::app()->user->id);
@@ -279,7 +278,7 @@ class PrivateController extends Controller {
                 }
 
                 if($model->save()) {
-                    $this->redirect(array('site/userPage','id'=>$expert_id));
+                    $this->redirect(array('/user','id'=>$expert_id));
                 }
 
             }

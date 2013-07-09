@@ -30,7 +30,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'Заказчик',
             'type' => 'raw',
             'value' => 'CHtml::link(CHtml::encode($data->user->name),
-                         array("../site/userpage","id" => $data->user->id))',
+                         array("/user/index","id" => $data->user->id))',
         ),
         'title',
         'call_time',

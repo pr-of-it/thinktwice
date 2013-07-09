@@ -10,18 +10,22 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Регистрация</h1>
+<section>
+    <h1>Регистрация</h1>
 
-<?php
-$this->renderPartial('_register', array(
-    'model' => $registerForm,
-));
-?>
+    <?php
+    $this->renderPartial('_register', array(
+        'model' => $registerForm,
+    ));
+    ?>
+</section>
 
-<h1>Вход для зарегистрированных пользователей</h1>
+<section>
+    <h1>Вход для зарегистрированных пользователей</h1>
 
-<?php
-$this->renderPartial('_login', array(
-    'model' => $loginForm,
-));
-?>
+    <?php
+    $this->renderPartial('_login', array(
+        'model' => $loginForm,
+    ));
+    ?>
+</section>
