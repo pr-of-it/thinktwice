@@ -44,7 +44,7 @@ class CallRequest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, caller_id, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, caller_id, status, duration', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
 			array('text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
 			// The following rule is used by search().
