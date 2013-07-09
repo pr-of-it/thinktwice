@@ -360,6 +360,11 @@ function CConfig() { // для наследования класса внутр�
 				running = true;
 			}
 
+			var lastStep = self.rails.find('.step-day:last');
+			if (lastStep.length) {
+				stepDay = lastStep;
+			}
+
 			var header, headerText, oldHeaderText;
 			for(var i=0; i<data.length; i++) {
 				var item = data[i];
@@ -543,7 +548,7 @@ function CConfig() { // для наследования класса внутр�
 			width += $(this).outerWidth(true);
 		})
 		if(is_set == 'set')
-			self.rails.width(width*2 + 175);
+			self.rails.width(width*6 + 175);
 		//console.log(width)
 		return width;
 	}

@@ -621,7 +621,7 @@ icon-archive{
 	background-position:center;
 }
 .image-gallery-min-full, .image-gallery-min-full img{
-	width:560px; height:52%;
+	width:560px; height:50%;
 }
 .news-list.full-item .news-body{
 	top:52%;
@@ -1623,9 +1623,33 @@ input[type="reset"].styler:active{
 		background: url(../img/sprites/main.png) no-repeat -306px -13px transparent;
 	}
 
+	#lenta-template + .step-day > header + .news-list.full-item .time-dott {
+		left: 560px;
+		-moz-transform: scaleX(-1);
+	    -webkit-transform: scaleX(-1);
+	    -o-transform: scaleX(-1);
+	    transform: scaleX(-1);
+	    -ms-filter: fliph; /*IE*/
+	    filter: fliph; /*IE*/
+	}
+
 	.news-list.full-item .time-dott span {
 		left: auto;
 		right: 15px;
+	}
+	#lenta-template + .step-day > header + .news-list.full-item .time-dott span {
+		-moz-transform: scaleX(-1);
+	    -webkit-transform: scaleX(-1);
+	    -o-transform: scaleX(-1);
+	    transform: scaleX(-1);
+	    -ms-filter: fliph; /*IE*/
+	    filter: fliph; /*IE*/
+	}
+
+	#lenta-template + .step-day > header + .news-list.full-item + .news-list .news-item:first-child .time-dott,
+	#lenta-template + .step-day > header + .news-list.full-item + .news-list .news-item:first-child .time-slider
+	{
+		left: 25%;
 	}
 
 	.news-list.full-item + .full-item .time-slider {
