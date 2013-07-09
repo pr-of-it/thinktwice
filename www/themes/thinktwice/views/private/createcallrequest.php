@@ -70,6 +70,6 @@
         var duration = $('#CallRequest_duration').val();
         if ( duration == 0 )
             return false;
-        return confirm('Стоимость консультации составит '+ price*duration + ' рублей. Подтверждаете заказ?');
+        confirm('Стоимость консультации составит '+ price*duration + ' рублей. Подтверждаете заказ?');
     }
 </script>

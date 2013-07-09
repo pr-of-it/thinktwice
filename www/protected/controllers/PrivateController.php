@@ -256,14 +256,15 @@ class PrivateController extends Controller {
     public function actionCallRequest($expert_id) {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $expert = User::model()->findByPk($expert_id);
+        $summ = $_POST['CallRequest']['duration']*$_POST['User']['consult_price'];
 
-        if ( $user->getAmount() < $expert->consult_price ) {
-            $amount = $expert->consult_price - $user->getAmount();
-
+        if ( $user->getAmount() < $summ ) {
+            $amount = $summ - $user->getAmount();
             Yii::app()->user->setFlash("NO_AMOUNT", 'У Вас не хватает средств на счете');
-
             $this->redirect(array('/private/deposit','amount'=>$amount));
         }else{
+
+
             $model = new CallRequest();
             $model->user_id = Yii::app()->user->id;
             $model->caller_id = $expert_id;
@@ -283,6 +284,6 @@ class PrivateController extends Controller {
         }
     }
 
- 
+
 
 }
