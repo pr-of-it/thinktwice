@@ -58,7 +58,7 @@ class BlogController extends Controller {
             'offset' => $offset,
         ));
 
-        $posts = BlogPost::model()->findAll($criteria);
+        $posts = BlogPost::model()->with('blog', 'blog.user')->findAll($criteria);
 
         header('Content-type: application/json');
         echo CJSON::encode($posts);
@@ -67,7 +67,7 @@ class BlogController extends Controller {
     }
 
     public function actionGetIndexBlogPost($id) {
-        $post = BlogPost::model()->with('blog')->findByPk($id);
+        $post = BlogPost::model()->with('blog', 'blog.user')->findByPk($id);
         header('Content-type: application/json');
         echo CJSON::encode($post);
         Yii::app()->end();

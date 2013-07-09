@@ -15,7 +15,6 @@
  * @property integer $can_consult
  * @property string $consult_price
  * @property string $avatar_file
- * @property string $avatar
  *
  * @property string $amount
  *
@@ -34,6 +33,10 @@ class User extends CActiveRecord
 
     const AVATAR_UPLOAD_PATH = '/upload/avatars/';
 
+    /**
+     * @var string $avatar
+     */
+    public $avatar;
 
     /**
      * @return string the associated database table name
@@ -87,14 +90,6 @@ class User extends CActiveRecord
 
     public function hasAvatar() {
         return !empty($this->avatar_file);
-    }
-
-    public function getAvatar() {
-        if ( !empty($this->avatar_file) ) {
-            return Yii::app()->baseUrl . $this->avatar_file;
-        } else {
-            return Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
-        }
     }
 
     /*
@@ -318,6 +313,19 @@ class User extends CActiveRecord
         return crypt($password, $salt);
     }
 
+    /*
+     * ------------------------ BEFORE/AFTER методы ---------------------------------------
+     */
+
+    protected function afterFind() {
+        if ( !empty($this->avatar_file) ) {
+            $this->avatar = Yii::app()->baseUrl . $this->avatar_file;
+        } else {
+            $this->avatar = Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
+        }
+        return parent::afterFind();
+    }
+
     protected function beforeSave() {
         if ( $this->getIsNewRecord() ) {
             $this->password = self::cryptPassword($this->password);
@@ -347,8 +355,29 @@ class User extends CActiveRecord
             $blog->type = Blog::SIMPLE_BLOG;
             $blog->save();
         }
-
-            return parent::afterSave();
+        return parent::afterSave();
     }
 
+    /**
+     * Для корректного формирования JSON из моделей
+     * @return CMapIterator the iterator for the foreach statement
+     */
+    public function getIterator()
+    {
+        $attributes=$this->getAttributes();
+        $vars = get_object_vars($this);
+        $relations = array();
+
+        foreach ($this->relations() as $key => $related)
+        {
+            if ($this->hasRelated($key))
+            {
+                $relations[$key] = $this->$key;
+            }
+        }
+
+        $all = array_merge($attributes, $vars, $relations);
+
+        return new CMapIterator($all);
+    }
 }
