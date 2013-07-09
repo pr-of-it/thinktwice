@@ -49,7 +49,7 @@ function CConfig() { // для наследования класса внутр�
 		doc = document
 		self.rails = $('#rails')
 		var tmpl = document.getElementById('lenta-template')
-		self.lentaTemplate = Mustache.compile(tmpl.innerHTML);
+		self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
 
 		// init
@@ -263,7 +263,6 @@ function CConfig() { // для наследования класса внутр�
 
 		$(window).resize(function() {
 			self.fixPostPositions();
-			self.setWidth('set');
 		});
 
 		/**
@@ -392,7 +391,7 @@ function CConfig() { // для наследования класса внутр�
 				}
 
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
-				var post = $(self.lentaTemplate({
+				var post = $(self.postTemplate({
 					extraClass: '',
 					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
 					preview: preview,

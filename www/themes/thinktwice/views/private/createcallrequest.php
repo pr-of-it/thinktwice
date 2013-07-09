@@ -45,10 +45,19 @@
 </div>
 
 <div class="row">
-    <?php echo $form->labelEx($model,'Примерная продолжительность'); ?>
+    <?php echo $form->labelEx($model,'Примерная продолжительность в минутах'); ?>
     <?php echo $form->textField($model,'duration'); ?>
     <?php echo $form->error($model,'duration'); ?>
 </div>
+
+    <?php echo CHtml::hiddenField($model,'')?>
+
+    <?php echo CHtml::link('Полная стоимость: ', array(
+        'private/allSumm/',
+
+        ));
+    ?>
+    <?php echo $Summ; ?>
 
 <div class="row buttons">
     <?php echo CHtml::submitButton($model->isNewRecord ? 'Отправить' : 'Save'); ?>

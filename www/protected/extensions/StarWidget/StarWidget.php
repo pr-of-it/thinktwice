@@ -21,6 +21,4 @@ class StarWidget extends CWidget {
 
    }
 
-
-
 }

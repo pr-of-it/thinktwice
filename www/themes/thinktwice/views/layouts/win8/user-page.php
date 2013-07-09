@@ -45,7 +45,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <header id="header">
 
     <div class="dashboard-link"></div>
-    <a href=""><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/site/index')?>"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>

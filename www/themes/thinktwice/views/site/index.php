@@ -24,8 +24,8 @@
                     <div class="news-body">
                         {{#preview}}<img src="{{preview}}" alt="{{title}}"/>{{/preview}}
                         <header class="news-author">{{author}}</header>
-                        <h6>{{title}}</h6>
-                        <p>{{text}}</p>
+                        <h6>{{{title}}}</h6>
+                        <p>{{{text}}}</p>
                         <span class="text-hide"></span>
                     </div>
                     <div class="news-like">{{likes}}</div>

@@ -18,9 +18,9 @@ html, body{
 	background: #081c24; /* Old browsers */
 }
 body{
-	/*height:auto !important;
-	height:100%;
-	min-height:100%;*/ overflow-x: hidden;
+	overflow-x: hidden;
+	min-width:950px;
+	position: relative;
 }
 
 /** h group **/
@@ -226,7 +226,7 @@ input.error{ border:1px solid red !important }
 	height:100%;
 	overflow:hidden;
 	min-height:655px;
-	min-width:1000px;
+	/*min-width:1000px;*/ width: 100%;
 	background:-moz-linear-gradient(-45deg, #081c24 0%, #16353e 100%); /* FF3.6+ */
 	background:-webkit-gradient(linear, left top, right bottom, color-stop(0%, #081c24), color-stop(100%, #16353e)); /* Chrome,Safari4+ */
 	background:-webkit-linear-gradient(-45deg, #081c24 0%, #16353e 100%); /* Chrome10+,Safari5.1+ */
@@ -396,7 +396,7 @@ icon-archive{
 	top:0;
 	width:100%;
 	cursor:default !important;
-	overflow:auto; -webkit-overflow-scrolling:touch;
+	overflow:hidden; -webkit-overflow-scrolling:touch;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
@@ -1468,7 +1468,7 @@ input[type="reset"].styler:active{
 	color:#ffffff;
 	font:14px "NoteworthyLight";
 	height:91px;
-	left:-345px;
+	left:-400px;
 	position:absolute;
 	top:-5px;
 	width:322px;
@@ -1477,7 +1477,7 @@ input[type="reset"].styler:active{
 }
 .user-bar .link-reg{
 	position:absolute;
-	left:-90px; top:25px;
+	left:-111px; top:25px;
 	color:#000;
 	box-shadow:0 1px 2px #000;
 	z-index:1;
@@ -1577,7 +1577,7 @@ input[type="reset"].styler:active{
 	width:500px;
 }
 
-@media screen and (min-height: 768px) {
+@media screen and (min-height: 904px) {
 
 	.news-item.line-2 .time-slider{
 		bottom:auto; top:-11px;
