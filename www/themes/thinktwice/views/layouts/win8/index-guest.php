@@ -38,7 +38,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1006"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1007"></script>
 </head>
 <body>
 
@@ -207,11 +207,15 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
         <div class="scroll">
             <header class="popup-head">Новости рынка труда</header>
             <div class="article-info">
-                <span class="viewings">
+                <!--<span class="viewings">
                     <span></span>
                     250
                 </span>
-                <span class="shared">Поделилось: 5</span>
+                <span class="shared">Поделилось: 5</span>-->
+                <a href="" class="user-avatar">
+                    <img src=""><span></span>
+                </a>
+                <a href="" class="user-name">Автор</a>
             </div>
             <article class="content">
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
