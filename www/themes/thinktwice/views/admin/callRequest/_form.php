@@ -47,7 +47,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
+		<?php /*echo $form->textField($model,'status'); */?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
