@@ -35,7 +35,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/PIE_IE678.js"></script>
     <![endif]-->
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js?1"></script>
 </head>
 <body>
 
