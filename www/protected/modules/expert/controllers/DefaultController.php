@@ -79,7 +79,7 @@ class DefaultController extends ExpertController
     {
         $model = CallRequest::model()->findByPk($id);
         $user = User::model()->findByPk($model->caller_id);
-        $transactions = new UserTransaction();
+        $transaction = new UserTransaction();
         $model->status = $status;
       #  var_dump($call_time);
         switch ( $model->status ) {
@@ -93,12 +93,6 @@ class DefaultController extends ExpertController
                 );
                 break;
 
-            case null:
-                $model->call_time = $call_time;
-                $model->status = CallRequest::STATUS_MODERATED;
-                $model->save();
-                $this->redirect(array('callrequest', 'id' => $id, 'call_time'=>$call_time));
-
             case CallRequest::STATUS_ACCEPTED:
                 $model->call_time = $call_time;
                 $model->status = CallRequest::STATUS_ACCEPTED;
@@ -109,11 +103,11 @@ class DefaultController extends ExpertController
 
                 $amountOff = $model->duration * $user->consult_price;
                 $amountOff = -1 * $amountOff;
-                $transactions->amount = $amountOff;
-                $transactions->user_id = $model->user_id;
-                $transactions->reason = 'списание средств за консультацию у пользователя: ' . $user->name;
-                if ( $transactions->save() );
-                $model->status = CallRequest::STATUS_COMPLETE;
+                $transaction->amount = $amountOff;
+                $transaction->user_id = $model->user_id;
+                $transaction->reason = 'Списание средств за консультацию у эксперта: ' . $user->name;
+                if ( $transaction->save() )
+                    $model->status = CallRequest::STATUS_COMPLETE;
                 if ( $model->save() )
                     $this->redirect(array('closest'));
 
@@ -125,6 +119,15 @@ class DefaultController extends ExpertController
             Yii::app()->user->setFlash('FAIL_WRITE', 'Ошибка записи');
             $this->redirect(array('callrequest', 'id' => $id));
         }
+    }
+
+    public function actionCallTransfer($id, $call_time) {
+        $model = CallRequest::model()->findByPk($id);
+        $model->call_time = $call_time;
+        $model->status = CallRequest::STATUS_MODERATED;
+        $model->save();
+        $this->redirect(array('callrequest', 'id' => $id, 'call_time'=>$call_time));
+
     }
 
     public function actionUpdateTime($id) {

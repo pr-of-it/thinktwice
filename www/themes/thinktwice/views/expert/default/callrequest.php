@@ -16,20 +16,20 @@ echo Yii::app()->user->getFlash('FAIL_WRITE');
     <p><?php
         echo $callRequest->alter_call_time_1;?>
         <?php echo CHtml::link('Перенести на ' . $callRequest->alter_call_time_1, array(
-            'default/updateStatus/',
+            'default/callTransfer/',
             'id'=>$callRequest->id,
             'call_time'=>$callRequest->alter_call_time_1,
-            'status'=>null,));
+            ));
 
         ?>
     </p>
     <p> <?php
         echo $callRequest->alter_call_time_2;?>
         <?php echo CHtml::link('Перенести на ' . $callRequest->alter_call_time_2, array(
-            'default/updateStatus/',
+            'default/callTransfer/',
             'id'=>$callRequest->id,
             'call_time'=>$callRequest->alter_call_time_2,
-            'status'=>null,));
+            ));
 
         ?>
     </p>
