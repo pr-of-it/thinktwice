@@ -78,9 +78,12 @@ class DefaultController extends ExpertController
     public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
+        $user = User::model()->findByPk($model->caller_id);
+        $transactions = new UserTransaction();
         $model->status = $status;
       #  var_dump($call_time);
         switch ( $model->status ) {
+
             case CallRequest::STATUS_REJECTED:
                 $model->comments[CallRequest::STATUS_REJECTED] = $_POST['comments'];
                 User::model()->findByPk($model->user_id)->sendMessage(
@@ -103,6 +106,13 @@ class DefaultController extends ExpertController
                 $this->redirect(array('requests'));
 
             case CallRequest::STATUS_COMPLETE:
+
+                $amountOff = $model->duration * $user->consult_price;
+                $amountOff = -1 * $amountOff;
+                $transactions->amount = $amountOff;
+                $transactions->user_id = $model->user_id;
+                $transactions->reason = 'списание средств за консультацию у пользователя: ' . $user->name;
+                if ( $transactions->save() );
                 $model->status = CallRequest::STATUS_COMPLETE;
                 if ( $model->save() )
                     $this->redirect(array('closest'));
