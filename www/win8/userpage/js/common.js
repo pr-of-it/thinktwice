@@ -250,41 +250,6 @@ $(function () {
 		$('.time-var span').click(function(){
 			$(this).parents('.call-time-data').css('display', 'none');
 		});
-	
-		$("#slider").slider({
-		    range: "min",
-		    min: 15,
-		    max: 60,
-		    step: 15,
-		    value: 15,
-		    slide: function(event, ui) {
-		        var delay = function() {
-			        $( "#CallRequest_duration" ).val( ui.value );
-			        $( "#slider-result" ).html( ui.value*100 );
-			        $(".call-charge").html( ui.value*100 );
-			        $(".call-duration").html( ui.value+" минут" );
-		            var handleIndex = $(ui.handle).data('index.uiSliderHandle');
-		            var label = '#min';
-		            $(label).html(ui.value).position({
-		                my: 'center top',
-		                at: 'center bottom',
-		                of: ui.handle,
-		                offset: "0,15"
-		            });
-		        };
-		        
-		        // wait for the ui.handle to set its position
-		        setTimeout(delay, 5);
-		    }
-		});
-		
-		$('#min').html($('#slider').slider('values', 0)).position({
-		    my: 'center top',
-		    at: 'center bottom',
-		    of: $('#slider a:eq(0)'),
-		    offset: "0, 10"
-		});
-		
 		
 		$("#call-tabs-1, #call-tabs-2, #call-tabs-3").tabs();				
 				
