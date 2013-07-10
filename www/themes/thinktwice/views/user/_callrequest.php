@@ -1,6 +1,7 @@
 <?php
 /* @var $this PrivateController */
 /* @var $user User */
+/* @var $currentUser User */
 /* @var $model CallRequest */
 /* @var $form ActiveForm */
 ?>
@@ -23,10 +24,10 @@
                     <span class="call-duration">15 минут</span>
                 </div>
                 <div class="do-confirm">
-                    <?php if ( $user->phone_verified ): ?>
+                    <?php if ( !$currentUser->phone_verified ): ?>
                     <div class="confirm-number">
                         <span class="header">Подтвердить номер телефона</span><br>
-                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><input type="button" class="button-dark change-phone" value="Отправить"><br><br><br>
+                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($currentUser->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($currentUser->phone, 4, 7); ?>"><input type="button" class="button-dark change-phone" value="Отправить"><br><br><br>
                         <span class="text code-label">Введите код</span><input type="text" size="5" name=""><br><br><br>
                         <input type="button" class="button-yellow confirm" value="Подтвердить">
                         <p class="error">Введите правильный код</p>
@@ -34,7 +35,7 @@
                     <?php else : ?>
                     <div class="change-number">
                         <span class="header">Ваш номер телефона:</span><br>
-                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><br>
+                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($currentUser->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($currentUser->phone, 4, 7); ?>"><br>
                         <input type="button" class="button-yellow change-phone" value="Изменить">
                         <p class="error">Введите правильный номер телефона</p>
                         <div class="confirm-number-2" style="display:none">
