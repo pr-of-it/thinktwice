@@ -120,7 +120,8 @@ class UserController extends Controller {
      * Возвращает код верификации
      * @param $phone
      */
-    public function actonAjaxChangePhone($phone) {
+    public function actionAjaxChangePhone($phone) {
+
         $user = User::model()->findByPk(Yii::app()->user->id);
 
         $user->phone = $phone;
@@ -133,6 +134,7 @@ class UserController extends Controller {
         header('Content-type: application/json');
         echo CJSON::encode($ret);
         Yii::app()->end();
+
     }
 
     /**
