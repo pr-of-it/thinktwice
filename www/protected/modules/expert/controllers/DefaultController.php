@@ -55,7 +55,8 @@ class DefaultController extends ExpertController
     public function actionRequests() {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('requests',array(
-            'user' => $user
+            'user' => $user,
+
         ));
     }
 
@@ -77,6 +78,13 @@ class DefaultController extends ExpertController
     public function actionFinishedCallRequest($id){
         $callRequest = CallRequest::model()->findByPk($id);
         $this->render( 'finishedCallRequest',array (
+            'callRequest' => $callRequest,
+        ));
+    }
+
+    public function actionConsultGrath($id) {
+        $callRequest = CallRequest::model()->findByPk($id);
+        $this->render( 'consultgrath',array (
             'callRequest' => $callRequest,
         ));
     }
@@ -130,7 +138,7 @@ class DefaultController extends ExpertController
         $model->call_time = $call_time;
         $model->status = CallRequest::STATUS_MODERATED;
         $model->save();
-        $this->redirect(array('callrequest', 'id' => $id, 'call_time'=>$call_time));
+        $this->redirect(array('requests'));
 
     }
 
