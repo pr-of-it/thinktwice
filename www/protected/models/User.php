@@ -15,6 +15,8 @@
  * @property integer $can_consult
  * @property string $consult_price
  * @property string $avatar_file
+ * @property string $phone_verify_code
+ * @property integer $phone_verified
  *
  * @property string $amount
  *
@@ -214,6 +216,9 @@ class User extends CActiveRecord
             'can_consult' => Yii::t('User', 'Can consult'),
             'consult_price' => Yii::t('User', 'Consult price'),
             'avatar_file' => Yii::t('User', 'Avatar file'),
+            'phone_verify_code' => Yii::t('User', 'Phone verify code'),
+            'phone_verified' => Yii::t('User', 'Phone verified'),
+
 
         );
 
@@ -247,6 +252,8 @@ class User extends CActiveRecord
         $criteria->compare('can_consult',$this->can_consult,true);
         $criteria->compare('consult_price',$this->consult_price,true);
         $criteria->compare('avatar_file',$this->avatar_file,true);
+        $criteria->compare('phone_verified',$this->phone_verified,true);
+        $criteria->compare('phone_verify_code',$this->phone_verify_code,true);
 
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
