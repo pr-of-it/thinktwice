@@ -77,7 +77,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'comments'); ?>
-		<?php echo $form->textField($model, 'comments'); ?>
+		<?php /* echo $form->textField($model, 'comments'); */ ?>
 		<?php echo $form->error($model,'comments'); ?>
 
 	<div class="row buttons">
