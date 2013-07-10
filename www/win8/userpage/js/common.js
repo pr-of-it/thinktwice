@@ -81,13 +81,13 @@ function CConfig() { // для наследования класса внутр�
 		$(document).keydown(function (e) {
 			var container = document.getElementById('container');
 
-			if (e.keyCode == 37) {
+			/*if (e.keyCode == 37) {
 				container.scrollLeft -= 100;
 				return false;
 			} else if (e.keyCode == 39) {
 				container.scrollLeft += 100;
 				return false;
-			}
+			}*/
 		});
 
 		/**
