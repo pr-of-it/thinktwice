@@ -308,7 +308,7 @@ $(function () {
 			}
 
 			$.get(makeUrl('/user/ajaxRequestPhoneVerify'), {
-				phone: '7' + phone
+					phone: '7' + phone
 				}, function(data) {
 					var code = data.code;
 					console.log(phone, code);
@@ -330,6 +330,7 @@ $(function () {
 			var parent = $(this).parents('.do-confirm');
 
 			var error = $(this).parent().find('.error').hide();
+			var phone = parent.find('input[type=text][size=3]').val() + parent.find('input[type=text][size=7]').val();
 			var code = parent.find('input[type=text][size=5]').val();
 			if (code.length !== 6 || !/\d+/.test(code)) {
 				error.show();
