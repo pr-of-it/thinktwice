@@ -80,6 +80,8 @@ function CConfig() { // для наследования класса внутр�
 
 		self.bgPopup = $('#bg-popup');
 
+		$('.create-post').detach().appendTo('body');
+
 		window.onload = function(){
 			self.loadData();
 		};
@@ -236,6 +238,11 @@ function CConfig() { // для наследования класса внутр�
 				(target.hasClass('window-post') || target.parents('.window-post').length)) {
 				return true;
 			}
+			if(target.hasClass('create-post') || target.parents('.create-post').length) {
+				return true;
+			}
+			$('#rails').removeClass('disabled')
+			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
 			$('#popup-wrapper').css('z-index', 0);
@@ -250,6 +257,8 @@ function CConfig() { // для наследования класса внутр�
 		// открываем редактор для поста
 		$('.create-post').click(function(){
 			if($(this).hasClass('opacity-hide')){
+				$('#popup-wrapper').css('z-index', 100);
+				self.bgPopup.show();
 				$(this).removeClass('opacity-hide')
 				$('#rails').addClass('disabled')
 			}
@@ -260,10 +269,12 @@ function CConfig() { // для наследования класса внутр�
 		// скрываем его
 		$(doc).on('click', '*', function(e){
 			var target = $(e.target)
-			if(!target.hasClass('create-post') && !target.closest('.create-post').length){
+			/*if(!target.hasClass('create-post') && !target.parents('.create-post').length){
 				$('#rails').removeClass('disabled')
 				$('.create-post').addClass('opacity-hide')
-			}
+				$('#popup-wrapper').css('z-index', 0);
+				self.bgPopup.hide();
+			}*/
 
 			// скрываем основное меню
 			if(!target.is('.interest-menu a') && $('.interest-menu').is(':visible'))

@@ -17,12 +17,10 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!--[if lt IE 9]>
+
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-1.x.x.min.js"></script>
-    <![endif]-->
-    <!--[if gte IE 9]><!-->
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-2.x.x.min.js"></script>
-    <!--<![endif]-->
+
+
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/scripts.js"></script>
 
     <!--[if lte IE 9]>
@@ -36,8 +34,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <!--[if lte IE 8]>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/PIE_IE678.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-tabs.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js?1"></script>
 </head>
 <body>
 

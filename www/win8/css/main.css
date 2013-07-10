@@ -903,7 +903,7 @@ input.error{ border:1px solid red !important }
 	left:0; width:739px;
 	min-height:343px;
 	background:#e1e1db;
-	z-index:10;
+	z-index:100;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
