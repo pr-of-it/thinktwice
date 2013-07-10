@@ -332,7 +332,7 @@ $(function () {
 			var error = $(this).parent().find('.error').hide();
 			var phone = parent.find('input[type=text][size=3]').val() + parent.find('input[type=text][size=7]').val();
 			var code = parent.find('input[type=text][size=5]').val();
-			if (code.length !== 6 || !/\d+/.test(code)) {
+			if (code.length !== 6) {
 				error.show();
 				return false;
 			}
