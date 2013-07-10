@@ -407,6 +407,11 @@ class User extends CActiveRecord
     }
 
     public function verifyPhoneCode($code) {
-        return $code == $this->phone_verify_code;
+        if ( $code == $this->phone_verify_code ) {
+            $this->phone_verified = 1;
+            return $this->save();
+        } else {
+            return false;
+        }
     }
 }

@@ -23,12 +23,18 @@
                     <span class="call-duration">15 минут</span>
                 </div>
                 <div class="do-confirm">
+                    <?php if ( $user->phone_verified ): ?>
                     <form class="confirm-number">
                         <span class="header">Подтвердить номер телефона</span><br>
-                        <span class="text">+7</span><input type="text" size="3" name=""><input type="text" size="7" name=""><input type="button" class="button-dark" value="Отправить"><br><br><br>
+                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><input type="button" class="button-dark" value="Отправить"><br><br><br>
                         <span class="text">Введите код</span><input type="text" size="5" name=""><br><br><br>
                         <input type="button" class="button-yellow" value="Подтвердить">
                     </form>
+                    <?php else : ?>
+                        <span class="header">Ваш номер телефона:</span><br>
+                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><br>
+                        <input type="button" class="button-yellow" value="Изменить">
+                    <?php endif; ?>
                 </div>
                 <br><br>
                 <input type="button" class="button-yellow" value="Купить" onclick="$('#callrequest-form').submit();">

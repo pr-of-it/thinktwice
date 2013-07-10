@@ -133,4 +133,15 @@ class UserController extends Controller {
 
     }
 
+    public function actionAjaxVerifyPhoneCode($code) {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $ret = $user->verifyPhoneCode($code);
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
+
+    }
+
 }
