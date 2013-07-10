@@ -19,7 +19,7 @@
                     <span>1 августа с 15 до 17</span><br>
                 </div>
                 <div class="call-cost">
-                    <span class="call-charge">1500</span>
+                    <span class="call-charge"><?php echo $user->consult_price * 15;?></span>
                     <span class="call-duration">15 минут</span>
                 </div>
                 <div class="do-confirm">
