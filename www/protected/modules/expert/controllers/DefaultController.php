@@ -7,9 +7,15 @@ class DefaultController extends ExpertController
      */
     public function actionIndex()
     {
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'status =' . CallRequest::STATUS_ACCEPTED;
+        $criteria->order = 'call_time DESC';
+        $callRequest = CallRequest::model()->find($criteria);
+
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('index',array(
-            'user' => $user
+            'user' => $user,
+            'callRequest' => $callRequest,
         ));
     }
 
@@ -130,8 +136,4 @@ class DefaultController extends ExpertController
 
     }
 
-    public function actionUpdateTime($id) {
-
-
-    }
 }
