@@ -110,4 +110,27 @@ class UserController extends Controller {
 
     }
 
+    /**
+     * AJAX
+     * Запрос верификации телефонного номера у текущего пользователя
+     * Возвращает код верификации
+     * @param $phone
+     */
+    public function actionAjaxRequestPhoneVerify($phone) {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        $user->phone = $phone;
+        $user->phone_verified = 0;
+        $user->save();
+
+        $ret = new stdClass();
+        $ret->code = $user->doPhoneVerify();
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
+
+    }
+
 }
