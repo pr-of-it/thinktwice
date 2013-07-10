@@ -26,6 +26,10 @@ class UserController extends Controller {
             array('allow',  // allow all users to perform 'index' and 'view' actions
                 'actions'=>array('index',),
                 'users'=>array('*'),
+            ),
+            array('allow',
+                'actions' => array('ajaxChangePhone', 'ajaxRequestPhoneVerify', 'ajaxVerifyPhoneCode'),
+                'users' => array('@'),
             )
         );
     }
@@ -107,6 +111,68 @@ class UserController extends Controller {
             'currentUser' => $currentUser,
             'model'=>$model,
         ));
+
+    }
+
+    /**
+     * AJAX
+     * Изменение телефонного номера у текущего пользователя
+     * Возвращает код верификации
+     * @param $phone
+     */
+    public function actionAjaxChangePhone($phone) {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        $user->phone = $phone;
+        $user->phone_verified = 0;
+        $user->save();
+
+        $ret = new stdClass();
+        $ret->code = $user->doPhoneVerify();
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
+
+    }
+
+    /**
+     * AJAX
+     * Запрос верификации телефонного номера у текущего пользователя
+     * Возвращает код верификации
+     * @param $phone
+     */
+    public function actionAjaxRequestPhoneVerify($phone) {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+
+        $user->phone = $phone;
+        $user->phone_verified = 0;
+        $user->save();
+
+        $ret = new stdClass();
+        $ret->code = $user->doPhoneVerify();
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
+
+    }
+
+    /**
+     * AJAX
+     * Проверка кода верификации номера телефона текущего пользователя
+     * @param $code
+     */
+    public function actionAjaxVerifyPhoneCode($code) {
+
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $ret = $user->verifyPhoneCode($code);
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
 
     }
 

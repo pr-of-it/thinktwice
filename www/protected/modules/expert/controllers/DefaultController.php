@@ -7,9 +7,15 @@ class DefaultController extends ExpertController
      */
     public function actionIndex()
     {
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'status =' . CallRequest::STATUS_ACCEPTED;
+        $criteria->order = 'call_time DESC';
+        $callRequest = CallRequest::model()->find($criteria);
+
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('index',array(
-            'user' => $user
+            'user' => $user,
+            'callRequest' => $callRequest,
         ));
     }
 
@@ -49,13 +55,14 @@ class DefaultController extends ExpertController
     public function actionRequests() {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('requests',array(
-            'user' => $user
+            'user' => $user,
+
         ));
     }
 
     public function actionClosest() {
         $user = User::model()->findByPk(Yii::app()->user->id);
-        $this->render('requests',array(
+        $this->render('closest',array(
             'user' => $user
         ));
     }
@@ -75,12 +82,21 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public function actionConsultGrath($id) {
+        $callRequest = CallRequest::model()->findByPk($id);
+        $this->render( 'consultgrath',array (
+            'callRequest' => $callRequest,
+        ));
+    }
+
     public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
+        $user = User::model()->findByPk($model->caller_id);
+        $transaction = new UserTransaction();
         $model->status = $status;
-      #  var_dump($call_time);
         switch ( $model->status ) {
+
             case CallRequest::STATUS_REJECTED:
                 $model->comments[CallRequest::STATUS_REJECTED] = $_POST['comments'];
                 User::model()->findByPk($model->user_id)->sendMessage(
@@ -90,19 +106,22 @@ class DefaultController extends ExpertController
                 );
                 break;
 
-            case null:
-                $model->call_time = $call_time;
-                $model->status = CallRequest::STATUS_MODERATED;
-                $model->save();
-                $this->redirect(array('callrequest', 'id' => $id, 'call_time'=>$call_time));
-
             case CallRequest::STATUS_ACCEPTED:
                 $model->call_time = $call_time;
                 $model->status = CallRequest::STATUS_ACCEPTED;
                 if ( $model->save() )
-                $this->redirect(array('closest'));
+                $this->redirect(array('requests'));
 
-
+            case CallRequest::STATUS_COMPLETE:
+                $amountOff = $model->duration * $user->consult_price;
+                $amountOff = -1 * $amountOff;
+                $transaction->amount = $amountOff;
+                $transaction->user_id = $model->user_id;
+                $transaction->reason = 'Списание средств за консультацию у эксперта: ' . $user->name;
+                if ( $transaction->save() )
+                    $model->status = CallRequest::STATUS_COMPLETE;
+                if ( $model->save() )
+                    $this->redirect(array('closest'));
 
         }
 
@@ -114,8 +133,13 @@ class DefaultController extends ExpertController
         }
     }
 
-    public function actionUpdateTime($id) {
-
+    public function actionCallTransfer($id, $call_time) {
+        $model = CallRequest::model()->findByPk($id);
+        $model->call_time = $call_time;
+        $model->status = CallRequest::STATUS_MODERATED;
+        $model->save();
+        $this->redirect(array('requests'));
 
     }
+
 }

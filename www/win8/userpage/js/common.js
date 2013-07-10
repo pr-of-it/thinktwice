@@ -226,6 +226,7 @@ function CFilter(config){
 
 var Filter = new CFilter({});
 
+
 $(function () {
 
 	// create config and init classes
@@ -239,54 +240,117 @@ $(function () {
 		});
 	}
 	
+		$("#slider").slider({
+            range: "min",
+            min: 15,
+            max: 60,
+            step: 15,
+            value: 15,
+            slide: function(event, ui) {
+                var delay = function() {
+                    $( "#CallRequest_duration" ).val( ui.value );
+                    $( "#slider-result" ).html( ui.value *  parseFloat(USER.consult_price || "0"));
+                    $(".call-charge").html( ui.value * parseFloat(USER.consult_price || "0") );
+                    $(".call-duration").html( ui.value + " минут" );
+                    var handleIndex = $(ui.handle).data('index.uiSliderHandle');
+                    var label = '#min';
+                    $(label).html(ui.value).position({
+                        my: 'center top',
+                        at: 'center bottom',
+                        of: ui.handle,
+                        offset: "0,15"
+                    });
+                };
+
+                // wait for the ui.handle to set its position
+                setTimeout(delay, 5);
+            }
+        });
+
+        $('#min').html($('#slider').slider('values', 0)).position({
+            my: 'center top',
+            at: 'center bottom',
+            of: $('#slider a:eq(0)'),
+            offset: "0, 10"
+        });
+
+
+
 		$('.link-advice').click(function(){
 			$('.get-call').popup();
 		})	
 	
 		$('.call-time-select').click(function(){
-			$(this).next('.call-time-data').css('display', 'block');
+			$('.call-time-data').hide();
+			$(this).next('.call-time-data').show();
 		});
 		
 		$('.time-var span').click(function(){
 			$(this).parents('.call-time-data').css('display', 'none');
 		});
-	
-		$("#slider").slider({
-		    range: "min",
-		    min: 15,
-		    max: 60,
-		    step: 15,
-		    value: 15,
-		    slide: function(event, ui) {
-		        var delay = function() {
-			        $( "#CallRequest_duration" ).val( ui.value );
-			        $( "#slider-result" ).html( ui.value*100 );
-			        $(".call-charge").html( ui.value*100 );
-			        $(".call-duration").html( ui.value+" минут" );
-		            var handleIndex = $(ui.handle).data('index.uiSliderHandle');
-		            var label = '#min';
-		            $(label).html(ui.value).position({
-		                my: 'center top',
-		                at: 'center bottom',
-		                of: ui.handle,
-		                offset: "0,15"
-		            });
-		        };
-		        
-		        // wait for the ui.handle to set its position
-		        setTimeout(delay, 5);
-		    }
-		});
-		
-		$('#min').html($('#slider').slider('values', 0)).position({
-		    my: 'center top',
-		    at: 'center bottom',
-		    of: $('#slider a:eq(0)'),
-		    offset: "0, 10"
-		});
-		
 		
 		$("#call-tabs-1, #call-tabs-2, #call-tabs-3").tabs();				
-				
-				
-}); // dom ready	
+	
+		
+		makeUrl = function(url) {
+			return '/index.php' + url;
+		};
+
+
+		$('.get-call .do-confirm input[type=button].change-phone').on('click', function () {
+			var parent = $(this).parents('.do-confirm');
+			var changeButton = $(this);
+			var error = $(this).parent().find('.error').hide();
+			var phone = parent.find('input[type=text][size=3]').val() + parent.find('input[type=text][size=7]').val();
+			if (phone.length !== 10 || !/\d+/.test(phone)) {
+				error.show();
+				return false;
+			}
+
+			$.get(makeUrl('/user/ajaxRequestPhoneVerify'), {
+				phone: '7' + phone
+				}, function(data) {
+					var code = data.code;
+					console.log(phone, code);
+					changeButton.hide();
+					parent.find('input[type=text][size=5]').show();
+					parent.find('input[type=button].confirm').show();
+					var label = parent.find('.text-code-label');
+					if (label.length)
+						label.show();
+					parent.find('.change-number').addClass('confirm-number');
+					parent.find('.confirm-number-2').show();
+					parent.find('input[type=text][size=3]').prop('disabled', true).show();
+					parent.find('input[type=text][size=7]').prop('disabled', true).show();
+			});
+			
+		});
+
+		$('.get-call .do-confirm input[type=button].confirm').on('click', function () {
+			var parent = $(this).parents('.do-confirm');
+
+			var error = $(this).parent().find('.error').hide();
+			var code = parent.find('input[type=text][size=5]').val();
+			if (code.length !== 6 || !/\d+/.test(code)) {
+				error.show();
+				return false;
+			}
+
+			$.get(makeUrl('/user/ajaxVerifyPhoneCode'), {
+				code: code
+				}, function(data) {
+					//console.log(data);
+					if (data === true) {
+						parent.find('input[type=text][size=5]').hide();
+						parent.find('input[type=button].confirm').hide();
+						parent.find('.code-label').hide();
+					} else {
+						error.text('Неправильный код.').show();
+					}
+			});
+			
+		});
+
+
+}); // dom ready
+
