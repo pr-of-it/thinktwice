@@ -388,4 +388,21 @@ class User extends CActiveRecord
 
         return new CMapIterator($all);
     }
+
+    public function doPhoneVerify() {
+
+        $code = substr(md5(time() . $this->phone), 0, 6);
+        $this->phone_verify_code = $code;
+        $this->save();
+
+        $this->sendMessage(
+            'Код подтверждения',
+            'Введите код подтверждения: ' . $this->phone_verify_code,
+            array('sms')
+        );
+
+        return $this->phone_verify_code;
+
+    }
+
 }
