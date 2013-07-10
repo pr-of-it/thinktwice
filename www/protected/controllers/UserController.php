@@ -110,4 +110,32 @@ class UserController extends Controller {
 
     }
 
+    /**
+     * Добавление в фолловеры
+     * @param $follower_id
+     */
+    public function actionAddFollower($follower_id) {
+
+        $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
+
+        if($model != null)
+            $this->redirect(array('/user/index','id'=>$follower_id));
+
+        $model = new UserFollower;
+        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
+        if( $model->save() )
+            $this->redirect(array('/user/index','id'=>$follower_id));
+
+    }
+
+    /**
+     * Удаление из фолловеров
+     * @param $follower_id
+     */
+    public function actionDelFollower($follower_id) {
+        $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
+        if($model->delete())
+            $this->redirect(array('/user/index','id'=>$follower_id));
+    }
+
 }

@@ -261,8 +261,31 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->homeUrl);
     }
 
+    public function actionRestore() {
 
+        $model = new RestoreForm();
+        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+        {
+            echo ActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        $success = false;
 
+        if(isset($_POST['RestoreForm'])) {
+            $model->attributes=$_POST['RestoreForm'];
+            // validate user input and redirect to the previous page if valid
+            if( $model->validate() && $model->restore() ) {
+                $success = true;
+            }
+        }
+
+        $this->render('restore',array('model'=>$model, 'success'=>$success));
+
+    }
+
+    /*
+     * СТАНДАРТНЫЕ ЭКШНЫ
+     */
 
     /**
      * This is the action to handle external exceptions.
@@ -304,55 +327,6 @@ class SiteController extends Controller
         $this->render('contact',array('model'=>$model));
     }
 
-
-     public function actionAddFollower($follower_id) {
-
-        $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
-
-        if($model != null)
-            $this->redirect(array('/user','id'=>$follower_id));
-
-        $model = new UserFollower;
-        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
-        if( $model->save() )
-            $this->redirect(array('/user','id'=>$follower_id));
-
-    }
-
-    public function actionDelFollower($follower_id) {
-        $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
-        if($model->delete())
-            $this->redirect(array('/user','id'=>$follower_id));
-    }
-
-    public function actionCallRequest($id){
-        $callRequest = CallRequest::model()->findByPk($id);
-        $this->render( 'callrequest',array (
-            'callRequest' => $callRequest,
-        ));
-    }
-
-    public function actionRestore() {
-
-        $model = new RestoreForm();
-        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
-        {
-            echo ActiveForm::validate($model);
-            Yii::app()->end();
-        }
-        $success = false;
-
-        if(isset($_POST['RestoreForm'])) {
-            $model->attributes=$_POST['RestoreForm'];
-            // validate user input and redirect to the previous page if valid
-            if( $model->validate() && $model->restore() ) {
-                $success = true;
-            }
-        }
-
-        $this->render('restore',array('model'=>$model, 'success'=>$success));
-
-    }
 
 
 }
