@@ -168,7 +168,10 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#wrapper');
+			var container = $('#container');
+
+			if (self.rails.hasClass('disabled'))
+				return true;
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -226,6 +229,7 @@ function CConfig() { // для наследования класса внутр�
 			}
 			$('#popup-wrapper').css('z-index', 100);
 			self.bgPopup.show();
+			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
 		})
 
@@ -245,13 +249,14 @@ function CConfig() { // для наследования класса внутр�
 			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
+			$('#rails').removeClass('disabled')
 			$('#popup-wrapper').css('z-index', 0);
 			return false;
 		})
 
 		// iOS fix
-		$('body').on('touchstart', '#popup-wrapper', function(e) {
-			$(this).click();
+		$('body').on('touchstart', '#popup-wrapper,#bg-popup', function(e) {
+			$('#popup-wrapper').click();
 		});
 
 		// открываем редактор для поста
@@ -259,8 +264,8 @@ function CConfig() { // для наследования класса внутр�
 			if($(this).hasClass('opacity-hide')){
 				$('#popup-wrapper').css('z-index', 100);
 				self.bgPopup.show();
-				$(this).removeClass('opacity-hide')
-				$('#rails').addClass('disabled')
+				$(this).removeClass('opacity-hide');
+				$('#rails').addClass('disabled');
 			}
 
 			//else return false;
