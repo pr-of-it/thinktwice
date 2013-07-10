@@ -2,10 +2,9 @@
 
 class SiteController extends Controller
 {
+
     const LAST_POST = 20;
-    /**
-     * Declares class-based actions.
-     */
+
     public function actions()
     {
         return array(
@@ -32,10 +31,24 @@ class SiteController extends Controller
         );
     }
 
+    /**
+     * Устанавливаем layout страницы
+     * @param $action
+     * @return bool
+     */
     public function beforeAction($action) {
+
         if ( false !== strpos(Yii::app()->user->returnUrl, 'expert') ) {
             $this->layout = 'expert-mobile';
+            return parent::beforeAction($action);
         };
+
+        if ( Yii::app()->user->isGuest ) {
+            $this->layout = '//layouts/win8/page-guest';
+        } else {
+            $this->layout = '//layouts/win8/page';
+        }
+
         return parent::beforeAction($action);
     }
 
@@ -56,7 +69,7 @@ class SiteController extends Controller
         if(isset($_POST['BlogPost'])) {
             $post->attributes=$_POST['BlogPost'];
             if($post->save())
-                $this->redirect(array('/blog/index','id'=>$post->blog->id));
+                $this->redirect(array('/site/index'));
         }
 
         if ( Yii::app()->user->isGuest ) {
@@ -88,8 +101,6 @@ class SiteController extends Controller
      * @param string $email
      */
     public function actionEnter($code = null, $email = null) {
-
-        $this->layout = '//layouts/win8/index-guest';
 
         // Часть регистрации
 
@@ -160,8 +171,6 @@ class SiteController extends Controller
      * @param string $email E-mail
      */
     public function actionRegister($code = null, $email = null) {
-
-        $this->layout = '//layouts/win8/index-guest';
 
         $model = new RegisterForm();
         // if it is ajax validation request
@@ -296,42 +305,24 @@ class SiteController extends Controller
     }
 
 
-    /**mail(
-     * Личная страничка пользователя
-     * @param $id ID пользователя
-     * @throws CHttpException
-     */
-    public function actionUserPage($id) {
-        $this->layout = '//layouts/win8/user-page';
-        $user = User::model()->findByPk($id);
-        if( $user === null )
-            throw new CHttpException( 404,'Страница пользователя не найдена' );
-
-        $this->render( 'userpage',array (
-            'user' => $user,
-            'currentUser' => User::model()->findByPk(Yii::app()->user->id),
-        ));
-
-    }
-
      public function actionAddFollower($follower_id) {
 
         $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
 
         if($model != null)
-            $this->redirect(array('site/userPage','id'=>$follower_id));
+            $this->redirect(array('/user','id'=>$follower_id));
 
         $model = new UserFollower;
         $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
         if( $model->save() )
-            $this->redirect(array('site/userPage','id'=>$follower_id));
+            $this->redirect(array('/user','id'=>$follower_id));
 
     }
 
     public function actionDelFollower($follower_id) {
         $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
         if($model->delete())
-            $this->redirect(array('site/userPage','id'=>$follower_id));
+            $this->redirect(array('/user','id'=>$follower_id));
     }
 
     public function actionCallRequest($id){

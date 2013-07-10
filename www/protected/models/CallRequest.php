@@ -48,7 +48,7 @@ class CallRequest extends CActiveRecord
             array('user_id, caller_id, title, text, call_time, duration', 'required'),
            # array('title', 'length', 'max'=>255),
            # array('call_time, alter_call_time_1, alter_call_time_2', 'date' ),
-            array('duration', 'numerical', 'min' => 5, 'tooSmall' => 'Продолжительность консультации не может быть менее 5 минут'),
+            array('duration', 'numerical', 'min' => 15, 'tooSmall' => 'Продолжительность консультации не может быть менее 15 минут'),
 			array('title, text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -125,7 +125,7 @@ class CallRequest extends CActiveRecord
 		));
 	}
 
-	/**
+   	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.

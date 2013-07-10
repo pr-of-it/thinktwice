@@ -32,7 +32,7 @@ function CConfig() { // для наследования класса внутр�
 
 	self.anim = 200;     // time animation
 	self.ajaxError = function (e, usertext) {
-		alert('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
+		console.error('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
 	}// ошибка ajax запроса
 
 	/**
@@ -68,7 +68,7 @@ function CConfig() { // для наследования класса внутр�
 			background:'#000',
 			opacity:.6,
 			filter:"alpha(opacity=60)",
-			zIndex:100,
+			zIndex:99,
 			cursor:"pointer"
 		};
 
@@ -78,12 +78,16 @@ function CConfig() { // для наследования класса внутр�
 			$("#bg-popup").css(popupCss);
 		}
 
-		self.bgPopup = $('#bg-popup').addClass('close-popup');
+		self.bgPopup = $('#bg-popup');
 
 		window.onload = function(){
 			self.loadData();
-		}
-	}
+		};
+	};
+
+	self.makeUrl = function(url) {
+		return '/index.php' + url;
+	};
 
 	self.bind = function(){
 
@@ -198,13 +202,19 @@ function CConfig() { // для наследования класса внутр�
 			if (!target.hasClass('news-box')) {
 				target = target.parents('.news-box')
 			}
-			var window = $('.window-post');
-			window.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			window.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
-			window.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
+			var data = target.parent().data();
+
+			var popup = $('.window-post');
+			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
+			popup.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
+			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			
+			popup.find('.article-info img').attr('src', data.avatar);
+			popup.find('.article-info .user-name').text(data.user_name || '');
+			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
+
 			var imgTarget = target.find('.image-gallery-min-full'),
-				img = window.find('img:first');
+				img = popup.find('article img:first');
 			if (imgTarget.length) {
 				var src = imgTarget.css('background-image');
 				img[0].src = src.replace(/^url\(/, '').replace(/\)$/, '');
@@ -212,17 +222,30 @@ function CConfig() { // для наследования класса внутр�
 			} else {
 				img.hide();
 			}
-
+			$('#popup-wrapper').css('z-index', 100);
 			self.bgPopup.show();
-			window.addClass('visible-on');
+			popup.addClass('visible-on');
 		})
+
+
 
 		// скрываем окно
-		$('body').on('click', '.close-popup', function(){
+		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
+			var target = $(e.target);
+			if (!target.hasClass('close-popup') &&
+				(target.hasClass('window-post') || target.parents('.window-post').length)) {
+				return true;
+			}
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
-			
+			$('#popup-wrapper').css('z-index', 0);
+			return false;
 		})
+
+		// iOS fix
+		$('body').on('touchstart', '#popup-wrapper', function(e) {
+			$(this).click();
+		});
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
@@ -285,6 +308,18 @@ function CConfig() { // для наследования класса внутр�
 
 
 		});
+
+		// Форма поста
+		/*$('#blog-form').on('submit', function () {
+			var data = $(this).serializeArray();
+			$.post('', data, function(data) {
+				console.log(data);
+				alert(data);
+			})
+			.fail(function() {alert('Не удалось отправить данные.');})
+			.always(function() {});
+			return false;
+		});*/
 	}
 
 	var zFill = function(s) {
@@ -344,7 +379,7 @@ function CConfig() { // для наследования класса внутр�
 
 		self.postsAreLoading = true;
 		console.log('loading data...')
-		$.getJSON('/index.php/blog/getIndexBlogPosts', {
+		$.getJSON(self.makeUrl('/blog/getIndexBlogPosts'), {
 			limit: opts['limit'] | 20,
 			offset: opts['offset'] | self.numPosts
 		}, function(data) {
@@ -395,7 +430,7 @@ function CConfig() { // для наследования класса внутр�
 				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
 				var post = $(self.postTemplate({
 					extraClass: '',
-					tag: '#' + (i+1+self.numPosts) + ' ' + (item.tag || '#TODO'),
+					tag: item.tag || '',
 					preview: preview,
 					author: item.blog.title || '',
 					title: item.title,
@@ -404,7 +439,13 @@ function CConfig() { // для наследования класса внутр�
 					time: timeFormat,
 					image: item.image
 				}));
-				post.data({position: i + self.numPosts});
+				post.data({
+					position: i + self.numPosts,
+					id: item.id,
+					avatar: item.blog.user.avatar,
+					uid: item.blog.user.id,
+					user_name: item.blog.user.name || 'Эксперт'
+				});
 				if (preview) {
 					post.addClass('medium-width');
 				}
@@ -561,7 +602,7 @@ function CConfig() { // для наследования класса внутр�
 				containerWidth += ($('.quick-start-box').outerWidth() + 90);
 			$('#container').width(containerWidth);
 
-			self.rails.width(width * 10);
+			self.rails.width(width * 2 + (560+90)*20);
 		}
 		//console.log(width)
 		return width;

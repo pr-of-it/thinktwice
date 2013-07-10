@@ -1,0 +1,5 @@
+.after{
+	*background-image:expression(this.runtimeStyle.backgroundImage="none",this.innerHTML = this.innerHTML + '<u></u>');
+	zoom:1;
+}
+.pie, .columns, .f-row, .clear{ zoom:1; }

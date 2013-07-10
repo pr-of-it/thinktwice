@@ -123,7 +123,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'ссылка',
             'type' => 'raw',
             'value' => 'CHtml::link(CHtml::encode($data->name),
-                         array("site/userPage","id" => $data->id))',
+                         array("/user/index","id" => $data->id))',
         ),
         'name',
     ),
