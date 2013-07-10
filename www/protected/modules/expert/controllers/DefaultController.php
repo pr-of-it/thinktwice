@@ -87,7 +87,6 @@ class DefaultController extends ExpertController
         $user = User::model()->findByPk($model->caller_id);
         $transaction = new UserTransaction();
         $model->status = $status;
-      #  var_dump($call_time);
         switch ( $model->status ) {
 
             case CallRequest::STATUS_REJECTED:
@@ -106,7 +105,6 @@ class DefaultController extends ExpertController
                 $this->redirect(array('requests'));
 
             case CallRequest::STATUS_COMPLETE:
-
                 $amountOff = $model->duration * $user->consult_price;
                 $amountOff = -1 * $amountOff;
                 $transaction->amount = $amountOff;
