@@ -25,14 +25,16 @@
                 <li class="set_font-fullscreen">на весь экран</li>
             </ul>
         </header>
-        <?php echo $form->textArea($model,'text',array('class'=>'text-field')); ?>
-        <?php echo $form->error($model,'text'); ?>
+        <div class="text-field">
+            <?php echo $form->textArea($model,'text'); ?>
+             <?php echo $form->error($model,'text'); ?>
+        </div>
         <div class="tag-attach-box">
             <input placeholder="Теги" type="text" name=""/>
             <ul class="attach-list">
+                <!--<li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
                 <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                <li class="add-attach"></li>
+                --><li class="add-attach"></li>
             </ul>
         </div>
         <footer>

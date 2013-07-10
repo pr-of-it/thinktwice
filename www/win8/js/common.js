@@ -308,6 +308,18 @@ function CConfig() { // для наследования класса внутр�
 
 
 		});
+
+		// Форма поста
+		/*$('#blog-form').on('submit', function () {
+			var data = $(this).serializeArray();
+			$.post('', data, function(data) {
+				console.log(data);
+				alert(data);
+			})
+			.fail(function() {alert('Не удалось отправить данные.');})
+			.always(function() {});
+			return false;
+		});*/
 	}
 
 	var zFill = function(s) {
@@ -432,7 +444,7 @@ function CConfig() { // для наследования класса внутр�
 					id: item.id,
 					avatar: item.blog.user.avatar,
 					uid: item.blog.user.id,
-					user_name: item.blog.user.name
+					user_name: item.blog.user.name || 'Эксперт'
 				});
 				if (preview) {
 					post.addClass('medium-width');
