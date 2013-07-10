@@ -55,7 +55,7 @@ class DefaultController extends ExpertController
 
     public function actionClosest() {
         $user = User::model()->findByPk(Yii::app()->user->id);
-        $this->render('requests',array(
+        $this->render('closest',array(
             'user' => $user
         ));
     }
@@ -100,9 +100,12 @@ class DefaultController extends ExpertController
                 $model->call_time = $call_time;
                 $model->status = CallRequest::STATUS_ACCEPTED;
                 if ( $model->save() )
-                $this->redirect(array('closest'));
+                $this->redirect(array('requests'));
 
-
+            case CallRequest::STATUS_COMPLETE:
+                $model->status = CallRequest::STATUS_COMPLETE;
+                if ( $model->save() )
+                    $this->redirect(array('closest'));
 
         }
 

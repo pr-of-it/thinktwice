@@ -291,7 +291,8 @@ class User extends CActiveRecord
     public function getExpertClosest() {
         return CallRequest::model()->findAllByAttributes(array(
             'status' => CallRequest::STATUS_ACCEPTED,
-            'caller_id' => $this->id
+            'caller_id' => $this->id,
+
         ));
     }
 

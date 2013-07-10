@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 
 <?php
 
+
 $dataProvider = new CActiveDataProvider($user->model());
 $dataProvider->setData($user->getExpertClosest());
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -19,7 +20,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'name' => 'ID',
             'type' => 'raw',
             'value' => 'CHtml::link(CHtml::encode($data->id),
-                         array("finishedcallrequest","id" => $data->id))',
+                         array("finishedCallRequest","id" => $data->id))',
         ),
         array(
             'name' => 'Заказчик',
