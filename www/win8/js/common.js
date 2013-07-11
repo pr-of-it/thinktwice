@@ -211,7 +211,7 @@ function CConfig() { // для наследования класса внутр�
 
 			var popup = $('.window-post');
 			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			popup.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
+			popup.find('article.content div').html( target.find('.news-body div').html() );  // $post->text
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -247,7 +247,7 @@ function CConfig() { // для наследования класса внутр�
 			{
 				return true;
 			}
-			alert([target[0].tagName, target[0].classList+'', target[0].id])
+			//alert([target[0].tagName, target[0].classList+'', target[0].id])
 			$('#rails').removeClass('disabled')
 			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
@@ -258,7 +258,7 @@ function CConfig() { // для наследования класса внутр�
 		})
 
 		// iOS fix
-		$('body').on('touchstart', '#popup-wrapper,#bg-popup', function(e) {
+		$('body').on('touchstart', '#popup-wrapper', function(e) {
 			var target = $(e.target);
 			if (
 					(!target.hasClass('close-popup') &&
@@ -269,7 +269,7 @@ function CConfig() { // для наследования класса внутр�
 			{
 				return true;
 			}
-			$('#popup-wrapper').click();
+			$(this).click();
 		});
 
 		// открываем редактор для поста
