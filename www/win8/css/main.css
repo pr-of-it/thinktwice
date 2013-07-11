@@ -807,6 +807,7 @@ input.error{ border:1px solid red !important }
 	-webkit-box-sizing: border-box; /* Safari */
 	padding: 65px 45px;
 	overflow-y: auto;-webkit-overflow-scrolling:touch;
+	pointer-events: auto;
 }
 .popup.visible-on{
 	right:0 !important;

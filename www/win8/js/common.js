@@ -228,14 +228,14 @@ function CConfig() { // для наследования класса внутр�
 				img.hide();
 			}
 			//$('#popup-wrapper').css('z-index', 100);
-			$('#popup-wrapper').css('pointer-events', 'auto');
+			//$('#popup-wrapper').css('pointer-events', 'auto');
 			self.bgPopup.show();
 			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
 		})
 
 		// скрываем окно
-		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
+		$('body').on('click', '.close-popup,#popup-wrapper,#bg-popup', function(e){
 			var target = $(e.target);
 			if (
 					(!target.hasClass('close-popup') &&
@@ -256,13 +256,13 @@ function CConfig() { // для наследования класса внутр�
 			// iOS fix
 			setTimeout(function() {
 				//$('#popup-wrapper').css('z-index', 0);
-				$('#popup-wrapper').css('pointer-events', 'none');
+				//$('#popup-wrapper').css('pointer-events', 'none');
 			}, 1200);
 			return false;
 		})
 
 		// iOS fixes
-		$('body').on('touchstart', '#popup-wrapper', function(e) {
+		/*$('body').on('touchstart', '#popup-wrapper,#bg-popup', function(e) {
 			var target = $(e.target);
 			if (
 					(!target.hasClass('close-popup') &&
@@ -274,13 +274,13 @@ function CConfig() { // для наследования класса внутр�
 				return true;
 			}
 			$(this).click();
-		});
+		});*/
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
 			if($(this).hasClass('opacity-hide')){
 				//$('#popup-wrapper').css('z-index', 100);
-				$('#popup-wrapper').css('pointer-events', 'auto');
+				//$('#popup-wrapper').css('pointer-events', 'auto');
 				self.bgPopup.show();
 				$(this).removeClass('opacity-hide');
 				$('#rails').addClass('disabled');
