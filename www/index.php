@@ -10,5 +10,6 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
+setlocale(LC_ALL, 'ru_RU.UTF-8');
 header('Content-Type: text/html; charset=utf-8');
 Yii::createWebApplication($config)->run();

@@ -60,6 +60,31 @@ class DefaultController extends ExpertController
         ));
     }
 
+    public function actionConsult() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('consult',array(
+            'user' => $user,
+
+        ));
+    }
+
+    public function actionConsultSchedule() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render( 'consultschedule',array (
+            'user' => $user,
+        ));
+    }
+
+    public function actionCreateSchedule($consultSchedule) {
+
+
+        var_dump($consultSchedule);die;
+
+        $this->render( 'consultSchedule',array (
+            'user' => $user,
+        ));
+    }
+
     public function actionClosest() {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('closest',array(
@@ -67,29 +92,7 @@ class DefaultController extends ExpertController
         ));
     }
 
-    public function actionCallRequest($id)
-    {
-        $callRequest = CallRequest::model()->findByPk($id);
-        $this->render( 'callRequest',array (
-            'callRequest' => $callRequest,
-        ));
-    }
-
-    public function actionFinishedCallRequest($id){
-        $callRequest = CallRequest::model()->findByPk($id);
-        $this->render( 'finishedCallRequest',array (
-            'callRequest' => $callRequest,
-        ));
-    }
-
-    public function actionConsultGrath($id) {
-        $callRequest = CallRequest::model()->findByPk($id);
-        $this->render( 'consultgrath',array (
-            'callRequest' => $callRequest,
-        ));
-    }
-
-    public function actionUpdateStatus($id, $status, $call_time)
+     public function actionUpdateStatus($id, $status, $call_time)
     {
         $model = CallRequest::model()->findByPk($id);
         $user = User::model()->findByPk($model->caller_id);

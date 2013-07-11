@@ -16,6 +16,6 @@
 <div class="block bg-red">Ближайшая консультация: <b style="margin:8px 0;"><?php echo $callRequest ? $callRequest->call_time : 'Заявок нет'; ?></b></div>
 <a href="<?php echo $this->createUrl('requests'); ?>" title="" class="block bg-green">Ожидают подтверждения:<span class="count f-r"><?php echo count($user->getExpertCallRequests()); ?></span></a>
 <a href="<?php echo $this->createUrl('closest'); ?>" title="" class="block bg-green">Ближайшие консультации:<span class="count f-r"><?php echo count($user->getExpertClosest()); ?></span></a>
-<a href="<?php echo $this->createUrl('consultGrath'); ?>" title="" class="block bg-green">График консультаций:<span class="count f-r">**</span></a>
+<a href="<?php echo $this->createUrl('consultSchedule'); ?>" title="" class="block bg-green">График консультаций:<span class="count f-r">**</span></a>
 <a href="<?php echo $this->createUrl('price'); ?>" title="" class="block bg-green">Стоимость моих консультаций: <?php echo sprintf('%0.0f', $user->consult_price); ?>&nbsp;руб.</a>
 <a href="<?php echo $this->createUrl('stat'); ?>" title="" class="block bg-green">Статистика:</a>
