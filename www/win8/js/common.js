@@ -474,7 +474,8 @@ function CConfig() { // для наследования класса внутр�
 					id: item.id,
 					avatar: item.blog.user.avatar,
 					uid: item.blog.user.id,
-					user_name: item.blog.user.name || 'Эксперт'
+					user_name: item.blog.user.name || 'Эксперт',
+					time: item.time
 				});
 				if (preview) {
 					post.addClass('medium-width');
