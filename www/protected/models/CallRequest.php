@@ -158,9 +158,10 @@ class CallRequest extends CActiveRecord
     }
 
     protected function sendStatusMessage() {
+        $expert = User::model()->findByPk($this->caller_id);
         switch ( $this->status ) {
             case self::STATUS_CREATED:
-                $text = 'Заявка на консультацию эксперта ' . $this->caller_id . ' принята. Ее номер ' . $this->id;
+                $text = 'Заявка на консультацию эксперта ' . $expert->name . ' принята. Ее номер ' . $this->id;
                 break;
            /* case self::STATUS_MODERATED:
                 $text = 'Ваша заявка номер ' . $this->id . ' прошла проверку модератором.';
