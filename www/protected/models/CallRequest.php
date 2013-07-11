@@ -157,4 +157,25 @@ class CallRequest extends CActiveRecord
 
         }
     }
+
+    public function getStatusList() {
+        return array(
+            array(
+                'id' => self::STATUS_CREATED,
+                'value' => 'Ожидает проверки модератором',
+            ),
+            array(
+                'id' => self::STATUS_MODERATED,
+                'value' => 'Ожидает подтверждения экспертом',
+            ),
+            array(
+                'id' => self::STATUS_ACCEPTED,
+                'value' => 'Звонок подтверждён',
+            ),
+            array(
+                'id' => self::STATUS_COMPLETE,
+                'value' => 'Звонок осуществлён',
+            ),
+        );
+    }
 }

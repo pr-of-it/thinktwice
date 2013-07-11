@@ -25,7 +25,6 @@
         <?php echo $form->error($model,'user_id'); ?>
     </div>
 
-
     <div class="row">
         <?php echo $form->labelEx($model,'caller_id'); ?>
         <?php echo $form->dropDownList($model,'caller_id', CHtml::listData( User::model()->findAll(), 'id', 'email' )); ?>
@@ -45,13 +44,14 @@
 		<?php echo $form->error($model,'text'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php /*echo $form->textField($model,'status'); */?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
 
-	<div class="row">
+    <div class="row">
+        <?php echo $form->labelEx($model,'status'); ?>
+        <?php echo $form->dropDownList($model,'status', CHtml::listData( CallRequest::model()->getStatusList(), 'id', 'value' )); ?>
+        <?php echo $form->error($model,'status'); ?>
+    </div>
+
+    <div class="row">
 		<?php echo $form->labelEx($model,'call_time'); ?>
 		<?php echo $form->textField($model,'call_time'); ?>
 		<?php echo $form->error($model,'call_time'); ?>
@@ -77,9 +77,9 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'comments'); ?>
-		<?php /* echo $form->textField($model, 'comments'); */ ?>
-		<?php echo $form->error($model,'comments'); ?>
-
+		<?php echo $form->textField($model, 'comments_json');  ?>
+		<?php echo $form->error($model,'comments_json'); ?>
+    </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
