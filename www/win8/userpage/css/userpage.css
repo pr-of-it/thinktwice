@@ -412,7 +412,7 @@ width: 390px;
 	margin-left: 350px;
 }
 
-.popup.get-call .popup-head {
+.popup.get-call .popup-sidebar .popup-head {
 	color: white;
 	margin-bottom: 30px;
 }
@@ -740,7 +740,7 @@ outline:none;
 	padding: .5em 1em;
 	text-decoration: none;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected.ui-state-active {
+.ui-tabs .ui-tabs-nav li.ui-state-active {
 	margin-bottom: -1px;
 	padding-bottom: 1px;
 	border: 1px solid #9a9b96;
@@ -763,6 +763,10 @@ outline:none;
 }
 
 .ui-tabs .ui-tabs-panel.ui-tabs-hide {
+	display: none;
+}
+
+.do-confirm .error {
 	display: none;
 }
 

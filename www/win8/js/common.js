@@ -80,6 +80,8 @@ function CConfig() { // для наследования класса внутр�
 
 		self.bgPopup = $('#bg-popup');
 
+		$('.create-post').detach().appendTo('body');
+
 		window.onload = function(){
 			self.loadData();
 		};
@@ -166,7 +168,10 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#wrapper');
+			var container = $('#container');
+
+			if (self.rails.hasClass('disabled'))
+				return true;
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -206,7 +211,7 @@ function CConfig() { // для наследования класса внутр�
 
 			var popup = $('.window-post');
 			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			popup.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
+			popup.find('article.content div').html( target.find('.news-body div').html() );  // $post->text
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -224,6 +229,7 @@ function CConfig() { // для наследования класса внутр�
 			}
 			$('#popup-wrapper').css('z-index', 100);
 			self.bgPopup.show();
+			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
 		})
 
@@ -232,26 +238,47 @@ function CConfig() { // для наследования класса внутр�
 		// скрываем окно
 		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
 			var target = $(e.target);
-			if (!target.hasClass('close-popup') &&
-				(target.hasClass('window-post') || target.parents('.window-post').length)) {
+			if (
+					(!target.hasClass('close-popup') &&
+					(target.hasClass('window-post') || target.parents('.window-post').length))
+					||
+					(target.hasClass('create-post') || target.parents('.create-post').length)
+				)
+			{
 				return true;
 			}
+			//alert([target[0].tagName, target[0].classList+'', target[0].id])
+			$('#rails').removeClass('disabled')
+			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
+			$('#rails').removeClass('disabled')
 			$('#popup-wrapper').css('z-index', 0);
 			return false;
 		})
 
 		// iOS fix
 		$('body').on('touchstart', '#popup-wrapper', function(e) {
+			var target = $(e.target);
+			if (
+					(!target.hasClass('close-popup') &&
+					(target.hasClass('window-post') || target.parents('.window-post').length))
+					||
+					(target.hasClass('create-post') || target.parents('.create-post').length)
+				)
+			{
+				return true;
+			}
 			$(this).click();
 		});
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
 			if($(this).hasClass('opacity-hide')){
-				$(this).removeClass('opacity-hide')
-				$('#rails').addClass('disabled')
+				$('#popup-wrapper').css('z-index', 100);
+				self.bgPopup.show();
+				$(this).removeClass('opacity-hide');
+				$('#rails').addClass('disabled');
 			}
 
 			//else return false;
@@ -260,10 +287,12 @@ function CConfig() { // для наследования класса внутр�
 		// скрываем его
 		$(doc).on('click', '*', function(e){
 			var target = $(e.target)
-			if(!target.hasClass('create-post') && !target.closest('.create-post').length){
+			/*if(!target.hasClass('create-post') && !target.parents('.create-post').length){
 				$('#rails').removeClass('disabled')
 				$('.create-post').addClass('opacity-hide')
-			}
+				$('#popup-wrapper').css('z-index', 0);
+				self.bgPopup.hide();
+			}*/
 
 			// скрываем основное меню
 			if(!target.is('.interest-menu a') && $('.interest-menu').is(':visible'))

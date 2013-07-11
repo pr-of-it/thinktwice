@@ -24,16 +24,25 @@
                 </div>
                 <div class="do-confirm">
                     <?php if ( $user->phone_verified ): ?>
-                    <form class="confirm-number">
+                    <div class="confirm-number">
                         <span class="header">Подтвердить номер телефона</span><br>
-                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><input type="button" class="button-dark" value="Отправить"><br><br><br>
-                        <span class="text">Введите код</span><input type="text" size="5" name=""><br><br><br>
-                        <input type="button" class="button-yellow" value="Подтвердить">
-                    </form>
+                        <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><input type="button" class="button-dark change-phone" value="Отправить"><br><br><br>
+                        <span class="text code-label">Введите код</span><input type="text" size="5" name=""><br><br><br>
+                        <input type="button" class="button-yellow confirm" value="Подтвердить">
+                        <p class="error">Введите правильный код</p>
+                    </div>
                     <?php else : ?>
+                    <div class="change-number">
                         <span class="header">Ваш номер телефона:</span><br>
                         <span class="text">+7</span><input type="text" size="3" name="" value="<?php echo substr($user->phone, 1, 3); ?>"><input type="text" size="7" name="" value="<?php echo substr($user->phone, 4, 7); ?>"><br>
-                        <input type="button" class="button-yellow" value="Изменить">
+                        <input type="button" class="button-yellow change-phone" value="Изменить">
+                        <p class="error">Введите правильный номер телефона</p>
+                        <div class="confirm-number-2" style="display:none">
+                            <span class="text code-label">Введите код</span><input type="text" size="5" name=""><br><br><br>
+                            <input type="button" class="button-yellow confirm" value="Подтвердить">
+                            <p class="error">Введите правильный код</p>
+                        </div>
+                    </div>
                     <?php endif; ?>
                 </div>
                 <br><br>
@@ -206,41 +215,7 @@
 <?php endif; ?>
 
 <script>
-    $(function() {
-
-        $("#slider").slider({
-            range: "min",
-            min: 15,
-            max: 60,
-            step: 15,
-            value: 15,
-            slide: function(event, ui) {
-                var delay = function() {
-                    $( "#CallRequest_duration" ).val( ui.value );
-                    $( "#slider-result" ).html( ui.value*<?php echo $user->consult_price; ?> );
-                    $(".call-charge").html( ui.value*<?php echo $user->consult_price; ?> );
-                    $(".call-duration").html( ui.value+" минут" );
-                    var handleIndex = $(ui.handle).data('index.uiSliderHandle');
-                    var label = '#min';
-                    $(label).html(ui.value).position({
-                        my: 'center top',
-                        at: 'center bottom',
-                        of: ui.handle,
-                        offset: "0,15"
-                    });
-                };
-
-                // wait for the ui.handle to set its position
-                setTimeout(delay, 5);
-            }
-        });
-
-        $('#min').html($('#slider').slider('values', 0)).position({
-            my: 'center top',
-            at: 'center bottom',
-            of: $('#slider a:eq(0)'),
-            offset: "0, 10"
-        });
-
-    });
+    window.USER = {
+        consult_price: "<?php echo $user->consult_price; ?>"
+    }
 </script>

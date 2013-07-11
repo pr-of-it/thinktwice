@@ -11,18 +11,18 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/css/main.css"/>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/css/userpage.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/css/print.css"/>
+    <meta name= "viewport" content="width=device-width, initial-scale=.8, user-scalable=no">
+
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/css/ie.css" media="screen"/>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/selectivizr-min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!--[if lt IE 9]>
+
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-1.x.x.min.js"></script>
-    <![endif]-->
-    <!--[if gte IE 9]><!-->
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-2.x.x.min.js"></script>
-    <!--<![endif]-->
+
+
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/scripts.js"></script>
 
     <!--[if lte IE 9]>
@@ -36,8 +36,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <!--[if lte IE 8]>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/PIE_IE678.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-tabs.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/js/common.js?1"></script>
 </head>
 <body>
 

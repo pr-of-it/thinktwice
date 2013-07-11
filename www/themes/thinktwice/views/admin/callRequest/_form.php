@@ -47,7 +47,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
+		<?php /*echo $form->textField($model,'status'); */?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
@@ -74,6 +74,11 @@
 		<?php echo $form->textField($model,'duration'); ?>
 		<?php echo $form->error($model,'duration'); ?>
 	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model, 'comments'); ?>
+		<?php /* echo $form->textField($model, 'comments'); */ ?>
+		<?php echo $form->error($model,'comments'); ?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

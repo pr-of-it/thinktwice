@@ -39,9 +39,9 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1007"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1008"></script>
 </head>
-<body>
+<body class="index">
 
 <header id="header">
 
@@ -210,8 +210,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             </div>
             <article class="content">
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
-                <p>
-                </p>
+                <div>
+                </div>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
             </article>
