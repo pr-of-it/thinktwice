@@ -195,6 +195,9 @@ function CConfig() { // для наследования класса внутр�
 		 * Не выполнять этот бинд
 		 */
 		self.rails.on('click', '.news-box', function(e){
+			/*if($('.create-post').length && !$('.create-post').hasClass('opacity-hide')) {
+				return true;
+			}*/
 			var target = $(e.target)
 
 			if (target.hasClass('icon-category')) {
@@ -278,6 +281,8 @@ function CConfig() { // для наследования класса внутр�
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
+			if($('.window-post').hasClass('visible-on'))
+				return true;
 			if($(this).hasClass('opacity-hide')){
 				//$('#popup-wrapper').css('z-index', 100);
 				//$('#popup-wrapper').css('pointer-events', 'auto');
