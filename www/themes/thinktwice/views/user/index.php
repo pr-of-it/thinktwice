@@ -1,6 +1,7 @@
 <?php
 /* @var $this PrivateController */
 /* @var $user User */
+/* @var $currentUser User */
 /* @var $model CallRequest */
 ?>
 <section class="user-title">
@@ -363,6 +364,7 @@
 <div class="popup get-call">
     <?php $this->renderPartial('_callrequest', array(
         'user' => $user,
+        'currentUser' => $currentUser,
         'model' => $model,
     )); ?>
     <div class="close-popup"></div>
