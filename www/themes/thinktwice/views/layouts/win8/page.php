@@ -48,7 +48,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
     <section class="user-bar">
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
-        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.2f', $user->getAmount()); ?> руб.</a></div>
+        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); ?> руб.</a></div>
         <div class="user-name"><?php echo $user->name; ?></div>
     </section>
 

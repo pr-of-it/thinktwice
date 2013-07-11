@@ -48,8 +48,8 @@ class CallRequest extends CActiveRecord
 		return array(
 			array('user_id, caller_id, status, duration', 'numerical', 'integerOnly'=>true),
             array('user_id, caller_id, title, text, call_time, duration', 'required'),
-           # array('title', 'length', 'max'=>255),
-           # array('call_time, alter_call_time_1, alter_call_time_2', 'date' ),
+            # array('title', 'length', 'max'=>255),
+            # array('call_time, alter_call_time_1, alter_call_time_2', 'date' ),
             array('duration', 'numerical', 'min' => 15, 'tooSmall' => 'Продолжительность консультации не может быть менее 15 минут'),
 			array('title, text, call_time, alter_call_time_1, alter_call_time_2, duration, comments_json', 'safe'),
 			// The following rule is used by search().

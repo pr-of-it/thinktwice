@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 <h1>Стоимость консультаций</h1>
 <div class="bg-gray b-shadow price">
 
-    <div>Текущая стоимость:<span> <?php echo sprintf('%0.2f', $user->consult_price); ?>&nbsp;руб./мин.</span></div>
+    <div>Текущая стоимость:<span> <?php echo sprintf('%0.0f', $user->consult_price); ?>&nbsp;руб./мин.</span></div>
 
     <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'price-form',

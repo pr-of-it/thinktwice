@@ -132,7 +132,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 
 <h4>Ваш счет:</h4>
-<p>Сумма на счету: <?php echo sprintf("%01.2f", $user->getAmount()); ?></p>
+<p>Сумма на счету: <?php echo sprintf("%0.0f", $user->getAmount()); ?></p>
 
 <h6>Последние операции по счету:</h6>
 <table>
@@ -143,10 +143,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
         <tr>
             <td><?php echo $transaction->id; ?></td>
             <td><?php echo strstr($transaction->time,'.',true); ?></td>
-            <td><?php echo sprintf("%01.2f", $transaction->amount_before); ?></td>
+            <td><?php echo sprintf("%0.0f", $transaction->amount_before); ?></td>
 
             <td><?php
-                $formatted = sprintf("%01.2f", $transaction->amount);
+                $formatted = sprintf("%0.0f", $transaction->amount);
                 if($formatted >0){
                     echo $formatted;
                 }?></td>
@@ -154,7 +154,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     echo $formatted;
                 }?></td>
             <td><?php echo $transaction->reason; ?></td>
-            <td><?php echo sprintf("%01.2f", $transaction->amount_after) ?></td>
+            <td><?php echo sprintf("%0.0f", $transaction->amount_after) ?></td>
         </tr>
 
     <?php endforeach; ?>
