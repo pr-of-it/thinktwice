@@ -904,7 +904,7 @@ input.error{ border:1px solid red !important }
 	position:absolute;
 	top:212px; bottom:95px;
 	left:0; width:739px;
-	min-height:400px;
+	min-height:512px;
 	background:#e1e1db;
 	z-index:100;
 	-webkit-transition:all .5s;
