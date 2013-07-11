@@ -160,13 +160,13 @@ class CallRequest extends CActiveRecord
     protected function sendStatusMessage() {
         switch ( $this->status ) {
             case self::STATUS_CREATED:
-                $text = 'Вы создали заявку на звонок эксперту. Ее номер ' . $this->id;
+                $text = 'Заявка на консультацию эксперта ' . $this->caller_id . ' принята. Ее номер ' . $this->id;
                 break;
-            case self::STATUS_MODERATED:
+           /* case self::STATUS_MODERATED:
                 $text = 'Ваша заявка номер ' . $this->id . ' прошла проверку модератором.';
-                break;
+                break;*/
             case self::STATUS_ACCEPTED:
-                $text = 'Ваша заявка номер ' . $this->id . ' принята экспертом. Ожидайте звонка в ' . $this->call_time ;
+                $text = 'Эксперт подтвердил заявку на консультацию номер' . $this->id . ', вам позвонят ' . date('d.m.Y H:i', strtotime($this->call_time)) ;
                 break;
             case self::STATUS_COMPLETE:
                 $text = 'Звонок эксперта по заявке номер ' . $this->id . ' состоялся. Спасибо, что воспользовались нашим сервисом!';
