@@ -59,7 +59,7 @@ class User extends CActiveRecord
             array('email, password', 'required'),
             array('email', 'unique'),
             array('active, can_consult', 'boolean'),
-            array('consult_price', 'numerical'),
+            array('consult_price', 'default', 'value'=>0 ),
             array('password, name, email', 'length', 'max'=>255),
             array('register_time, update_time, roleid, avatar_file, phone', 'safe'),
             // The following rule is used by search().
