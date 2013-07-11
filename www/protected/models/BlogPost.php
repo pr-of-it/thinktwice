@@ -73,7 +73,7 @@ class BlogPost extends CActiveRecord
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
                 'createAttribute' => 'time',
-                'updateAttribute' => 'time',
+                'updateAttribute' => null,
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => new CDbExpression('NOW()'),
             ),
