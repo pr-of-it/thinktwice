@@ -160,7 +160,7 @@ function CConfig() { // для наследования класса внутр�
 			})
 		})();
 
-		$("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
+		$("#container").mousewheel(function (event, delta, deltaX, deltaY) {
 			this.scrollLeft += (deltaX * 30); // трекпад на маке
 			this.scrollLeft -= (deltaY * 30); // колесико мыши
 
@@ -238,13 +238,16 @@ function CConfig() { // для наследования класса внутр�
 		// скрываем окно
 		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
 			var target = $(e.target);
-			if (!target.hasClass('close-popup') &&
-				(target.hasClass('window-post') || target.parents('.window-post').length)) {
+			if (
+					(!target.hasClass('close-popup') &&
+					(target.hasClass('window-post') || target.parents('.window-post').length))
+					||
+					(target.hasClass('create-post') || target.parents('.create-post').length)
+				)
+			{
 				return true;
 			}
-			if(target.hasClass('create-post') || target.parents('.create-post').length) {
-				return true;
-			}
+			alert([target[0].tagName, target[0].classList+'', target[0].id])
 			$('#rails').removeClass('disabled')
 			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
@@ -256,6 +259,16 @@ function CConfig() { // для наследования класса внутр�
 
 		// iOS fix
 		$('body').on('touchstart', '#popup-wrapper,#bg-popup', function(e) {
+			var target = $(e.target);
+			if (
+					(!target.hasClass('close-popup') &&
+					(target.hasClass('window-post') || target.parents('.window-post').length))
+					||
+					(target.hasClass('create-post') || target.parents('.create-post').length)
+				)
+			{
+				return true;
+			}
 			$('#popup-wrapper').click();
 		});
 

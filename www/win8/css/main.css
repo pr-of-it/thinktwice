@@ -1720,6 +1720,7 @@ screen and (min-device-width: 1024px) and (min-height: 48em)
 	#rails.page-lenta:first-child { padding-left: 90px;}
 	#rails.quick-start:first-child { padding-left: 871px }
 	.link-reg.button-yellow { left: -105px; }
+	.create-post.opacity-hide { left: -685px;}
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {

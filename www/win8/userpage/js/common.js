@@ -340,7 +340,7 @@ $(function () {
 			$.get(makeUrl('/user/ajaxVerifyPhoneCode'), {
 				code: code
 				}, function(data) {
-					//console.log(data);
+					console.log(data);
 					if (data === true) {
 						parent.find('input[type=text][size=5]').hide();
 						parent.find('input[type=button].confirm').hide();
