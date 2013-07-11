@@ -741,6 +741,9 @@ $(function () {
 	var ckconf = {
 		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
 		height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+		uiColor: '#e1e1db',
+		dialog_backgroundCoverColor: 'black',
+		dialog_backgroundCoverOpacity: 0.6,
 		language: 'ru'
 	};
 	var editor = CKEDITOR.replace('post-editor', ckconf);
