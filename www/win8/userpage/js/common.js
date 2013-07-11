@@ -342,7 +342,8 @@ $(function () {
 				}, function(data) {
 					//console.log(data);
 					if (data === true) {
-						parent.find('input,.text,.header,br').hide();
+						parent.find('input,.text,br').hide();
+						parent.find('.header').text('Эксперт будет звонить на номер:')
 						parent.append('<span class="text">+7 (' + phone.substr(0, 3) + ') ' + phone.substr(3, 7));
 					} else {
 						error.text('Неправильный код.').show();

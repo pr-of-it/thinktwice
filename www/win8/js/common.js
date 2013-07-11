@@ -363,11 +363,12 @@ function CConfig() { // для наследования класса внутр�
 		if (date.getDate() == now.getDate() &&
 				date.getMonth() == now.getMonth() &&
 				date.getFullYear() == now.getFullYear()) {
-			if (date.getHours() == now.getHours()) {
-				if (now.getMinutes() - date.getMinutes() <= 3)
-					timeFormat = 'сейчас';
-				else if (now.getMinutes() - date.getMinutes() <= 60)
-					timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+			var dateMinutes = date.getHours()*60 + date.getMinutes(),
+				nowMinutes = now.getHours()*60 + now.getMinutes();
+			if (nowMinutes - dateMinutes  <= 3) {
+				timeFormat = 'сейчас';
+			} else if (nowMinutes - dateMinutes <= 60) {
+				timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
