@@ -1,20 +1,20 @@
 (function() {
-    var days = ['воскрусенье','понедельни','вторник','среда','четверг','пятница','суббота'];
+	var days = ['воскрусенье','понедельни','вторник','среда','четверг','пятница','суббота'];
 
-    var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+	var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 
-    Date.prototype.getMonthName = function() {
-        return months[ this.getMonth() ];
-    };
-    Date.prototype.getDayName = function() {
-        return days[ this.getDay() ];
-    };
-    Date.fromDateTimeString = function(dateStr) {
+	Date.prototype.getMonthName = function() {
+		return months[ this.getMonth() ];
+	};
+	Date.prototype.getDayName = function() {
+		return days[ this.getDay() ];
+	};
+	Date.fromDateTimeString = function(dateStr) {
 		var dt = dateStr.split(/[ T]/),
 			d = dt[0].split('-'),
 			t = dt[1].split(':');
 		return new Date(d[0], (d[1]-1), d[2], t[0], t[1], t[2]);
-    };
+	};
 })();
 function CConfig() { // для наследования класса внутри нового клаcса - CConfig.apply(this);
 	var self = this,
@@ -570,7 +570,7 @@ function CConfig() { // для наследования класса внутр�
 
 	self.fixPostPositions = function(force) {
 		if ( (self.viewLines === 1 && self._isTwoLinesMediaQueryActive()) ||
-		     (self.viewLines === 2 && force) ) {
+			 (self.viewLines === 2 && force) ) {
 
 			self.viewLines = 2;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
@@ -606,7 +606,7 @@ function CConfig() { // для наследования класса внутр�
 			});
 			self.setWidth('set');
 		} else if ( (self.viewLines === 2 && !self._isTwoLinesMediaQueryActive()) ||
-		            (self.viewLines === 1 && force) ) {
+					(self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
@@ -731,8 +731,15 @@ $(function () {
 
 	var ckconf = {
 		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+		height: ($('.wysiwyg-text-field').height() - 50) + 'px',
 		language: 'ru'
 	};
-	CKEDITOR.replace('post-editor', ckconf);
+	var editor = CKEDITOR.replace('post-editor', ckconf);
+
+	editor.on('contentDom', function() {
+		this.document.on('click', function(event){
+			$('.create-post').click()
+		});
+	});
 
 }); // dom ready
