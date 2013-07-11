@@ -227,13 +227,12 @@ function CConfig() { // для наследования класса внутр�
 			} else {
 				img.hide();
 			}
-			$('#popup-wrapper').css('z-index', 100);
+			//$('#popup-wrapper').css('z-index', 100);
+			$('#popup-wrapper').css('pointer-events', 'auto');
 			self.bgPopup.show();
 			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
 		})
-
-
 
 		// скрываем окно
 		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
@@ -253,11 +252,16 @@ function CConfig() { // для наследования класса внутр�
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
 			$('#rails').removeClass('disabled')
-			$('#popup-wrapper').css('z-index', 0);
+			
+			// iOS fix
+			setTimeout(function() {
+				//$('#popup-wrapper').css('z-index', 0);
+				$('#popup-wrapper').css('pointer-events', 'none');
+			}, 1200);
 			return false;
 		})
 
-		// iOS fix
+		// iOS fixes
 		$('body').on('touchstart', '#popup-wrapper', function(e) {
 			var target = $(e.target);
 			if (
@@ -275,7 +279,8 @@ function CConfig() { // для наследования класса внутр�
 		// открываем редактор для поста
 		$('.create-post').click(function(){
 			if($(this).hasClass('opacity-hide')){
-				$('#popup-wrapper').css('z-index', 100);
+				//$('#popup-wrapper').css('z-index', 100);
+				$('#popup-wrapper').css('pointer-events', 'auto');
 				self.bgPopup.show();
 				$(this).removeClass('opacity-hide');
 				$('#rails').addClass('disabled');
@@ -324,6 +329,8 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		$("#wrapper").scroll(function () {
+			if (self.rails.hasClass('disabled'))
+				return false;
 			var width = self.setWidth() - 300;
 			var scroll = $(this).scrollLeft() + $(window).width();
 
