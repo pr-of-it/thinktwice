@@ -75,11 +75,6 @@
 		<?php echo $form->error($model,'duration'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'comments'); ?>
-		<?php echo $form->textField($model, 'comments_json');  ?>
-		<?php echo $form->error($model,'comments_json'); ?>
-    </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

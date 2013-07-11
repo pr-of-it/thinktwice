@@ -28,6 +28,8 @@ class CallRequest extends CActiveRecord
 
     public $comments = array();
 
+    public $_old_status = -1;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -136,14 +138,43 @@ class CallRequest extends CActiveRecord
 		return parent::model($className);
 	}
 
-    public function beforeSave() {
+    protected function afterFind() {
+        $this->_old_status = $this->status;
+        $this->comments = json_decode($this->comments_json);
+    }
+
+    protected function beforeSave() {
         $this->comments_json = json_encode($this->comments);
         return parent::beforeSave();
     }
 
-    public function afterSave() {
+    protected function afterSave() {
+        if ( $this->status != $this->_old_status ) {
+            $this->sendStatusMessage();
+            $this->_old_status = $this->status;
+        }
         $this->comments = json_decode($this->comments_json);
         return parent::afterSave();
+    }
+
+    protected function sendStatusMessage() {
+        switch ( $this->status ) {
+            case self::STATUS_CREATED:
+                $text = 'Вы создали заявку на звонок эксперту. Ее номер ' . $this->id;
+                break;
+            case self::STATUS_MODERATED:
+                $text = 'Ваша заявка номер ' . $this->id . ' прошла проверку модератором.';
+                break;
+            case self::STATUS_ACCEPTED:
+                $text = 'Ваша заявка номер ' . $this->id . ' принята экспертом. Ожидайте звонка в ' . $this->call_time ;
+                break;
+            case self::STATUS_COMPLETE:
+                $text = 'Звонок эксперта по заявке номер ' . $this->id . ' состоялся. Спасибо, что воспользовались нашим сервисом!';
+                break;
+
+        }
+        $user = User::model()->findByPk($this->user_id);
+        $user->sendMessage('Заявка на звонок эксперта', $text, array('sms'));
     }
 
     public function getStatusDesc() {
