@@ -31,8 +31,11 @@
 		<?php echo $form->error($model,'text'); ?>
 	</div>
 
-
-
+    <div class="row">
+        <?php echo $form->labelEx($model,'time'); ?>
+        <?php echo $form->textField($model,'time'); ?>
+        <?php echo $form->error($model,'time'); ?>
+    </div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
