@@ -18,15 +18,15 @@
         <header>
             <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255, 'placeholder'=>'Тема моего совета')); ?>
             <?php echo $form->error($model,'title'); ?>
-            <ul class="controlls-fonts">
+            <!--<ul class="controlls-fonts">
                 <li class="set_font-bold">b</li>
                 <li class="set_font-italic">i</li>
                 <li class="set_font-link">link</li>
                 <li class="set_font-fullscreen">на весь экран</li>
-            </ul>
+            </ul>-->
         </header>
-        <div class="text-field">
-            <?php echo $form->textArea($model,'text'); ?>
+        <div class="wysiwyg-text-field">
+            <?php echo $form->textArea($model,'text', array('id'=>'post-editor')); ?>
              <?php echo $form->error($model,'text'); ?>
         </div>
         <div class="tag-attach-box">

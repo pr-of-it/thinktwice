@@ -728,4 +728,11 @@ $(function () {
 			PIE.attach(this);
 		});
 	}
+
+	var ckconf = {
+		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+		language: 'ru'
+	};
+	CKEDITOR.replace('post-editor', ckconf);
+
 }); // dom ready
