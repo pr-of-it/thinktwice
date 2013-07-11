@@ -278,6 +278,8 @@ function CConfig() { // для наследования класса внутр�
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
+			if($('.window-post').hasClass('visible-on'))
+				return true;
 			if($(this).hasClass('opacity-hide')){
 				//$('#popup-wrapper').css('z-index', 100);
 				//$('#popup-wrapper').css('pointer-events', 'auto');
@@ -739,6 +741,9 @@ $(function () {
 	var ckconf = {
 		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
 		height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+		uiColor: '#e1e1db',
+		dialog_backgroundCoverColor: 'black',
+		dialog_backgroundCoverOpacity: 0.6,
 		language: 'ru'
 	};
 	var editor = CKEDITOR.replace('post-editor', ckconf);
