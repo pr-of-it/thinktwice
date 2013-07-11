@@ -963,7 +963,19 @@ input.error{ border:1px solid red !important }
     -moz-box-sizing: border-box; /*Firefox 1-3*/
     -webkit-box-sizing: border-box; /* Safari */
 }
+.wysiwyg-text-field{
+	position:absolute;
+	left:19px; top:80px;
+	bottom:246px; right:22px;
+	color:#112d36;
+	overflow:auto;
+}
 .text-field textarea {
+	width: 99.9%; height: 100%;
+	font:16px/20px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+	padding: 0; margin: 0; border: none;
+}
+.wysiwyg-text-field textarea {
 	width: 99.9%; height: 100%;
 	font:16px/20px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
 	padding: 0; margin: 0; border: none;
