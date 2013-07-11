@@ -3,11 +3,12 @@ Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
+html { margin: 0; padding: 0;}
 body
 {
 	/* Font */
-	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
-	font-size: 12px;
+	font:400 13px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+
 
 	/* Text color */
 	color: #333;
@@ -15,7 +16,7 @@ body
 	/* Remove the background color to make it transparent */
 	background-color: #fff;
 
-	margin: 20px;
+	margin: -5px 9px 9px;
 }
 
 .cke_editable
