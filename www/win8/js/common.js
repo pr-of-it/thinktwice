@@ -195,9 +195,6 @@ function CConfig() { // для наследования класса внутр�
 		 * Не выполнять этот бинд
 		 */
 		self.rails.on('click', '.news-box', function(e){
-			/*if($('.create-post').length && !$('.create-post').hasClass('opacity-hide')) {
-				return true;
-			}*/
 			var target = $(e.target)
 
 			if (target.hasClass('icon-category')) {
