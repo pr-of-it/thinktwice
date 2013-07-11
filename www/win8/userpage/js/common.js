@@ -311,8 +311,8 @@ $(function () {
 					phone: '7' + phone
 				}, function(data) {
 					var code = data.code;
-					console.log(phone, code);
-					changeButton.hide();
+					//console.log(phone, code);
+					changeButton.prop('disabled', true).css('opacity', .5);
 					parent.find('input[type=text][size=5]').show();
 					parent.find('input[type=button].confirm').show();
 					var label = parent.find('.text-code-label');
@@ -340,11 +340,10 @@ $(function () {
 			$.get(makeUrl('/user/ajaxVerifyPhoneCode'), {
 				code: code
 				}, function(data) {
-					console.log(data);
+					//console.log(data);
 					if (data === true) {
-						parent.find('input[type=text][size=5]').hide();
-						parent.find('input[type=button].confirm').hide();
-						parent.find('.code-label').hide();
+						parent.find('input,.text,.header,br').hide();
+						parent.append('<span class="text">+7 (' + phone.substr(0, 3) + ') ' + phone.substr(3, 7));
 					} else {
 						error.text('Неправильный код.').show();
 					}
