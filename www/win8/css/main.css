@@ -893,6 +893,12 @@ input.error{ border:1px solid red !important }
 	line-height:21px;
 	margin:0 0 21px;
 }
+.popup-content .window-post-image {
+	width: 625px;
+	height: 417px;
+	background-size: cover;
+	background-position: center;
+}
 .popup-content address{
 	margin:0 0 35px;
 }
