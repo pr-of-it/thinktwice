@@ -26,12 +26,17 @@
     </tr></table>
     <?php $hours = array ('10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00', '16:00 - 18:00', '18:00 - 20:00', '20:00 - 22:00'); ?>
     <?php for ( $day=1; $day <= 7; $day++ ): ?>
-
             <div class="shedule-one-day" id="shedule-one-day-<?php echo $day; ?>"<?php if ($day!=1): ?> style="display:none;"<?php endif; ?>>
                  <?php foreach ( $hours as $h ) :?>
                    <div>
                         <?php echo $h; ?>
-                        <input type = "checkbox" name = "WorkTime[<?php echo $day; ?>][]" value = "<?php echo $h; ?>"<?php if (in_array($h, $user->consultSchedule->$day)) : ?> checked="checked"<?php endif; ?> />
+                        <input
+                            type="checkbox"
+                            name="WorkTime[<?php echo $day; ?>][]"
+                            value="<?php echo $h; ?>"
+                            <?php if (isset($user->consultSchedule->$day) && in_array($h, $user->consultSchedule->$day)) : ?>
+                            checked="checked"<?php endif; ?>
+                        />
                    </div>
                  <?php endforeach ?>
             </div>
