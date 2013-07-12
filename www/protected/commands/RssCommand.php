@@ -110,7 +110,7 @@ class RssCommand extends CConsoleCommand {
                 fwrite($file, $imageStr);
                 fclose($file);
 
-                $post->image = $imageFileDir . DIRECTORY_SEPARATOR . $imageFileName . '.' . $imageExtension;
+                $post->image = str_replace('\\', '/', $imageFileDir) . '/' . $imageFileName . '.' . $imageExtension;
 
             }
 

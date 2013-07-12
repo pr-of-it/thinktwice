@@ -21,7 +21,12 @@ return array(
             $xml = str_replace("enclosure", "image", $xml);
             $xml = str_replace("yandex:full-text", "text", $xml);
             return $xml;
-        }
+        },
+
+        'http://static.feed.rbc.ru/rbc/internal/rss.rbc.ru/rbc.ru/economics.rss' => function ($xml) {
+            $xml = str_replace("enclosure", "image", $xml);
+            return $xml;
+        },
 
     )
 );
