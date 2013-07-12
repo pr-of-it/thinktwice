@@ -377,7 +377,7 @@ function CConfig() { // для наследования класса внутр�
 			if (nowMinutes - dateMinutes  <= 3) {
 				timeFormat = 'сейчас';
 			} else if (nowMinutes - dateMinutes <= 60) {
-				timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
