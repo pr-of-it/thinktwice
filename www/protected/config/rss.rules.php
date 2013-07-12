@@ -33,5 +33,10 @@ return array(
             return $xml;
         },
 
+        'http://static.feed.rbc.ru/rbc/internal/rss.rbc.ru/rbcdaily.ru/industry_news.rss' => function ($xml) {
+            $xml = str_replace("enclosure", "image", $xml);
+            return $xml;
+        },
+
     )
 );
