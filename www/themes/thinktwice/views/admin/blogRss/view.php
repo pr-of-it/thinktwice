@@ -25,5 +25,6 @@ $this->menu=array(
 		'blog_id',
 		'title',
 		'url',
+        'active',
 	),
 )); ?>
