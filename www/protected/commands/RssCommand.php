@@ -12,6 +12,9 @@ class RssCommand extends CConsoleCommand {
         $rssStreams = BlogRss::model()->findAll();
         foreach ( $rssStreams as $stream ) {
 
+            if ( !$stream->active )
+                continue;
+
             // Получаем ленту в виде текста
             echo "RSS stream {$stream->title} (#{$stream->id}) processing start\n";
             $rssXML = file_get_contents($stream->url);
@@ -110,7 +113,7 @@ class RssCommand extends CConsoleCommand {
                 fwrite($file, $imageStr);
                 fclose($file);
 
-                $post->image = $imageFileDir . DIRECTORY_SEPARATOR . $imageFileName . '.' . $imageExtension;
+                $post->image = str_replace('\\', '/', $imageFileDir) . '/' . $imageFileName . '.' . $imageExtension;
 
             }
 
