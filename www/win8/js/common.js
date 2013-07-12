@@ -377,7 +377,7 @@ function CConfig() { // для наследования класса внутр�
 			if (nowMinutes - dateMinutes  <= 3) {
 				timeFormat = 'сейчас';
 			} else if (nowMinutes - dateMinutes <= 60) {
-				timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
@@ -738,20 +738,22 @@ $(function () {
 		});
 	}
 
-	var ckconf = {
-		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-		height: ($('.wysiwyg-text-field').height() - 50) + 'px',
-		uiColor: '#e1e1db',
-		dialog_backgroundCoverColor: 'black',
-		dialog_backgroundCoverOpacity: 0.6,
-		language: 'ru'
-	};
-	var editor = CKEDITOR.replace('post-editor', ckconf);
+	if ($('#post-editor').length) {
+		var ckconf = {
+			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+			height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+			uiColor: '#e1e1db',
+			dialog_backgroundCoverColor: 'black',
+			dialog_backgroundCoverOpacity: 0.6,
+			language: 'ru'
+		};
+		var editor = CKEDITOR.replace('post-editor', ckconf);
 
-	editor.on('contentDom', function() {
-		this.document.on('click', function(event){
-			$('.create-post').click()
+		editor.on('contentDom', function() {
+			this.document.on('click', function(event){
+				$('.create-post').click()
+			});
 		});
-	});
+	}
 
 }); // dom ready

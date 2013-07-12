@@ -75,14 +75,13 @@ class DefaultController extends ExpertController
         ));
     }
 
-    public function actionCreateSchedule($consultSchedule) {
+    public function actionCreateSchedule($id) {
+        $user = User::model()->findByPk($id);
+        $user->consultSchedule = $_POST['WorkTime'];
+        $user->save();
 
+        $this->redirect(array('index'));
 
-        var_dump($consultSchedule);die;
-
-        $this->render( 'consultSchedule',array (
-            'user' => $user,
-        ));
     }
 
     public function actionClosest() {

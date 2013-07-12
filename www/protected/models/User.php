@@ -17,7 +17,7 @@
  * @property string $avatar_file
  * @property string $phone_verify_code
  * @property integer $phone_verified
- * @property string $consult_schedule_json
+ * @property text $consult_schedule_json
  * @property string $amount
  *
  * The followings are the available model relations:
