@@ -81,12 +81,9 @@ class DefaultController extends ExpertController
 
     public function actionCreateSchedule($id) {
         $user = User::model()->findByPk($id);
-
         $user->consultSchedule = $_POST['WorkTime'];
         $user->save();
-
         $this->redirect(array('index'));
-
     }
 
     public function actionClosest() {
