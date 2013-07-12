@@ -211,7 +211,7 @@ function CConfig() { // для наследования класса внутр�
 
 			var popup = $('.window-post');
 			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			popup.find('article.content div').html( target.find('.news-body div').html() );  // $post->text
+			popup.find('div.window-post-text').html( target.find('.news-body div').html() );  // $post->text
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -219,16 +219,14 @@ function CConfig() { // для наследования класса внутр�
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
 			var imgTarget = target.find('.image-gallery-min-full'),
-				img = popup.find('article img:first');
+				img = popup.find('div.window-post-image');
 			if (imgTarget.length) {
-				var src = imgTarget.css('background-image');
-				img[0].src = src.replace(/^url\(/, '').replace(/\)$/, '');
+				var bg = imgTarget.css('background-image');
+				img.css('background-image', bg);
 				img.show();
 			} else {
 				img.hide();
 			}
-			//$('#popup-wrapper').css('z-index', 100);
-			//$('#popup-wrapper').css('pointer-events', 'auto');
 			self.bgPopup.show();
 			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
@@ -246,35 +244,14 @@ function CConfig() { // для наследования класса внутр�
 			{
 				return true;
 			}
-			//alert([target[0].tagName, target[0].classList+'', target[0].id])
 			$('#rails').removeClass('disabled')
 			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
 			$('#rails').removeClass('disabled')
-			
-			// iOS fix
-			setTimeout(function() {
-				//$('#popup-wrapper').css('z-index', 0);
-				//$('#popup-wrapper').css('pointer-events', 'none');
-			}, 1200);
+
 			return false;
 		})
-
-		// iOS fixes
-		/*$('body').on('touchstart', '#popup-wrapper,#bg-popup', function(e) {
-			var target = $(e.target);
-			if (
-					(!target.hasClass('close-popup') &&
-					(target.hasClass('window-post') || target.parents('.window-post').length))
-					||
-					(target.hasClass('create-post') || target.parents('.create-post').length)
-				)
-			{
-				return true;
-			}
-			$(this).click();
-		});*/
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
@@ -377,7 +354,7 @@ function CConfig() { // для наследования класса внутр�
 			if (nowMinutes - dateMinutes  <= 3) {
 				timeFormat = 'сейчас';
 			} else if (nowMinutes - dateMinutes <= 60) {
-				timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
@@ -738,20 +715,22 @@ $(function () {
 		});
 	}
 
-	var ckconf = {
-		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-		height: ($('.wysiwyg-text-field').height() - 50) + 'px',
-		uiColor: '#e1e1db',
-		dialog_backgroundCoverColor: 'black',
-		dialog_backgroundCoverOpacity: 0.6,
-		language: 'ru'
-	};
-	var editor = CKEDITOR.replace('post-editor', ckconf);
+	if ($('#post-editor').length) {
+		var ckconf = {
+			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+			height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+			uiColor: '#e1e1db',
+			dialog_backgroundCoverColor: 'black',
+			dialog_backgroundCoverOpacity: 0.6,
+			language: 'ru'
+		};
+		var editor = CKEDITOR.replace('post-editor', ckconf);
 
-	editor.on('contentDom', function() {
-		this.document.on('click', function(event){
-			$('.create-post').click()
+		editor.on('contentDom', function() {
+			this.document.on('click', function(event){
+				$('.create-post').click()
+			});
 		});
-	});
+	}
 
 }); // dom ready
