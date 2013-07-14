@@ -40,9 +40,10 @@ class Controller extends CController
             $uri = preg_replace("/[\&]?$/", "", $uri);
             $uri = preg_replace("/\/token\/" . $token . "/", "", $uri);
 
-            Yii::app()->user->returnUrl = $uri;
-
-            $this->redirect($this->createAbsoluteUrl('/site/login', array('token'=>$token)));
+            $this->redirect($this->createAbsoluteUrl('/site/login', array(
+                'token'=>$token,
+                'returnUrl' => $uri,
+            )));
 
         }
 

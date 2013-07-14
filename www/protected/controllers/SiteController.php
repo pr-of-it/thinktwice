@@ -246,7 +246,8 @@ class SiteController extends Controller
 
             if ( $identity->authenticate() ) {
                 Yii::app()->user->login($identity, 3600*24*30);
-                $this->redirect(Yii::app()->user->returnUrl);
+                // @todo На dev-сайте не работает ->user->returnUrl, поэтому такое кривое решение
+                $this->redirect(Yii::app()->request->getQuery('returnUrl'));
             } else {
                 $this->redirect($this->createAbsoluteUrl('/site/login'));
             }
