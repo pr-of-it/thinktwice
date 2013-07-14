@@ -190,7 +190,15 @@ class CallRequest extends CActiveRecord
                 $user->sendMessage($subject, $text, $methods);
                 break;
             case self::STATUS_MODERATED:
-                $text = 'Поступила новая заявка на консультацию номер ' . $this->id . ': ' . Yii::app()->createAbsoluteUrl('/expert/default/requests', array('#' => 'request-' . $this->id) );;
+                $token = $expert->getAuthToken();
+                $text = 'Поступила новая заявка на консультацию номер ' . $this->id . ': ' .
+                    Yii::app()->createAbsoluteUrl(
+                        '/expert/default/requests',
+                        array(
+                            'token' => $token,
+                            '#' => 'request-' . $this->id
+                        )
+                    );
                 $expert->sendMessage($subject, $text, $methods);
                 break;
             case self::STATUS_ACCEPTED:

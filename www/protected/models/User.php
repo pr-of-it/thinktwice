@@ -18,7 +18,11 @@
  * @property string $phone_verify_code
  * @property integer $phone_verified
  * @property text $consult_schedule_json
+ * @property string $auth_token
+ * @property string $auth_token_expire
+ *
  * @property string $amount
+ * @property string avatar
  *
  * The followings are the available model relations:
  * @property UserRole $role
@@ -26,14 +30,22 @@
  * @property User[] $followers
  * @property UserTransaction[] $transactions
  * @property UserTransactionIncomplete[] $transactions_incomplete
- *
  * @property Blog $blog
+ * @property Blog[] $subscriptions
  *
  */
 class User extends CActiveRecord
 {
 
+    /**
+     * Путь, где хранятся файлы аватаров пользователей
+     */
     const AVATAR_UPLOAD_PATH = '/upload/avatars/';
+
+    /**
+     * Время жизни токена авторизации, в секундах
+     */
+    const AUTH_TOKEN_EXPIRE_TIME = 86400;
 
     /**
      * @var string $avatar
@@ -88,6 +100,22 @@ class User extends CActiveRecord
             'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'subscriptions.type=' . Blog::SUBSCRIPT_BLOG),
 
         );
+    }
+
+    /*
+     * Авторизация через токен
+     */
+    public function getAuthToken() {
+        if ( empty($this->auth_token) || time() > strtotime($this->auth_token_expire) ) {
+            $this->generateAuthToken();
+        }
+        return $this->auth_token;
+    }
+
+    public function generateAuthToken() {
+        $this->auth_token = substr(md5($this->register_time), 0, 2) . base_convert(time(), 10, 36);
+        $this->auth_token_expire = date('Y-m-d H:i:s', time()+self::AUTH_TOKEN_EXPIRE_TIME);
+        $this->save();
     }
 
     /*
