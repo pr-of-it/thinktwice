@@ -17,7 +17,7 @@
  * @property string $avatar_file
  * @property string $phone_verify_code
  * @property integer $phone_verified
- *
+ * @property text $consult_schedule_json
  * @property string $amount
  *
  * The followings are the available model relations:
@@ -40,6 +40,9 @@ class User extends CActiveRecord
      */
     public $avatar;
 
+    public $consultSchedule = array();
+
+
     /**
      * @return string the associated database table name
      */
@@ -59,12 +62,12 @@ class User extends CActiveRecord
             array('email, password', 'required'),
             array('email', 'unique'),
             array('active, can_consult', 'boolean'),
-            array('consult_price', 'numerical'),
+            array('consult_price', 'default', 'value'=>0 ),
             array('password, name, email', 'length', 'max'=>255),
             array('register_time, update_time, roleid, avatar_file, phone', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar_file, consult_price', 'safe', 'on'=>'search'),
+            array('name, email, phone, register_time, update_time, roleid, active, can_consult, avatar_file, consult_price, consult_schedule_json', 'safe', 'on'=>'search'),
         );
     }
 
@@ -332,6 +335,8 @@ class User extends CActiveRecord
         } else {
             $this->avatar = Yii::app()->baseUrl . self::AVATAR_UPLOAD_PATH . 'empty.jpg';
         }
+
+        $this->consultSchedule = json_decode($this->consult_schedule_json);
         return parent::afterFind();
     }
 
@@ -344,6 +349,9 @@ class User extends CActiveRecord
                 $this->password = self::cryptPassword($this->password);
             }
         }
+
+        $this->consult_schedule_json = json_encode($this->consultSchedule);
+
         return parent::beforeSave();
     }
 

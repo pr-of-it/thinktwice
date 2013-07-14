@@ -1,20 +1,20 @@
 (function() {
-    var days = ['воскрусенье','понедельни','вторник','среда','четверг','пятница','суббота'];
+	var days = ['воскрусенье','понедельни','вторник','среда','четверг','пятница','суббота'];
 
-    var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+	var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 
-    Date.prototype.getMonthName = function() {
-        return months[ this.getMonth() ];
-    };
-    Date.prototype.getDayName = function() {
-        return days[ this.getDay() ];
-    };
-    Date.fromDateTimeString = function(dateStr) {
+	Date.prototype.getMonthName = function() {
+		return months[ this.getMonth() ];
+	};
+	Date.prototype.getDayName = function() {
+		return days[ this.getDay() ];
+	};
+	Date.fromDateTimeString = function(dateStr) {
 		var dt = dateStr.split(/[ T]/),
 			d = dt[0].split('-'),
 			t = dt[1].split(':');
 		return new Date(d[0], (d[1]-1), d[2], t[0], t[1], t[2]);
-    };
+	};
 })();
 function CConfig() { // для наследования класса внутри нового клаcса - CConfig.apply(this);
 	var self = this,
@@ -168,7 +168,10 @@ function CConfig() { // для наследования класса внутр�
 		});
 
 		$(document).keydown(function (e) {
-			var container = $('#wrapper');
+			var container = $('#container');
+
+			if (self.rails.hasClass('disabled'))
+				return true;
 
 			if (e.keyCode == 37) {
 				container.animate({
@@ -208,7 +211,7 @@ function CConfig() { // для наследования класса внутр�
 
 			var popup = $('.window-post');
 			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			popup.find('article.content p').html( target.find('.news-body p').html() );  // $post->text
+			popup.find('div.window-post-text').html( target.find('.news-body div').html() );  // $post->text
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 			
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -216,51 +219,50 @@ function CConfig() { // для наследования класса внутр�
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
 			var imgTarget = target.find('.image-gallery-min-full'),
-				img = popup.find('article img:first');
+				img = popup.find('div.window-post-image');
 			if (imgTarget.length) {
-				var src = imgTarget.css('background-image');
-				img[0].src = src.replace(/^url\(/, '').replace(/\)$/, '');
+				var bg = imgTarget.css('background-image');
+				img.css('background-image', bg);
 				img.show();
 			} else {
 				img.hide();
 			}
-			$('#popup-wrapper').css('z-index', 100);
 			self.bgPopup.show();
+			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
 		})
 
-
-
 		// скрываем окно
-		$('body').on('click', '.close-popup,#popup-wrapper', function(e){
+		$('body').on('click', '.close-popup,#popup-wrapper,#bg-popup', function(e){
 			var target = $(e.target);
-			if (!target.hasClass('close-popup') &&
-				(target.hasClass('window-post') || target.parents('.window-post').length)) {
-				return true;
-			}
-			if(target.hasClass('create-post') || target.parents('.create-post').length) {
+			if (
+					(!target.hasClass('close-popup') &&
+					(target.hasClass('window-post') || target.parents('.window-post').length))
+					||
+					(target.hasClass('create-post') || target.parents('.create-post').length)
+				)
+			{
 				return true;
 			}
 			$('#rails').removeClass('disabled')
 			$('.create-post').addClass('opacity-hide')
 			self.bgPopup.hide();
 			$('.window-post').removeClass('visible-on');
-			$('#popup-wrapper').css('z-index', 0);
+			$('#rails').removeClass('disabled')
+
 			return false;
 		})
 
-		// iOS fix
-		$('body').on('touchstart', '#popup-wrapper', function(e) {
-			$(this).click();
-		});
-
 		// открываем редактор для поста
 		$('.create-post').click(function(){
+			if($('.window-post').hasClass('visible-on'))
+				return true;
 			if($(this).hasClass('opacity-hide')){
-				$('#popup-wrapper').css('z-index', 100);
+				//$('#popup-wrapper').css('z-index', 100);
+				//$('#popup-wrapper').css('pointer-events', 'auto');
 				self.bgPopup.show();
-				$(this).removeClass('opacity-hide')
-				$('#rails').addClass('disabled')
+				$(this).removeClass('opacity-hide');
+				$('#rails').addClass('disabled');
 			}
 
 			//else return false;
@@ -306,6 +308,8 @@ function CConfig() { // для наследования класса внутр�
 		 */
 
 		$("#wrapper").scroll(function () {
+			if (self.rails.hasClass('disabled'))
+				return false;
 			var width = self.setWidth() - 300;
 			var scroll = $(this).scrollLeft() + $(window).width();
 
@@ -345,11 +349,12 @@ function CConfig() { // для наследования класса внутр�
 		if (date.getDate() == now.getDate() &&
 				date.getMonth() == now.getMonth() &&
 				date.getFullYear() == now.getFullYear()) {
-			if (date.getHours() == now.getHours()) {
-				if (now.getMinutes() - date.getMinutes() <= 3)
-					timeFormat = 'сейчас';
-				else if (now.getMinutes() - date.getMinutes() <= 60)
-					timeFormat = (now.getMinutes() - date.getMinutes()) + ' минут назад'
+			var dateMinutes = date.getHours()*60 + date.getMinutes(),
+				nowMinutes = now.getHours()*60 + now.getMinutes();
+			if (nowMinutes - dateMinutes  <= 3) {
+				timeFormat = 'сейчас';
+			} else if (nowMinutes - dateMinutes <= 60) {
+				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
@@ -455,7 +460,8 @@ function CConfig() { // для наследования класса внутр�
 					id: item.id,
 					avatar: item.blog.user.avatar,
 					uid: item.blog.user.id,
-					user_name: item.blog.user.name || 'Эксперт'
+					user_name: item.blog.user.name || 'Эксперт',
+					time: item.time
 				});
 				if (preview) {
 					post.addClass('medium-width');
@@ -550,7 +556,7 @@ function CConfig() { // для наследования класса внутр�
 
 	self.fixPostPositions = function(force) {
 		if ( (self.viewLines === 1 && self._isTwoLinesMediaQueryActive()) ||
-		     (self.viewLines === 2 && force) ) {
+			 (self.viewLines === 2 && force) ) {
 
 			self.viewLines = 2;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
@@ -586,7 +592,7 @@ function CConfig() { // для наследования класса внутр�
 			});
 			self.setWidth('set');
 		} else if ( (self.viewLines === 2 && !self._isTwoLinesMediaQueryActive()) ||
-		            (self.viewLines === 1 && force) ) {
+					(self.viewLines === 1 && force) ) {
 			//console.log('fixing for 1 line')
 			self.viewLines = 1;
 			$('.news-list:not(.full-item)', self.rails).each(function () {
@@ -708,4 +714,23 @@ $(function () {
 			PIE.attach(this);
 		});
 	}
+
+	if ($('#post-editor').length) {
+		var ckconf = {
+			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+			height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+			uiColor: '#e1e1db',
+			dialog_backgroundCoverColor: 'black',
+			dialog_backgroundCoverOpacity: 0.6,
+			language: 'ru'
+		};
+		var editor = CKEDITOR.replace('post-editor', ckconf);
+
+		editor.on('contentDom', function() {
+			this.document.on('click', function(event){
+				$('.create-post').click()
+			});
+		});
+	}
+
 }); // dom ready

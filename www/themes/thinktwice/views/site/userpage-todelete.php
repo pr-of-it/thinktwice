@@ -17,7 +17,7 @@ $this->pageTitle=Yii::app()->name . ' - User page';
         <?php if ( $user->role->name == 'expert' ): ?>
             <a class="link-advice button-yellow" href="<?php echo Yii::app()->createAbsoluteUrl('/private/callrequest',
                 array ('expert_id'=> $user->id)); ?>"><span></span>Заказать консультацию</a><br>
-            <div class="advice-price"><?php echo sprintf("%0.2f", $user->consult_price); ?> руб./мин.</div>
+            <div class="advice-price"><?php echo sprintf("%0.0f", $user->consult_price); ?> руб./мин.</div>
         <?php endif; ?>
 
     </section>

@@ -37,11 +37,13 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <!--[if lte IE 8]>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/PIE_IE678.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/ckeditor/lang/ru.js"></script>
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1007"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1010"></script>
 </head>
-<body>
+<body class="index">
 
 <header id="header">
 
@@ -50,7 +52,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
     <section class="user-bar">
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
-        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.2f', $user->getAmount()); ?> руб.</a></div>
+        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); ?> руб.</a></div>
         <div class="user-name"><?php echo $user->name; ?></div>
     </section>
 
@@ -209,9 +211,9 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                 <a href="" class="user-name">Автор</a>
             </div>
             <article class="content">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
-                <p>
-                </p>
+                <div class="window-post-image"></div>
+                <div class="window-post-text">
+                </div>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
             </article>
@@ -223,34 +225,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div class="popup window-post-2">
     <section class="popup-content">
         <div class="scroll">
-            <header class="popup-head">Торговая рекомендация</header>
+            <header class="popup-head"></header>
             <article class="content">
-                <h3>Потенциал — 15% на росте акций Сбербанка</h3>
-                <h4>Что требуется: </h4>
-                <ul>
-                    <li>от 1000 руб. свободные денежные средства</li>
-                    <li>2-3 месяца что ожидать через 6 месяцев?</li>
-                    <li>брокерский счет</li>
-                </ul>
-
-                <h4>Стратегия</h4>
-                <p>
-                    Приобретать обыкновенные акции Сбербанка по цене ниже 82 рублей за акцию и продавать, когда цена
-                    достигнет 94 рублей. Заемные денежные средства не использовать.
-                </p>
-
-                <h4>Почему</h4>
-
-                <p>
-                    Иностранные и российские инвесторы не заинтересованы долго держать в низкодоходных активах
-                    свободные деньги. Сбербанк выглядит самым инвестиционно привлекательным активом в банковском
-                    секторе. ссылка на источник. Учитывая недооцененность акций (на 50%) даже при намеке на
-                    стабилизацию экономики ЕС рост котировок может быть взрывным.
-                    <br /><br/>
-                    <a href="">Ссылка на аналитику</a>
-                </p>
-
-                <h3>Как купить?</h3>
             </article>
         </div>
     </section>

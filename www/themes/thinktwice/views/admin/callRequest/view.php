@@ -31,6 +31,6 @@ $this->menu=array(
 		'alter_call_time_1',
 		'alter_call_time_2',
 		'duration',
-		'comments',
+//		'comments',
 	),
 )); ?>
