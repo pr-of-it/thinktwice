@@ -138,16 +138,32 @@ class CallRequest extends CActiveRecord
 		return parent::model($className);
 	}
 
+    /**
+     * Восстановление модели из БД
+     * - запоминаем статус заявки
+     * - декодируем массив с комментариями
+     */
     protected function afterFind() {
         $this->_old_status = $this->status;
         $this->comments = json_decode($this->comments_json);
     }
 
+    /**
+     * Запись модели в БД
+     * - кодируем комментарии в JSON
+     * @return bool
+     */
     protected function beforeSave() {
         $this->comments_json = json_encode($this->comments);
         return parent::beforeSave();
     }
 
+    /**
+     * После успешной записи модели в БД
+     * - если изменился статус - отсылаем сообщение об этом
+     * - декодируем массив с комментариями
+     * @todo - под вопросом - а зачем?
+     */
     protected function afterSave() {
         if ( $this->status != $this->_old_status ) {
             $this->sendStatusMessage();
@@ -157,25 +173,37 @@ class CallRequest extends CActiveRecord
         return parent::afterSave();
     }
 
+    /**
+     * Отсылка сообщения о смене статуса заявки
+     */
     protected function sendStatusMessage() {
+
         $expert = User::model()->findByPk($this->caller_id);
+        $user = User::model()->findByPk($this->user_id);
+
+        $subject = 'Заявка на консультацию эксперта';
+        $methods = array('sms');
+
         switch ( $this->status ) {
             case self::STATUS_CREATED:
                 $text = 'Заявка на консультацию эксперта ' . $expert->name . ' принята. Ее номер ' . $this->id;
+                $user->sendMessage($subject, $text, $methods);
                 break;
-           /* case self::STATUS_MODERATED:
-                $text = 'Ваша заявка номер ' . $this->id . ' прошла проверку модератором.';
-                break;*/
+            case self::STATUS_MODERATED:
+                $text = 'Поступила новая заявка на консультацию номер ' . $this->id . ': ' . Yii::app()->createAbsoluteUrl('/expert/default/requests', array('#' => 'request-' . $this->id) );;
+                $expert->sendMessage($subject, $text, $methods);
+                break;
             case self::STATUS_ACCEPTED:
                 $text = 'Эксперт подтвердил заявку на консультацию номер' . $this->id . ', вам позвонят ' . date('d.m.Y H:i', strtotime($this->call_time)) ;
+                $user->sendMessage($subject, $text, $methods);
                 break;
             case self::STATUS_COMPLETE:
                 $text = 'Звонок эксперта по заявке номер ' . $this->id . ' состоялся. Спасибо, что воспользовались нашим сервисом!';
+                $user->sendMessage($subject, $text, $methods);
                 break;
 
         }
-        $user = User::model()->findByPk($this->user_id);
-        $user->sendMessage('Заявка на звонок эксперта', $text, array('sms'));
+
     }
 
     public function getStatusDesc() {
@@ -210,4 +238,5 @@ class CallRequest extends CActiveRecord
             ),
         );
     }
+    
 }

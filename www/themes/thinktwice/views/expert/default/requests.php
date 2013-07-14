@@ -11,6 +11,7 @@
 
 <?php foreach ( $user->getExpertCallRequests() as $request ) :?>
     <div class="block bg-gray b-shadow confirmation">
+        <p>Номер заявки: <span><a name="request-<?php echo $request->id; ?>"><?php echo $request->id; ?></a></span></p>
         <div class="block bg-red txt-c" style="padding-left:20px !important; margin-bottom:30px !important;"><?php echo $request->call_time ?></div>
         <p>Вопрос:
             <span><?php echo $request->title; ?></span></p>
