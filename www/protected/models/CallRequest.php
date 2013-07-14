@@ -238,5 +238,5 @@ class CallRequest extends CActiveRecord
             ),
         );
     }
-    
+
 }
