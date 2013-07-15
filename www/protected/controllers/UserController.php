@@ -115,6 +115,57 @@ class UserController extends Controller {
     }
 
     /**
+     * Добавление в фолловеры
+     * @param $follower_id
+     */
+    public function actionAddFollower($follower_id) {
+
+        $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
+
+        if($model != null)
+            $this->redirect(array('/user/index','id'=>$follower_id));
+
+        $model = new UserFollower;
+        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
+        if( $model->save() )
+            $this->redirect(array('/user/index','id'=>$follower_id));
+
+    }
+
+    /**
+     * Удаление из фолловеров
+     * @param $follower_id
+     */
+    public function actionDelFollower($follower_id) {
+        $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
+        if($model->delete())
+            $this->redirect(array('/user/index','id'=>$follower_id));
+    }
+
+    /**
+     * AJAX
+     * Получение списка пользователей
+     * @param int $limit
+     * @param int $offset
+     */
+    public function actionAjaxGetUsersList($limit, $offset=0) {
+
+        $criteria = new CDbCriteria(array(
+            'select' => 'id, email, name, phone, active, can_consult, consult_price, avatar_file',
+            'order' => 't.id DESC',
+            'with' => 'role',
+            'limit' => $limit,
+            'offset' => $offset,
+        ));
+
+        $users = User::model()->findAll($criteria);
+
+        header('Content-type: application/json');
+        echo CJSON::encode($users);
+        Yii::app()->end();
+    }
+
+    /**
      * AJAX
      * Изменение телефонного номера у текущего пользователя
      * Возвращает код верификации
@@ -174,39 +225,6 @@ class UserController extends Controller {
         echo CJSON::encode($ret);
         Yii::app()->end();
 
-    }
-
-    /**
-     * Добавление в фолловеры
-     * @param $follower_id
-     */
-    public function actionAddFollower($follower_id) {
-
-        $model = UserFollower::model()->findByAttributes( array('follower_id' => $follower_id,'user_id' => Yii::app()->user->id));
-
-        if($model != null)
-            $this->redirect(array('/user/index','id'=>$follower_id));
-
-        $model = new UserFollower;
-        $model->attributes = array('follower_id'=>$follower_id, 'user_id'=>Yii::app()->user->id);
-        if( $model->save() )
-            $this->redirect(array('/user/index','id'=>$follower_id));
-
-    }
-
-    /**
-     * Удаление из фолловеров
-     * @param $follower_id
-     */
-    public function actionDelFollower($follower_id) {
-        $model = UserFollower::model()->findByAttributes(array('follower_id'=>$follower_id,'user_id'=>Yii::app()->user->id));
-        if($model->delete())
-            $this->redirect(array('/user/index','id'=>$follower_id));
-    }
-
-    public function actionList() {
-        $user = User::model()->findAll();
-        $this->render('list',array('user'=>$user));
     }
 
 }

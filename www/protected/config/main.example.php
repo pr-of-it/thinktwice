@@ -83,11 +83,8 @@ return array(
         // uncomment the following to enable URLs in path-format
         'urlManager'=>array(
             'urlFormat'=>'path',
-            'rules'=>array(
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-            ),
+            'showScriptName' => false,
+            'rules'=> include(__DIR__ . DIRECTORY_SEPARATOR . 'route.php'),
         ),
         'db'=>array(
             'connectionString' => 'pgsql:host=localhost;port=5432;dbname=tt',

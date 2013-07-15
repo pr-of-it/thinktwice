@@ -231,17 +231,6 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     </section>
     <div class="close-popup"></div>
 </div>
-
-<div class="popup window-post-2">
-    <section class="popup-content">
-        <div class="scroll">
-            <header class="popup-head"></header>
-            <article class="content">
-            </article>
-        </div>
-    </section>
-    <div class="close-popup"></div>
-</div>
 </div>
 
 </body>

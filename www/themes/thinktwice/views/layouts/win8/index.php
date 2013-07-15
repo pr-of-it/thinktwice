@@ -197,8 +197,51 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
+        <form class="scroll" id="blog-edit-form" action="/" method="post">
+            <header class="popup-head">Редактировать совет</header>
+            <input type="hidden" name="BlogPost[id]" class="id-field">
+            <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" class="title-field" type="text">
+            
+            <div class="wysiwyg-text-field">
+                <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
+            </div>
+            <div class="tag-attach-box">
+                <input placeholder="Теги" type="text" name="">
+                <ul class="attach-list">
+                    <!--<li><img src="/win8/img/tmp/city.png" alt=""/></li>
+                    <li><img src="/win8/img/tmp/city.png" alt=""/></li>
+                    --><li class="add-attach"></li>
+                </ul>
+            </div>
+            <footer>
+                <table>
+                    <tr>
+                        <!--<td><a class="add-element" href=""><span></span></a></td>-->
+                        <td class="width-select-1">
+                            <select name="BlogPost[blog_id]">
+
+                            </select>
+                        </td>
+                        <td class="width-select-2">
+                            <select name="">
+                                <option value="">для всех</option>
+                                <option value="">Выбор 1</option>
+                                <option value="">Выбор 2</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="line-buttons" colspan="3">
+                            <a class="button-cancel" href="">Отменить</a>
+                            <input class="button-yellow" type="submit" value="Опубликовать изменения"/>
+                        </td>
+                    </tr>
+                </table>
+            </footer>
+        </form>
         <div class="scroll">
-            <header class="popup-head">Новости рынка труда</header>
+            <header class="popup-head">&nbsp;</header>
             <div class="article-info">
                 <!--<span class="viewings">
                     <span></span>
@@ -213,23 +256,14 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <article class="content">
                 <div class="window-post-image"></div>
                 <div class="window-post-text">
+                    &nbsp;
                 </div>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
             </article>
         </div>
     </section>
-    <div class="close-popup"></div>
-</div>
-
-<div class="popup window-post-2">
-    <section class="popup-content">
-        <div class="scroll">
-            <header class="popup-head"></header>
-            <article class="content">
-            </article>
-        </div>
-    </section>
+    <div class="edit-post-button"></div>
     <div class="close-popup"></div>
 </div>
 </div>
