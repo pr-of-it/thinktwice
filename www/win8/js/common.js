@@ -91,7 +91,7 @@ function CConfig() { // для наследования класса внутр�
 	};
 
 	self.makeUrl = function(url) {
-		return '/index.php' + url;
+		return url;
 	};
 
 	self.bind = function(){
