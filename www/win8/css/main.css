@@ -791,7 +791,7 @@ input.error{ border:1px solid red !important }
 .popup{
 	position:absolute;
 	right:-1000px !important; top:0; left:auto !important;
-	height:100%; width:715px;
+	height:100%; width:715px; max-width: 61.8%;
 	border-left:1px solid #a6aca8;
 	border-right:1px solid #a6aca8;
 	background:#dfdfd9;
@@ -827,7 +827,6 @@ input.error{ border:1px solid red !important }
 	margin:0 0 12px;
 }
 .popup .popup-content{
-	width: 625px;
 }
 .popup .scroll{
 	overflow:auto;
@@ -1040,6 +1039,21 @@ input.error{ border:1px solid red !important }
 }
 
 /*****   create-post:end   *****/
+
+/***** edit-post ****/
+.window-post form
+{
+	display: none;
+}
+.window-post.edit-post div.scroll {
+	display: none;
+}
+.window-post.edit-post form {
+	display: block;
+}
+
+
+/***** edit-post:end; ****/
 
 /*****   formStyler   *****/
 
