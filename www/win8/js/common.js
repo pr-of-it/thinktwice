@@ -264,8 +264,8 @@ function CConfig() { // для наследования класса внутр�
 
 			return false;
 		});
-
-		$('.edit-post-button').on('click', function () {
+		$('.edit-post-button,.window-post .button-cancel').on('click', function(e) {
+			e.preventDefault();
 			var popup = $(this).parents('.window-post');
 			popup.toggleClass('edit-post');
 			return false;
@@ -301,20 +301,11 @@ function CConfig() { // для наследования класса внутр�
 				$('.my-interest').click()
 		})
 
-		// todo: удалить
-		/*$('.news-like').click(function(){
-			$('.window-post-edit').popup()
-		})*/
-		$('.news-item img').click(function(){
-			$('.window-post-2').popup()
-		})
-
 		$('.video-box .close').click(function(){
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
 			$('#rails').removeClass('quick-start');
 			self.setWidth('set');
 		})
-
 
 		$(window).resize(function() {
 			self.fixPostPositions();
