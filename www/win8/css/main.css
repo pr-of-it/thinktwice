@@ -909,7 +909,7 @@ input.error{ border:1px solid red !important }
 
 .create-post{
 	position:absolute;
-	top:212px; bottom:95px;
+	bottom:0;
 	left:0; width:739px;
 	min-height:512px;
 	background:#e1e1db;
@@ -921,7 +921,7 @@ input.error{ border:1px solid red !important }
 	transition:all .5s;
 }
 .create-post.opacity-hide{
-	left:-581px;
+	left:-581px; min-height: 70%;
 	opacity:.5; filter:alpha(opacity=50);
 }
 .create-post-content{
@@ -1644,6 +1644,10 @@ screen and (max-device-width: 1024px) and (min-height: 960px),
 screen and (min-device-width: 1024px) and (min-height: 768px),
 screen and (min-device-width: 1024px) and (min-height: 48em)
 {
+	.create-post {
+		top: 213px;
+		bottom: 102px;
+	}
 
 	.news-item.line-2 .time-slider {
 		bottom:auto; top:-11px;

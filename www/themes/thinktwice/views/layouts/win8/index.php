@@ -198,36 +198,38 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div class="popup window-post">
     <section class="popup-content">
         <div class="scroll">
-            <header class="popup-head">Новости рынка труда</header>
-            <div class="article-info">
-                <!--<span class="viewings">
-                    <span></span>
-                    250
-                </span>
-                <span class="shared">Поделилось: 5</span>-->
-                <a href="" class="user-avatar">
-                    <img src=""><span></span>
-                </a>
-                <a href="" class="user-name">Автор</a>
-            </div>
-            <article class="content">
-                <div class="window-post-image"></div>
-                <div class="window-post-text">
+            <form id="blog-edit-form" action="/" method="post">
+                <header class="popup-head">&nbsp;
+                    <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" type="text">
+                </header>
+                <div class="article-info">
+                    <!--<span class="viewings">
+                        <span></span>
+                        250
+                    </span>
+                    <span class="shared">Поделилось: 5</span>-->
+                    <a href="" class="user-avatar">
+                        <img src=""><span></span>
+                    </a>
+                    <a href="" class="user-name">Автор</a>
                 </div>
-                <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
-            </article>
-        </div>
-    </section>
-    <div class="close-popup"></div>
-</div>
-
-<div class="popup window-post-2">
-    <section class="popup-content">
-        <div class="scroll">
-            <header class="popup-head"></header>
-            <article class="content">
-            </article>
+                <article class="content">
+                    <div class="window-post-image"></div>
+                    <div class="window-post-text">
+                        &nbsp;
+                    </div>
+                    <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
+                    <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
+                </article>
+                <div class="tag-attach-box">
+                    <input placeholder="Теги" type="text" name="">
+                    <ul class="attach-list">
+                        <!--<li><img src="/win8/img/tmp/city.png" alt=""/></li>
+                        <li><img src="/win8/img/tmp/city.png" alt=""/></li>
+                        --><li class="add-attach"></li>
+                </div>
+            </form>
         </div>
     </section>
     <div class="close-popup"></div>
