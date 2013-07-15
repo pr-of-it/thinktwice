@@ -3,7 +3,10 @@
 class PrivateBlogController extends Controller {
 
     public function actionBlog(){
-        $blog = Blog::model()->findByAttributes(array('user_id' => Yii::app()->user->id));
+        $blog = Blog::model()->findByAttributes(
+            array('user_id' => Yii::app()->user->id,
+                  'type' => Blog::SIMPLE_BLOG,
+        ));
             if(isset($_POST['Blog']))
             {
                 $blog->attributes = $_POST['Blog'];
@@ -34,28 +37,31 @@ class PrivateBlogController extends Controller {
         }
     }
 
-    public function actionSubscript(){
-        $subscript = new Blog;
-        $subscript->user_id = Yii::app()->user->id;
-        $subscript->type = Blog::SUBSCRIPT_BLOG;
-
-        if ( isset( $_POST['time']) && isset($_POST['price']) ) {
-            switch ( $_POST['time'] ) {
-                case 'month_price':
-                    $subscript->month_price = $_POST['price'];
-                    $subscript->week_price = 0;
-                    break;
-                case 'week_price':
-                    $subscript->week_price = $_POST['price'];
-                    $subscript->month_price = 0;
-                    break;
+    public function actionSubscript() {
+            if ( isset ($_POST['Blog']) && $_POST['Blog']['id'] != 0 ) {
+                $subscript = Blog::model()->findByPk($_POST['Blog']['id']);
             }
-        }
+            else {
+                $subscript = new Blog;
+                $subscript->user_id = Yii::app()->user->id;
+                $subscript->type = Blog::SUBSCRIPT_BLOG;
+            }
+            if ( isset( $_POST['time']) && isset($_POST['price']) ) {
+                switch ( $_POST['time'] ) {
+                    case 'month_price':
+                        $subscript->month_price = $_POST['price'];
+                        $subscript->week_price = 0;
+                        break;
+                    case 'week_price':
+                        $subscript->week_price = $_POST['price'];
+                        $subscript->month_price = 0;
+                        break;
+                }
+            }
 
-        if ( isset( $_POST['Blog']) ) {
+
             $subscript->attributes = $_POST['Blog'];
-            if ( $subscript->save())
-                $this->redirect(array('/private'));
-        }
+                if ( $subscript->save())
+                    $this->redirect(array('/private'));
     }
 }

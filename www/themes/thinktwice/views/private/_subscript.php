@@ -34,6 +34,10 @@
         </div>
 
         <div class="row">
+            <?php echo $form->hiddenField($subscript, 'id', array('value'=>$subscript->id)) ?>
+        </div>
+
+        <div class="row">
             <?php echo CHtml::submitButton('Сохранить'); ?>
         </div>
 
