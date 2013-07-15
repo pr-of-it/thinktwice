@@ -52,6 +52,9 @@ function CConfig() { // для наследования класса внутр�
 		self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
 
+		var blogSelectOptions = $('.create-post .width-select-1 select option').clone();
+		$('.window-post .width-select-1 select').append(blogSelectOptions);
+
 		// init
 		$('input, select').styler();
 
@@ -210,13 +213,21 @@ function CConfig() { // для наследования класса внутр�
 			var data = target.parent().data();
 
 			var popup = $('.window-post');
-			popup.find('header.popup-head').html( target.find('h6').html() );  // $post->title
-			popup.find('div.window-post-text').html( target.find('.news-body div').html() );  // $post->text
+
+			var title = target.find('h6').html();
+			popup.find('div.scroll header.popup-head').html(title);  // $post->title
+			popup.find('form input.title-field').val(title);
+			var text = target.find('.news-body div').html();
+			popup.find('div.window-post-text').html(text);  // $post->text
+			popup.find('form textarea').html(text);
+			CKEDITOR.instances['popup-post-editor'].setData(text);
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
-			
+
 			popup.find('.article-info img').attr('src', data.avatar);
 			popup.find('.article-info .user-name').text(data.user_name || '');
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
+
+			popup.find('form input.id-field').val(data.id);
 
 			var imgTarget = target.find('.image-gallery-min-full'),
 				img = popup.find('div.window-post-image');
@@ -227,6 +238,7 @@ function CConfig() { // для наследования класса внутр�
 			} else {
 				img.hide();
 			}
+			popup.removeClass('edit-post');
 			self.bgPopup.show();
 			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
@@ -449,12 +461,12 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 
-				var preview = item.preview || ( ((Math.random() > .8) && !item.image) ? '/win8/img/tmp/image-float.png' : null );
+				var preview = (item.media && item.media[0]) || null;
 				var post = $(self.postTemplate({
 					extraClass: '',
 					tag: item.tag || '',
 					preview: preview,
-					author: item.blog.title || '',
+					author: (item.blog && item.blog.title) || '',
 					title: item.title,
 					text: item.text,
 					likes: item.likes || 0,
@@ -464,9 +476,9 @@ function CConfig() { // для наследования класса внутр�
 				post.data({
 					position: i + self.numPosts,
 					id: item.id,
-					avatar: item.blog.user.avatar,
-					uid: item.blog.user.id,
-					user_name: item.blog.user.name || 'Эксперт',
+					avatar: (item.blog && item.blog.user.avatar) || '',
+					uid: (item.blog && item.blog.user.id) || null,
+					user_name: (item.blog && item.blog.user.name || 'Эксперт'),
 					time: item.time
 				});
 				if (preview) {

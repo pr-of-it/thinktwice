@@ -198,9 +198,10 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div class="popup window-post">
     <section class="popup-content">
         <form class="scroll" id="blog-edit-form" action="/" method="post">
-            <header>
-                <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" type="text">
-            </header>
+            <header class="popup-head">Редактировать совет</header>
+            <input type="hidden" name="BlogPost[id]" class="id-field">
+            <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" class="title-field" type="text">
+            
             <div class="wysiwyg-text-field">
                 <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
             </div>
@@ -214,12 +215,29 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             </div>
             <footer>
                 <table>
-                    <tbody><tr>
-                        <td class="width-select-1"></td>
-                        <td class="width-select-2"></td>
+                    <tr>
+                        <!--<td><a class="add-element" href=""><span></span></a></td>-->
+                        <td class="width-select-1">
+                            <select name="BlogPost[blog_id]">
+
+                            </select>
+                        </td>
+                        <td class="width-select-2">
+                            <select name="">
+                                <option value="">для всех</option>
+                                <option value="">Выбор 1</option>
+                                <option value="">Выбор 2</option>
+                            </select>
+                        </td>
+                        <td></td>
                     </tr>
-                </tbody></table>
-                <input class="button-yellow" type="submit" name="" value="Опубликовать"> 
+                    <tr>
+                        <td class="line-buttons" colspan="3">
+                            <a class="button-cancel" href="">Отменить</a>
+                            <input class="button-yellow" type="submit" value="Опубликовать изменения"/>
+                        </td>
+                    </tr>
+                </table>
             </footer>
         </form>
         <div class="scroll">

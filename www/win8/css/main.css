@@ -886,6 +886,9 @@ input.error{ border:1px solid red !important }
 	color:#42423f;
 	font-size:16px;
 }
+.popup-content {
+	height: 100%;
+}
 .popup-content article{
 	padding:24px 3px;
 	color:#323232;
@@ -1010,7 +1013,7 @@ input.error{ border:1px solid red !important }
 	cursor:pointer;
 }
 .button-cancel{
-	padding:12px 21px;
+	padding:10px 21px 11px;
 	background:#307c84;
 }
 .create-post footer, .tag-attach-box{
@@ -1059,8 +1062,8 @@ input.error{ border:1px solid red !important }
 	display: block;
 }
 
-.edit-post header {
-	margin: 20px 0 12px;
+.edit-post input.title-field {
+	margin-bottom: 12px;
 }
 .edit-post .tag-attach-box {
 	position: relative;
@@ -1083,6 +1086,10 @@ input.error{ border:1px solid red !important }
 }
 .edit-post .wysiwyg-text-field textarea {
 	min-height: 250px;
+}
+
+.edit-post .line-buttons .button-cancel {
+	left: 0; top: 0;
 }
 
 /***** edit-post:end; ****/
@@ -1544,36 +1551,7 @@ input[type="reset"].styler:active{
 /*****   interest-menu:end   *****/
 
 
-/*****   window-post-edit   *****/
 
-.window-post-edit .create-post, .window-post-edit .text-field,
-.window-post-edit .create-post footer, .window-post-edit .tag-attach-box
-{
-	position:relative;
-	top:auto; right:auto;
-	left:auto; bottom:auto;
-	opacity:1; filter:alpha(opacity=100);
-	width:auto;
-}
-.window-post-edit .create-post-content{
-	padding:20px 0 0;
-}
-.window-post-edit .create-post header input, .window-post-edit .tag-attach-box input{
-	width:601px;
-}
-.window-post-edit .text-field{
-	margin:0 0 10px;
-	height:170px;
-}
-.window-post-edit .scroll{
-	overflow:visible;
-}
-.window-post-edit .popup-content article p{
-	font:16px/18px "Helvetica Neue", "Segoe UI Semilight", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
-	margin:0 0 19px;
-}
-
-/*****   window-post-edit:end   *****/
 
 .reg-helper{
 	color:#ffffff;
