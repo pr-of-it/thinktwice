@@ -251,7 +251,13 @@ function CConfig() { // для наследования класса внутр�
 			$('#rails').removeClass('disabled')
 
 			return false;
-		})
+		});
+
+		$('.edit-post-button').on('click', function () {
+			var popup = $(this).parents('.window-post');
+			popup.toggleClass('edit-post');
+			return false;
+		});
 
 		// открываем редактор для поста
 		$('.create-post').click(function(){
@@ -718,7 +724,7 @@ $(function () {
 	if ($('#post-editor').length) {
 		var ckconf = {
 			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-			height: ($('.wysiwyg-text-field').height() - 50) + 'px',
+			height: ($('.create-post .wysiwyg-text-field').height() - 50) + 'px',
 			uiColor: '#e1e1db',
 			dialog_backgroundCoverColor: 'black',
 			dialog_backgroundCoverOpacity: 0.6,
@@ -731,6 +737,19 @@ $(function () {
 				$('.create-post').click()
 			});
 		});
+	}
+
+	if ($('#popup-post-editor').length) {
+		var ckconf = {
+			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+			height: '250px',
+			uiColor: '#e1e1db',
+			dialog_backgroundCoverColor: 'black',
+			dialog_backgroundCoverOpacity: 0.6,
+			language: 'ru'
+		};
+		var editor = CKEDITOR.replace('popup-post-editor', ckconf);
+
 	}
 
 }); // dom ready
