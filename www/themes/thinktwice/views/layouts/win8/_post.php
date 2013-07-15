@@ -31,11 +31,14 @@
         </div>
         <div class="tag-attach-box">
             <input placeholder="Теги" type="text" name=""/>
-            <ul class="attach-list">
+            <ul class="attach-list" style="display:none">
                 <!--<li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
                 <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                --><li class="add-attach"></li>
-                <?php $this->widget('ext.EFineUploader.EFineUploader', array(
+                --><li class="add-attach qq-upload-list">
+                
+                </li>
+            </ul>
+            <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                     'id'=>'FineUploader',
                     'config' => array(
                         'autoUpload'=>true,
@@ -49,11 +52,12 @@
                             'onComplete'=>"js:function(id, name, response){
                                 $('li.qq-upload-success').remove();
                                 $('#BlogPost_image').val('/upload/blogs/' + response.filename);
+                                //$('#blog-form .attach-list').prepend('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                             }",
                             //'onError'=>"js:function(id, name, errorReason){ }",
                         ),
                         'validation'=>array(
-                            'allowedExtensions'=>array('jpg','jpeg'),
+                            'allowedExtensions'=>array('jpg','jpeg','png','gif'),
                             'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
                             //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
                         ),
@@ -68,7 +72,6 @@
                     )
                 )); ?>
                 <?php echo $form->hiddenField($model,'image'); ?>
-            </ul>
         </div>
         <footer>
             <table>

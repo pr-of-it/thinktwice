@@ -805,7 +805,6 @@ input.error{ border:1px solid red !important }
 	box-sizing: border-box;
 	-moz-box-sizing: border-box; /*Firefox 1-3*/
 	-webkit-box-sizing: border-box; /* Safari */
-	padding: 65px 45px;
 	overflow-y: auto;-webkit-overflow-scrolling:touch;
 	pointer-events: auto;
 }
@@ -834,12 +833,10 @@ input.error{ border:1px solid red !important }
 	margin:0 0 12px;
 }
 .popup .popup-content{
+	margin: 65px 45px;
 }
 .popup .scroll{
-	overflow:auto;
-	height:100%;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow:hidden;
 }
 
 .article-info { position: relative; height: 60px;}
@@ -885,9 +882,6 @@ input.error{ border:1px solid red !important }
 .shared{
 	color:#42423f;
 	font-size:16px;
-}
-.popup-content {
-	height: 100%;
 }
 .popup-content article{
 	padding:24px 3px;
@@ -1064,6 +1058,11 @@ input.error{ border:1px solid red !important }
 
 .edit-post input.title-field {
 	margin-bottom: 12px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box; /*Firefox 1-3*/
+	-webkit-box-sizing: border-box; /* Safari */
+	width: 100%;
+	height: 31px;
 }
 .edit-post .tag-attach-box {
 	position: relative;
@@ -1461,21 +1460,37 @@ input[type="reset"].styler:active{
 
 /*****   formStyler:end   *****/
 
-.attach-list{
+.attach-list, .qq-upload-list, .qq-uploader {
 	height:110px;
 	margin:10px 0;
-	overflow:auto;
+	overflow-x: auto;
+	overflow-y: hidden;
 }
-.attach-list li{
-	float:left;
+.attach-list li, .qq-upload-list li, .qq-upload-button {
+	float:left; text-align: center;
 	margin:0 10px 10px 0;
 }
-.attach-list li, .attach-list img{
-	height:99px; width:141px;
+.qq-upload-list li span {
+	display: block; font-weight: 300;
 }
-.add-attach{
+.qq-upload-list li a {
+	margin: 4px; color: white;
+}
+.qq-uploader li.qq-upload-retrying { padding: 9px; background-color: #EFA81F; }
+.qq-uploader li.qq-upload-retrying span { color: white; }
+.qq-uploader li.qq-upload-fail { padding: 9px; background-color: red; }
+.qq-uploader li.qq-upload-retrying span { color: white; }
+
+.attach-list li, .attach-list img, .qq-upload-list li, .qq-upload-list img {
+	height:99px; width:141px; padding: 0;
+}
+.add-attach, .qq-upload-button{
+	width:141px; height: 99px;
 	cursor:pointer;
 	background:url(../img/add-photo-or-video.png) no-repeat transparent;
+}
+.qq-upload-button {
+	margin: 10px; text-indent: -1000px;
 }
 
 
