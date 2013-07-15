@@ -198,8 +198,12 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div class="popup window-post">
     <section class="popup-content">
         <form class="scroll" id="blog-edit-form" action="/" method="post">
-            <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" type="text">
-            <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
+            <header>
+                <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" type="text">
+            </header>
+            <div class="wysiwyg-text-field">
+                <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
+            </div>
             <div class="tag-attach-box">
                 <input placeholder="Теги" type="text" name="">
                 <ul class="attach-list">
@@ -208,6 +212,15 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                     --><li class="add-attach"></li>
                 </ul>
             </div>
+            <footer>
+                <table>
+                    <tbody><tr>
+                        <td class="width-select-1"></td>
+                        <td class="width-select-2"></td>
+                    </tr>
+                </tbody></table>
+                <input class="button-yellow" type="submit" name="" value="Опубликовать"> 
+            </footer>
         </form>
         <div class="scroll">
             <header class="popup-head">&nbsp;</header>
@@ -232,6 +245,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             </article>
         </div>
     </section>
+    <div class="edit-post-button"></div>
     <div class="close-popup"></div>
 </div>
 </div>
