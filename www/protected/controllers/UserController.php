@@ -204,4 +204,9 @@ class UserController extends Controller {
             $this->redirect(array('/user/index','id'=>$follower_id));
     }
 
+    public function actionList() {
+        $user = User::model()->findAll();
+        $this->render('list',array('user'=>$user));
+    }
+
 }
