@@ -89,7 +89,7 @@ class BlogController extends Controller {
 
         $result = $uploader->handleUpload($tempFolder);
         $result['filename'] = $uploader->getUploadName();
-        $result['folder'] = $webFolder;
+        $result['folder'] = $tempFolder;
 
         $uploadedFile=$tempFolder.$result['filename'];
 
