@@ -917,7 +917,7 @@ input.error{ border:1px solid red !important }
 	position:absolute;
 	bottom:0;
 	left:0; width:739px;
-	min-height:512px;
+	min-height: 700px;
 	background:#e1e1db;
 	z-index:100;
 	-webkit-transition:all .5s;
@@ -1036,6 +1036,7 @@ input.error{ border:1px solid red !important }
 }
 .tag-attach-box{
 	bottom:64px;
+	overflow: auto;
 }
 .line-buttons{
 	padding:15px 0 0;
@@ -1465,14 +1466,16 @@ input[type="reset"].styler:active{
 
 .attach-list, .qq-upload-list, .qq-uploader {
 	height:120px;
-	margin:10px 0;
+	margin: 0;
 	overflow-x: auto;
 	overflow-y: hidden;
 }
+#FineUploader, .attach-list { float: left;}
 .attach-list li, .qq-upload-list li, .qq-upload-button {
 	float:left; text-align: center;
 	margin:0 10px 10px 0;
 }
+.attach-list li { margin-top: 10px;}
 .qq-upload-list li span {
 	display: block; font-weight: 300;
 }
@@ -1495,7 +1498,10 @@ input[type="reset"].styler:active{
 .qq-upload-button {
 	margin: 10px 10px 10px 0; text-indent: -1000px;
 }
-
+.file-upload-container {
+	width: 10000px;
+	margin: 10px 0;
+}
 
 /*****   interest-menu   *****/
 
