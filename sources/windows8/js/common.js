@@ -24,6 +24,7 @@ function CConfig() { // для наследования класса внутр�
 		} }
 		doc = document
 		self.rails = $('#rails')
+		self.header = $('#header')
 
 		// init
 		$('input, select').styler();
@@ -34,6 +35,9 @@ function CConfig() { // для наследования класса внутр�
 		// delegate events
 		self.bind()
 
+		// плитка на рабочем столе
+		$('.mp-level-list').w8tile()
+
 		$('.reg-helper').delay(3000).fadeOut(2000)
 
 		window.onload = function(){
@@ -43,7 +47,7 @@ function CConfig() { // для наследования класса внутр�
 
 	self.bind = function(){
 
-		$('.my-interest').click(function(e){
+		$('.my-interest:not(.expert-only)').click(function(e){
 			if(window.user_id === 'null') return false;
 
 			$('.create-post').addClass('opacity-hide')
@@ -78,6 +82,15 @@ function CConfig() { // для наследования класса внутр�
 				}
 
 			}
+			return false;
+		})
+
+		$('.my-interest.expert-only').click(function(e){
+
+			if ($(this).hasClass('active'))
+				$(this).removeClass('active')
+			else
+				$(this).addClass('active')
 			return false;
 		})
 
@@ -181,6 +194,22 @@ function CConfig() { // для наследования класса внутр�
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
 			$('#rails').removeClass('quick-start')
 		})
+		$('.video-box .content').click(function(){
+			$('.window-post').popup()
+		})
+
+		// фильтруем по категориям
+		$('.news-tag', self.rails).click(function(){
+			$('.lenta-settings', self.header).hide()
+			$('.filter-by', self.header).show().find('div').off().on({
+				click:function(){
+					$(this).closest('.filter-by').hide()
+					$('.lenta-settings', self.header).show()
+				}
+			}).prev().text($(this).text())
+		})
+
+
 	}
 
 	/**
@@ -188,13 +217,36 @@ function CConfig() { // для наследования класса внутр�
 	 */
 	self.setWidth = function(is_set){
 		var width = 0
-		$('> .step-day', self.rails).each(function(){
+		$('> *:not(.quick-start-box)', self.rails).each(function(){
 			width += $(this).outerWidth(true)
-			width += parseInt(self.rails.css('padding-left'))
 		})
 		if(is_set == 'set')
 			self.rails.width(width + 175)
 		return width
+	}
+
+	$.fn.w8tile = function () {
+		return this.each(function(){
+			var list = $(this),
+				items = list.find('> li'),
+				width_item = items.first().outerWidth(true),
+				height_item = items.first().outerHeight(true),
+				level = [2, 3, 4, 5],
+				res = null
+
+			$(window).on('resize.tile', function(){
+
+				$.each(level, function(i){
+					res = ((items.length / level[i]) * width_item) + width_item
+					if (list.height() > (height_item * level[i])) {
+						list.width(res).parent().parent().width(res)
+						self.setWidth('set')
+					}
+				})
+
+			})
+			$(window).trigger('resize.tile')
+		})
 	}
 }
 Config = new CConfig(); // init classes
@@ -208,7 +260,7 @@ function CFilter(config){
 
 	// methods
 	self.run = function(){
-		var panel = $('.lenta-settings', document.getElementById('header'))
+		var panel = $('.lenta-settings', Config.header)
 
 		// показываем фильтр
 		$('.icon-filter', panel).click(function(){
@@ -260,7 +312,9 @@ function CFilter(config){
 		})
 
 		// сорт. по дате
-		$('.icon-archive').datepicker().click(function(){
+		$('.datepicker-field').datepicker()
+		$('.icon-archive').click(function(){
+			$('.datepicker-field').datepicker('show')
 			return false;
 		})
 

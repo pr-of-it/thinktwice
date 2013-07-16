@@ -220,7 +220,8 @@ function CConfig() { // для наследования класса внутр�
 			var text = target.find('.news-body div').html();
 			popup.find('div.window-post-text').html(text);  // $post->text
 			popup.find('form textarea').html(text);
-			CKEDITOR.instances['popup-post-editor'].setData(text);
+			if (CKEDITOR.instances['popup-post-editor'])
+				CKEDITOR.instances['popup-post-editor'].setData(text);
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -452,9 +453,9 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 
-				var preview = (item.media && item.media[0]) || null;
+				var preview = (!item.image && item.media && item.media.length && item.media[0].url) || null;
 				var post = $(self.postTemplate({
-					extraClass: '',
+					extraClass: (item.blog && item.blog.type === 3) ? ' white-style' : '',
 					tag: item.tag || '',
 					preview: preview,
 					author: (item.blog && item.blog.title) || '',
@@ -462,7 +463,8 @@ function CConfig() { // для наследования класса внутр�
 					text: item.text,
 					likes: item.likes || 0,
 					time: timeFormat,
-					image: item.image
+					image: item.image,
+					media: item.image && item.media
 				}));
 				post.data({
 					position: i + self.numPosts,
