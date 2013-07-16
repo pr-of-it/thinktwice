@@ -1722,8 +1722,8 @@ screen and (min-device-width: 1024px) and (min-height: 768px),
 screen and (min-device-width: 1024px) and (min-height: 48em)
 {
 	.create-post {
-		top: 213px;
-		bottom: 102px;
+		top: 212px;
+		bottom: 100px;
 		min-height: 500px;
 	}
 
