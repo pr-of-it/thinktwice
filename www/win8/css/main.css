@@ -1488,6 +1488,7 @@ input[type="reset"].styler:active{
 .qq-upload-list li span {
 	display: block; font-weight: 300;
 }
+.qq-upload-list li { margin-top: 10px;}
 .qq-upload-list li a {
 	margin: 4px; color: white;
 }
