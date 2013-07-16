@@ -243,7 +243,6 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         )
                     )); ?>
                     <?php //echo $form->hiddenField($model,'image'); ?>
-                    <?php echo Yii::app()->easyImage->thumbOf($post, array('resize'=>array('width'=>150), 'crop'=>array('width'=>164, 'height'=>164))); ?>
                     <ul class="attach-list">
                     </ul>
                 </div>
