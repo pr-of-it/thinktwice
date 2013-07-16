@@ -27,6 +27,7 @@
  * The followings are the available model relations:
  * @property UserRole $role
  * @property UserService[] $services
+ * @property User[] $subscripts
  * @property User[] $followers
  * @property UserTransaction[] $transactions
  * @property UserTransactionIncomplete[] $transactions_incomplete
@@ -94,6 +95,9 @@ class User extends CActiveRecord
         return array(
             'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
+            // те, на кого подписан пользователь:
+            'subscripts' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
+            // те, кто подписан на пользователя:
             'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
@@ -184,10 +188,10 @@ class User extends CActiveRecord
      * Отслеживание (дружба)
      */
 
-    public function doesFollow($follower_id) {
+    public function doesFollow($id) {
 
-        foreach ( $this->followers as $follow ) {
-            if ( $follower_id == $follow->id )
+        foreach ( $this->subscripts as $subscript ) {
+            if ( $id == $subscript->id )
                 return true;
         }
         return false;
@@ -247,6 +251,7 @@ class User extends CActiveRecord
             'active' => Yii::t('User', 'Active'),
             'register_time' => Yii::t('User', 'Register time'),
             'update_time' => Yii::t('User', 'Update time'),
+            'subscripts' => Yii::t('User', 'Subscripts'),
             'followers' => Yii::t('User', 'Followers'),
             'roleid' => Yii::t('User', 'Role ID'),
             'role' => Yii::t('User', 'Role'),
