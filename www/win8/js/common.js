@@ -455,7 +455,7 @@ function CConfig() { // для наследования класса внутр�
 
 				var preview = (item.media && item.media.length && item.media[0].url) || null;
 				var post = $(self.postTemplate({
-					extraClass: '',
+					extraClass: (item.blog && item.blog.type === 3) ? ' white-style' : '',
 					tag: item.tag || '',
 					preview: preview,
 					author: (item.blog && item.blog.title) || '',
