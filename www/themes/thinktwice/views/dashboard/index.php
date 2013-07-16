@@ -1,7 +1,7 @@
 <div id="container">
 <div id="rails" class="page-lenta page-dashboard quick-start">
 <div class="quick-start-box">
-    <header>Начало</header>
+    <header>О проекте</header>
     <div class="video-box">
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/video.jpg" alt=""/>
 
@@ -243,6 +243,9 @@
 
 </li>
 </ul>
+
+
+
 </div>
 
 </div>
