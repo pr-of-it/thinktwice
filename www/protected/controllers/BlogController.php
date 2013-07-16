@@ -47,8 +47,12 @@ class BlogController extends Controller {
         ));
     }
 
-    // AJAX actions
-
+    /**
+     * AJAX
+     * Возвращает последние посты для ленты
+     * @param int $limit
+     * @param int $offset
+     */
     public function actionGetIndexBlogPosts($limit, $offset=0) {
 
         $criteria = new CDbCriteria(array(
@@ -58,7 +62,7 @@ class BlogController extends Controller {
             'offset' => $offset,
         ));
 
-        $posts = BlogPost::model()->with('blog', 'blog.user')->findAll($criteria);
+        $posts = BlogPost::model()->with('blog', 'blog.user', 'media')->findAll($criteria);
 
         header('Content-type: application/json');
         echo CJSON::encode($posts);
