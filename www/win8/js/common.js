@@ -220,7 +220,8 @@ function CConfig() { // для наследования класса внутр�
 			var text = target.find('.news-body div').html();
 			popup.find('div.window-post-text').html(text);  // $post->text
 			popup.find('form textarea').html(text);
-			CKEDITOR.instances['popup-post-editor'].setData(text);
+			if (CKEDITOR.instances['popup-post-editor'])
+				CKEDITOR.instances['popup-post-editor'].setData(text);
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 
 			popup.find('.article-info img').attr('src', data.avatar);
@@ -452,7 +453,7 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 
-				var preview = (item.media && item.media[0]) || null;
+				var preview = (item.media && item.media.length && item.media[0].url) || null;
 				var post = $(self.postTemplate({
 					extraClass: '',
 					tag: item.tag || '',
