@@ -234,6 +234,19 @@ function CConfig() { // для наследования класса внутр�
 				img = popup.find('div.window-post-image');
 			if (imgTarget.length) {
 				var bg = imgTarget.css('background-image');
+				var src = bg.replace(/(^url\()|(\)$)/g, '');
+				var temp = new Image();
+				temp.onload = function() {
+					var targetWidth = popup.find('article').width();
+					img.css('width', targetWidth);
+					console.log(targetWidth, this.width, this.height)
+					if (this.width < targetWidth) {
+						img.css('background-size', '100%');
+					} else {
+						img.css('background-size', 'cover');
+					}
+				};
+				temp.src = src;
 				img.css('background-image', bg);
 				img.show();
 			} else {

@@ -904,6 +904,7 @@ input.error{ border:1px solid red !important }
 	height: 417px;
 	background-size: cover;
 	background-position: center;
+	background-repeat: no-repeat;
 }
 .popup-content address{
 	margin:0 0 35px;

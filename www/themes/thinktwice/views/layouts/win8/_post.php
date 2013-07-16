@@ -76,6 +76,8 @@
             <table>
                 <tr>
                     <!--<td><a class="add-element" href=""><span></span></a></td>-->
+
+
                     <td class="width-select-1">
                         <?php echo $form->dropDownList($model, 'blog_id', CHtml::listData($user->getAllBlogs(), 'id', 'title')); ?>
                         <?php echo $form->error($model,'blog_id'); ?>
