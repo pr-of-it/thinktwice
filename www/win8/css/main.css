@@ -929,10 +929,27 @@ input.error{ border:1px solid red !important }
 }
 .create-post.opacity-hide{
 	left:-581px;
+	/*opacity:.5; filter:alpha(opacity=50);*/
+}
+.create-post .darkener {
+	position: absolute; left:0; right:0; bottom: 0; top: 0;
+	background: rgb(0, 5, 7);
+	opacity:0;
+	z-index: 100;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	-ms-transition:all .5s;
+	-o-transition:all .5s;
+	transition:all .5s;
+	pointer-events: none;
+}
+.create-post.opacity-hide .darkener {
 	opacity:.5; filter:alpha(opacity=50);
 }
+
 .create-post-content{
 	padding:20px 19px;
+	pointer-events: auto;
 }
 .create-post header input, .tag-attach-box input{
 	width:678px;

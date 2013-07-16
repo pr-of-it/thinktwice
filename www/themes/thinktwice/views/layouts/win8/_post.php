@@ -6,6 +6,7 @@
 ?>
 <div class="create-post opacity-hide">
 
+    <div class="darkener"></div>
     <?php $form = $this->beginWidget('ActiveForm', array(
         'id'=>'blog-form',
         'enableAjaxValidation'=>false,
