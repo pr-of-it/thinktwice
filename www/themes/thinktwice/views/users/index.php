@@ -51,20 +51,20 @@
     <header>Эксперты <span>Всего (<?php echo count($experts); ?>)</span></header>
     <ul class="users-list clear">
 
-        <?php foreach ($currentUser->followers as $follower) : ?>
+        <?php foreach ($experts as $expert) : ?>
 
         <li class="users-item user-premium">
             <div class="user-content">
                 <div class="avatar-rating">
-                    <?php echo Yii::app()->easyImage->thumbOf($follower->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
+                    <?php echo Yii::app()->easyImage->thumbOf($expert->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                     <span></span>
                     <div class="user-rating-box">
                         <div class="star-3"><b></b></div>
                     </div>
                 </div>
-                <header class="name"><?php echo $follower->name; ?></header>
+                <header class="name"><?php echo $expert->name; ?></header>
                 <div class="desc">Специалист методологии</div>
-                <div class="price-time"><?php echo sprintf('%0.0f', $follower->consult_price); ?> руб./мин.</div>
+                <div class="price-time"><?php echo sprintf('%0.0f', $expert->consult_price); ?> руб./мин.</div>
             </div>
 
             <div class="close"></div>
