@@ -3,6 +3,7 @@
  * @var $currentUser User
  * @var $experts User[]
  * @var $feeds User[]
+ * @var $users User[]
  */
 ?>
 <div id="container">
@@ -80,7 +81,7 @@
 </li>
 
 <li class="users-list-box users-list-row-2">
-    <header>Новостные порталы</header>
+    <header>Новостные порталы<span>Всего (<?php echo count($feeds); ?>)</span></header>
     <ul class="users-list clear">
 
         <?php foreach ($feeds as $feed) : ?>
@@ -103,69 +104,25 @@
 </li>
 
 <li class="users-list-box users-list-row-3">
-    <header>Люди <span>Всего (1689)</span></header>
+    <header>Люди <span>Всего (<?php echo count($users); ?>)</span></header>
     <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
 
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
+        <?php foreach ($users as $user) : ?>
 
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
+            <li class="users-item">
+                <div class="user-content">
+                    <div class="avatar-rating">
+                        <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
+                        <span></span>
+                    </div>
+                    <header class="name"><?php echo $user->name; ?></header>
+                    <div class="desc">Пользователь</div>
                 </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
+                <div class="close"></div>
+            </li>
+
+        <?php endforeach; ?>
+
     </ul>
 </li>
 </ul>
