@@ -19,7 +19,7 @@ $form = $this->beginWidget('ActiveForm', array(
 
     <?php echo $form->hiddenField($model,'id'); ?>
 
-    <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255,'class'=>'title-field')); ?>
+    <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255,'class'=>'title-field','id'=>'BlogPost_title_edit')); ?>
     <?php echo $form->error($model,'title'); ?>
 
     <div class="wysiwyg-text-field">
@@ -37,7 +37,7 @@ $form = $this->beginWidget('ActiveForm', array(
                 <!--<td><a class="add-element" href=""><span></span></a></td>-->
                 <td class="width-select-1">
 
-                    <?php echo $form->dropDownList($model, 'blog_id', CHtml::listData($user->getAllBlogs(), 'id', 'title')); ?>
+                    <?php echo $form->dropDownList($model, 'blog_id', CHtml::listData($user->getAllBlogs(), 'id', 'title'), array('id'=>'BlogPost_blog_id_edit')); ?>
                     <?php echo $form->error($model,'blog_id'); ?>
 
                 </td>
