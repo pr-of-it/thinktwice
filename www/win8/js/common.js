@@ -64,9 +64,6 @@ function CConfig() { // для наследования класса внутр�
 		self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
 
-		var blogSelectOptions = $('.create-post .width-select-1 select option').clone();
-		$('.window-post .width-select-1 select').append(blogSelectOptions);
-
 		// init
 		$('input, select').styler();
 

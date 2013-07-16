@@ -1104,6 +1104,7 @@ input.error{ border:1px solid red !important }
 	-moz-box-sizing: border-box; /*Firefox 1-3*/
 	-webkit-box-sizing: border-box; /* Safari */
 	height: 31px;
+	margin-bottom: 12px;
 }
 .edit-post .wysiwyg-text-field {
 	position: relative;
@@ -1721,8 +1722,8 @@ screen and (min-device-width: 1024px) and (min-height: 768px),
 screen and (min-device-width: 1024px) and (min-height: 48em)
 {
 	.create-post {
-		top: 213px;
-		bottom: 102px;
+		top: 212px;
+		bottom: 100px;
 		min-height: 500px;
 	}
 
