@@ -241,7 +241,7 @@ function CConfig() { // для наследования класса внутр�
 					img.css('width', targetWidth);
 					console.log(targetWidth, this.width, this.height)
 					if (this.width < targetWidth) {
-						img.css('background-size', '100%');
+						img.css('background-size', 'auto');
 					} else {
 						img.css('background-size', 'cover');
 					}
