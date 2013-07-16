@@ -453,7 +453,7 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 
-				var preview = (item.media && item.media.length && item.media[0].url) || null;
+				var preview = (!item.image && item.media && item.media.length && item.media[0].url) || null;
 				var post = $(self.postTemplate({
 					extraClass: (item.blog && item.blog.type === 3) ? ' white-style' : '',
 					tag: item.tag || '',
@@ -463,7 +463,8 @@ function CConfig() { // для наследования класса внутр�
 					text: item.text,
 					likes: item.likes || 0,
 					time: timeFormat,
-					image: item.image
+					image: item.image,
+					media: item.image && item.media
 				}));
 				post.data({
 					position: i + self.numPosts,
