@@ -227,4 +227,9 @@ class UserController extends Controller {
 
     }
 
+    public function actionList() {
+        $user = User::model()->findAll();
+        $this->render('list',array('user'=>$user));
+    }
+
 }

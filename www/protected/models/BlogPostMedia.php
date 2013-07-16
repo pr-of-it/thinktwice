@@ -8,14 +8,14 @@
  * @property integer $post_id
  * @property string $image
  */
-class BlogPostImage extends CActiveRecord
+class BlogPostMedia extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tt_blog_post_images';
+		return 'tt_blog_post_media';
 	}
 
 	/**
@@ -27,10 +27,10 @@ class BlogPostImage extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('post_id', 'numerical', 'integerOnly'=>true),
-			array('image', 'length', 'max'=>255),
+			array('url,type', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, post_id, image', 'safe', 'on'=>'search'),
+			array('id, post_id, url, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,7 +54,8 @@ class BlogPostImage extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'post_id' => 'Post',
-			'image' => 'Image',
+			'url' => 'Url',
+            'type'=> 'Type',
 		);
 	}
 
@@ -78,7 +79,8 @@ class BlogPostImage extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('post_id',$this->post_id);
-		$criteria->compare('image',$this->image,true);
+		$criteria->compare('url',$this->url,true);
+        $criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

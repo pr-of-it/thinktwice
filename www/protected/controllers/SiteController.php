@@ -66,10 +66,21 @@ class SiteController extends Controller
 
         // Публикация поста в блог с главной
         $post = new BlogPost();
+
         if(isset($_POST['BlogPost'])) {
+            $media = $_POST['BlogPost']['images'];
+            unset($_POST['BlogPost']['images']);
             $post->attributes=$_POST['BlogPost'];
-            if($post->save())
+            if($post->save()) {
+                foreach ( $media as $file ) {
+                    $model = new BlogPostMedia();
+                    $model->post_id = $post->id;
+                    $model->url = $file;
+                    $model->type = 'image';
+                    $model->save();
+                }
                 $this->redirect(array('/site/index'));
+            }
         }
 
         if ( Yii::app()->user->isGuest ) {

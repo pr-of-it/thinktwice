@@ -12,6 +12,7 @@
  * @property string $time
  * @property integer $rss_id
  * @property string $rss_guid
+ * @property array media
  */
 class BlogPost extends CActiveRecord
 {
@@ -49,7 +50,7 @@ class BlogPost extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'blog' => array(self::BELONGS_TO, 'Blog', 'blog_id'),
-            'images' => array(self::HAS_MANY, 'BlogPostImage', 'post_id'),
+            'media' => array(self::HAS_MANY, 'BlogPostMedia', 'post_id'),
 		);
 	}
 
