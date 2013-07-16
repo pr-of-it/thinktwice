@@ -2,6 +2,7 @@
 /* @var $this Controller
  * @var $currentUser User
  * @var $experts User[]
+ * @var $feeds User[]
  */
 ?>
 <div id="container">
@@ -81,42 +82,23 @@
 <li class="users-list-box users-list-row-2">
     <header>Новостные порталы</header>
     <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
 
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
+        <?php foreach ($feeds as $feed) : ?>
+
+            <li class="users-item">
+                <div class="user-content">
+                    <div class="avatar-rating">
+                        <?php echo Yii::app()->easyImage->thumbOf($feed->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
+                        <span></span>
+                    </div>
+                    <header class="name"><?php echo $feed->name; ?></header>
+                    <div class="desc">Новостной <br/> портал</div>
                 </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
+                <div class="close"></div>
+            </li>
+
+        <?php endforeach; ?>
+
     </ul>
 </li>
 
