@@ -23,6 +23,38 @@ class UsersController extends Controller {
      * ------------------------ AJAX -------------------------------
      */
 
+    public function actionAjaxGetUsers($limit, $offset = 0, $filter = null) {
+
+        $criteria = new CDbCriteria();
+        $criteria->offset = $offset;
+        $criteria->limit = $limit;
+        $criteria->select = 'id, name, role.name';
+        $criteria->with = 'role';
+
+        switch ( $filter ) {
+            /*
+            case 'subscripts':
+                $criteria->addCondition('');
+                break;
+            */
+            case 'experts':
+                $criteria->addCondition('role.name=:rolename');
+                $criteria->params = array(':rolename' => 'expert');
+                break;
+            case 'rss':
+                $criteria->addCondition('role.name=:rolename');
+                $criteria->params = array(':rolename' => 'rss');
+                break;
+        }
+
+        $ret = User::model()->findAll($criteria);
+
+        header('Content-type: application/json');
+        echo CJSON::encode($ret);
+        Yii::app()->end();
+
+    }
+
     /**
      * AJAX
      * Добавляет пользователя с указанным ID в список subscripts текущего
