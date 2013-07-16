@@ -79,6 +79,17 @@ class BlogController extends Controller {
 
     /**
      * AJAX
+     * Выдача формы редактирования поста в блоге
+     * @param $id ID записи поста
+     */
+    public function actionAjaxGetPostEditForm($id) {
+        $model = BlogPost::model()->findByPk($id);
+        $this->renderPartial('_post', array('model' => $model));
+        Yii::app()->end();
+    }
+
+    /**
+     * AJAX
      * Загрузка изображения к посту
      */
     public function actionUploadImage() {

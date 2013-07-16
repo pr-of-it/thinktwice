@@ -32,6 +32,7 @@
  * @property UserTransactionIncomplete[] $transactions_incomplete
  * @property Blog $blog
  * @property Blog[] $subscriptions
+ * @property Blog[] $feeds
  *
  */
 class User extends CActiveRecord
@@ -98,6 +99,7 @@ class User extends CActiveRecord
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
             'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'blog.type=' . Blog::SIMPLE_BLOG),
             'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'subscriptions.type=' . Blog::SUBSCRIPT_BLOG),
+            'feeds' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'feeds.type=' . Blog::RSS_BLOG),
 
         );
     }
@@ -200,10 +202,14 @@ class User extends CActiveRecord
     }
 
     public function getAllBlogs() {
-        $this->blog->title .= ' (Личный блог)';
+        if ( $this->hasBlog() ) {
+            $this->blog->title .= ' (Личный блог)';
+        }
         foreach ( $this->subscriptions as $blog )
             $blog->title .= ' (Подписка)';
-        return array_merge( array($this->blog), (array)$this->subscriptions);
+        foreach ( $this->feeds as $blog )
+            $blog->title .= ' (Лента)';
+        return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
     }
 
     /**
