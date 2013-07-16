@@ -252,6 +252,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                     <tr>
                         <!--<td><a class="add-element" href=""><span></span></a></td>-->
                         <td class="width-select-1">
+
                             <select name="BlogPost[blog_id]">
 
                             </select>
