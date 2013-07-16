@@ -47,7 +47,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
 <header id="header">
 
-    <div class="dashboard-link"></div>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
@@ -208,6 +208,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <div class="tag-attach-box">
                 <input placeholder="Теги" type="text" name="">
                 <div class="file-upload-container">
+                    <ul class="attach-list">
+                    </ul>
                     <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                         'id'=>'FineUploader_Edit',
                         'config' => array(
@@ -243,8 +245,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         )
                     )); ?>
                     <?php //echo $form->hiddenField($model,'image'); ?>
-                    <ul class="attach-list">
-                    </ul>
+                    
                 </div>
             </div>
             <footer>

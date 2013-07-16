@@ -8,7 +8,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Вёрстка</title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/css/print.css"/>
     <!--[if lte IE 8]>
@@ -58,7 +58,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
         </ul>
         <div>Дашборд <span></span></div>
     </div>
-    <a href=""><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/logo.png" alt=""/></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/site/index')?>"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
