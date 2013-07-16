@@ -364,6 +364,33 @@ function CConfig() { // для наследования класса внутр�
 		return ('00' + s).substr((s+'').length, 2);
 	}
 
+	var declension = function (num, nominative, genitivesingular, genitiveplural) {
+
+        if (num == 11) {return genitiveplural;}
+        if (num == 12) {return genitiveplural;}
+        if (num == 13) {return genitiveplural;}
+        if (num == 14) {return genitiveplural;}
+
+        num = '' + num;
+
+        var length = num.length;
+
+        num = num.substring(length-1, length);
+
+        if (num == '1') {return nominative;}
+
+        if (num == '2') {return genitivesingular;}
+        if (num == '3') {return genitivesingular;}
+        if (num == '4') {return genitivesingular;}
+
+        if (num == '5') {return genitiveplural;}
+        if (num == '6') {return genitiveplural;}
+        if (num == '7') {return genitiveplural;}
+        if (num == '8') {return genitiveplural;}
+        if (num == '9') {return genitiveplural;}
+        if (num == '0') {return genitiveplural;}
+    };
+
 	self.formatTimelineDate = function(s) {
 		var now = new Date(),
 			date = Date.fromDateTimeString(s),
@@ -374,10 +401,12 @@ function CConfig() { // для наследования класса внутр�
 				date.getFullYear() == now.getFullYear()) {
 			var dateMinutes = date.getHours()*60 + date.getMinutes(),
 				nowMinutes = now.getHours()*60 + now.getMinutes();
-			if (nowMinutes - dateMinutes  <= 3) {
+
+			var minDelta = nowMinutes - dateMinutes;
+			if (minDelta <= 3) {
 				timeFormat = 'сейчас';
-			} else if (nowMinutes - dateMinutes <= 60) {
-				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
+			} else if (minDelta <= 60) {
+				timeFormat = minDelta + ' ' + declension(minDelta, 'минуту', 'минуты', 'минут') + ' назад';
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
@@ -643,7 +672,7 @@ function CConfig() { // для наследования класса внутр�
 				containerWidth += ($('.quick-start-box').outerWidth() + 90);
 			$('#container').width(containerWidth);
 
-			self.rails.width(width * 2 + (560+90)*20);
+			self.rails.width(width * 2 + (560+120)*20);
 		}
 		//console.log(width)
 		return width;
