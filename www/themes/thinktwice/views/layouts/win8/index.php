@@ -197,7 +197,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
-        <form class="scroll" id="blog-edit-form" action="/" method="post">
+        <form class="scroll" id="blog-edit-form" action="/site/index" method="post">
             <header class="popup-head">Редактировать совет</header>
             <input type="hidden" name="BlogPost[id]" class="id-field">
             <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" class="title-field" type="text">
@@ -243,6 +243,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         )
                     )); ?>
                     <?php //echo $form->hiddenField($model,'image'); ?>
+                    <?php echo Yii::app()->easyImage->thumbOf($post, array('resize'=>array('width'=>150), 'crop'=>array('width'=>164, 'height'=>164))); ?>
                     <ul class="attach-list">
                     </ul>
                 </div>
