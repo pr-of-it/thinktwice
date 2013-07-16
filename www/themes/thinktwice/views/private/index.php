@@ -83,7 +83,6 @@ $this->breadcrumbs=array(
 
 <!--Форма создания подписок для пользователя Expert-->
 <?php if ( $user->role->name == 'expert' ) :;?>
-    <?php $this->renderPartial('_subscript', array('user' => $user, 'subscript'=>$subscript)); ?>
 
         <p> <h5>Список подписок:</h5>
         <?php
@@ -93,7 +92,12 @@ $this->breadcrumbs=array(
             'id'=>'subscript-grid',
             'dataProvider'=>$dataProvider,
             'columns'=>array(
-                'title',
+                array(
+                    'name' => 'title',
+                    'type' => 'raw',
+                    'value' => 'CHtml::link(CHtml::encode($data->title),
+                         array("private/updateSubscript","id" => $data->id))',
+                ),
                 'month_price',
                 'week_price',
 
@@ -101,7 +105,7 @@ $this->breadcrumbs=array(
         ));
 
         ?></p>
-
+    <?php $this->renderPartial('_subscript', array('user' => $user, 'subscript'=>$subscript)); ?>
 <?php endif;?>
 
 <!-- Форма заявки на подключение Rss для всех кроме пользователя Rss-->

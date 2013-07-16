@@ -21,4 +21,32 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
+    /**
+     * Авторизация по токену
+     */
+    public function init() {
+
+        $token = Yii::app()->request->getQuery('token');
+
+        if ( !empty($token) && Yii::app()->controller->id != 'site' ) {
+
+            if ( !Yii::app()->user->isGuest ) {
+                Yii::app()->user->logout();
+            }
+
+            $uri = Yii::app()->request->requestUri;
+
+            $uri = preg_replace("/(token\=" . $token . "[\&]?)/", "", $uri);
+            $uri = preg_replace("/[\&]?$/", "", $uri);
+            $uri = preg_replace("/\/token\/" . $token . "/", "", $uri);
+
+            $this->redirect($this->createAbsoluteUrl('/site/login', array(
+                'token'=>$token,
+                'returnUrl' => $uri,
+            )));
+
+        }
+
+    }
+
 }

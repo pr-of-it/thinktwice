@@ -8,6 +8,7 @@
  * @property integer $blog_id
  * @property string $title
  * @property string $url
+ * @property integer $active
  */
 class BlogRss extends CActiveRecord
 {
@@ -29,10 +30,11 @@ class BlogRss extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('blog_id', 'numerical', 'integerOnly'=>true),
+			array('active', 'numerical', 'integerOnly'=>true),
 			array('title, url', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, blog_id, title, url', 'safe', 'on'=>'search'),
+			array('id, blog_id, title, url, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +60,7 @@ class BlogRss extends CActiveRecord
 			'blog_id' => 'Blog ID',
 			'title' => 'Title',
 			'url' => 'Url',
+			'active' => 'Active',
 		);
 	}
 
@@ -83,6 +86,7 @@ class BlogRss extends CActiveRecord
 		$criteria->compare('blog_id',$this->blog_id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('url',$this->url,true);
+		$criteria->compare('active',$this->active,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

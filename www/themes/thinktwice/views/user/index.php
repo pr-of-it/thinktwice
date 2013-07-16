@@ -1,5 +1,5 @@
 <?php
-/* @var $this PrivateController */
+/* @var $this UserController */
 /* @var $user User */
 /* @var $currentUser User */
 /* @var $model CallRequest */

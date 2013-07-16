@@ -31,6 +31,11 @@
 		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'active'); ?>
+		<?php echo $form->checkBox($model,'active'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

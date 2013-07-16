@@ -73,9 +73,14 @@ class BlogController extends Controller {
         Yii::app()->end();
     }
 
+    /**
+     * AJAX
+     * Загрузка изображения к посту
+     */
     public function actionUploadImage() {
 
         $tempFolder=Yii::getPathOfAlias('webroot').'/upload/blogs/';
+        $webFolder = Yii::app()->getBaseUrl() . '/upload/blogs/';
 
         @mkdir($tempFolder, 0777, TRUE);
         @mkdir($tempFolder.'chunks', 0777, TRUE);

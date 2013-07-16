@@ -30,11 +30,8 @@
              <?php echo $form->error($model,'text'); ?>
         </div>
         <div class="tag-attach-box">
-            <input placeholder="Теги" type="text" name=""/>
-            <ul class="attach-list">
-                <!--<li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                <li><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/city.png" alt=""/></li>
-                --><li class="add-attach"></li>
+            <input placeholder="Теги" type="text" name=""/><br />
+            <div class="file-upload-container">
                 <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                     'id'=>'FineUploader',
                     'config' => array(
@@ -48,12 +45,15 @@
                         'callbacks'=>array(
                             'onComplete'=>"js:function(id, name, response){
                                 $('li.qq-upload-success').remove();
-                                $('#BlogPost_image').val('/upload/blogs/' + response.filename);
+                                //$('#BlogPost_image').val('/upload/blogs/' + response.filename);
+                                var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                $('.create-post .file-upload-container').append(imageInput);
+                                $('#blog-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                             }",
                             //'onError'=>"js:function(id, name, errorReason){ }",
                         ),
                         'validation'=>array(
-                            'allowedExtensions'=>array('jpg','jpeg'),
+                            'allowedExtensions'=>array('jpg','jpeg','png','gif'),
                             'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
                             //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
                         ),
@@ -67,8 +67,10 @@
                                          ),*/
                     )
                 )); ?>
-                <?php echo $form->hiddenField($model,'image'); ?>
-            </ul>
+                <?php //echo $form->hiddenField($model,'image'); ?>
+                <ul class="attach-list">
+                </ul>
+            </div>
         </div>
         <footer>
             <table>

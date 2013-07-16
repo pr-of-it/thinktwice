@@ -36,7 +36,7 @@ class PrivateController extends Controller {
                     'deleteAvatar',
                     'rssRequest',
                     'rss',
-                    'subscript',
+                    'subscript','updateSubscript',
                 ),
                 'roles'=>array('user'),
             ),
@@ -170,6 +170,13 @@ class PrivateController extends Controller {
         if(!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('private/services'));
 
+    }
+
+    public function actionUpdateSubscript ($id) {
+        $subscript = Blog::model()->findByPk($id);
+        $this->render('updateSubscript', array(
+            'subscript' => $subscript,
+        ));
     }
 
     public function actionPassword() {

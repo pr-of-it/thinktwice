@@ -12,8 +12,17 @@ class WebUser extends CWebUser {
     }
 
     public function logout($destroySession=true) {
+
+        $returnUrlFromState = $this->getState("__returnUrl");
+
         parent::logout(false);
         $this->setState('role', 'guest');
+
+        if ($returnUrlFromState)
+        {
+            $this->setState("__returnUrl", $returnUrlFromState);
+        }
+
     }
 
 }

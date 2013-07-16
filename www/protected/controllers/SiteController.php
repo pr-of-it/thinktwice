@@ -203,6 +203,9 @@ class SiteController extends Controller
     public function actionLogin()
     {
 
+        /*
+         * Авторизация по сервису социальной сети
+         */
         $service = Yii::app()->request->getQuery('service');
 
         if (isset($service)) {
@@ -230,6 +233,30 @@ class SiteController extends Controller
             // Что-то пошло не так, перенаправляем на страницу входа
             $this->redirect(array('site/login'));
         }
+
+        /*
+         * Авторизация по токену
+         */
+
+        $token = Yii::app()->request->getQuery('token');
+
+        if ( isset($token) ) {
+
+            $identity = new TokenUserIdentity($token);
+
+            if ( $identity->authenticate() ) {
+                Yii::app()->user->login($identity, 3600*24*30);
+                // @todo На dev-сайте не работает ->user->returnUrl, поэтому такое кривое решение
+                $this->redirect(Yii::app()->request->getQuery('returnUrl'));
+            } else {
+                $this->redirect($this->createAbsoluteUrl('/site/login'));
+            }
+
+        }
+
+        /*
+         * Авторизация через форму
+         */
 
         $model=new LoginForm;
 
@@ -282,6 +309,7 @@ class SiteController extends Controller
         $this->render('restore',array('model'=>$model, 'success'=>$success));
 
     }
+
 
     /*
      * СТАНДАРТНЫЕ ЭКШНЫ

@@ -197,8 +197,85 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
+        <form class="scroll" id="blog-edit-form" action="/" method="post">
+            <header class="popup-head">Редактировать совет</header>
+            <input type="hidden" name="BlogPost[id]" class="id-field">
+            <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" class="title-field" type="text">
+            
+            <div class="wysiwyg-text-field">
+                <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
+            </div>
+            <div class="tag-attach-box">
+                <input placeholder="Теги" type="text" name="">
+                <div class="file-upload-container">
+                    <?php $this->widget('ext.EFineUploader.EFineUploader', array(
+                        'id'=>'FineUploader_Edit',
+                        'config' => array(
+                            'autoUpload'=>true,
+                            'request' => array(
+                                'endpoint' => $this->createUrl('blog/uploadImage'),
+                                'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
+                            ),
+                            'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
+                            'chunking'=>array('enable'=>true,'partSize'=>100),
+                            'callbacks'=>array(
+                                'onComplete'=>"js:function(id, name, response){
+                                    $('li.qq-upload-success').remove();
+                                    var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                    $('.window-post .file-upload-container').append(imageInput);
+                                    $('#blog-edit-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
+                                }",
+                                //'onError'=>"js:function(id, name, errorReason){ }",
+                            ),
+                            'validation'=>array(
+                                'allowedExtensions'=>array('jpg','jpeg','png','gif'),
+                                'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
+                                //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
+                            ),
+                            /*'messages'=>array(
+                                              'tooManyItemsError'=>'Too many items error',
+                                              'typeError'=>"Файл {file} имеет неверное расширение. Разрешены файлы только с расширениями: {extensions}.",
+                                              'sizeError'=>"Размер файла {file} велик, максимальный размер {sizeLimit}.",
+                                              'minSizeError'=>"Размер файла {file} мал, минимальный размер {minSizeLimit}.",
+                                              'emptyError'=>"{file} is empty, please select files again without it.",
+                                              'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                                             ),*/
+                        )
+                    )); ?>
+                    <?php //echo $form->hiddenField($model,'image'); ?>
+                    <ul class="attach-list">
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <table>
+                    <tr>
+                        <!--<td><a class="add-element" href=""><span></span></a></td>-->
+                        <td class="width-select-1">
+                            <select name="BlogPost[blog_id]">
+
+                            </select>
+                        </td>
+                        <td class="width-select-2">
+                            <select name="">
+                                <option value="">для всех</option>
+                                <option value="">Выбор 1</option>
+                                <option value="">Выбор 2</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="line-buttons" colspan="3">
+                            <a class="button-cancel" href="">Отменить</a>
+                            <input class="button-yellow" type="submit" value="Опубликовать изменения"/>
+                        </td>
+                    </tr>
+                </table>
+            </footer>
+        </form>
         <div class="scroll">
-            <header class="popup-head">Новости рынка труда</header>
+            <header class="popup-head">&nbsp;</header>
             <div class="article-info">
                 <!--<span class="viewings">
                     <span></span>
@@ -211,51 +288,16 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                 <a href="" class="user-name">Автор</a>
             </div>
             <article class="content">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/image.png" alt=""/>
-                <div>
+                <div class="window-post-image"></div>
+                <div class="window-post-text">
+                    &nbsp;
                 </div>
                 <address class="author"><b>Ведомости</b> (56 подписчиков)</address>
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/tmp/soc.png" alt=""/>
             </article>
         </div>
     </section>
-    <div class="close-popup"></div>
-</div>
-
-<div class="popup window-post-2">
-    <section class="popup-content">
-        <div class="scroll">
-            <header class="popup-head">Торговая рекомендация</header>
-            <article class="content">
-                <h3>Потенциал — 15% на росте акций Сбербанка</h3>
-                <h4>Что требуется: </h4>
-                <ul>
-                    <li>от 1000 руб. свободные денежные средства</li>
-                    <li>2-3 месяца что ожидать через 6 месяцев?</li>
-                    <li>брокерский счет</li>
-                </ul>
-
-                <h4>Стратегия</h4>
-                <p>
-                    Приобретать обыкновенные акции Сбербанка по цене ниже 82 рублей за акцию и продавать, когда цена
-                    достигнет 94 рублей. Заемные денежные средства не использовать.
-                </p>
-
-                <h4>Почему</h4>
-
-                <p>
-                    Иностранные и российские инвесторы не заинтересованы долго держать в низкодоходных активах
-                    свободные деньги. Сбербанк выглядит самым инвестиционно привлекательным активом в банковском
-                    секторе. ссылка на источник. Учитывая недооцененность акций (на 50%) даже при намеке на
-                    стабилизацию экономики ЕС рост котировок может быть взрывным.
-                    <br /><br/>
-                    <a href="">Ссылка на аналитику</a>
-                </p>
-
-                <h3>Как купить?</h3>
-            </article>
-        </div>
-    </section>
+    <div class="edit-post-button"></div>
     <div class="close-popup"></div>
 </div>
 </div>

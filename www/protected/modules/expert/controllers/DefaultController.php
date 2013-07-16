@@ -45,9 +45,13 @@ class DefaultController extends ExpertController
     public function actionStat() {
 
         $user = User::model()->findByPk(Yii::app()->user->id);
+        /*   $criteria = new CDbCriteria();
+         $criteria->condition = 'status=' . CallRequest::STATUS_COMPLETE;
+         $callRequest = CallRequest::model()->findAll($criteria);*/
 
         $this->render('stat',array(
-            'user' => $user
+            'user' => $user,
+            #'callRequest' => $callRequest,
         ));
 
     }
@@ -75,14 +79,11 @@ class DefaultController extends ExpertController
         ));
     }
 
-    public function actionCreateSchedule($consultSchedule) {
-
-
-        var_dump($consultSchedule);die;
-
-        $this->render( 'consultSchedule',array (
-            'user' => $user,
-        ));
+    public function actionCreateSchedule($id) {
+        $user = User::model()->findByPk($id);
+        $user->consultSchedule = $_POST['WorkTime'];
+        $user->save();
+        $this->redirect(array('index'));
     }
 
     public function actionClosest() {
