@@ -27,6 +27,7 @@ $form = $this->beginWidget('ActiveForm', array(
         <?php echo $form->error($model,'text'); ?>
     </div>
     <div class="tag-attach-box">
+        <?php echo $form->textField($model,'time'); ?>
         <input placeholder="Теги" type="text" name="">
         
     </div>

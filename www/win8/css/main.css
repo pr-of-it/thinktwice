@@ -1104,6 +1104,7 @@ input.error{ border:1px solid red !important }
 	-moz-box-sizing: border-box; /*Firefox 1-3*/
 	-webkit-box-sizing: border-box; /* Safari */
 	height: 31px;
+	margin-bottom: 12px;
 }
 .edit-post .wysiwyg-text-field {
 	position: relative;
