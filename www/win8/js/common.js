@@ -247,7 +247,9 @@ function CConfig() { // для наследования класса внутр�
 					if (self.editor) {
 						self.editor.destroy();
 					}
+					var uploader = popup.find('form > div').detach()
 					popup.find('form').html(data);
+					popup.find('.tag-attach-box').append(uploader);
 
 					if (popup.find('#popup-post-editor').length) {
 						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
