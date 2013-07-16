@@ -2,7 +2,13 @@
 /* @var $this Controller
  * $user User
  */
-$user = User::model()->findByPk(Yii::app()->user->id);
+if (Yii::app()->user->isGuest) {
+    $user = new stdClass;
+    $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
+
+} else {
+    $user = User::model()->findByPk(Yii::app()->user->id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -64,8 +70,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
 
         <a href="" class="setting-icon"></a>
-        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); ?> руб.</a></div>
-        <div class="user-name"><?php echo $user->name; ?></div>
+        <div class="user-money"><a href="<?php if ( !Yii::app()->user->isGuest ) {echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); }?> руб.</a></div>
+        <div class="user-name"><?php if ( !Yii::app()->user->isGuest ) {echo $user->name;} ?></div>
     </section>
 
 </header>
