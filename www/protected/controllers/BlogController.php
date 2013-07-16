@@ -71,7 +71,7 @@ class BlogController extends Controller {
     }
 
     public function actionGetIndexBlogPost($id) {
-        $post = BlogPost::model()->with('blog', 'blog.user')->findByPk($id);
+        $post = BlogPost::model()->with('blog', 'blog.user', 'media')->findByPk($id);
         header('Content-type: application/json');
         echo CJSON::encode($post);
         Yii::app()->end();
