@@ -1,5 +1,5 @@
 <?php
-class DashBoardController extends Controller {
+class DashboardController extends Controller {
     public $layout = '//layouts/win8/dashboard';
 
     public function actionIndex() {
