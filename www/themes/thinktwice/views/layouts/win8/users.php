@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+/* @var $this Controller
+ * $user User
+ */
+$user = User::model()->findByPk(Yii::app()->user->id);
+?><!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -49,12 +54,12 @@
         <div>Дашборд <span></span></div>
         <a class="icon-flash" href=""></a>
     </div>
-    <a href=""><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/logo.png" alt=""/></a>
+    <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
-        <a class="user-avatar" href=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/><span></span></a>
-        <div class="user-money">1000 руб.</div>
-        <div class="user-name">Тим Черный</div>
+        <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
+        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); ?> руб.</a></div>
+        <div class="user-name"><?php echo $user->name; ?></div>
     </section>
 
     <nav class="lenta-settings page-users">
@@ -154,285 +159,8 @@
 
 </header>
 <div id="wrapper">
-<!--header-->
-<div id="container">
 
-<div id="rails" class="page-users">
-<ul class="users-list-wrap clear">
-
-<li class="users-list-box users-list-row-2">
-    <header>Я подписался <span>Всего (9)</span></header>
-    <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Демьян Кузнецов</header>
-                <div class="desc">Газпром <br/> Финансовый аналитик</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Демьян Кузнецов</header>
-                <div class="desc">Газпром <br/> Финансовый аналитик</div>
-            </div>
-            <div class="close"></div>
-        </li>
-    </ul>
-</li>
-
-<li class="users-list-box users-list-row-3">
-    <header>Эксперты <span>Всего (19)</span></header>
-    <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                    <div class="user-rating-box">
-                        <div class="star-3"><b></b></div>
-                    </div>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-
-                    <div class="user-rating-box">
-                        <div class="star-3"><b></b></div>
-                    </div>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-
-                    <div class="user-rating-box">
-                        <div class="star-1-5"><b></b></div>
-                    </div>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-
-                    <div class="user-rating-box">
-                        <div class="star-3-5"><b></b></div>
-                    </div>
-                </div>
-                <header class="name">Демьян Кузнецов</header>
-                <div class="desc">Газпром <br/> Финансовый аналитик</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-
-                    <div class="user-rating-box">
-                        <div class="star-4"><b></b></div>
-                    </div>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-plus">
-
-        </li>
-    </ul>
-</li>
-
-<li class="users-list-box users-list-row-2">
-    <header>Новостные порталы</header>
-    <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-    </ul>
-</li>
-
-<li class="users-list-box users-list-row-3">
-    <header>Люди <span>Всего (1689)</span></header>
-    <ul class="users-list clear">
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Игорь Белявский</header>
-                <div class="desc">UNI <br/> Дизайнер</div>
-            </div>
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Лиза Карицина</header>
-                <div class="desc">Специалист методологии</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-
-            <div class="close"></div>
-        </li>
-        <li class="users-item user-premium">
-            <div class="user-content">
-                <div class="avatar-rating">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/tmp/image-float.png" alt=""/>
-                    <span></span>
-                </div>
-                <header class="name">Даниил Октопов</header>
-                <div class="desc">Разработки и внедрение систем</div>
-                <div class="price-time">2 500 руб./мин.</div>
-            </div>
-            <div class="close"></div>
-        </li>
-    </ul>
-</li>
-</ul>
-</div>
-</div>
-<!--container-->
+    <?php echo $content; ?>
 
 <footer id="footer">
     <ul class="footer-body clear">
