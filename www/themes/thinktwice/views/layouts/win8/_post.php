@@ -45,7 +45,9 @@
                         'callbacks'=>array(
                             'onComplete'=>"js:function(id, name, response){
                                 $('li.qq-upload-success').remove();
-                                $('#BlogPost_image').val('/upload/blogs/' + response.filename);
+                                //$('#BlogPost_image').val('/upload/blogs/' + response.filename);
+                                var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                $('.create-post .file-upload-container').append(imageInput);
                                 $('#blog-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                             }",
                             //'onError'=>"js:function(id, name, errorReason){ }",
@@ -65,7 +67,7 @@
                                          ),*/
                     )
                 )); ?>
-                <?php echo $form->hiddenField($model,'image'); ?>
+                <?php //echo $form->hiddenField($model,'image'); ?>
                 <ul class="attach-list">
                 </ul>
             </div>
