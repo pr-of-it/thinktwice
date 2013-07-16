@@ -64,11 +64,17 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        // Публикация поста в блог с главной
-        $post = new BlogPost();
-
+        // Публикация поста в блог с главной и редактирование его
+        if ( isset ($_POST['BlogPost']['id']) )
+        {
+            $post = BlogPost::model()->findByPk($_POST['BlogPost']['id']);
+        }
+            else
+            {
+                $post = new BlogPost();
+            }
         if(isset($_POST['BlogPost'])) {
-            $media = $_POST['BlogPost']['images'];
+            $media = isset($_POST['BlogPost']['images']) ? $_POST['BlogPost']['images'] : array();
             unset($_POST['BlogPost']['images']);
             $post->attributes=$_POST['BlogPost'];
             if($post->save()) {

@@ -12,7 +12,7 @@
  * @property string $time
  * @property integer $rss_id
  * @property string $rss_guid
- * @property array media
+ * @property array $media
  */
 class BlogPost extends CActiveRecord
 {
