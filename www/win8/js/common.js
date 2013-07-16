@@ -241,15 +241,23 @@ function CConfig() { // для наследования класса внутр�
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
 			$.get(self.makeUrl('/blog/ajaxGetPostEditForm'),
-				{id: data.id}, function (data) {
+				{id: data.id}, function (d) {
 					if (self.editor) {
 						self.editor.destroy();
 					}
 					var uploader = popup.find('.file-upload-container').detach();
 					uploader.find('.hidden-image').remove();
 					uploader.find('.attach-list').html('');
-					popup.find('form').html(data);
+					popup.find('form').html(d);
 					popup.find('.tag-attach-box').append(uploader);
+
+					var media = $('<ul class="attach-list" />');
+
+					for (var i=0; i < data.media.length; i++ ) {
+						var item = data.media[i];
+						media.append('<li><img src="' + item.url  +'"></li>');
+					}
+					uploader.append(media)
 
 					if (popup.find('#popup-post-editor').length) {
 						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
@@ -544,7 +552,8 @@ function CConfig() { // для наследования класса внутр�
 					avatar: (item.blog && item.blog.user.avatar) || '',
 					uid: (item.blog && item.blog.user.id) || null,
 					user_name: (item.blog && item.blog.user.name || 'Эксперт'),
-					time: item.time
+					time: item.time,
+					media: item.media || []
 				});
 				if (preview) {
 					post.addClass('medium-width');
