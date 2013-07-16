@@ -35,6 +35,18 @@ function CConfig() { // для наследования класса внутр�
 		console.error('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
 	}// ошибка ajax запроса
 
+
+	self.ckconf = {
+		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+		height: '250px',
+		uiColor: '#e1e1db',
+		dialog_backgroundCoverColor: 'black',
+		dialog_backgroundCoverOpacity: 0.6,
+		language: 'ru'
+	};
+	self.editor = null;
+
+
 	/**
 	 * init scripts
 	 */
@@ -216,19 +228,34 @@ function CConfig() { // для наследования класса внутр�
 
 			var title = target.find('h6').html();
 			popup.find('div.scroll header.popup-head').html(title);  // $post->title
-			popup.find('form input.title-field').val(title);
+			//popup.find('form input.title-field').val(title);
 			var text = target.find('.news-body div').html();
 			popup.find('div.window-post-text').html(text);  // $post->text
-			popup.find('form textarea').html(text);
-			if (CKEDITOR.instances['popup-post-editor'])
-				CKEDITOR.instances['popup-post-editor'].setData(text);
+			//popup.find('form textarea').html(text);
+			/*if (CKEDITOR.instances['popup-post-editor'])
+				CKEDITOR.instances['popup-post-editor'].setData(text);*/
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 
 			popup.find('.article-info img').attr('src', data.avatar);
 			popup.find('.article-info .user-name').text(data.user_name || '');
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
-			popup.find('form input.id-field').val(data.id);
+
+
+			$.get(self.makeUrl('/blog/ajaxGetPostEditForm'),
+				{id: data.id}, function (data) {
+					if (self.editor) {
+						self.editor.destroy();
+					}
+					popup.find('form').html(data);
+
+					if (popup.find('#popup-post-editor').length) {
+						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
+					}
+					popup.find('select').styler();
+			});
+
+			//popup.find('form input.id-field').val(data.id);
 
 			var imgTarget = target.find('.image-gallery-min-full'),
 				img = popup.find('div.window-post-image');
@@ -239,7 +266,7 @@ function CConfig() { // для наследования класса внутр�
 				temp.onload = function() {
 					var targetWidth = popup.find('article').width();
 					img.css('width', targetWidth);
-					console.log(targetWidth, this.width, this.height)
+					//console.log(targetWidth, this.width, this.height)
 					if (this.width < targetWidth) {
 						img.css('background-size', 'auto');
 					} else {
@@ -786,17 +813,6 @@ $(function () {
 		});
 	}
 
-	if ($('#popup-post-editor').length) {
-		var ckconf = {
-			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-			height: '250px',
-			uiColor: '#e1e1db',
-			dialog_backgroundCoverColor: 'black',
-			dialog_backgroundCoverOpacity: 0.6,
-			language: 'ru'
-		};
-		var editor = CKEDITOR.replace('popup-post-editor', ckconf);
-
-	}
+	
 
 }); // dom ready

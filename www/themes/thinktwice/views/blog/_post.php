@@ -19,7 +19,7 @@ $form = $this->beginWidget('ActiveForm', array(
 
     <?php echo $form->hiddenField($model,'id'); ?>
 
-    <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
+    <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255,'class'=>'title-field')); ?>
     <?php echo $form->error($model,'title'); ?>
 
     <div class="wysiwyg-text-field">
@@ -29,6 +29,8 @@ $form = $this->beginWidget('ActiveForm', array(
     <div class="tag-attach-box">
         <input placeholder="Теги" type="text" name="">
         <div class="file-upload-container">
+            <ul class="attach-list">
+            </ul>
             <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                 'id'=>'FineUploader_Edit',
                 'config' => array(
@@ -64,8 +66,6 @@ $form = $this->beginWidget('ActiveForm', array(
                 )
             )); ?>
             <?php //echo $form->hiddenField($model,'image'); ?>
-            <ul class="attach-list">
-            </ul>
         </div>
     </div>
     <footer>
