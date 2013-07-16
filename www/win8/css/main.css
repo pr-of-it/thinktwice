@@ -944,7 +944,7 @@ input.error{ border:1px solid red !important }
 	pointer-events: none;
 }
 .create-post.opacity-hide .darkener {
-	opacity:.5; filter:alpha(opacity=50);
+	opacity:.7; filter:alpha(opacity=70);
 }
 
 .create-post-content{
