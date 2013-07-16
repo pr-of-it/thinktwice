@@ -208,6 +208,8 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <div class="tag-attach-box">
                 <input placeholder="Теги" type="text" name="">
                 <div class="file-upload-container">
+                    <ul class="attach-list">
+                    </ul>
                     <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                         'id'=>'FineUploader_Edit',
                         'config' => array(
@@ -243,8 +245,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                         )
                     )); ?>
                     <?php //echo $form->hiddenField($model,'image'); ?>
-                    <ul class="attach-list">
-                    </ul>
+                    
                 </div>
             </div>
             <footer>
