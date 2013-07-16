@@ -22,7 +22,7 @@
                     </div>
                     {{/image}}
                     <div class="news-body">
-                        {{#preview}}<img src="{{preview}}" alt="{{title}}"/>{{/preview}}
+                        {{#preview}}<img src="{{preview}}" width="180" height="110" alt="{{title}}"/>{{/preview}}
                         <header class="news-author">{{author}}</header>
                         <h6>{{{title}}}</h6>
                         <div>{{{text}}}</div>
