@@ -535,7 +535,8 @@ function CConfig() { // для наследования класса внутр�
 					likes: item.likes || 0,
 					time: timeFormat,
 					image: item.image,
-					media: item.image && item.media
+					media: item.image && item.media,
+					hasMedia: (item.image && item.media.length)
 				}));
 				post.data({
 					position: i + self.numPosts,
