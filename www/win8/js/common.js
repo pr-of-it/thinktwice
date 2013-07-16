@@ -45,7 +45,7 @@ function CConfig() { // для наследования класса внутр�
 		language: 'ru'
 	};
 	self.editor = null;
-
+	
 
 	/**
 	 * init scripts
@@ -240,14 +240,14 @@ function CConfig() { // для наследования класса внутр�
 			popup.find('.article-info .user-name').text(data.user_name || '');
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
-
-
 			$.get(self.makeUrl('/blog/ajaxGetPostEditForm'),
 				{id: data.id}, function (data) {
 					if (self.editor) {
 						self.editor.destroy();
 					}
-					var uploader = popup.find('form > div').detach()
+					var uploader = popup.find('.file-upload-container').detach();
+					uploader.find('.hidden-image').remove();
+					uploader.find('.attach-list').html('');
 					popup.find('form').html(data);
 					popup.find('.tag-attach-box').append(uploader);
 

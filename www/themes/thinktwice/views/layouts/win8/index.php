@@ -214,7 +214,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
                     'callbacks'=>array(
                         'onComplete'=>"js:function(id, name, response){
                                     $('li.qq-upload-success').remove();
-                                    var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                    var imageInput = $('<input class=\"hidden-image\" type=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
                                     $('.window-post .file-upload-container').append(imageInput);
                                     $('#blog-edit-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                                 }",
