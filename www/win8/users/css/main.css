@@ -408,7 +408,7 @@ input.error{ border:1px solid red !important }
 	top:0;
 	width:100%;
 	cursor:default !important;
-	overflow:auto;
+	overflow:auto;-webkit-overflow-scrolling:touch;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	-ms-transition:all .5s;
