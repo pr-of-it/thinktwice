@@ -150,7 +150,7 @@ class SiteController extends Controller
 	    );
             if ($isAuth) {
 
-                $identity = new ServiceUserIdentity($authIdentity);
+                $identity = new EAuthUserIdentity($authIdentity);
 
 		$isAuth = $identity->authenticate();
 		
