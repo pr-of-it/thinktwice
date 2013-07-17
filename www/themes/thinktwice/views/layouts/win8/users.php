@@ -7,7 +7,6 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/jquery-ui-1.10.3.custom.min.css" media="all"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/print.css"/>
@@ -39,6 +38,9 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/js/common.js"></script>
+
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
 </head>
 <body>
 
