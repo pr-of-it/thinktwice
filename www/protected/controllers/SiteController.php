@@ -143,11 +143,12 @@ class SiteController extends Controller
             $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
             $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/enter');
 
+	    $isAuth = $authIdentity->authenticate()
 	    Yii::log(
-		    'authIdentity: ' . $authIdentity->authenticate(),
+		    'authIdentity: ' . $isAuth,
 		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
 	    );
-            if ($authIdentity->authenticate()) {
+            if ($isAuth) {
 
                 $identity = new ServiceUserIdentity($authIdentity);
 
