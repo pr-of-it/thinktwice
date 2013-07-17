@@ -24,6 +24,12 @@
         </div>
 
         <div class="row">
+            <?php echo $form->labelEx($subscript,'Описание'); ?>
+            <?php echo $form->textField($subscript,'desc',array('size'=>60,'maxlength'=>255));?>
+            <?php echo $form->error($subscript,'desc'); ?>
+        </div>
+
+        <div class="row">
             Стоимость:
             <select name='time'>
                 <option value="month_price">За месяц</option>

@@ -98,6 +98,7 @@ $this->breadcrumbs=array(
                     'value' => 'CHtml::link(CHtml::encode($data->title),
                          array("private/updateSubscript","id" => $data->id))',
                 ),
+                'desc',
                 'month_price',
                 'week_price',
 
@@ -112,27 +113,6 @@ $this->breadcrumbs=array(
 <?php if ( $user->role->name != 'rss' ) :;?>
     <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
-
-<!-- Список фолловеров-->
-<h4>Ваши subscripts:</h4>
-
-<?php
-$dataProvider = new CActiveDataProvider($user->model());
-$dataProvider->setData($user->subscripts);
-$this->widget('zii.widgets.grid.CGridView', array(
-    'id'=>'user-grid',
-    'dataProvider'=>$dataProvider,
-    'columns'=>array(
-        array(
-            'name' => 'ссылка',
-            'type' => 'raw',
-            'value' => 'CHtml::link(CHtml::encode($data->name),
-                         array("/user/index","id" => $data->id))',
-        ),
-        'name',
-    ),
-));
-?>
 
 
 <h4>Ваш счет:</h4>
