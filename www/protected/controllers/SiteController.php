@@ -152,8 +152,14 @@ class SiteController extends Controller
 
                 $identity = new ServiceUserIdentity($authIdentity);
 
-                // Успешный вход
-                if ($identity->authenticate()) {
+		$isAuth = $identity->authenticate();
+		
+		Yii::log(
+		    'ServerUserIdentity: ' . $isAuth,
+		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
+	    	);
+		// Успешный вход
+                if ($isAuth) {
                     Yii::app()->user->login($identity, 3600*24*30);
                     // Специальный редирект с закрытием popup окна
                     $authIdentity->redirect();
