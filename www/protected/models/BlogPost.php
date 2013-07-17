@@ -13,6 +13,9 @@
  * @property integer $rss_id
  * @property string $rss_guid
  * @property array $media
+ *
+ * @property Blog $blog
+ * @property BlogPostMedia[] $media
  */
 class BlogPost extends CActiveRecord
 {

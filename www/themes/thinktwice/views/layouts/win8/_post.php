@@ -33,6 +33,8 @@
         <div class="tag-attach-box">
             <input placeholder="Теги" type="text" name=""/><br />
             <div class="file-upload-container">
+                <ul class="attach-list">
+                </ul>
                 <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                     'id'=>'FineUploader',
                     'config' => array(
@@ -69,8 +71,7 @@
                     )
                 )); ?>
                 <?php //echo $form->hiddenField($model,'image'); ?>
-                <ul class="attach-list">
-                </ul>
+                
             </div>
         </div>
         <footer>

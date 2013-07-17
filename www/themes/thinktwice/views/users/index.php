@@ -12,21 +12,21 @@
 <ul class="users-list-wrap clear">
 
 <li class="users-list-box users-list-row-2">
-    <header>Я подписался <span>Всего (<?php echo count($currentUser->followers); ?>)</span></header>
+    <header>Я подписался <span>Всего (<?php echo count($currentUser->subscripts); ?>)</span></header>
     <ul class="users-list clear">
 
-        <?php foreach ($currentUser->followers as $follower) : ?>
+        <?php foreach ($currentUser->subscripts as $subscript) : ?>
 
-            <?php if ( $follower->role->name == 'expert' ) : ?>
+            <?php if ( $subscript->role->name == 'expert' ) : ?>
             <li class="users-item user-premium">
                 <div class="user-content">
                     <div class="avatar-rating">
-                        <?php echo Yii::app()->easyImage->thumbOf($follower->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
+                        <?php echo Yii::app()->easyImage->thumbOf($subscript->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                         <span></span>
                     </div>
-                    <header class="name"><?php echo $follower->name; ?></header>
+                    <header class="name"><?php echo $subscript->name; ?></header>
                     <div class="desc">Специалист методологии</div>
-                    <div class="price-time"><?php echo sprintf('%0.0f', $follower->consult_price); ?> руб./мин.</div>
+                    <div class="price-time"><?php echo sprintf('%0.0f', $subscript->consult_price); ?> руб./мин.</div>
                 </div>
                 <div class="close"></div>
             </li>
@@ -34,10 +34,10 @@
                 <li class="users-item">
                     <div class="user-content">
                         <div class="avatar-rating">
-                            <?php echo Yii::app()->easyImage->thumbOf($follower->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
+                            <?php echo Yii::app()->easyImage->thumbOf($subscript->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                             <span></span>
                         </div>
-                        <header class="name"><?php echo $follower->name; ?></header>
+                        <header class="name"><?php echo $subscript->name; ?></header>
                         <div class="desc">UNI <br/> Дизайнер</div>
                     </div>
                     <div class="close"></div>

@@ -56,7 +56,7 @@ class PrivateController extends Controller {
 
     public function actionIndex() {
 
-        $user = User::model()->with(array('followers', 'services',))->findByPk(Yii::app()->user->id);
+        $user = User::model()->with(array('subscripts', 'services',))->findByPk(Yii::app()->user->id);
         if ( $user->blog == null ) {
             $blog = new Blog;
             $blog->user_id = $user->id;

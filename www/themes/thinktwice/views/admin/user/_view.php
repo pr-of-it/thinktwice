@@ -47,13 +47,13 @@
     <?php echo CHtml::encode($data->consult_price); ?>
     <br />
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('followers')); ?>:</b>
+    <b><?php echo CHtml::encode($data->getAttributeLabel('subscripts')); ?>:</b>
     <?php
-    $followers = array();
-    foreach ( $data->followers as $follower ):
-	    $followers[] = CHtml::link(CHtml::encode($follower->name), array('view', 'id'=>$follower->id));
+    $subscripts = array();
+    foreach ( $data->subscripts as $subscript ):
+	    $subscripts[] = CHtml::link(CHtml::encode($subscript->name), array('view', 'id'=>$subscript->id));
     endforeach; ?>
-    <?php echo implode('|', $followers); ?>
+    <?php echo implode('|', $subscripts); ?>
 	<br />
 
     <b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>

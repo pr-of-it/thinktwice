@@ -23,11 +23,11 @@
                     {{/image}}
                     <div class="news-body">
                         {{#preview}}<img src="{{preview}}" width="180" height="110" alt="{{title}}"/>{{/preview}}
-                        {{#media}}<ul class="image-gallery-min">{{/media}}
+                        {{#hasMedia}}<ul class="image-gallery-min">{{/hasMedia}}
                         {{#media}}
                             <li><a href=""><img src="{{ url }}" width="21" height="60" alt=""></a></li>
                         {{/media}}
-                        {{#media}}</ul>{{/media}}
+                        {{#hasMedia}}</ul>{{/hasMedia}}
                         <header class="news-author">{{author}}</header>
                         <h6>{{{title}}}</h6>
                         <div>{{{text}}}</div>

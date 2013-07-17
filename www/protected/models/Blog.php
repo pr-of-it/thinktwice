@@ -10,6 +10,8 @@
  * @property integer $type
  * @property integer $month_price
  * @property integer $week_price
+ *
+ * @property User $user
  */
 class Blog extends CActiveRecord
 {
