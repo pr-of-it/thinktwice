@@ -52,7 +52,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <li class="dl-5"></li>
         </ul>
         <div>Дашборд <span></span></div>
-        <a class="icon-flash" href=""></a>
+        <!--<a class="icon-flash" href=""></a>-->
     </div>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/logo.png" alt=""/></a>
 
@@ -63,6 +63,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
 
     <nav class="lenta-settings page-users">
+        <!--
         <ul>
             <li>
                 <h1>Пользователи</h1>
@@ -70,6 +71,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <li><div class="check-all-lebel">Все</div> <a class="my-interest expert-only" href=""><span></span> <i>Только эксперты</i></a></li>
         </ul>
         <div class="button-ok"></div>
+        -->
 
         <ul class="interest-menu">
             <li>
