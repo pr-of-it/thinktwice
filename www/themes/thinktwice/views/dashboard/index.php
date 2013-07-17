@@ -185,7 +185,7 @@
                             <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
 
                                 <div class="w8-cell yellow-cell icon-center-user">
-                                    <div class="cell-name">Пустой блог 1</div>
+                                    <div class="cell-name">Пустой блок 1</div>
 
                                 </div>
 
@@ -194,7 +194,7 @@
                             <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
 
                                 <div class="w8-cell red-cell icon-center-w">
-                                    <div class="cell-name">Пустой блог 2</div>
+                                    <div class="cell-name">Пустой блок 2</div>
 
                                 </div>
 
