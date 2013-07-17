@@ -27,7 +27,7 @@
                         <?php echo Yii::app()->easyImage->thumbOf($subscript->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                         <span></span>
                     </div>
-                    <header class="name"><?php echo $subscript->name; ?></header>
+                    <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $subscript->id)); ?>"><?php echo $subscript->name; ?></a></header>
                     <div class="desc">Специалист методологии</div>
                     <div class="price-time"><?php echo sprintf('%0.0f', $subscript->consult_price); ?> руб./мин.</div>
                 </div>
@@ -40,7 +40,7 @@
                             <?php echo Yii::app()->easyImage->thumbOf($subscript->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                             <span></span>
                         </div>
-                        <header class="name"><?php echo $subscript->name; ?></header>
+                        <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $subscript->id)); ?>"><?php echo $subscript->name; ?></a></header>
                         <div class="desc">UNI <br/> Дизайнер</div>
                     </div>
                     <div class="unfollow"></div>
@@ -67,7 +67,7 @@
                         <div class="star-3"><b></b></div>
                     </div>
                 </div>
-                <header class="name"><?php echo $expert->name; ?></header>
+                <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $expert->id)); ?>"><?php echo $expert->name; ?></a></header>
                 <div class="desc">Специалист методологии</div>
                 <div class="price-time"><?php echo sprintf('%0.0f', $expert->consult_price); ?> руб./мин.</div>
             </div>
@@ -95,7 +95,7 @@
                         <?php echo Yii::app()->easyImage->thumbOf($feed->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                         <span></span>
                     </div>
-                    <header class="name"><?php echo $feed->name; ?></header>
+                    <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $feed->id)); ?>"><?php echo $feed->name; ?></a></header>
                     <div class="desc">Новостной <br/> портал</div>
                 </div>
                 <div class="follow"></div>
@@ -118,7 +118,7 @@
                         <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                         <span></span>
                     </div>
-                    <header class="name"><?php echo $user->name; ?></header>
+                    <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $user->id)); ?>"><?php echo $user->name; ?></a></header>
                     <div class="desc">Пользователь</div>
                 </div>
                 <div class="follow"></div>
