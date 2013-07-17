@@ -144,3 +144,8 @@
 
 </div>
 </div>
+<script type="text/javascript">
+window.USER = {
+    id: "<?php echo $currentUser->id ?>"
+}
+</script>

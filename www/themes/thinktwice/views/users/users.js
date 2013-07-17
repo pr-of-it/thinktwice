@@ -30,13 +30,15 @@ $(function () {
         //console.log(target.attr('class'), numItems, items.length, items.slice(numItems).length)
         //console.log(target.attr('class'), numItems, items.length, items.slice(0, numItems).length)
         
-        console.log(target.attr('class'), target.data('count'))
+        //console.log(target.attr('class'), target.data('count'))
         target.find('header span').html('Всего (' + target.data('count') + ')');
     };
 
     var ajaxUpdate = function (target) {
 
     };
+
+
 
     $('.users-list-box:not(.ajax-loader)').each(function () {
         fixVisibility($(this));
@@ -55,7 +57,7 @@ $(function () {
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
             source.data('count', source.data('count') - 1);
-            console.log(following.data('count'), source.data('count'))
+            //console.log(following.data('count'), source.data('count'))
             fixVisibility(following);
             fixVisibility(source);
         });
@@ -71,7 +73,7 @@ $(function () {
             }
             var role = parent.data('userrole');
             var target = others;
-            console.log(role)
+            //console.log(role)
             if (role === 'expert') target = experts;
             else if (role === 'rss') target = portals;
             parent.detach().prependTo(target);
@@ -87,15 +89,57 @@ $(function () {
     });
     
 
-    var numItems = others.find('.users-item').length;
+    var numItems = others.find('.users-item').length,
+        everythingWasLoaded = false,
+        loading = false;
 
     loadData = function() {
         //console.log('Подгрузка... TODO ', numItems)
+        loading = true;
+
+        var loaderFunc = 
+        $.get('/users/ajaxGetUsers', {offset: numItems, limit: 20}, function (origData) {
+            var data = [];
+            for (var i=0; i<origData.length; i++) {
+                var item = origData[i];
+                if (item.role.name !== 'expert' && item.role.name !== 'rss') {
+                    for (var j=0; j < item.followers.length; j++) {
+                        var follower = item.followers[j];
+                        if (follower.id == window.USER.id)
+                            continue;
+                    }
+                    data.push(item);
+                }
+            }
+            if (data.length === 0) {
+                var loader = $('.ajax-loader')
+                loader.find('img').hide();
+                loader.find('span').text('Все пользователи загружены.').show();
+                everythingWasLoaded = true;
+                return;
+            }
+            for (var i=0; i<data.length; i++) {
+                var item = data[i];
+                var block = others.find('.users-item:first').clone();
+                block.find('.avatar-rating img').attr('src', item.avatar);
+                var name = block.find('header.name a');
+                name.attr('href', '/user/index/' + item.id);
+                name.text(item.name);
+                block.data('id', item.id);
+                block.data('userrole', item.role.name);
+                //console.log(item.role.name, item.id);
+                others.find('.users-list').append(block);
+            }
+            fixWidth();
+            loading = false;
+        });
     }
 
     fixWidth = function() {
+        numItems = others.find('.users-item').length;
         others.find('.users-item').show();
         others.width( ((numItems/2)|0) * 184 );
+        $('#container').width($('.users-list-wrap').width() + 500)
     }
 
     fixWidth();
@@ -103,10 +147,10 @@ $(function () {
     $("#wrapper").scroll(function () {
         if ($('#rails').hasClass('disabled'))
             return false;
-        var width = $('#container').width() - 30;
+        var width = $('#container').width() - 90;
         var scroll = $(this).scrollLeft() + $(window).width();
 
-        if (scroll > width) {
+        if (!loading && scroll > width) {
             loadData();
         }
 
