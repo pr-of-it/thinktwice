@@ -73,7 +73,7 @@ if (Yii::app()->user->isGuest) {
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
         <?php endif ?>
         <a href="" class="setting-icon"></a>
-        <div class="user-money"><a href="<?php if ( !Yii::app()->user->isGuest ) {echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); }?> руб.</a></div>
+        <div class="user-money"><a href="<?php if ( !Yii::app()->user->isGuest ) {echo $this->createAbsoluteUrl('/private/deposit'); }?>"> руб.</a></div>
         <div class="user-name"><?php if ( !Yii::app()->user->isGuest ) {echo $user->name;} ?></div>
     </section>
 
