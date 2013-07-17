@@ -54,7 +54,9 @@
     <ul class="cells-50 clear">
         <li class="cell-50<?php echo $_u ? ' disabled' : ''; ?>">
 
-            <a href="<?php if ( $_u == false ) { echo Yii::app()->createAbsoluteUrl('/users');}?>">
+            <?php if ( $_u == false ) :?>
+            <a href="<? echo Yii::app()->createAbsoluteUrl('/users'); ?>">
+                <?php endif ?>
                 <div class="w8-cell yellow-cell icon-center-user">
                 <div class="cell-name">Люди</div>
             </div></a>
@@ -72,6 +74,15 @@
 
 </li>
 
+<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
+
+    <div class="w8-cell cell-full blue-cell">
+        <div class="cell-name">Уведомления</div>
+        <img class="cell-image" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/icon-bb.png"
+             alt=""/>
+    </div>
+
+</li>
 
 <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
 
@@ -96,16 +107,6 @@
 <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
 
     <div class="w8-cell cell-full blue-cell">
-        <div class="cell-name">Альтернативные инвестиции</div>
-        <img class="cell-image"
-             src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/wine-big-2.png" alt=""/>
-    </div>
-
-</li>
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Недвижимость</div>
         <img class="cell-image"
              src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/realty-big-2.png" alt=""/>
@@ -113,51 +114,6 @@
 
 </li>
 
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full yellow-cell">
-        <div class="cell-name">
-            Демьян Кудрявцев
-            <div class="cell-category">Экономика, финансы</div>
-        </div>
-        <a href="" class="user-avatar">
-            <img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/image-float.png"/>
-            <span></span>
-        </a>
-
-        <div class="cell-author">эксперты</div>
-    </div>
-
-</li>
-
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full yellow-cell">
-        <div class="cell-name">
-            Демьян Кудрявцев
-            <div class="cell-category">Экономика, финансы</div>
-        </div>
-        <a href="" class="user-avatar">
-            <img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/image-float.png"/>
-            <span></span>
-        </a>
-
-        <div class="cell-author">эксперты</div>
-    </div>
-
-</li>
-
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full blue-cell">
-        <div class="cell-name">Бизнес</div>
-        <img class="cell-image" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/icon-bb.png"
-             alt=""/>
-    </div>
-
-</li>
 <li class="mp-level">
 
     <ul class="cells-50 clear">
@@ -170,23 +126,15 @@
 
         </li>
         <li class="cell-50<?php echo $_u ? ' disabled' : ''; ?>">
-            <a href="<?php if ( $_u == false ) { echo Yii::app()->createAbsoluteUrl('/private');}?>">
+            <?php if ( $_u == false ) :?>
+            <a href="<?php echo Yii::app()->createAbsoluteUrl('/private');?>">
+                <?php endif ?>
                 <div class="w8-cell cell-full blue-cell">
                     <div class="cell-name">Я</div>
                 </div></a>
 
         </li>
     </ul>
-
-</li>
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full blue-cell">
-        <div class="cell-name">Коллективные инвестиции</div>
-        <img class="cell-image"
-             src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/icon-user-big.png" alt=""/>
-    </div>
 
 </li>
 
@@ -200,56 +148,12 @@
 
 </li>
 
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full blue-cell">
-        <div class="cell-name">Недвижимость</div>
-        <img class="cell-image"
-             src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/realty-big-2.png" alt=""/>
-    </div>
-
-</li>
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full yellow-cell">
-        <div class="cell-name">
-            Демьян Кудрявцев
-            <div class="cell-category">Экономика, финансы</div>
-        </div>
-        <a href="" class="user-avatar">
-            <img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/image-float.png"/>
-            <span></span>
-        </a>
-
-        <div class="cell-author">эксперты</div>
-    </div>
-
-</li>
-
-
-<li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
-
-    <div class="w8-cell cell-full yellow-cell">
-        <div class="cell-name">
-            Демьян Кудрявцев
-            <div class="cell-category">Экономика, финансы</div>
-        </div>
-        <a href="" class="user-avatar">
-            <img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/image-float.png"/>
-            <span></span>
-        </a>
-
-        <div class="cell-author">эксперты</div>
-    </div>
-
-</li>
 
 
 <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
 
     <div class="w8-cell cell-full blue-cell">
-        <div class="cell-name">Бизнес</div>
+        <div class="cell-name">Инвестиции в бизнес</div>
         <img class="cell-image" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/icons/icon-bb.png"
              alt=""/>
     </div>
