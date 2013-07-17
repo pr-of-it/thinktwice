@@ -5,7 +5,7 @@ $(function () {
     var portals = $('.users-list-portalse');
     var others = $('.users-list-others');
 
-    var not_following = $('.users-list-box:not(.users-list-following)');
+    var not_following = $('.users-list-box:not(.users-list-following,.ajax-loader)');
 
     $('.users-list-box header:first-child').each(function (e) {
         var header = $(this), parent = header.parent();
@@ -38,7 +38,7 @@ $(function () {
 
     };
 
-    $('.users-list-box').each(function () {
+    $('.users-list-box:not(.ajax-loader)').each(function () {
         fixVisibility($(this));
     });
     
@@ -86,5 +86,31 @@ $(function () {
         })
     });
     
+
+    var numItems = others.find('.users-item').length;
+
+    loadData = function() {
+        //console.log('Подгрузка... TODO ', numItems)
+    }
+
+    fixWidth = function() {
+        others.find('.users-item').show();
+        others.width( ((numItems/2)|0) * 184 );
+    }
+
+    fixWidth();
+
+    $("#wrapper").scroll(function () {
+        if ($('#rails').hasClass('disabled'))
+            return false;
+        var width = $('#container').width() - 30;
+        var scroll = $(this).scrollLeft() + $(window).width();
+
+        if (scroll > width) {
+            loadData();
+        }
+
+
+    });
 
 });

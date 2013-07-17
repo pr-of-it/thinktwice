@@ -61,7 +61,8 @@ function CConfig() { // для наследования класса внутр�
 		doc = document
 		self.rails = $('#rails')
 		var tmpl = document.getElementById('lenta-template')
-		self.postTemplate = Mustache.compile(tmpl.innerHTML);
+		if (tmpl)
+			self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
 
 		// init
@@ -92,10 +93,15 @@ function CConfig() { // для наследования класса внутр�
 
 		self.bgPopup = $('#bg-popup');
 
-		$('.create-post').detach().appendTo('body');
+		if ($('.create-post').length)
+			$('.create-post').detach().appendTo('body');
+
 
 		window.onload = function(){
-			self.loadData();
+			if ($('body').hasClass('index'))
+				self.loadData();
+			else if ($('body').hasClass('users'))
+				$('#container').width($('.users-list-wrap').width() + 500)
 		};
 	};
 
@@ -368,7 +374,7 @@ function CConfig() { // для наследования класса внутр�
 		 *  Подгрузка контетна в ленту
 		 */
 
-		$("#wrapper").scroll(function () {
+		$("body.index #wrapper").scroll(function () {
 			if (self.rails.hasClass('disabled'))
 				return false;
 			var width = self.setWidth() - 300;

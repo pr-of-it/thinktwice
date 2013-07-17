@@ -128,6 +128,19 @@
 
     </ul>
 </li>
+
+<li class="users-list-box ajax-loader">
+    <ul class="users-list clear">
+        <li class="ajax-loader-wrap">
+            <div>
+                <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/ajax-loader-lenta.gif" alt=""/>
+                <span>Возобновить загрузку</span>
+            </div>
+        </li>
+    </ul>
+</li>
+
 </ul>
+
 </div>
 </div>
