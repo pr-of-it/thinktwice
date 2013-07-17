@@ -145,7 +145,7 @@ class SiteController extends Controller
 
 	    Yii:log(
 		    'authIdentity: ' . $authIdentity->authenticate(),
-		    CLogger::LEVEL_ERROR
+		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
 	    );
             if ($authIdentity->authenticate()) {
 
