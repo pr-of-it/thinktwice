@@ -143,16 +143,23 @@ class SiteController extends Controller
             $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
             $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/enter');
 
+	    $isAuth = $authIdentity->authenticate();
 	    Yii::log(
-		    'authIdentity: ' . $authIdentity->authenticate(),
+		    'authIdentity: ' . $isAuth,
 		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
 	    );
-            if ($authIdentity->authenticate()) {
+            if ($isAuth) {
 
-                $identity = new ServiceUserIdentity($authIdentity);
+                $identity = new EAuthUserIdentity($authIdentity);
 
-                // Успешный вход
-                if ($identity->authenticate()) {
+		$isAuth = $identity->authenticate();
+		
+		Yii::log(
+		    'ServerUserIdentity: ' . $isAuth,
+		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
+	    	);
+		// Успешный вход
+                if ($isAuth) {
                     Yii::app()->user->login($identity, 3600*24*30);
                     // Специальный редирект с закрытием popup окна
                     $authIdentity->redirect();
