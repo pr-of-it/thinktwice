@@ -1,8 +1,13 @@
 <div id="container">
+
+<?php
+if ( !Yii::app()->request->cookies->contains('notShowVideo')
+    || Yii::app()->request->cookies['notShowVideo']->value==0) :
+    ?>
 <div id="rails" class="page-lenta page-dashboard quick-start">
 <div class="quick-start-box">
     <header>О проекте</header>
-    <div class="video-box">
+        <div class="video-box">
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/tmp/video.jpg" alt=""/>
 
         <div class="content">
@@ -30,6 +35,11 @@
         <div class= "close" ></div>
     </div>
 </div>
+
+<?php else: ?>
+<div id="rails" class="page-lenta page-dashboard">
+
+<?php endif; ?>
 
 <ul class="main-panel clear">
 <li class="header">Главное</li>

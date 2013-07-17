@@ -8,4 +8,11 @@ class DashboardController extends Controller {
             'currentUser' => User::model()->findByPk(Yii::app()->user->id),
         ));
     }
+
+    public function actionAjaxSetCookieCloseVideo() {
+        if ( !Yii::app()->user->isGuest ) {
+            Yii::app()->request->cookies['notShowVideo'] = new CHttpCookie('notShowVideo', 1);
+        }
+        Yii::app()->end();
+    }
 }

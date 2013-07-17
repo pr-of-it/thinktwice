@@ -191,6 +191,7 @@ function CConfig() { // для наследования класса внутр�
 		})
 
 		$('.video-box .close').click(function(){
+            $.get('/dashboard/ajaxSetCookieCloseVideo');
 			$(this).closest('.quick-start-box').addClass('qsb-hide')
 			$('#rails').removeClass('quick-start')
 		})
