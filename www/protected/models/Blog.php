@@ -10,6 +10,7 @@
  * @property integer $type
  * @property integer $month_price
  * @property integer $week_price
+ * @property text $desc
  *
  * @property User $user
  */
@@ -40,7 +41,7 @@ class Blog extends CActiveRecord
 			array('title', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, title', 'safe', 'on'=>'search'),
+			array('id, user_id, title, desc', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +72,7 @@ class Blog extends CActiveRecord
             'type' => 'Type',
             'month_price' => 'Month price',
             'week_price' => 'Week price',
+            'desc' => 'Desc',
 		);
 	}
 
@@ -97,6 +99,7 @@ class Blog extends CActiveRecord
         $criteria->compare('type',$this->type,true);
         $criteria->compare('month_price',$this->month_price,true);
         $criteria->compare('week_price',$this->week_price,true);
+        $criteria->compare('desc', $this->desc);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
