@@ -313,6 +313,5 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
-
 </body>
 </html>
