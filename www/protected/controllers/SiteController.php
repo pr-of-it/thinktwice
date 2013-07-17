@@ -159,8 +159,18 @@ class SiteController extends Controller
 		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
 	    	);
 		// Успешный вход
-                if ($isAuth) {
-                    Yii::app()->user->login($identity, 3600*24*30);
+		if ($isAuth) {
+			$user = User::model()->find('email=:email', array(':email'=>$service->getState('email')));
+			if ( null === $user ) {
+				$user = new User();
+				$user->email = $service->getState('email');
+				$user->password = '';
+				$user->name = $service->getState('name');
+				$user->save();
+			}
+
+			Yii::app()->user->login($identity, 3600*24*30);
+
                     // Специальный редирект с закрытием popup окна
                     $authIdentity->redirect();
                 }
