@@ -41,8 +41,14 @@
 <body>
 
 <header id="header">
-
 	<div class="dashboard-link">
+		<ul>
+			<li class="dl-1"></li>
+			<li class="dl-2"></li>
+			<li class="dl-3"></li>
+			<li class="dl-4"></li>
+			<li class="dl-5"></li>
+		</ul>
 		<div>Дашборд <span></span></div>
 	</div>
 	<a href=""><img id="logo" src="img/logo.png" alt=""/></a>
@@ -57,7 +63,10 @@
 
 	<nav class="lenta-settings">
 		<ul>
-			<li><a class="icon-archive" href=""><span></span> Архив</a></li>
+			<li>
+				<a class="icon-archive" href=""><span></span> Архив </a>
+				<input class="datepicker-field" type="text" name=""/>
+			</li>
 			<li>
 				<a class="icon-filter" href=""><span></span> Фильтр</a>
 				<div class="lenta-set-menu clear">
@@ -91,7 +100,7 @@
 					</ul>
 				</div>
 			</li>
-			<li>
+			<li class="item-interest">
 				<a class="my-interest" href=""><span></span> Мои интересы</a>
 				<p class="notify-reg">
 					<b>Зарегистрируйтесь</b>, чтобы
@@ -100,6 +109,26 @@
 					о работе сервиса.
 					<span class="arrow"></span>
 				</p>
+			</li>
+			<li class="sort-by-history">
+				<ul class="history-list">
+					<li class="history-item active">
+						<div></div>
+						<span>сегодня</span>
+					</li>
+					<li class="history-item">
+						<div></div>
+						<span>вчера</span>
+					</li>
+					<li class="history-item">
+						<div></div>
+						<span>2-го</span>
+					</li>
+					<li class="history-item">
+						<div></div>
+						<span>3-го</span>
+					</li>
+				</ul>
 			</li>
 		</ul>
 		<div class="button-ok"></div>

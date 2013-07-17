@@ -64,12 +64,29 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        // Публикация поста в блог с главной
-        $post = new BlogPost();
+        // Публикация поста в блог с главной и редактирование его
+        if ( isset ($_POST['BlogPost']['id']) )
+        {
+            $post = BlogPost::model()->findByPk($_POST['BlogPost']['id']);
+        }
+            else
+            {
+                $post = new BlogPost();
+            }
         if(isset($_POST['BlogPost'])) {
+            $media = isset($_POST['BlogPost']['images']) ? $_POST['BlogPost']['images'] : array();
+            unset($_POST['BlogPost']['images']);
             $post->attributes=$_POST['BlogPost'];
-            if($post->save())
+            if($post->save()) {
+                foreach ( $media as $file ) {
+                    $model = new BlogPostMedia();
+                    $model->post_id = $post->id;
+                    $model->url = $file;
+                    $model->type = 'image';
+                    $model->save();
+                }
                 $this->redirect(array('/site/index'));
+            }
         }
 
         if ( Yii::app()->user->isGuest ) {

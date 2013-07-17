@@ -41,13 +41,13 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/ckeditor/lang/ru.js"></script>
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1010"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1012"></script>
 </head>
 <body class="index">
 
 <header id="header">
 
-    <div class="dashboard-link"></div>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
@@ -197,82 +197,46 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div id="popup-wrapper">
 <div class="popup window-post">
     <section class="popup-content">
-        <form class="scroll" id="blog-edit-form" action="/" method="post">
-            <header class="popup-head">Редактировать совет</header>
-            <input type="hidden" name="BlogPost[id]" class="id-field">
-            <input size="60" maxlength="255" placeholder="Тема моего совета" name="BlogPost[title]" class="title-field" type="text">
-            
-            <div class="wysiwyg-text-field">
-                <textarea id="popup-post-editor" name="BlogPost[text]"></textarea>
-            </div>
-            <div class="tag-attach-box">
-                <input placeholder="Теги" type="text" name="">
-                <div class="file-upload-container">
-                    <?php $this->widget('ext.EFineUploader.EFineUploader', array(
-                        'id'=>'FineUploader_Edit',
-                        'config' => array(
-                            'autoUpload'=>true,
-                            'request' => array(
-                                'endpoint' => $this->createUrl('blog/uploadImage'),
-                                'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
-                            ),
-                            'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
-                            'chunking'=>array('enable'=>true,'partSize'=>100),
-                            'callbacks'=>array(
-                                'onComplete'=>"js:function(id, name, response){
+        <form class="scroll" id="blog-edit-form" action="/site/index" method="post">
+        <div class="file-upload-container">
+            <ul class="attach-list">
+            </ul>
+            <?php $this->widget('ext.EFineUploader.EFineUploader', array(
+                'id'=>'FineUploader_Edit',
+                'config' => array(
+                    'autoUpload'=>true,
+                    'request' => array(
+                        'endpoint' => $this->createUrl('blog/uploadImage'),
+                        'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
+                    ),
+                    'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
+                    'chunking'=>array('enable'=>true,'partSize'=>100),
+                    'callbacks'=>array(
+                        'onComplete'=>"js:function(id, name, response){
                                     $('li.qq-upload-success').remove();
-                                    var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                    var imageInput = $('<input class=\"hidden-image\" type=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
                                     $('.window-post .file-upload-container').append(imageInput);
                                     $('#blog-edit-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                                 }",
-                                //'onError'=>"js:function(id, name, errorReason){ }",
-                            ),
-                            'validation'=>array(
-                                'allowedExtensions'=>array('jpg','jpeg','png','gif'),
-                                'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
-                                //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
-                            ),
-                            /*'messages'=>array(
-                                              'tooManyItemsError'=>'Too many items error',
-                                              'typeError'=>"Файл {file} имеет неверное расширение. Разрешены файлы только с расширениями: {extensions}.",
-                                              'sizeError'=>"Размер файла {file} велик, максимальный размер {sizeLimit}.",
-                                              'minSizeError'=>"Размер файла {file} мал, минимальный размер {minSizeLimit}.",
-                                              'emptyError'=>"{file} is empty, please select files again without it.",
-                                              'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-                                             ),*/
-                        )
-                    )); ?>
-                    <?php //echo $form->hiddenField($model,'image'); ?>
-                    <ul class="attach-list">
-                    </ul>
-                </div>
-            </div>
-            <footer>
-                <table>
-                    <tr>
-                        <!--<td><a class="add-element" href=""><span></span></a></td>-->
-                        <td class="width-select-1">
-                            <select name="BlogPost[blog_id]">
-
-                            </select>
-                        </td>
-                        <td class="width-select-2">
-                            <select name="">
-                                <option value="">для всех</option>
-                                <option value="">Выбор 1</option>
-                                <option value="">Выбор 2</option>
-                            </select>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="line-buttons" colspan="3">
-                            <a class="button-cancel" href="">Отменить</a>
-                            <input class="button-yellow" type="submit" value="Опубликовать изменения"/>
-                        </td>
-                    </tr>
-                </table>
-            </footer>
+                        //'onError'=>"js:function(id, name, errorReason){ }",
+                    ),
+                    'validation'=>array(
+                        'allowedExtensions'=>array('jpg','jpeg','png','gif'),
+                        'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
+                        //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
+                    ),
+                    /*'messages'=>array(
+                                      'tooManyItemsError'=>'Too many items error',
+                                      'typeError'=>"Файл {file} имеет неверное расширение. Разрешены файлы только с расширениями: {extensions}.",
+                                      'sizeError'=>"Размер файла {file} велик, максимальный размер {sizeLimit}.",
+                                      'minSizeError'=>"Размер файла {file} мал, минимальный размер {minSizeLimit}.",
+                                      'emptyError'=>"{file} is empty, please select files again without it.",
+                                      'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                                     ),*/
+                )
+            )); ?>
+            <?php //echo $form->hiddenField($model,'image'); ?>
+        </div>
         </form>
         <div class="scroll">
             <header class="popup-head">&nbsp;</header>

@@ -11,6 +11,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/userpage.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
+    <meta name= "viewport" content="width=device-width, initial-scale=.8, user-scalable=no">
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/ie.css" media="screen"/>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/selectivizr-min.js"></script>
@@ -44,13 +45,13 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 
 <header id="header">
 
-    <div class="dashboard-link"></div>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
     <a href="<?php echo Yii::app()->createAbsoluteUrl('/site/index')?>"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
-        <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
-        <div class="user-money"><?php echo sprintf("%0.0f", $user->getAmount()); ?> руб.</div>
-        <div class="user-name"><?php echo $user->name ?></div>
+        <a class="user-avatar" href="<?php if ( !Yii::app()->user->isGuest ) { echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); }?><span></span></a>
+        <div class="user-money"><?php if ( !Yii::app()->user->isGuest ) { echo sprintf("%0.0f", $user->getAmount()); }?> руб.</div>
+        <div class="user-name"><?php if ( !Yii::app()->user->isGuest ) { echo $user->name; }?></div>
     </section>
 
 

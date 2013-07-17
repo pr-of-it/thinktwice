@@ -35,6 +35,18 @@ function CConfig() { // для наследования класса внутр�
 		console.error('statusText: ' + e.statusText + '\nresponseText: ' + e.responseText + '\n\n' + (usertext ? usertext : ''));
 	}// ошибка ajax запроса
 
+
+	self.ckconf = {
+		toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
+		height: '250px',
+		uiColor: '#e1e1db',
+		dialog_backgroundCoverColor: 'black',
+		dialog_backgroundCoverOpacity: 0.6,
+		language: 'ru'
+	};
+	self.editor = null;
+	
+
 	/**
 	 * init scripts
 	 */
@@ -51,9 +63,6 @@ function CConfig() { // для наследования класса внутр�
 		var tmpl = document.getElementById('lenta-template')
 		self.postTemplate = Mustache.compile(tmpl.innerHTML);
 
-
-		var blogSelectOptions = $('.create-post .width-select-1 select option').clone();
-		$('.window-post .width-select-1 select').append(blogSelectOptions);
 
 		// init
 		$('input, select').styler();
@@ -216,23 +225,66 @@ function CConfig() { // для наследования класса внутр�
 
 			var title = target.find('h6').html();
 			popup.find('div.scroll header.popup-head').html(title);  // $post->title
-			popup.find('form input.title-field').val(title);
+			//popup.find('form input.title-field').val(title);
 			var text = target.find('.news-body div').html();
 			popup.find('div.window-post-text').html(text);  // $post->text
-			popup.find('form textarea').html(text);
-			CKEDITOR.instances['popup-post-editor'].setData(text);
+			//popup.find('form textarea').html(text);
+			/*if (CKEDITOR.instances['popup-post-editor'])
+				CKEDITOR.instances['popup-post-editor'].setData(text);*/
 			popup.find('.author b').html( target.find('header.news-author').html() );  // $post->blog->title
 
 			popup.find('.article-info img').attr('src', data.avatar);
 			popup.find('.article-info .user-name').text(data.user_name || '');
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
-			popup.find('form input.id-field').val(data.id);
+
+			$.get(self.makeUrl('/blog/ajaxGetPostEditForm'),
+				{id: data.id}, function (d) {
+					if (self.editor) {
+						self.editor.destroy();
+					}
+					var uploader = popup.find('.file-upload-container').detach();
+					uploader.find('.hidden-image').remove();
+					uploader.find('.attach-list').html('');
+					popup.find('form').html(d);
+					popup.find('.tag-attach-box').append(uploader);
+
+					var media = $('<ul class="attach-list" />');
+
+					for (var i=0; i < data.media.length; i++ ) {
+						var item = data.media[i];
+						media.append('<li><img src="' + item.url  +'"></li>');
+					}
+					uploader.append(media)
+
+					if (popup.find('#popup-post-editor').length) {
+						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
+					}
+					popup.find('select').styler();
+			}); // TODO: обработка ошибок связи
+
+			//popup.find('form input.id-field').val(data.id);
 
 			var imgTarget = target.find('.image-gallery-min-full'),
 				img = popup.find('div.window-post-image');
+			img.css('height', '417px')
 			if (imgTarget.length) {
 				var bg = imgTarget.css('background-image');
+				var src = bg.replace(/(^url\()|(\)$)/g, '');
+				var temp = new Image();
+				temp.onload = function() {
+					var targetWidth = popup.find('article').width();
+					img.css('width', targetWidth + 'px');
+					//console.log(targetWidth, this.width, this.height)
+					if (this.width < targetWidth) {
+						img.css('background-size', 'auto');
+					} else {
+						img.css('background-size', 'cover');
+					}
+					if (temp.height < 417)
+						img.css('height', temp.height + 'px');
+				};
+				temp.src = src;
 				img.css('background-image', bg);
 				img.show();
 			} else {
@@ -350,6 +402,33 @@ function CConfig() { // для наследования класса внутр�
 		return ('00' + s).substr((s+'').length, 2);
 	}
 
+	var declension = function (num, nominative, genitivesingular, genitiveplural) {
+
+        if (num == 11) {return genitiveplural;}
+        if (num == 12) {return genitiveplural;}
+        if (num == 13) {return genitiveplural;}
+        if (num == 14) {return genitiveplural;}
+
+        num = '' + num;
+
+        var length = num.length;
+
+        num = num.substring(length-1, length);
+
+        if (num == '1') {return nominative;}
+
+        if (num == '2') {return genitivesingular;}
+        if (num == '3') {return genitivesingular;}
+        if (num == '4') {return genitivesingular;}
+
+        if (num == '5') {return genitiveplural;}
+        if (num == '6') {return genitiveplural;}
+        if (num == '7') {return genitiveplural;}
+        if (num == '8') {return genitiveplural;}
+        if (num == '9') {return genitiveplural;}
+        if (num == '0') {return genitiveplural;}
+    };
+
 	self.formatTimelineDate = function(s) {
 		var now = new Date(),
 			date = Date.fromDateTimeString(s),
@@ -360,10 +439,12 @@ function CConfig() { // для наследования класса внутр�
 				date.getFullYear() == now.getFullYear()) {
 			var dateMinutes = date.getHours()*60 + date.getMinutes(),
 				nowMinutes = now.getHours()*60 + now.getMinutes();
-			if (nowMinutes - dateMinutes  <= 3) {
+
+			var minDelta = nowMinutes - dateMinutes;
+			if (minDelta <= 3) {
 				timeFormat = 'сейчас';
-			} else if (nowMinutes - dateMinutes <= 60) {
-				timeFormat = (nowMinutes - dateMinutes) + ' минут назад'
+			} else if (minDelta <= 60) {
+				timeFormat = minDelta + ' ' + declension(minDelta, 'минуту', 'минуты', 'минут') + ' назад';
 			} else timeFormat = time;
 		} else if (date.getFullYear() == now.getFullYear()) {
 			if (date.getDate() == now.getDate() - 1)
@@ -452,9 +533,9 @@ function CConfig() { // для наследования класса внутр�
 					}
 				}
 
-				var preview = (item.media && item.media[0]) || null;
+				var preview = (!item.image && item.media && item.media.length && item.media[0].url) || null;
 				var post = $(self.postTemplate({
-					extraClass: '',
+					extraClass: (item.blog && item.blog.type === 3) ? ' white-style' : '',
 					tag: item.tag || '',
 					preview: preview,
 					author: (item.blog && item.blog.title) || '',
@@ -462,7 +543,9 @@ function CConfig() { // для наследования класса внутр�
 					text: item.text,
 					likes: item.likes || 0,
 					time: timeFormat,
-					image: item.image
+					image: item.image,
+					media: item.image && item.media,
+					hasMedia: (item.image && item.media.length)
 				}));
 				post.data({
 					position: i + self.numPosts,
@@ -470,7 +553,8 @@ function CConfig() { // для наследования класса внутр�
 					avatar: (item.blog && item.blog.user.avatar) || '',
 					uid: (item.blog && item.blog.user.id) || null,
 					user_name: (item.blog && item.blog.user.name || 'Эксперт'),
-					time: item.time
+					time: item.time,
+					media: item.media || []
 				});
 				if (preview) {
 					post.addClass('medium-width');
@@ -628,7 +712,7 @@ function CConfig() { // для наследования класса внутр�
 				containerWidth += ($('.quick-start-box').outerWidth() + 90);
 			$('#container').width(containerWidth);
 
-			self.rails.width(width * 2 + (560+90)*20);
+			self.rails.width(width * 2 + (560+120)*20);
 		}
 		//console.log(width)
 		return width;
@@ -742,17 +826,6 @@ $(function () {
 		});
 	}
 
-	if ($('#popup-post-editor').length) {
-		var ckconf = {
-			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-			height: '250px',
-			uiColor: '#e1e1db',
-			dialog_backgroundCoverColor: 'black',
-			dialog_backgroundCoverOpacity: 0.6,
-			language: 'ru'
-		};
-		var editor = CKEDITOR.replace('popup-post-editor', ckconf);
-
-	}
+	
 
 }); // dom ready

@@ -6,6 +6,7 @@
 ?>
 <div class="create-post opacity-hide">
 
+    <div class="darkener"></div>
     <?php $form = $this->beginWidget('ActiveForm', array(
         'id'=>'blog-form',
         'enableAjaxValidation'=>false,
@@ -32,6 +33,8 @@
         <div class="tag-attach-box">
             <input placeholder="Теги" type="text" name=""/><br />
             <div class="file-upload-container">
+                <ul class="attach-list">
+                </ul>
                 <?php $this->widget('ext.EFineUploader.EFineUploader', array(
                     'id'=>'FineUploader',
                     'config' => array(
@@ -68,14 +71,15 @@
                     )
                 )); ?>
                 <?php //echo $form->hiddenField($model,'image'); ?>
-                <ul class="attach-list">
-                </ul>
+                
             </div>
         </div>
         <footer>
             <table>
                 <tr>
                     <!--<td><a class="add-element" href=""><span></span></a></td>-->
+
+
                     <td class="width-select-1">
                         <?php echo $form->dropDownList($model, 'blog_id', CHtml::listData($user->getAllBlogs(), 'id', 'title')); ?>
                         <?php echo $form->error($model,'blog_id'); ?>

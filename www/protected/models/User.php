@@ -27,11 +27,13 @@
  * The followings are the available model relations:
  * @property UserRole $role
  * @property UserService[] $services
+ * @property User[] $subscripts
  * @property User[] $followers
  * @property UserTransaction[] $transactions
  * @property UserTransactionIncomplete[] $transactions_incomplete
  * @property Blog $blog
  * @property Blog[] $subscriptions
+ * @property Blog[] $feeds
  *
  */
 class User extends CActiveRecord
@@ -48,11 +50,22 @@ class User extends CActiveRecord
     const AUTH_TOKEN_EXPIRE_TIME = 86400;
 
     /**
+     * Относительная ссылка на аватар пользователя
      * @var string $avatar
      */
     public $avatar;
 
+    /**
+     * Массив, содержащий расписание консультаций
+     * @var array $consultSchedule
+     */
     public $consultSchedule = array();
+
+    /**
+     * Флаг, указывающий подписан ли текущий пользователь (follow) на данного
+     * @var bool $isCurrentUserSubscribed
+     */
+    public $isCurrentUserSubscribed;
 
 
     /**
@@ -93,11 +106,15 @@ class User extends CActiveRecord
         return array(
             'role' => array(self::BELONGS_TO, 'UserRole', 'roleid'),
             'services' => array(self::HAS_MANY, 'UserService', 'user_id'),
-            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
+            // те, на кого подписан пользователь:
+            'subscripts' => array(self::MANY_MANY, 'User', 'tt_followers(user_id, follower_id)'),
+            // те, кто подписан на пользователя:
+            'followers' => array(self::MANY_MANY, 'User', 'tt_followers(follower_id, user_id)'),
             'transactions' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
             'transactions_incomplete' => array(self::HAS_MANY, 'UserTransactionIncomplete', 'user_id'),
             'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'blog.type=' . Blog::SIMPLE_BLOG),
             'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'subscriptions.type=' . Blog::SUBSCRIPT_BLOG),
+            'feeds' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'feeds.type=' . Blog::RSS_BLOG),
 
         );
     }
@@ -179,15 +196,23 @@ class User extends CActiveRecord
     }
 
     /*
-     * Отслеживание (дружба)
+     * Подписка (follow)
      */
 
-    public function doesFollow($follower_id) {
-
-        foreach ( $this->followers as $follow ) {
-            if ( $follower_id == $follow->id )
+    /**
+     * Метод возвращает
+     * - true, если текущий пользователь сайта подписан на данного (follow его)
+     * - false в противном случае
+     * @return bool
+     */
+    public function getIsCurrentUserSubscribed() {
+        if ( Yii::app()->user->isGuest )
+            return false;
+        $id = Yii::app()->user->id;
+        foreach ( $this->followers as $follower ) {
+            if ( $id == $follower->id )
                 return true;
-        }
+        };
         return false;
     }
 
@@ -200,10 +225,14 @@ class User extends CActiveRecord
     }
 
     public function getAllBlogs() {
-        $this->blog->title .= ' (Личный блог)';
+        if ( $this->hasBlog() ) {
+            $this->blog->title .= ' (Личный блог)';
+        }
         foreach ( $this->subscriptions as $blog )
             $blog->title .= ' (Подписка)';
-        return array_merge( array($this->blog), (array)$this->subscriptions);
+        foreach ( $this->feeds as $blog )
+            $blog->title .= ' (Лента)';
+        return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
     }
 
     /**
@@ -241,6 +270,7 @@ class User extends CActiveRecord
             'active' => Yii::t('User', 'Active'),
             'register_time' => Yii::t('User', 'Register time'),
             'update_time' => Yii::t('User', 'Update time'),
+            'subscripts' => Yii::t('User', 'Subscripts'),
             'followers' => Yii::t('User', 'Followers'),
             'roleid' => Yii::t('User', 'Role ID'),
             'role' => Yii::t('User', 'Role'),
@@ -358,6 +388,7 @@ class User extends CActiveRecord
      */
 
     protected function afterFind() {
+
         if ( !empty($this->avatar_file) ) {
             $this->avatar = Yii::app()->baseUrl . $this->avatar_file;
         } else {
@@ -365,10 +396,15 @@ class User extends CActiveRecord
         }
 
         $this->consultSchedule = json_decode($this->consult_schedule_json);
+
+        $this->isCurrentUserSubscribed = $this->getIsCurrentUserSubscribed();
+
         return parent::afterFind();
+
     }
 
     protected function beforeSave() {
+
         if ( $this->getIsNewRecord() ) {
             $this->password = self::cryptPassword($this->password);
         } else {
@@ -381,16 +417,20 @@ class User extends CActiveRecord
         $this->consult_schedule_json = json_encode($this->consultSchedule);
 
         return parent::beforeSave();
+
     }
 
     protected function afterSave() {
+
         $file = CUploadedFile::getInstance($this, 'avatar_file');
+
         if ( $file ) {
             $uploaded = Yii::getPathOfAlias('webroot') . self::AVATAR_UPLOAD_PATH . $file->getName();
             $file->saveAs($uploaded);
             $this->avatar_file = self::AVATAR_UPLOAD_PATH . $file->getName();
             $this->saveAttributes(array('avatar_file'=>$this->avatar_file));
         }
+
         if ( $this->isNewRecord ) {
             $blog = new Blog;
             $blog->user_id = $this->id;
@@ -400,7 +440,9 @@ class User extends CActiveRecord
             $blog->type = Blog::SIMPLE_BLOG;
             $blog->save();
         }
+
         return parent::afterSave();
+
     }
 
     /**
