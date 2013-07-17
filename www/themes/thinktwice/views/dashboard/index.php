@@ -38,8 +38,9 @@
 <ul class="mp-level-list">
 <li class="mp-level">
 
+    <?php  Yii::app()->user->isGuest ? $dis = 'disabled' : $dis = null;?>
     <ul class="cells-50 clear">
-        <li class="cell-50">
+        <li class="cell-50 <?php echo $dis?> ">
 
             <div class="w8-cell yellow-cell icon-center-user">
                 <div class="cell-name">Пользователи</div>
@@ -60,7 +61,7 @@
 <li class="mp-level">
 
     <ul class="cells-50 clear">
-        <li class="cell-50">
+        <li class="cell-50 <?php echo $dis?>">
 
             <div class="w8-cell yellow-cell icon-center-user">
                 <div class="cell-name">Пользователи</div>
@@ -79,7 +80,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Фондовый рынок</div>
@@ -89,7 +90,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Коллективные инвестиции</div>
@@ -99,7 +100,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Альтернативные инвестиции</div>
@@ -109,7 +110,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Недвижимость</div>
@@ -119,7 +120,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full yellow-cell">
         <div class="cell-name">
@@ -137,7 +138,7 @@
 </li>
 
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full yellow-cell">
         <div class="cell-name">
@@ -155,7 +156,7 @@
 </li>
 
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Бизнес</div>
@@ -164,7 +165,7 @@
     </div>
 
 </li>
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Фондовый рынок</div>
@@ -174,7 +175,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Коллективные инвестиции</div>
@@ -184,7 +185,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Альтернативные инвестиции</div>
@@ -194,7 +195,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Недвижимость</div>
@@ -204,7 +205,7 @@
 
 </li>
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full yellow-cell">
         <div class="cell-name">
@@ -222,7 +223,7 @@
 </li>
 
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full yellow-cell">
         <div class="cell-name">
@@ -240,7 +241,7 @@
 </li>
 
 
-<li class="mp-level">
+<li class="mp-level <?php echo $dis?>">
 
     <div class="w8-cell cell-full blue-cell">
         <div class="cell-name">Бизнес</div>
