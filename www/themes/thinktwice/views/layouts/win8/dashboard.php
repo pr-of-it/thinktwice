@@ -4,7 +4,6 @@
  */
 if (Yii::app()->user->isGuest) {
     $user = new stdClass;
-    $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 
 } else {
     $user = User::model()->findByPk(Yii::app()->user->id);
