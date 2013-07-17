@@ -18,7 +18,7 @@
     <header>Я подписался <span>Всего (<?php echo count($currentUser->subscripts); ?>)</span></header>
     <ul class="users-list clear">
 
-        <?php foreach ($currentUser->subscripts as $subscript) : ?>
+        <?php foreach ($subscripts as $subscript) : ?>
 
             <?php if ( $subscript->role->name == 'expert' ) : ?>
             <li class="users-item user-premium" data-id="<?php echo $subscript->id; ?>" data-userrole="<?php echo $subscript->role->name; ?>">
@@ -112,7 +112,7 @@
 
         <?php foreach ($users as $user) : ?>
 
-            <li class="users-item" data-id="<?php echo $feed->id; ?>" data-userrole="<?php echo $feed->role->name; ?>">
+            <li class="users-item" data-id="<?php echo $user->id; ?>" data-userrole="<?php echo $user->role->name; ?>">
                 <div class="user-content">
                     <div class="avatar-rating">
                         <?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>

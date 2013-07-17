@@ -7,16 +7,62 @@ class UsersController extends Controller {
 
     public $layout = '//layouts/win8/users';
 
+    public function filters()
+    {
+        return array('accessControl');
+    }
+
+    public function accessRules()
+    {
+        return array(
+            array('allow', 'users'=>array('@') ),
+            array('deny',  'users'=>array('*')),
+        );
+    }
+
     public function actionIndex() {
-        $expertRole = UserRole::model()->findByAttributes(array('name' => 'expert'));
-        $rssRole = UserRole::model()->findByAttributes(array('name' => 'rss'));
-        $userRole = UserRole::model()->findByAttributes(array('name' => 'user'));
+
+        $currentUser = User::model()->findByPk(Yii::app()->user->id);
+
+        $subscripts = $currentUser->subscripts;
+        $subscriptsIds = array();
+        foreach ( $subscripts as $subscript )
+            $subscriptsIds[] = $subscript->id;
+
+        $criteria = new CDbCriteria();
+        $criteria->order = 'id DESC';
+        $criteria->limit = 4;
+        $criteria->offset = 0;
+        $criteria->addNotInCondition('id', $subscriptsIds);
+
+        $expertCriteria = clone $criteria;
+        $expertCriteria->addCondition('roleid=:roleid');
+        $expertRole = UserRole::model()->findByAttributes(array('name' => 'expert'))->id;
+        $expertCriteria->params = array_merge($expertCriteria->params, array(':roleid' => $expertRole));
+        $expertCriteria->limit = 5;
+        $experts = User::model()->findAll($expertCriteria);
+
+        $feedCriteria = clone $criteria;
+        $feedCriteria->addCondition('roleid=:roleid');
+        $rssRole = UserRole::model()->findByAttributes(array('name' => 'rss'))->id;
+        $feedCriteria->params = array_merge($feedCriteria->params, array(':roleid' => $rssRole));
+        $feeds = User::model()->findAll($feedCriteria);
+
+        $usersCriteria = clone $criteria;
+        $usersCriteria->addCondition('roleid=:roleid');
+        $userRole = UserRole::model()->findByAttributes(array('name' => 'user'))->id;
+        $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
+        $usersCriteria->limit = 6;
+        $users = User::model()->findAll($usersCriteria);
+
         $this->render('index', array(
-            'currentUser' => User::model()->findByPk(Yii::app()->user->id),
-            'experts' => User::model()->findAllByAttributes( array('roleid' => $expertRole->id) ),
-            'feeds' => User::model()->findAllByAttributes( array('roleid' => $rssRole->id) ),
-            'users' => User::model()->findAllByAttributes( array('roleid' => $userRole->id) ),
+            'currentUser' => $currentUser,
+            'subscripts' => $subscripts,
+            'experts' => $experts,
+            'feeds' => $feeds,
+            'users' => $users,
         ));
+
     }
 
     /*
