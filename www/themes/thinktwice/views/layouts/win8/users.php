@@ -7,7 +7,6 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/jquery-ui-1.10.3.custom.min.css" media="all"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/css/print.css"/>
@@ -39,6 +38,9 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/js/common.js"></script>
+
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
 </head>
 <body>
 
@@ -53,7 +55,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <li class="dl-5"></li>
         </ul>
         <div>Дашборд <span></span></div>
-        <a class="icon-flash" href=""></a>
+        <!--<a class="icon-flash" href=""></a>-->
     </div>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/users/img/logo.png" alt=""/></a>
 
@@ -64,6 +66,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
 
     <nav class="lenta-settings page-users">
+        <!--
         <ul>
             <li>
                 <h1>Пользователи</h1>
@@ -71,6 +74,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             <li><div class="check-all-lebel">Все</div> <a class="my-interest expert-only" href=""><span></span> <i>Только эксперты</i></a></li>
         </ul>
         <div class="button-ok"></div>
+        -->
 
         <ul class="interest-menu">
             <li>
@@ -309,6 +313,5 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     </section>
     <div class="close-popup"></div>
 </div>
-
 </body>
 </html>
