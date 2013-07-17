@@ -178,6 +178,30 @@
             </ul>
             <ul class="main-panel clear">
                 <li class="header">Избранное</li>
+                <li class="mp-row">
+
+                    <ul class="mp-level-list">
+
+                            <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
+
+                                <div class="w8-cell yellow-cell icon-center-user">
+                                    <div class="cell-name">Пустой блок 1</div>
+
+                                </div>
+
+                            </li>
+
+                            <li class="mp-level<?php echo $_u ? ' disabled' : ''; ?>">
+
+                                <div class="w8-cell red-cell icon-center-w">
+                                    <div class="cell-name">Пустой блок 2</div>
+
+                                </div>
+
+                            </li>
+
+                    </ul>
+                </li>
 
             </ul>
 
