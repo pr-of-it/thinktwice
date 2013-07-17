@@ -39,6 +39,7 @@ class Blog extends CActiveRecord
             array('month_price', 'numerical', 'integerOnly'=>true),
             array('week_price', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
+            array('desc', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, title, desc', 'safe', 'on'=>'search'),
@@ -72,7 +73,7 @@ class Blog extends CActiveRecord
             'type' => 'Type',
             'month_price' => 'Month price',
             'week_price' => 'Week price',
-            'desc' => 'Desc',
+            'desc' => 'Desc'
 		);
 	}
 

@@ -98,6 +98,7 @@ $this->breadcrumbs=array(
                     'value' => 'CHtml::link(CHtml::encode($data->title),
                          array("private/updateSubscript","id" => $data->id))',
                 ),
+                'desc',
                 'month_price',
                 'week_price',
 
