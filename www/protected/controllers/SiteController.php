@@ -65,14 +65,11 @@ class SiteController extends Controller
     {
 
         // Публикация поста в блог с главной и редактирование его
-        if ( isset ($_POST['BlogPost']['id']) )
-        {
+        if ( isset ($_POST['BlogPost']['id']) ) {
             $post = BlogPost::model()->findByPk($_POST['BlogPost']['id']);
+        } else {
+            $post = new BlogPost();
         }
-            else
-            {
-                $post = new BlogPost();
-            }
         if(isset($_POST['BlogPost'])) {
             $media = isset($_POST['BlogPost']['images']) ? $_POST['BlogPost']['images'] : array();
             unset($_POST['BlogPost']['images']);
@@ -143,22 +140,22 @@ class SiteController extends Controller
             $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
             $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/enter');
 
-	    $isAuth = $authIdentity->authenticate();
-	    Yii::log(
-		    'authIdentity: ' . $isAuth,
-		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
-	    );
+            $isAuth = $authIdentity->authenticate();
+            Yii::log(
+                'authIdentity: ' . $isAuth,
+                CLogger::LEVEL_ERROR, 'application.extentions.eauth'
+            );
             if ($isAuth) {
 
                 $identity = new EAuthUserIdentity($authIdentity);
 
-		$isAuth = $identity->authenticate();
-		
-		Yii::log(
-		    'ServerUserIdentity: ' . $isAuth,
-		    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
-	    	);
-		// Успешный вход
+                $isAuth = $identity->authenticate();
+
+                Yii::log(
+                    'ServerUserIdentity: ' . $isAuth,
+                    CLogger::LEVEL_ERROR, 'application.extentions.eauth'
+                );
+                // Успешный вход
                 if ($isAuth) {
                     Yii::app()->user->login($identity, 3600*24*30);
                     // Специальный редирект с закрытием popup окна

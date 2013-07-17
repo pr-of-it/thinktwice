@@ -62,6 +62,14 @@ class BlogController extends Controller {
             'offset' => $offset,
         ));
 
+        if ( !Yii::app()->user->isGuest ) {
+            $user = User::model()->findByPk(Yii::app()->user->id);
+            $subscripts = array();
+            foreach ( $user->subscripts as $subscript )
+                $subscripts[] = $subscript->id;
+            $criteria->addInCondition('blog.user_id', $subscripts);
+        }
+
         $posts = BlogPost::model()->with('blog', 'blog.user', 'media')->findAll($criteria);
 
         header('Content-type: application/json');
