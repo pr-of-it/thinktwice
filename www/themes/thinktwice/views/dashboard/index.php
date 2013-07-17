@@ -1,9 +1,10 @@
 <div id="container">
 
 <?php
-if ( !Yii::app()->request->cookies->contains('notShowVideo')
-    || Yii::app()->request->cookies['notShowVideo']->value==0) :
-    ?>
+    if ( !Yii::app()->request->cookies->contains('notShowVideo')
+        || Yii::app()->request->cookies['notShowVideo']->value==0) :
+
+?>
 <div id="rails" class="page-lenta page-dashboard quick-start">
 <div class="quick-start-box">
     <header>О проекте</header>
@@ -36,10 +37,10 @@ if ( !Yii::app()->request->cookies->contains('notShowVideo')
     </div>
 </div>
 
-<?php else: ?>
+<?php else : ?>
 <div id="rails" class="page-lenta page-dashboard">
 
-<?php endif; ?>
+<?php endif ?>
 
 <ul class="main-panel clear">
 <li class="header">Главное</li>
