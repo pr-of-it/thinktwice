@@ -40,7 +40,7 @@
                         <header class="name"><?php echo $subscript->name; ?></header>
                         <div class="desc">UNI <br/> Дизайнер</div>
                     </div>
-                    <div class="close"></div>
+                    <div class="unfollow"></div>
                 </li>
             <?php endif; ?>
 
@@ -69,7 +69,7 @@
                 <div class="price-time"><?php echo sprintf('%0.0f', $expert->consult_price); ?> руб./мин.</div>
             </div>
 
-            <div class="close"></div>
+            <div class="follow"></div>
         </li>
 
         <?php endforeach; ?>
@@ -95,7 +95,7 @@
                     <header class="name"><?php echo $feed->name; ?></header>
                     <div class="desc">Новостной <br/> портал</div>
                 </div>
-                <div class="close"></div>
+                <div class="follow"></div>
             </li>
 
         <?php endforeach; ?>
@@ -118,7 +118,7 @@
                     <header class="name"><?php echo $user->name; ?></header>
                     <div class="desc">Пользователь</div>
                 </div>
-                <div class="close"></div>
+                <div class="follow"></div>
             </li>
 
         <?php endforeach; ?>

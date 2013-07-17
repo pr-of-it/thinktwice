@@ -1824,7 +1824,9 @@ input[type="reset"].styler:active{
 .users-item .price-time{
 	padding-left:3px;
 }
-.users-item .close{
+.users-item .close,
+.users-item .unfollow,
+.users-item .follow {
 	cursor:pointer;
 	position:absolute;
 	left:98px; top:-12px;
@@ -1837,9 +1839,15 @@ input[type="reset"].styler:active{
 	-o-transition:all .4s;
 	transition:all .4s;
 }
-.users-item:hover .close{
+.users-item .follow {
+	background:url(../img/icons/user-follow.png) no-repeat transparent;
+}
+.users-item:hover .close,
+.users-item:hover .unfollow,
+.users-item:hover .follow {
 	opacity:1; filter:alpha(opacity=100);
 }
+
 .users-list-row-2{
 	width:400px;
 }
