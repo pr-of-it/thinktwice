@@ -113,27 +113,6 @@ $this->breadcrumbs=array(
     <?php $this->renderPartial('_rssrequest', array('user' => $user, 'rssRequest'=>$rssRequest)); ?>
 <?php endif;?>
 
-<!-- Список фолловеров-->
-<h4>Ваши subscripts:</h4>
-
-<?php
-$dataProvider = new CActiveDataProvider($user->model());
-$dataProvider->setData($user->subscripts);
-$this->widget('zii.widgets.grid.CGridView', array(
-    'id'=>'user-grid',
-    'dataProvider'=>$dataProvider,
-    'columns'=>array(
-        array(
-            'name' => 'ссылка',
-            'type' => 'raw',
-            'value' => 'CHtml::link(CHtml::encode($data->name),
-                         array("/user/index","id" => $data->id))',
-        ),
-        'name',
-    ),
-));
-?>
-
 
 <h4>Ваш счет:</h4>
 <p>Сумма на счету: <?php echo sprintf("%0.0f", $user->getAmount()); ?></p>

@@ -31,7 +31,6 @@ class UsersController extends Controller {
 
         $criteria = new CDbCriteria();
         $criteria->order = 'id DESC';
-        $criteria->limit = 4;
         $criteria->offset = 0;
         $criteria->addNotInCondition('id', $subscriptsIds);
 
@@ -39,20 +38,21 @@ class UsersController extends Controller {
         $expertCriteria->addCondition('roleid=:roleid');
         $expertRole = UserRole::model()->findByAttributes(array('name' => 'expert'))->id;
         $expertCriteria->params = array_merge($expertCriteria->params, array(':roleid' => $expertRole));
-        $expertCriteria->limit = 5;
+        $expertCriteria->limit = 14;
         $experts = User::model()->findAll($expertCriteria);
 
         $feedCriteria = clone $criteria;
         $feedCriteria->addCondition('roleid=:roleid');
         $rssRole = UserRole::model()->findByAttributes(array('name' => 'rss'))->id;
         $feedCriteria->params = array_merge($feedCriteria->params, array(':roleid' => $rssRole));
+        $feedCriteria->limit = 15;
         $feeds = User::model()->findAll($feedCriteria);
 
         $usersCriteria = clone $criteria;
         $usersCriteria->addCondition('roleid=:roleid');
         $userRole = UserRole::model()->findByAttributes(array('name' => 'user'))->id;
         $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
-        $usersCriteria->limit = 6;
+        $usersCriteria->limit = 25;
         $users = User::model()->findAll($usersCriteria);
 
         $this->render('index', array(
