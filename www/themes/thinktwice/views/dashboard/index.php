@@ -141,7 +141,7 @@
                                     <a href="<?php echo Yii::app()->createAbsoluteUrl('/private'); ?>">
                                         <?php endif ?>
                                         <div class="w8-cell cell-full blue-cell">
-                                            <div class="cell-name">Я</div>
+                                            <div class="cell-name">Личный кабинет</div>
                                         </div>
                                     </a>
 
