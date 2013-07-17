@@ -1815,6 +1815,9 @@ input[type="reset"].styler:active{
 	font:700 13px "Helvetica";
 	padding:13px 0 12px 3px;
 }
+.users-item .name a{
+    color:#e7e9ea;
+}
 .users-item .desc{
 	max-height:62px;
 	margin:0 0 7px 3px;
