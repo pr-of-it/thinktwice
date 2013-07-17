@@ -2,7 +2,12 @@
 /* @var $this Controller
  * $user User
  */
-$user = User::model()->findByPk(Yii::app()->user->id);
+if (Yii::app()->user->isGuest) {
+    $user = new stdClass;
+
+} else {
+    $user = User::model()->findByPk(Yii::app()->user->id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -11,6 +16,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/css/print.css"/>
+    <meta name= "viewport" content="width=device-width, initial-scale=.8, user-scalable=no">
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/css/ie.css" media="screen"/>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/js/selectivizr-min.js"></script>
@@ -61,11 +67,15 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <a href="<?php echo Yii::app()->createAbsoluteUrl('/site/index')?>"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/dashboard/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
+        <?php if ( Yii::app()->user->isGuest ) : ?>
+        <a class="link-reg button-yellow" href="<?php echo $this->createAbsoluteUrl('/site/enter');?>">Присоединиться</a>
+        <?php endif ?>
+        <?php if ( !Yii::app()->user->isGuest  ) : ?>
         <a class="user-avatar" href="<?php echo $this->createAbsoluteUrl('/private'); ?>"><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>164), 'crop'=>array('width'=>164, 'height'=>164))); ?><span></span></a>
-
+        <?php endif ?>
         <a href="" class="setting-icon"></a>
-        <div class="user-money"><a href="<?php echo $this->createAbsoluteUrl('/private/deposit'); ?>"><?php echo sprintf('%0.0f', $user->getAmount()); ?> руб.</a></div>
-        <div class="user-name"><?php echo $user->name; ?></div>
+        <div class="user-money"><a href="<?php if ( !Yii::app()->user->isGuest ) {echo $this->createAbsoluteUrl('/private/deposit'); }?>"> руб.</a></div>
+        <div class="user-name"><?php if ( !Yii::app()->user->isGuest ) {echo $user->name;} ?></div>
     </section>
 
 </header>

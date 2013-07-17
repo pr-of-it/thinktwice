@@ -114,11 +114,11 @@ $this->breadcrumbs=array(
 <?php endif;?>
 
 <!-- Список фолловеров-->
-<h4>Ваши followers:</h4>
+<h4>Ваши subscripts:</h4>
 
 <?php
 $dataProvider = new CActiveDataProvider($user->model());
-$dataProvider->setData($user->followers);
+$dataProvider->setData($user->subscripts);
 $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'user-grid',
     'dataProvider'=>$dataProvider,
