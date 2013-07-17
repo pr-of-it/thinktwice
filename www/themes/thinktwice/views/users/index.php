@@ -6,6 +6,9 @@
  * @var $users User[]
  */
 ?>
+
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/users.js')); ?>
+
 <div id="container">
 
 <div id="rails" class="page-users">
