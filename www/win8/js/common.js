@@ -237,6 +237,7 @@ function CConfig() { // для наследования класса внутр�
 			popup.find('.article-info .user-name').text(data.user_name || '');
 			popup.find('.article-info a').attr('href', self.makeUrl('/user/?id=' + data.uid));
 
+
 			$.get(self.makeUrl('/blog/ajaxGetPostEditForm'),
 				{id: data.id}, function (d) {
 					if (self.editor) {
@@ -260,25 +261,28 @@ function CConfig() { // для наследования класса внутр�
 						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
 					}
 					popup.find('select').styler();
-			});
+			}); // TODO: обработка ошибок связи
 
 			//popup.find('form input.id-field').val(data.id);
 
 			var imgTarget = target.find('.image-gallery-min-full'),
 				img = popup.find('div.window-post-image');
+			img.css('height', '417px')
 			if (imgTarget.length) {
 				var bg = imgTarget.css('background-image');
 				var src = bg.replace(/(^url\()|(\)$)/g, '');
 				var temp = new Image();
 				temp.onload = function() {
 					var targetWidth = popup.find('article').width();
-					img.css('width', targetWidth);
+					img.css('width', targetWidth + 'px');
 					//console.log(targetWidth, this.width, this.height)
 					if (this.width < targetWidth) {
 						img.css('background-size', 'auto');
 					} else {
 						img.css('background-size', 'cover');
 					}
+					if (temp.height < 417)
+						img.css('height', temp.height + 'px');
 				};
 				temp.src = src;
 				img.css('background-image', bg);
