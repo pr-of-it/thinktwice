@@ -1,7 +1,5 @@
 <?php
 
-
-
 class m130718_075653_create_added_subscriptions extends CDbMigration
 {
 	public function up()
