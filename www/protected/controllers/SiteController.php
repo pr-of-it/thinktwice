@@ -165,6 +165,8 @@ class SiteController extends Controller
 				$user->name = $service->getState('name');
 				$user->save();
 			}
+			Yii::log('!!!!!!!!!!!!!!!!!!!!!!!!',
+				CLogger::LEVEL_ERROR, 'application.extentions.eauth');
 
 			Yii::app()->user->login($identity, 3600*24*30);
 
