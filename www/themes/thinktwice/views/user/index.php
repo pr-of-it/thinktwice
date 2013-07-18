@@ -53,27 +53,29 @@
         </li>
     </ul>
 
-    <ul class="news-list full-item">
-        <li class="news-item">
-            <header>Подписки</header>
-            <div class="content-box" type="subscribes">
-                <?php foreach ( $user->subscriptions as $subscription ) :?>
-                    <div class="content-body">
-                        <header><?php echo $subscription->title; ?></header>
-                        <div class="content-text"><?php echo $subscription->desc; ?></div>
-                        <div class="content-price"><?php echo $subscription->month_price == 0 ? $subscription->week_price . ' руб/нед' : $subscription->month_price . ' руб/мес' ?></div>
-                        <a href="#" class="link-addsub"><span></span></a>
-                    </div>
-                <?php endforeach ?>
-                <?php if ( $user->id == $currentUser->id ) : ?>
-                    <div class="content-body">
-                        <a href="<?php echo Yii::app()->createAbsoluteUrl('/private');?>" class="link-createsub">Создать подписку</a>
-                    </div>
-                <?php endif?>
-            </div>
+    <?php if ($user->subscriptions != null):?>
+        <ul class="news-list full-item">
+            <li class="news-item">
+                <header>Подписки</header>
+                <div class="content-box" type="subscribes">
+                    <?php foreach ( $user->subscriptions as $subscription ) :?>
+                        <div class="content-body">
+                            <header><?php echo $subscription->title; ?></header>
+                            <div class="content-text"><?php echo $subscription->desc; ?></div>
+                            <div class="content-price"><?php echo $subscription->month_price == 0 ? $subscription->week_price . ' руб/нед' : $subscription->month_price . ' руб/мес' ?></div>
+                            <a href="#" class="link-addsub"><span></span></a>
+                        </div>
+                    <?php endforeach ?>
+                    <?php if ( $user->id == $currentUser->id ) : ?>
+                        <div class="content-body">
+                            <a href="<?php echo Yii::app()->createAbsoluteUrl('/private');?>" class="link-createsub">Создать подписку</a>
+                        </div>
+                    <?php endif?>
+                </div>
 
-        </li>
-    </ul>
+            </li>
+        </ul>
+    <?php endif ?>
 
     <ul class="news-list full-item text-item">
         <li class="news-item">
