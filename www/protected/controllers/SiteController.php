@@ -159,7 +159,7 @@ class SiteController extends Controller
 		if ($isAuth) {
 			$user = User::model()->find('email=:email', array(':email'=>$service->getState('email')));
 			Yii::log(
-				$service->getState('email'),
+				var_export($service->getPresistentStates(), true),
 				CLogger::LEVEL_ERROR, 'application.extentions.eauth');
 			if ( null === $user ) {
 				$user = new User();
