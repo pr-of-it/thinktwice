@@ -157,14 +157,19 @@ class SiteController extends Controller
 	    	);
 		// Успешный вход
 		if ($isAuth) {
-			$user = User::model()->find('email=:email', array(':email'=>$service->getState('email')));
+			Yii::log(
+				var_export($identity->getPersistentStates(), true),
+				CLogger::LEVEL_ERROR, 'application.extentions.eauth');
+			$user = User::model()->find('email=:email', array(':email'=>$identity->getState('email')));
 			if ( null === $user ) {
 				$user = new User();
-				$user->email = $service->getState('email');
+				$user->email = $identity->getState('email');
 				$user->password = '';
-				$user->name = $service->getState('name');
+				$user->name = $identity->getState('name');
 				$user->save();
 			}
+			Yii::log('!!!!!!!!!!!!!!!!!!!!!!!!',
+				CLogger::LEVEL_ERROR, 'application.extentions.eauth');
 
 			Yii::app()->user->login($identity, 3600*24*30);
 

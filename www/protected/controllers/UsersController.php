@@ -71,25 +71,38 @@ class UsersController extends Controller {
 
     public function actionAjaxGetUsers($limit, $offset = 0, $filter = null) {
 
+        $currentUser = User::model()->findByPk(Yii::app()->user->id);
+
+        $subscripts = $currentUser->subscripts;
+        $subscriptsIds = array();
+        foreach ( $subscripts as $subscript )
+            $subscriptsIds[] = $subscript->id;
+
         $criteria = new CDbCriteria();
+        $criteria->order = 't.id DESC';
         $criteria->offset = $offset;
         $criteria->limit = $limit;
-        $criteria->select = 'id, name, role.name';
+        $criteria->select = 't.id, name, role.name';
         $criteria->with = 'role';
 
         switch ( $filter ) {
-            /*
-            case 'subscripts':
-                $criteria->addCondition('');
+            case 'following':
+                $criteria->addInCondition('t.id', $subscriptsIds);
                 break;
-            */
             case 'experts':
+                $criteria->addNotInCondition('t.id', $subscriptsIds);
                 $criteria->addCondition('role.name=:rolename');
-                $criteria->params = array(':rolename' => 'expert');
+                $criteria->params = array_merge($criteria->params, array(':rolename' => 'expert'));
                 break;
-            case 'rss':
+            case 'portals':
+                $criteria->addNotInCondition('t.id', $subscriptsIds);
                 $criteria->addCondition('role.name=:rolename');
-                $criteria->params = array(':rolename' => 'rss');
+                $criteria->params = array_merge($criteria->params, array(':rolename' => 'rss'));
+                break;
+            case 'others':
+                $criteria->addNotInCondition('t.id', $subscriptsIds);
+                $criteria->addCondition('role.name=:rolename');
+                $criteria->params = array_merge($criteria->params, array(':rolename' => 'user'));
                 break;
         }
 
