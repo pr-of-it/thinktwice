@@ -158,7 +158,7 @@ class SiteController extends Controller
 		// Успешный вход
 		if ($isAuth) {
 			Yii::log(
-				var_export($identity->getPresistentStates(), true),
+				var_export($identity->getPersistentStates(), true),
 				CLogger::LEVEL_ERROR, 'application.extentions.eauth');
 			$user = User::model()->find('email=:email', array(':email'=>$identity->getState('email')));
 			if ( null === $user ) {
