@@ -1,5 +1,7 @@
 <?php
 
+
+
 class m130718_075653_create_added_subscriptions extends CDbMigration
 {
 	public function up()
@@ -11,6 +13,8 @@ class m130718_075653_create_added_subscriptions extends CDbMigration
             'expaire' =>'datetime',
         ));
 	}
+
+
 
 	public function down()
 	{
