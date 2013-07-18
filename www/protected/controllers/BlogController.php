@@ -128,4 +128,43 @@ class BlogController extends Controller {
 
     }
 
+    public function actionAddSubscription($id, $subscript)
+    {
+        $this->layout = '//layouts/column2';
+        $currentUser = User::model()->findByPk(Yii::app()->user->id);
+        $user = User::model()->findByPk($id);
+        $subscript = Blog::model()->findByPk($subscript);
+        if (isset ($_POST['yes'])) {
+            $price = $subscript->month_price == 0 ? $subscript->week_price : $subscript->month_price;
+
+            if ($currentUser->getAmount() < $price) {
+                $this->redirect(array('/private/deposit', 'amount' => $price - $currentUser->getAmount()));
+            } else {
+
+                $subscript->month_price == 0 ? $sec = 604800 : $sec = 2592000;
+                $expire = date('Y-m-d H:i:s', time() + $sec);
+
+                $addedSubscription = new AddedSubscription();
+                $addedSubscription->user_id = $currentUser->id;
+                $addedSubscription->blog_id = $subscript->id;
+                $addedSubscription->expire = $expire;
+
+                $transaction = new UserTransaction();
+                $transaction->user_id = $currentUser->id;
+                $transaction->amount = -1 * $price;
+                $transaction->reason = 'Списание средств за подключение подписки '
+                    . $subscript->title . ' эксперта ' . $user->name;
+
+                if ($transaction->save() && $addedSubscription->save())
+                    $this->redirect(array('/user/index/', 'id' => $user->id));
+            }
+        } elseif (isset ($_POST['no'])) {
+            $this->redirect(array('/user/index/', 'id' => $user->id));
+        }
+        $this->render('addSubscription',
+            array('user' => $user,
+                'subscript' => $subscript,
+            ));
+
+    }
 }

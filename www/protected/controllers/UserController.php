@@ -61,7 +61,7 @@ class UserController extends Controller {
      * @throws CHttpException
      */
     public function actionIndex($id) {
-
+        $addedSubscription = AddedSubscription::model()->findAllByAttributes(array('user_id' => Yii::app()->user->id));
         $user = User::model()->findByPk($id);
         if( $user === null )
             throw new CHttpException( 404,'Страница пользователя не найдена' );
@@ -110,6 +110,7 @@ class UserController extends Controller {
             'user' => $user,
             'currentUser' => $currentUser,
             'model'=>$model,
+            'addedSubscription' => $addedSubscription,
         ));
 
     }
@@ -231,5 +232,4 @@ class UserController extends Controller {
         $user = User::model()->findAll();
         $this->render('list',array('user'=>$user));
     }
-
 }

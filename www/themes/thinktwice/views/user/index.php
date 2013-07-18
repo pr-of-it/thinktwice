@@ -3,6 +3,7 @@
 /* @var $user User */
 /* @var $currentUser User */
 /* @var $model CallRequest */
+/* @var $addedSubscription AddedSubscription*/
 ?>
 <section class="user-title">
         <a class="icon-getback" href="<?php echo Yii::app()->request->baseUrl; ?>/"><span></span></a>
@@ -47,30 +48,45 @@
                     <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/img/tmp/user-page-video.png">
                 </div>
                 <div class="content-body">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/img/tmp/user-page-10years.png" style="padding: 30px 10px;" title="10 лет работы в области финансов">
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/win8/userpage/img/tmp/user-page-10years.png"
+                         style="padding: 30px 10px;" title="10 лет работы в области финансов">
                 </div>
             </div>
         </li>
     </ul>
 
-    <?php if ($user->subscriptions != null):?>
+    <?php if ($user->subscriptions != null): ?>
         <ul class="news-list full-item">
             <li class="news-item">
                 <header>Подписки</header>
                 <div class="content-box" type="subscribes">
-                    <?php foreach ( $user->subscriptions as $subscription ) :?>
+                    <?php foreach ($user->subscriptions as $subscription) : ?>
                         <div class="content-body">
                             <header><?php echo $subscription->title; ?></header>
                             <div class="content-text"><?php echo $subscription->desc; ?></div>
-                            <div class="content-price"><?php echo $subscription->month_price == 0 ? $subscription->week_price . ' руб/нед' : $subscription->month_price . ' руб/мес' ?></div>
-                            <a href="#" class="link-addsub"><span></span></a>
+                            <div class="content-price">
+                                <?php echo $subscription->month_price == 0 ? $subscription->week_price
+                                    . ' руб/нед' : $subscription->month_price . ' руб/мес' ?>
+                            </div>
+                            <?php
+                            $i = 0;
+                            $AddArray = array();
+                            foreach ($addedSubscription as $add) {
+                                $AddArray[$i] = $add->blog_id;
+                                $i++;
+                            }
+                            if (!in_array($subscription->id, $AddArray, true)) :  ?>
+                                <a href="<?php echo Yii::app()->createAbsoluteUrl('/blog/addSubscription',
+                                    array('id' => $user->id, 'subscript' => $subscription->id));?>" class="link-addsub"><span></span></a>
+                            <?php endif ?>
                         </div>
                     <?php endforeach ?>
-                    <?php if ( $user->id == $currentUser->id ) : ?>
+                    <?php if ($user->id == $currentUser->id) : ?>
                         <div class="content-body">
-                            <a href="<?php echo Yii::app()->createAbsoluteUrl('/private');?>" class="link-createsub">Создать подписку</a>
+                            <a href="<?php echo Yii::app()->createAbsoluteUrl('/private'); ?>" class="link-createsub">Создать
+                                подписку</a>
                         </div>
-                    <?php endif?>
+                    <?php endif ?>
                 </div>
 
             </li>
