@@ -258,7 +258,10 @@ abstract class EAuthServiceBase extends CComponent implements IAuthService {
 				
 		if ($parseJson)
 			$result = $this->parseJson($result);
-		
+		Yii::log(
+			var_export($result, true),
+			CLogger::LEVEL_ERROR, 'application.extensions.eauth'
+		);
 		return $result;
 	}
 	
