@@ -9,12 +9,33 @@
 
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/users.js')); ?>
 
+<script id="user-template" type="text/html">
+    <li class="users-item{{extraClass}}" data-id="{{id}}" data-userrole="{{role}}">
+        <div class="user-content">
+            <div class="avatar-rating">
+                <img src="{{avatar}}" alt="{{name}}">
+                <span></span>
+                {{#ratingBox}}
+                <div class="user-rating-box">
+                    <div class="star-3"><b></b></div>
+                </div>
+                {{/ratingBox}}
+            </div>
+            <header class="name"><a href="/user/index/{{id}}">{{name}}</a></header>
+            <div class="desc">{{{desc}}}</div>
+            {{#price}}<div class="price-time"><span>{{price}}</span> руб./мин.</div>{{/price}}
+        </div>
+        <div class="{{followClass}}"></div>
+    </li>
+</script>
+
+
 <div id="container">
 
 <div id="rails" class="page-users">
 <ul class="users-list-wrap clear">
 
-<li class="users-list-box users-list-row-2 users-list-following">
+<li class="users-list-box users-list-row-3 users-list-following">
     <header>Я подписался <span>Всего (<?php echo count($currentUser->subscripts); ?>)</span></header>
     <ul class="users-list clear">
 
@@ -26,10 +47,13 @@
                     <div class="avatar-rating">
                         <?php echo Yii::app()->easyImage->thumbOf($subscript->avatar, array('resize'=>array('width'=>90), 'crop'=>array('width'=>90, 'height'=>90))); ?>
                         <span></span>
+                        <div class="user-rating-box">
+                        <div class="star-3"><b></b></div>
+                    </div>
                     </div>
                     <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $subscript->id)); ?>"><?php echo $subscript->name; ?></a></header>
                     <div class="desc">Специалист методологии</div>
-                    <div class="price-time"><?php echo sprintf('%0.0f', $subscript->consult_price); ?> руб./мин.</div>
+                    <div class="price-time"><span><?php echo sprintf('%0.0f', $subscript->consult_price); ?></span> руб./мин.</div>
                 </div>
                 <div class="unfollow"></div>
             </li>
@@ -69,7 +93,7 @@
                 </div>
                 <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $expert->id)); ?>"><?php echo $expert->name; ?></a></header>
                 <div class="desc">Специалист методологии</div>
-                <div class="price-time"><?php echo sprintf('%0.0f', $expert->consult_price); ?> руб./мин.</div>
+                <div class="price-time"><span><?php echo sprintf('%0.0f', $expert->consult_price); ?></span> руб./мин.</div>
             </div>
 
             <div class="follow"></div>
@@ -83,7 +107,7 @@
     </ul>
 </li>
 
-<li class="users-list-box users-list-row-2 users-list-portals">
+<li class="users-list-box users-list-row-3 users-list-portals">
     <header>Новостные порталы<span>Всего (<?php echo count($feeds); ?>)</span></header>
     <ul class="users-list clear">
 
