@@ -30,10 +30,6 @@ class UsersController extends Controller {
             $subscriptsIds[] = $subscript->id;
 
         $criteria = new CDbCriteria();
-        $criteria->addNotInCondition('id', $subscriptsIds);
-        $experts = User::model()->findAll($criteria);
-/*
-        $criteria = new CDbCriteria();
         $criteria->order = 'id DESC';
         $criteria->offset = 0;
         $criteria->addNotInCondition('id', $subscriptsIds);
@@ -58,13 +54,13 @@ class UsersController extends Controller {
         $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
         $usersCriteria->limit = 25;
         $users = User::model()->findAll($usersCriteria);
-*/
+
         $this->render('index', array(
             'currentUser' => $currentUser,
             'subscripts' => $subscripts,
             'experts' => $experts,
-            //'feeds' => $feeds,
-            //'users' => $users,
+            'feeds' => $feeds,
+            'users' => $users,
         ));
 
     }

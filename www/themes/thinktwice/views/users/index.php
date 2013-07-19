@@ -7,7 +7,6 @@
  */
 ?>
 
-<?php /* ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/users.js')); ?>
 
 <script id="user-template" type="text/html">
@@ -29,7 +28,6 @@
         <div class="{{followClass}}"></div>
     </li>
 </script>
-<?php */ ?>
 
 <div id="container">
 
@@ -109,7 +107,6 @@
     </ul>
 </li>
 
-<?php /* ?>
 <li class="users-list-box users-list-row-3 users-list-portals">
     <header>Новостные порталы<span>Всего (<?php echo count($feeds); ?>)</span></header>
     <ul class="users-list clear">
@@ -166,7 +163,7 @@
         </li>
     </ul>
 </li>
-<?php */ ?>
+
 </ul>
 
 </div>
