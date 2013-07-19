@@ -57,20 +57,35 @@ class BlogController extends Controller {
 
         $criteria = new CDbCriteria(array(
             'order' => 'time DESC',
-            'with' => 'blog',
+            'with' => array('blog', 'blog.user', 'media'),
             'limit' => $limit,
             'offset' => $offset,
         ));
 
-        if ( !Yii::app()->user->isGuest ) {
-            $user = User::model()->findByPk(Yii::app()->user->id);
+        if ( Yii::app()->user->isGuest ) {
+            $criteria->addInCondition('blog.type', array(Blog::SIMPLE_BLOG, Blog::RSS_BLOG));
+        } else {
+
+            $currentUser = User::model()->with('subscripts')->findByPk(Yii::app()->user->id);
+
             $subscripts = array();
-            foreach ( $user->subscripts as $subscript )
-                $subscripts[] = $subscript->id;
-            $criteria->addInCondition('blog.user_id', $subscripts);
+            foreach ( $currentUser->subscripts as $subscript ) {
+                $subscripts[] = $subscript->blog->id;
+                foreach ( $subscript->feeds as $feed ) {
+                    $subscripts[] = $feed->id;
+                }
+            }
+            $criteria->addInCondition('blog.id', $subscripts, 'OR');
+
+            $arrayUserAddSub = array();
+            foreach ( $currentUser->addedSubscriptions as $userAddSub ){
+                if ( strtotime($userAddSub->expire) > time() )
+                    $arrayUserAddSub[] = $userAddSub->blog_id;
+            }
+            $criteria->addInCondition('blog.id', $arrayUserAddSub, 'OR');
         }
 
-        $posts = BlogPost::model()->with('blog', 'blog.user', 'media')->findAll($criteria);
+        $posts = BlogPost::model()->findAll($criteria);
 
         header('Content-type: application/json');
         echo CJSON::encode($posts);

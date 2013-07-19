@@ -58,7 +58,7 @@ class Blog extends CActiveRecord
             'posts' => array(self::HAS_MANY, 'BlogPost', 'blog_id'),
             'rss' => array(self::HAS_MANY, 'BlogRss', 'blog_id'),
             'rssRequests' => array(self::HAS_MANY, 'BlogRssRequest', 'blog_id'),
-		);
+   		);
 	}
 
 	/**
