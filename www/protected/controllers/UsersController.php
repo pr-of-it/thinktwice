@@ -1,4 +1,4 @@
-<?php
+*<?php
 /**
  * Контроллер страницы пользователей
  */
@@ -28,7 +28,7 @@ class UsersController extends Controller {
         $subscriptsIds = array();
         foreach ( $subscripts as $subscript )
             $subscriptsIds[] = $subscript->id;
-
+/*
         $criteria = new CDbCriteria();
         $criteria->order = 'id DESC';
         $criteria->offset = 0;
@@ -54,13 +54,13 @@ class UsersController extends Controller {
         $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
         $usersCriteria->limit = 25;
         $users = User::model()->findAll($usersCriteria);
-
+*/
         $this->render('index', array(
             'currentUser' => $currentUser,
             'subscripts' => $subscripts,
-            'experts' => $experts,
-            'feeds' => $feeds,
-            'users' => $users,
+            //'experts' => $experts,
+            //'feeds' => $feeds,
+            //'users' => $users,
         ));
 
     }
