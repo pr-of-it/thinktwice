@@ -397,7 +397,7 @@ class User extends CActiveRecord
 
         $this->consultSchedule = json_decode($this->consult_schedule_json);
 
-        $this->isCurrentUserSubscribed = $this->getIsCurrentUserSubscribed();
+        //$this->isCurrentUserSubscribed = $this->getIsCurrentUserSubscribed();
 
         return parent::afterFind();
 
