@@ -28,6 +28,10 @@ class UsersController extends Controller {
         $subscriptsIds = array();
         foreach ( $subscripts as $subscript )
             $subscriptsIds[] = $subscript->id;
+
+        $criteria = new CDbCriteria();
+        $criteria->addNotInCondition('id', $subscriptsIds);
+        $experts = User::model()->findAll($criteria);
 /*
         $criteria = new CDbCriteria();
         $criteria->order = 'id DESC';
@@ -58,7 +62,7 @@ class UsersController extends Controller {
         $this->render('index', array(
             'currentUser' => $currentUser,
             'subscripts' => $subscripts,
-            //'experts' => $experts,
+            'experts' => $experts,
             //'feeds' => $feeds,
             //'users' => $users,
         ));

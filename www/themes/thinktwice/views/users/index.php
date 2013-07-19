@@ -77,7 +77,7 @@
     </ul>
 </li>
 
-<?php /* ?>
+
 <li class="users-list-box users-list-row-3 users-list-experts">
     <header>Эксперты <span>Всего (<?php echo count($experts); ?>)</span></header>
     <ul class="users-list clear">
@@ -109,6 +109,7 @@
     </ul>
 </li>
 
+<?php /* ?>
 <li class="users-list-box users-list-row-3 users-list-portals">
     <header>Новостные порталы<span>Всего (<?php echo count($feeds); ?>)</span></header>
     <ul class="users-list clear">
