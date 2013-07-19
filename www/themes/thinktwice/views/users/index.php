@@ -29,7 +29,6 @@
     </li>
 </script>
 
-
 <div id="container">
 
 <div id="rails" class="page-users">
@@ -75,6 +74,7 @@
 
     </ul>
 </li>
+
 
 <li class="users-list-box users-list-row-3 users-list-experts">
     <header>Эксперты <span>Всего (<?php echo count($experts); ?>)</span></header>
