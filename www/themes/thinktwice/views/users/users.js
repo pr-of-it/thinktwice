@@ -38,11 +38,11 @@ $(function () {
         usersController[blockName] = [];
         target.find('.users-item:not(.user-plus)').each(function () {
             usersController[blockName].push($(this).data('id'));
+            $(this).find('.desc').html(userDesc($(this).data('userrole')));
         });
     };
 
-    //console.log(usersController)
-    //console.log(UsersData)
+
 
     $('.users-list-box header:first-child').each(function (e) {
         var header = $(this), parent = header.parent();
@@ -51,9 +51,15 @@ $(function () {
         //console.log(parent.data('count'))
 
         header.css('cursor', 'pointer');
-        /*header.on('click', function () {
-            $('.users-list-box').not(parent).hide();
-        })*/
+        header.on('click', function () {
+            if ($(this).data('selected') == 1) {
+                $('.users-list-box:not(.ajax-loader)').show();
+                $(this).data('selected', 0)
+            } else {
+                $('.users-list-box:not(.ajax-loader)').not(parent).hide();
+                $(this).data('selected', 1)
+            }
+        })
     });
 
     var allLoaded = {
@@ -185,7 +191,7 @@ $(function () {
             }
             var source = parent.parents('.users-list-box');
             //console.log(following, parent, $(self))
-            parent.detach().prependTo(following);
+            parent.detach().prependTo(following.find('.users-list'));
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
             source.data('count', source.data('count') - 1);
@@ -215,8 +221,8 @@ $(function () {
             //console.log(role)
             if (role === 'expert') target = experts;
             else if (role === 'rss') target = portals;
-            console.log(target, parent, $(self))
-            parent.detach().prependTo(target);
+            //console.log(target, parent, $(self))
+            parent.detach().prependTo(target.find('.users-list'));
             $(self).removeClass('unfollow').addClass('follow');
 
             target.data('count', target.data('count') + 1);

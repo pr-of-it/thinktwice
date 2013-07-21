@@ -1821,16 +1821,27 @@ input[type="reset"].styler:active{
 	float:left;
 	height:100%;
 	padding-right:57px;
+	top: -12px;
 }
 .users-list {
-
+	-moz-columns: 184px; /* Firefox */
+	-webkit-columns: 184px; /* Safari and Chrome */
+	-o-columns:184px;
+	-ms-columns:184px;
+	columns: 184px;
 }
-.users-list-box .users-item{
+.users-list-box .users-item {
 	position:relative;
 	height: 230px; width:184px;
 	float:left;
 	color:#b7dade;
+	top: 12px;
 	font:13px/16px "Helvetica";
+	-webkit-column-break-inside:avoid;
+	-moz-column-break-inside:avoid;
+	-o-column-break-inside:avoid;
+	-ms-column-break-inside:avoid;
+	column-break-inside:avoid;
 }
 .users-item.user-premium{
 	color:#2e757c;
