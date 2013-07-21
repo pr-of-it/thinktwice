@@ -95,7 +95,7 @@ $(function () {
             filter: blockName
         }, function (data) {
             console.log('Loading ' + data.length + ' ' + blockName + ' items...')
-            alert(data.length)
+            //alert(data.length)
             if (data.length === 0) {
                 if (blockName === 'others') {
                     var loader = $('.ajax-loader')
