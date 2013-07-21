@@ -1821,13 +1821,10 @@ input[type="reset"].styler:active{
 	float:left;
 	height:100%;
 	padding-right:57px;
-	top: -12px;
 }
 .users-list {
 	-moz-columns: 184px; /* Firefox */
 	-webkit-columns: 184px; /* Safari and Chrome */
-	-o-columns:184px;
-	-ms-columns:184px;
 	columns: 184px;
 }
 .users-list-box .users-item {
@@ -1838,17 +1835,17 @@ input[type="reset"].styler:active{
 	top: 12px;
 	font:13px/16px "Helvetica";
 	-webkit-column-break-inside:avoid;
-	-moz-column-break-inside:avoid;
-	-o-column-break-inside:avoid;
-	-ms-column-break-inside:avoid;
+	break-inside:avoid;
 	column-break-inside:avoid;
+	display: table;
 }
+
 .users-item.user-premium{
 	color:#2e757c;
 }
 .users-list-box > header{
 	position:absolute;
-	top:-49px; left:0;
+	top:-37px; left:0;
 	color:#2e757c;
 	font:25px "Helvetica";
 	margin:0 0 23px;
