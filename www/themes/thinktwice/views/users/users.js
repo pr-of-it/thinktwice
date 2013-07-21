@@ -95,6 +95,7 @@ $(function () {
             filter: blockName
         }, function (data) {
             console.log('Loading ' + data.length + ' ' + blockName + ' items...')
+            alert(data.length)
             if (data.length === 0) {
                 if (blockName === 'others') {
                     var loader = $('.ajax-loader')
@@ -129,6 +130,11 @@ $(function () {
         } else if (target.hasClass('users-list-portals')) {
             blockName = 'portals';
         } else if (target.hasClass('users-list-others')) {
+            if (items.length < 3 * visibleRows) {
+                othersColumns = 3;
+            } else if (items.length < 5 * visibleRows) {
+                othersColumns = 5;
+            } 
             numItems = othersColumns * visibleRows;
             target.width(othersColumns * 184);
             blockName = 'others';
@@ -140,7 +146,8 @@ $(function () {
                 //console.log(visibleRows, othersColumns, numItems, items.length,  allLoaded[blockName], blockName)
             }
             if (items.length < numItems && !allLoaded[blockName]) {
-                loadData(blockName, loadRemaining);
+                //console.log(items.length, numItems, blockName)
+                loadData(blockName);
             }
         }
         loadRemaining();
@@ -165,41 +172,50 @@ $(function () {
     $(window).on('resize', fixWidth);
 
     fixWidth();
-    
-
-
 
     not_following.on('click', '.follow', function (e) {
+        console.log('click follow', this)
         var parent = $(this).parent(),
             self = this;
-        $.get('/users/ajaxFollowUser', {id: parent.data('id')}, function (data) {
+        $.getJSON('/users/ajaxFollowUser', {id: parent.data('id')}, function (data) {
+            console.log('follow', data)
             if (!data){
                 console.error('follow error', data)
                 return
             }
             var source = parent.parents('.users-list-box');
+            console.log(following, parent, $(self))
             parent.detach().prependTo(following);
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
             source.data('count', source.data('count') - 1);
 
             fixWidth();
+        }).fail(function(d) {
+            //console.log('fail', d)
+        }).always(function (d) {
+            //console.log('always', d)
         });
     })
 
     following.on('click', '.unfollow', function (e) {
         var parent = $(this).parent(),
             self = this;
-        $.get('/users/ajaxUnfollowUser', {id: parent.data('id')}, function (data) {
+        console.log('click unfollow', this)
+        $.getJSON('/users/ajaxUnfollowUser', {id: parent.data('id')}, function (data) {
+            console.log('follow', data)
             if (!data){
                 console.error('unfollow error', data)
                 return
             }
+            console.log('unfollow', data)
             var role = parent.data('userrole');
             var target = others;
+
             //console.log(role)
             if (role === 'expert') target = experts;
             else if (role === 'rss') target = portals;
+            console.log(target, parent, $(self))
             parent.detach().prependTo(target);
             $(self).removeClass('unfollow').addClass('follow');
 
@@ -207,7 +223,11 @@ $(function () {
             following.data('count', following.data('count') - 1);
 
             fixWidth();
-        })
+        }).fail(function(d) {
+            //console.log('fail', d)
+        }).always(function (d) {
+            //console.log('always', d)
+        });
     });
     
 
@@ -227,7 +247,6 @@ $(function () {
         var scroll = $(this).scrollLeft() + $(window).width();
         //console.log(scroll, width, scroll-width)
         if (!loading && !allLoaded.others && scroll > width) {
-            othersColumns += 3;
             fixWidth();
         }
     });
