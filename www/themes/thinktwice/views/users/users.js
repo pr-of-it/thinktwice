@@ -174,17 +174,17 @@ $(function () {
     fixWidth();
 
     not_following.on('click', '.follow', function (e) {
-        console.log('click follow', this)
+        //console.log('click follow', this)
         var parent = $(this).parent(),
             self = this;
-        $.getJSON('/users/ajaxFollowUser', {id: parent.data('id')}, function (data) {
-            console.log('follow', data)
+        $.get('/users/ajaxFollowUser', {id: parent.data('id')}, function (data) {
+            //console.log('follow', data)
             if (!data){
                 console.error('follow error', data)
                 return
             }
             var source = parent.parents('.users-list-box');
-            console.log(following, parent, $(self))
+            //console.log(following, parent, $(self))
             parent.detach().prependTo(following);
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
@@ -201,14 +201,14 @@ $(function () {
     following.on('click', '.unfollow', function (e) {
         var parent = $(this).parent(),
             self = this;
-        console.log('click unfollow', this)
-        $.getJSON('/users/ajaxUnfollowUser', {id: parent.data('id')}, function (data) {
-            console.log('follow', data)
+        //console.log('click unfollow', this)
+        $.get('/users/ajaxUnfollowUser', {id: parent.data('id')}, function (data) {
+            //console.log('follow', data)
             if (!data){
                 console.error('unfollow error', data)
                 return
             }
-            console.log('unfollow', data)
+            //console.log('unfollow', data)
             var role = parent.data('userrole');
             var target = others;
 
@@ -250,95 +250,5 @@ $(function () {
             fixWidth();
         }
     });
-
-    /*
-    loadItem = function(item, target) {
-        var block = target.find('.users-item:first');
-        if (block.length === 0)
-            block = others.find('.users-item:first');
-        block = block.clone();
-        block.find('.avatar-rating img').attr('src', item.avatar);
-        var name = block.find('header.name a');
-        name.attr('href', '/user/index/' + item.id);
-        name.text(item.name);
-        block.data('id', item.id);
-        block.data('userrole', item.role.name);
-        target.find('.users-list').append(block);
-    };
-
-    
-    loadData = function(opts) {
-        loading = true;
-
-        opts = opts || {};
-        var limit = opts.limit || numItemstoLoad;
-        var offset = opts.offset || numItems;
-        $.get('/users/ajaxGetUsers', {offset: offset, limit: limit, filter: 'users'}, function (data) {
-            console.log('Loading ' + data.length + ' items...')
-            if (data.length === 0) {
-                var loader = $('.ajax-loader')
-                loader.find('img').hide();
-                loader.find('span').text('Все пользователи загружены.').show();
-                everythingWasLoaded = true;
-                return;
-            }
-            for (var i=0; i<data.length; i++) {
-                var item = data[i];
-                loadItem(item, others);
-            }
-            numItems = others.find('.users-item').length;
-            console.log('Loaded ' + numItems + ' items total.')
-            fixWidth();
-            loading = false;
-        });
-    }
-
-    $('.users-list-box header:first-child').each(function (e) {
-        var header = $(this), parent = header.parent();
-
-        parent.data('count', parseInt(header.find('span').text().substr(7)));
-        //console.log(parent.data('count'))
-
-        header.css('cursor', 'pointer');
-        header.on('click', function () {
-            $('.users-list-box').not(parent).hide();
-        })
-    });
-
-    var fixVisibility = function (target) {
-        var numItems = 6;
-        if (target.hasClass('users-list-experts'))
-            numItems -= 1;
-        var items = target.find('.users-item:not(.user-plus)');
-        items.slice(numItems).hide();
-        items.slice(0, numItems).show();
-        target.find('header span').html('Всего (' + target.data('count') + ')');
-    };
-
-
-    var fixWidth = function() {  
-        others.width( ((numItems/2)|0) * 184 );
-        $('#container').width($('.users-list-wrap').width() + 500)
-    }
-
-    
-
-    $('.users-list-box:not(.ajax-loader)').each(function () {
-        fixVisibility($(this));
-    });
-    fixWidth();
-
-    $("#wrapper").scroll(function () {
-        if ($('#rails').hasClass('disabled'))
-            return false;
-        var width = $('#container').width() - 90;
-        var scroll = $(this).scrollLeft() + $(window).width();
-
-        if (!loading && scroll > width) {
-            loadData();
-        }
-
-
-    });*/
 
 });
