@@ -40,11 +40,11 @@ class FacebookOAuthService extends EOAuth2Service {
 	}
 	
 	protected function getCodeUrl($redirect_uri) {
-		if (strpos($redirect_uri, '?') !== false) {
+		/*if (strpos($redirect_uri, '?') !== false) {
 			$url = explode('?', $redirect_uri);
 			$url[1] = preg_replace('#[/]#', '%2F', $url[1]);
 			$redirect_uri = implode('?', $url);
-		}
+		}*/
 		
 		$this->setState('redirect_uri', $redirect_uri);
 		
