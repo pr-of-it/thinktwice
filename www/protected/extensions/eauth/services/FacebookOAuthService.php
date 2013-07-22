@@ -53,6 +53,7 @@ class FacebookOAuthService extends EOAuth2Service {
 			CLogger::LEVEL_ERROR,
 			'applicayion.sokol');
 
+		Yii::app()->request->cookies['fb_redirect_uri'] = new CHttpCookie('fb_redirect_uri', $redirect_uri);
 		$url = parent::getCodeUrl($redirect_uri);
 		if (isset($_GET['js']))
 			$url .= '&display=popup';
@@ -62,10 +63,11 @@ class FacebookOAuthService extends EOAuth2Service {
 	
 	protected function getTokenUrl($code) {
 		#return parent::getTokenUrl($code).'&redirect_uri='.urlencode($this->getState('redirect_uri', 'http://dev.thinktwice.ru/site/enter?service=facebook'));
+		$redirect_uri = Yii::app()->request->cookies['fb_redirect_uri']->value;
 		Yii::log(var_export(Yii::app()->session,true),
 			CLogger::LEVEL_ERROR,
 			'applicayion.sokol');
-		return parent::getTokenUrl($code).'&redirect_uri='.urlencode(Yii::app()->session['fb_redirect_uri']);
+		return parent::getTokenUrl($code).'&redirect_uri='.urlencode($redirect_uri);
 	}
 	
 	protected function getAccessToken($code) {
