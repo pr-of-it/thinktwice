@@ -100,7 +100,7 @@ class BlogController extends Controller {
      * AJAX
      * Загрузка изображения к посту
      */
-    public function actionUploadImage() {
+    public function actionAjaxUploadImage() {
 
         $tempFolder=Yii::getPathOfAlias('webroot').'/upload/blogs/';
         $webFolder = Yii::app()->getBaseUrl() . '/upload/blogs/';
@@ -124,6 +124,26 @@ class BlogController extends Controller {
         header("Content-Type: text/plain");
         $result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
         echo $result;
+        Yii::app()->end();
+
+    }
+
+    /**
+     * AJAX
+     * Удаление медиа-файла, связанного с постом в блоге по его ID
+     * @param $id ID файла
+     * @throws CHttpException
+     */
+    public function actionAjaxDeletePostMedia($id) {
+
+        $model = BlogPostMedia::model()->findbyPk($id);
+        if ( is_null($model) )
+            throw new CHttpException(404, 'Медиа-файл не существует.');
+
+        $result = $model->delete();
+
+        header('Content-type: application/json');
+        echo CJSON::encode($result);
         Yii::app()->end();
 
     }

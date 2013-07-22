@@ -40,7 +40,7 @@
                     'config' => array(
                         'autoUpload'=>true,
                         'request' => array(
-                            'endpoint' => $this->createUrl('blog/uploadImage'),
+                            'endpoint' => $this->createUrl('blog/ajaxUploadImage'),
                             'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
                         ),
                         'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
