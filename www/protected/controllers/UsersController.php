@@ -49,9 +49,12 @@ class UsersController extends Controller {
         $feeds = User::model()->findAll($feedCriteria);
 
         $usersCriteria = clone $criteria;
-        $usersCriteria->addCondition('roleid=:roleid');
-        $userRole = UserRole::model()->findByAttributes(array('name' => 'user'))->id;
-        $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
+        $userRole = UserRole::model()->findAllByAttributes(array('name' => array('user','operator','moderator','lector','admin')));
+        $arrayRoleIds = array();
+        foreach ( $userRole as $ids ) {
+            $arrayRoleIds[] = $ids->id;
+        }
+        $usersCriteria->addInCondition('roleid', $arrayRoleIds, 'OR');
         $usersCriteria->limit = 25;
         $users = User::model()->findAll($usersCriteria);
 
