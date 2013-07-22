@@ -251,8 +251,10 @@ $(function () {
 
         var width = $('#container').outerWidth() + adjust;
         var scroll = $(this).scrollLeft() + $(window).width();
-        //console.log(scroll, width, scroll-width)
+        
         if (!loading && !allLoaded.others && scroll > width) {
+            //console.log(scroll, width, scroll-width)
+            othersColumns += 2;
             fixWidth();
         }
     });
