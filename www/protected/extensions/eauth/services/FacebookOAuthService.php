@@ -49,6 +49,9 @@ class FacebookOAuthService extends EOAuth2Service {
 		#$this->setState('redirect_uri', $redirect_uri);
 
 		Yii::app()->session['fb_redirect_uri'] = $redirect_uri;
+		Yii::log(var_export(Yii::app()->session,true),
+			CLogger::LEVEL_ERROR,
+			'applicayion.sokol');
 
 		$url = parent::getCodeUrl($redirect_uri);
 		if (isset($_GET['js']))
