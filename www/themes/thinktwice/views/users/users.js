@@ -170,7 +170,7 @@ $(function () {
         var itemsLeft = items.length;
         ul.width(184).css('float', 'left');
         
-        var visibleRows = Math.floor($('#rails').height() / 230);
+        var visibleRows = Math.floor($('#rails').outerHeight() / 230);
 
         var begin = 0, end = visibleRows;        
 
@@ -188,8 +188,9 @@ $(function () {
     }
 
     var fixVisibility = function (target) {
-        var visibleRows = Math.floor(($('#rails').height() ) / 230);
+        var visibleRows = Math.floor(($('#rails').outerHeight()) / 230);
 
+        //console.log(visibleRows, $('#rails').height(), ($('#rails').height() ) / 230)
         if (target.hasClass('users-list-following')) {
             blockName = 'following';
         } else if (target.hasClass('users-list-experts')) {
