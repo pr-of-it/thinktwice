@@ -826,7 +826,7 @@ $(function () {
 	if ($('#post-editor').length) {
 		var ckconf = {
 			toolbar: [['Bold'], ['Italic'], ['Link'], ['Maximize']],
-			height: ($('.create-post .wysiwyg-text-field').height() - 50) + 'px',
+			height: ($('.create-post .wysiwyg-text-field').height() - 74) + 'px',
 			uiColor: '#e1e1db',
 			dialog_backgroundCoverColor: 'black',
 			dialog_backgroundCoverOpacity: 0.6,
