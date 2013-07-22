@@ -83,6 +83,12 @@ class BlogController extends Controller {
                     $arrayUserAddSub[] = $userAddSub->blog_id;
             }
             $criteria->addInCondition('blog.id', $arrayUserAddSub, 'OR');
+
+            $currentUserBlogs = array();
+            foreach ( $currentUser->getAllBlogIds() as $ids ) {
+                $currentUserBlogs[] = $ids->id;
+            }
+            $criteria->addInCondition('blog.id', $currentUserBlogs, 'OR');
         }
 
         $posts = BlogPost::model()->findAll($criteria);

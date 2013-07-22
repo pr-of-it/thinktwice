@@ -236,6 +236,16 @@ class User extends CActiveRecord
         return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
     }
 
+    public function getAllBlogIds() {
+        if ( $this->hasBlog() ) {
+            $this->blog->id;
+        }
+        foreach ( $this->subscriptions as $blog )
+            $blog->id;
+        foreach ( $this->feeds as $blog )
+            $blog->id;
+        return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
+    }
     /**
      * @return array behaviors
      */
