@@ -70,7 +70,8 @@ class BlogController extends Controller {
 
             $subscripts = array();
             foreach ( $currentUser->subscripts as $subscript ) {
-                $subscripts[] = $subscript->blog->id;
+                if ( isset ($subscript->blog) )
+                    $subscripts[] = $subscript->blog->id;
                 foreach ( $subscript->feeds as $feed ) {
                     $subscripts[] = $feed->id;
                 }
