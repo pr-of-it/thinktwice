@@ -249,19 +249,20 @@ function CConfig() { // для наследования класса внутр�
 					if (self.editor) {
 						self.editor.destroy();
 					}
-					var uploader = popup.find('.file-upload-container').detach();
+					var uploader = popup.find('.file-upload-wrapper').detach();
+					var uploaderContent = uploader.find('.file-upload-container')
 					uploader.find('.hidden-image').remove();
 					uploader.find('.attach-list').html('');
 					popup.find('form').html(d);
 					popup.find('.tag-attach-box').append(uploader);
 
-					var media = $('<ul class="attach-list" />');
+					var media = $('<ul class="attach-list media-list" />');
 
 					for (var i=0; i < data.media.length; i++ ) {
 						var item = data.media[i];
-						media.append('<li><img src="' + item.url  +'"></li>');
+						media.append('<li><img src="' + item.url  +'"><span data-id="' +  item.id + '">Удалить</span></li>');
 					}
-					uploader.append(media)
+					uploaderContent.append(media)
 
 					if (popup.find('#popup-post-editor').length) {
 						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
@@ -300,6 +301,13 @@ function CConfig() { // для наследования класса внутр�
 			self.bgPopup.show();
 			$('#rails').addClass('disabled');
 			popup.addClass('visible-on');
+		})
+
+		$('#blog-edit-form').on('click', '.media-list li > span', function () {
+			var self = this;
+			$.get('/blog/ajaxDeletePostMedia', {id: $(self).data('id')}, function(d) {
+				$(self).parent().remove();
+			});
 		})
 
 		// скрываем окно

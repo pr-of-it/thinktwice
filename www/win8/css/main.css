@@ -1527,9 +1527,35 @@ input[type="reset"].styler:active{
 .qq-upload-button {
 	margin: 10px 10px 10px 0; text-indent: -1000px;
 }
+.qq-upload-button input {
+	height: 99px !important;
+}
+
 .file-upload-container {
 	width: 10000px;
 	margin: 10px 0;
+}
+.file-upload-wrapper {
+	width: 100%;
+	/*overflow-x: auto;*/
+	overflow-y: hidden;
+}
+
+.media-list li {
+	position: relative;
+}
+.media-list li > span {
+	display: none;
+	position:absolute;
+	left:0; top: 0; width:100%; height:59px;
+	background: #500;
+	color: white;
+	padding-top: 40px;
+	opacity: .75;
+}
+.media-list li:hover > span {
+	display: block;
+	cursor: pointer;
 }
 
 /*****   interest-menu   *****/
