@@ -44,6 +44,20 @@ $(function () {
     };
 
 
+    var loader = {
+        init: function () {
+            var loader = $('.ajax-loader');
+            loader.find('img').show();
+            loader.find('span').hide();
+        },
+        finish: function () {
+            var loader = $('.ajax-loader')
+            loader.find('img').hide();
+            loader.find('span').text('Все пользователи загружены.').show();
+        }
+    }
+
+
     $('.users-list-box header:first-child').each(function (e) {
         var header = $(this), parent = header.parent();
 
@@ -56,6 +70,7 @@ $(function () {
                 $('.users-list-box:not(.ajax-loader)').show();
                 $(this).data('selected', 0)
                 mode = 'all';
+                loader.init();
                 fixWidth();
             } else {
                 if (parent.is('.users-list-following')) {
@@ -68,7 +83,9 @@ $(function () {
                     mode = 'others';
                 }
                 $('.users-list-box:not(.ajax-loader)').not(parent).hide();
-                $(this).data('selected', 1)
+                $(this).data('selected', 1);
+                allLoaded[mode] = false;
+                loader.init();
                 fixWidth();
             }
         })
@@ -81,6 +98,11 @@ $(function () {
         'others': false
     };
 
+    var numColumns = {
+        'following': 5,
+        'experts': 5,
+        'portals': 5,
+    };
 
     loadItem = function(item, blockName) {
         var user = {
@@ -102,10 +124,6 @@ $(function () {
         var newBlock = userTemplate(user);
         var target = $('.users-list-' + blockName);
         target.find('.users-list:last').append(newBlock);
-        /*var plus = target.find('.user-plus');
-        if (plus.length)
-            plus.detach().appendTo(target.find('.users-list'));*/
-        
     };
 
     var loadData = function (blockName) {
@@ -118,10 +136,8 @@ $(function () {
             console.log('Loading ' + data.length + ' ' + blockName + ' items...')
             //alert(data.length)
             if (data.length === 0) {
-                if (blockName === 'others') {
-                    var loader = $('.ajax-loader')
-                    loader.find('img').hide();
-                    loader.find('span').text('Все пользователи загружены.').show();
+                if (blockName === 'others' || mode !== 'all') {
+                    loader.finish();
                 }
                 allLoaded[blockName] = true;
                 loading = false;
@@ -161,11 +177,9 @@ $(function () {
         while (itemsLeft > 0) {
             var newUl = ul.clone();
             newUl.append(items.slice(begin, end));
-            //console.log(items.length, items.slice(begin, end).length, visibleRows)
             target.append(newUl);
 
             itemsLeft -= visibleRows;
-            //console.log(itemsLeft)
             begin += visibleRows;
             end += visibleRows;
         }
@@ -175,17 +189,31 @@ $(function () {
 
     var fixVisibility = function (target) {
         var visibleRows = Math.floor(($('#rails').height() ) / 230);
-        //console.log(visibleRows)
-        var numItems = 3 * visibleRows;
-        var items = target.find('.users-item:not(.user-plus)');
+
         if (target.hasClass('users-list-following')) {
             blockName = 'following';
         } else if (target.hasClass('users-list-experts')) {
-            numItems -= 1;
             blockName = 'experts';
         } else if (target.hasClass('users-list-portals')) {
             blockName = 'portals';
         } else if (target.hasClass('users-list-others')) {
+            blockName = 'others';
+        }
+
+        var columns = mode === 'all' ? 3 : (numColumns[blockName] || othersColumns);
+
+        var items = target.find('.users-item:not(.user-plus)');
+
+        if (items.length + 1 < 3 * visibleRows) {
+            columns = 3;
+        } else if (mode !== 'all' && items.length + 1 < 5 * visibleRows) {
+            columns = 5;
+        }
+        var numItems = columns * visibleRows;
+        target.width(columns * 184);
+        if (blockName === 'experts') {
+            numItems -= 1;
+        } else if (blockName === 'others' && mode === 'all') {
             if (items.length < 3 * visibleRows) {
                 othersColumns = 3;
             } else if (items.length < 5 * visibleRows) {
@@ -193,39 +221,44 @@ $(function () {
             } 
             numItems = othersColumns * visibleRows;
             target.width(othersColumns * 184);
-            blockName = 'others';
         }
 
-        columnize(target)
+        columnize(target);
 
-        var loadRemaining = function () {
-            items = $('.users-list-' + blockName + ' .users-item:not(.user-plus)');
-            //console.log('loadRemaining called', blockName, items.length, numItems)
-            if (blockName === 'others') {
-                numItems = othersColumns * visibleRows;
-                //console.log(visibleRows, othersColumns, numItems, items.length,  allLoaded[blockName], blockName)
-            }
-            if (items.length < numItems && !allLoaded[blockName]) {
-                //console.log(items.length, numItems, blockName)
-                loadData(blockName);
-            }
+        if (blockName === 'others') {
+            numItems = othersColumns * visibleRows;
         }
-        loadRemaining();
 
+        if (items.length < numItems && !allLoaded[blockName]) {
+            loader.init();
+            loadData(blockName);
+        } 
         items.slice(numItems).hide();
         items.slice(0, numItems).show();
         target.find('header span').html('Всего (' + target.data('count') + ')');
     };
 
     var fixWidth = function() {
-        initUserBlock('following');
-        initUserBlock('experts');
-        initUserBlock('portals');
-        initUserBlock('others');
-        $('.users-list-box:not(.ajax-loader)').each(function () {
-            fixVisibility($(this));
-        });
+        if (mode === 'all') {
+            initUserBlock('following');
+            initUserBlock('experts');
+            initUserBlock('portals');
+            initUserBlock('others');
+            $('.users-list-box:not(.ajax-loader)').each(function () {
+                fixVisibility($(this));
+            });
+        } else {
+            initUserBlock(mode);
+            fixVisibility($('.users-list-' + mode));
+        }
+        
         var width = $('.users-list-wrap').outerWidth() + 200;
+
+        // Для очень больших мониторов
+        if ($(window).width() > width) {
+            width = $(window).width() + 200;
+        } // TODO: увеличивать кол-во колонок, чтобы заполнить экран
+
         $('#container').width(width);
         $('#rails').width(width * 1.2);
     }
@@ -233,8 +266,6 @@ $(function () {
     $(window).on('resize', fixWidth);
 
     fixWidth();
-
-    
 
     
 
@@ -311,10 +342,17 @@ $(function () {
         var width = $('#container').outerWidth() + adjust;
         var scroll = $(this).scrollLeft() + $(window).width();
         
-        if (!loading && !allLoaded.others && scroll > width) {
+        //console.log($(window).width() - $('#container').width())
+        if (!loading && scroll > width) {
             //console.log(scroll, width, scroll-width)
-            othersColumns += 2;
-            fixWidth();
+            if (mode === 'all' && !allLoaded.others) {
+                othersColumns += 2;
+                fixWidth();
+            } else if (!allLoaded[mode]) {
+                numColumns[mode] += 2;
+                fixWidth();
+            }
+            
         }
     });
 
