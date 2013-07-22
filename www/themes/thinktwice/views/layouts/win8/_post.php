@@ -54,7 +54,7 @@
                                     //$('#BlogPost_image').val('/upload/blogs/' + response.filename);
                                     var imageInput = $('<input class=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
                                     $('.create-post .file-upload-container').append(imageInput);
-                                    $('#blog-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
+                                    $('#blog-form .attach-list:not(.media-list)').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
                                 }",
                                 //'onError'=>"js:function(id, name, errorReason){ }",
                             ),
