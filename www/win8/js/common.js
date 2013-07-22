@@ -262,7 +262,8 @@ function CConfig() { // для наследования класса внутр�
 						var item = data.media[i];
 						media.append('<li><img src="' + item.url  +'"><span data-id="' +  item.id + '">Удалить</span></li>');
 					}
-					uploaderContent.append(media)
+					uploaderContent.append(media);
+					//uploaderContent.width(media.width());
 
 					if (popup.find('#popup-post-editor').length) {
 						self.editor = CKEDITOR.replace('popup-post-editor', self.ckconf);
