@@ -115,6 +115,7 @@ class User extends CActiveRecord
             'blog' => array(self::HAS_ONE, 'Blog', 'user_id', 'condition'=>'blog.type=' . Blog::SIMPLE_BLOG),
             'subscriptions' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'subscriptions.type=' . Blog::SUBSCRIPT_BLOG),
             'feeds' => array(self::HAS_MANY, 'Blog', 'user_id', 'condition'=>'feeds.type=' . Blog::RSS_BLOG),
+            'addedSubscriptions' => array(self::HAS_MANY, 'AddedSubscription', 'user_id'),
 
         );
     }
@@ -235,6 +236,16 @@ class User extends CActiveRecord
         return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
     }
 
+    public function getAllBlogIds() {
+        if ( $this->hasBlog() ) {
+            $this->blog->id;
+        }
+        foreach ( $this->subscriptions as $blog )
+            $blog->id;
+        foreach ( $this->feeds as $blog )
+            $blog->id;
+        return array_merge( $this->blog ? array($this->blog) : array(), (array)$this->subscriptions, (array)$this->feeds);
+    }
     /**
      * @return array behaviors
      */
