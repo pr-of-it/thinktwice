@@ -25,6 +25,8 @@
     <?php echo $form->error($rss,'url'); ?>
 </div>
 
+<?php echo $form->hiddenField($rss, 'active', array('value'=>1)) ?>
+
 <?php echo $form->hiddenField($rss, 'blog_id', array('value'=>$user->blog->id)) ?>
 
 <div class="row">
