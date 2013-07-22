@@ -1823,26 +1823,25 @@ input[type="reset"].styler:active{
 	padding-right:57px;
 }
 .users-list {
-	-moz-columns: 184px; /* Firefox */
-	-webkit-columns: 184px; /* Safari and Chrome */
-	columns: 184px;
+	/*-moz-columns: 184px;
+	-webkit-columns: 184px;
+	columns: 184px;*/
 }
 .ajax-loader .users-list {
-	-moz-columns: auto; /* Firefox */
-	-webkit-columns: auto; /* Safari and Chrome */
-	columns: auto;
+	/*-moz-columns: auto; 
+	-webkit-columns: auto; 
+	columns: auto;*/
 }
 .users-list-box .users-item {
 	position:relative;
 	height: 218px; width:184px;
-	float:left;
-	color:#b7dade;
-	top: 12px;
+	float: left;
+	color: #b7dade;
 	font:13px/16px "Helvetica";
-	-webkit-column-break-inside:avoid;
+	/*-webkit-column-break-inside:avoid;
 	break-inside:avoid;
 	column-break-inside:avoid;
-	display: table;
+	display: table;*/
 }
 
 .users-item.user-premium {
@@ -1850,7 +1849,7 @@ input[type="reset"].styler:active{
 }
 .users-list-box > header{
 	position:absolute;
-	top:-37px; left:0;
+	top:-59px; left:0;
 	color:#2e757c;
 	font:25px "Helvetica";
 	margin:0 0 23px;
@@ -1989,12 +1988,6 @@ input[type="reset"].styler:active{
 .users-list-row-3{
 	width: 600px;
 }
-.users-list{
-	height: 100%;
-	/*columns: 184px;
-	-webkit-columns:184px; 
-	-moz-columns:184px; */
-}
 .user-content{
 	height:100%;
 	overflow:hidden;
@@ -2012,7 +2005,7 @@ input[type="reset"].styler:active{
 }
 .users-list-wrap .ajax-loader {
 	padding-right: 0;
-	margin-left: 150px;
+	/*margin-left: 150px;*/
 }
 .users-list-others {
 	padding-right: 0;

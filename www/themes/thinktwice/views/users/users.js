@@ -15,6 +15,7 @@ $(function () {
     var userTemplate = Mustache.compile(tmpl.innerHTML);
 
 
+    var mode = 'all';
 
     var usersController = {
         'following': [],
@@ -43,7 +44,6 @@ $(function () {
     };
 
 
-
     $('.users-list-box header:first-child').each(function (e) {
         var header = $(this), parent = header.parent();
 
@@ -52,12 +52,24 @@ $(function () {
 
         header.css('cursor', 'pointer');
         header.on('click', function () {
-            if ($(this).data('selected') == 1) {
+            if (mode !== 'all') {
                 $('.users-list-box:not(.ajax-loader)').show();
                 $(this).data('selected', 0)
+                mode = 'all';
+                fixWidth();
             } else {
+                if (parent.is('.users-list-following')) {
+                    mode = 'following';
+                } else if (parent.is('.users-list-portals')) {
+                    mode = 'portals';
+                } else if (parent.is('.users-list-experts')) {
+                    mode = 'experts';
+                } else {
+                    mode = 'others';
+                }
                 $('.users-list-box:not(.ajax-loader)').not(parent).hide();
                 $(this).data('selected', 1)
+                fixWidth();
             }
         })
     });
@@ -84,17 +96,20 @@ $(function () {
             user.ratingBox = true;
             user.price = item.consult_price || 0;
         }
+        user.followClass = blockName === 'following' ? 'unfollow' : 'follow';
         usersController[blockName].push(user.id);
         //UsersData[user.id] = user;
         var newBlock = userTemplate(user);
         var target = $('.users-list-' + blockName);
-        target.find('.users-list').append(newBlock);
-        var plus = target.find('.user-plus');
+        target.find('.users-list:last').append(newBlock);
+        /*var plus = target.find('.user-plus');
         if (plus.length)
-            plus.detach().appendTo(target.find('.users-list'));
+            plus.detach().appendTo(target.find('.users-list'));*/
+        
     };
 
-    var loadData = function (blockName, after) {
+    var loadData = function (blockName) {
+        loading = true;
         $.get('/users/ajaxGetUsers', {
             offset: usersController[blockName].length,
             limit: numItemsToLoad,
@@ -116,16 +131,51 @@ $(function () {
                 var item = data[i];
                 loadItem(item, blockName);
             }
-            numItems = $('.users-list-' + blockName).find('.users-item').length;
+
+            var target = $('.users-list-' + blockName);
+            var numItems = target.find('.users-item').length;
             console.log('Loaded ' + numItems + ' ' + blockName + ' items total.')
+
             fixWidth();
             loading = false;
-            if (after) after();
+
         });
     }
 
-    var fixVisibility = function (target) {
+    var columnize = function (target) {
+        var plus = target.find('.user-plus');
+        if (plus.length) {
+            plus.detach();
+        }
+        var items = target.find('li.users-item:not(.user-plus)').detach();
+        var ul = target.find('.users-list:first').detach();
+        target.find('.users-list').remove();
+
+        var itemsLeft = items.length;
+        ul.width(184).css('float', 'left');
+        
         var visibleRows = Math.floor($('#rails').height() / 230);
+
+        var begin = 0, end = visibleRows;        
+
+        while (itemsLeft > 0) {
+            var newUl = ul.clone();
+            newUl.append(items.slice(begin, end));
+            //console.log(items.length, items.slice(begin, end).length, visibleRows)
+            target.append(newUl);
+
+            itemsLeft -= visibleRows;
+            //console.log(itemsLeft)
+            begin += visibleRows;
+            end += visibleRows;
+        }
+        if (plus.length)
+            plus.appendTo(target.find('.users-list:last'));
+    }
+
+    var fixVisibility = function (target) {
+        var visibleRows = Math.floor(($('#rails').height() ) / 230);
+        //console.log(visibleRows)
         var numItems = 3 * visibleRows;
         var items = target.find('.users-item:not(.user-plus)');
         if (target.hasClass('users-list-following')) {
@@ -145,8 +195,12 @@ $(function () {
             target.width(othersColumns * 184);
             blockName = 'others';
         }
+
+        columnize(target)
+
         var loadRemaining = function () {
             items = $('.users-list-' + blockName + ' .users-item:not(.user-plus)');
+            //console.log('loadRemaining called', blockName, items.length, numItems)
             if (blockName === 'others') {
                 numItems = othersColumns * visibleRows;
                 //console.log(visibleRows, othersColumns, numItems, items.length,  allLoaded[blockName], blockName)
@@ -157,6 +211,7 @@ $(function () {
             }
         }
         loadRemaining();
+
         items.slice(numItems).hide();
         items.slice(0, numItems).show();
         target.find('header span').html('Всего (' + target.data('count') + ')');
@@ -179,6 +234,10 @@ $(function () {
 
     fixWidth();
 
+    
+
+    
+
     not_following.on('click', '.follow', function (e) {
         //console.log('click follow', this)
         var parent = $(this).parent(),
@@ -191,7 +250,7 @@ $(function () {
             }
             var source = parent.parents('.users-list-box');
             //console.log(following, parent, $(self))
-            parent.detach().prependTo(following.find('.users-list'));
+            parent.detach().prependTo(following.find('.users-list:first'));
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
             source.data('count', source.data('count') - 1);
@@ -222,7 +281,7 @@ $(function () {
             if (role === 'expert') target = experts;
             else if (role === 'rss') target = portals;
             //console.log(target, parent, $(self))
-            parent.detach().prependTo(target.find('.users-list'));
+            parent.detach().prependTo(target.find('.users-list:first'));
             $(self).removeClass('unfollow').addClass('follow');
 
             target.data('count', target.data('count') + 1);
