@@ -59,6 +59,9 @@ class FacebookOAuthService extends EOAuth2Service {
 	
 	protected function getTokenUrl($code) {
 		#return parent::getTokenUrl($code).'&redirect_uri='.urlencode($this->getState('redirect_uri', 'http://dev.thinktwice.ru/site/enter?service=facebook'));
+		Yii::log(var_export(Yii::app()->session,true),
+			CLogger::LEVEL_ERROR,
+			'applicayion.sokol');
 		return parent::getTokenUrl($code).'&redirect_uri='.urlencode(Yii::app()->session['fb_redirect_uri']);
 	}
 	
