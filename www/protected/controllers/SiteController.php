@@ -2,9 +2,6 @@
 
 class SiteController extends Controller
 {
-
-    const LAST_POST = 20;
-
     public function actions()
     {
         return array(
@@ -186,6 +183,8 @@ class SiteController extends Controller
      * @param string $code Код инвайта
      * @param string $email E-mail
      */
+
+
     public function actionRegister($code = null, $email = null) {
         /*
         * Авторизация по сервису социальной сети
@@ -252,6 +251,7 @@ class SiteController extends Controller
     /**
      * Авторизация на сайте
      */
+
     public function actionLogin()
     {
 
@@ -340,6 +340,10 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->homeUrl);
     }
 
+
+    /**
+     * Восстановление забытого пароля пользователя
+     */
     public function actionRestore() {
 
         $model = new RestoreForm();

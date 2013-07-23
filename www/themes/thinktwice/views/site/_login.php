@@ -27,7 +27,7 @@
             Зарегистрироваться</a>
     </div>
     <?php if ($this->layout != 'expert-mobile'): ?>
-        <?php Yii::app()->eauth->renderWidget(); ?>
+        <?php $this->widget('ext.eauth.EAuthWidget', array('action' => 'site/enter')); ?>
     <?php endif; ?>
     
 
