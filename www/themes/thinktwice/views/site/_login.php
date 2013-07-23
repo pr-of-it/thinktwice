@@ -26,7 +26,9 @@
             onclick="$('.login-block').hide();$('.register-block').show();return false;">
             Зарегистрироваться</a>
     </div>
-
+    <?php if ($this->layout != 'expert-mobile'): ?>
+        <?php Yii::app()->eauth->renderWidget(); ?>
+    <?php endif; ?>
     
 
     <?php $this->endWidget(); ?>

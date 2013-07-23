@@ -23,9 +23,6 @@ $this->breadcrumbs=array(
         <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
             с&nbsp;<a href="#">офертой пользователя</a></p>
 
-        <?php if ($this->layout != 'expert-mobile'): ?>
-            <?php Yii::app()->eauth->renderWidget(); ?>
-        <?php endif; ?>
     </section>
 </div>
 
@@ -40,9 +37,6 @@ $this->breadcrumbs=array(
     ?>
     <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
             с&nbsp;<a href="#">офертой пользователя</a></p>
-        <?php if ($this->layout != 'expert-mobile'): ?>
-            <?php Yii::app()->eauth->renderWidget(); ?>
-        <?php endif; ?>
     </section>
 </div>
 
