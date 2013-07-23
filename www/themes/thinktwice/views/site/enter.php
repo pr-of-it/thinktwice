@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
     'Присоединиться',
 );
 ?>
-<div class="form-block register-block">
+<div class="form-block register-block" style="display: none">
     <h1>Вход на сайт</h1>
 
     <section>
@@ -21,7 +21,7 @@ $this->breadcrumbs=array(
         ?>
 
         <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
-            с&nbsp;<a href="#">афертой пользователя</a></p>
+            с&nbsp;<a href="#">офертой пользователя</a></p>
 
         <?php if ($this->layout != 'expert-mobile'): ?>
             <?php Yii::app()->eauth->renderWidget(); ?>
@@ -29,7 +29,7 @@ $this->breadcrumbs=array(
     </section>
 </div>
 
-<div class="form-block login-block" style="display: none">
+<div class="form-block login-block">
     <h1>Вход на сайт</h1>
 
     <section>
@@ -39,7 +39,7 @@ $this->breadcrumbs=array(
     ));
     ?>
     <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
-            с&nbsp;<a href="#">афертой пользователя</a></p>
+            с&nbsp;<a href="#">офертой пользователя</a></p>
         <?php if ($this->layout != 'expert-mobile'): ?>
             <?php Yii::app()->eauth->renderWidget(); ?>
         <?php endif; ?>

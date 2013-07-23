@@ -21,7 +21,7 @@
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
+        <?php echo CHtml::submitButton('Войти'); ?>
         <a class="alter-button" href="#"
             onclick="$('.login-block').hide();$('.register-block').show();return false;">
             Зарегистрироваться</a>
