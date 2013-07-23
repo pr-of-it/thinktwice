@@ -39,7 +39,7 @@
     <div class="row buttons">
         <?php echo CHtml::submitButton('Зарегистрироваться'); ?>
         <a class="alter-button" href="#"
-            onlick="javascript:$('.register-block').hide();$('.register-block').show();return false;">
+            onclick="$('.register-block').hide();$('.login-block').show();return false;">
             Уже есть аккаунт</a>
     </div>
 

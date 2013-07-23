@@ -800,6 +800,7 @@ input.error{ border:1px solid red !important }
 
 	font-size: 14px;
 	max-width: 850px;
+	min-width: 750px;
 }
 
 .form-block > h1 {

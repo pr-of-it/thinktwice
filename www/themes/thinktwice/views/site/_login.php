@@ -23,7 +23,7 @@
     <div class="row buttons">
         <?php echo CHtml::submitButton('Login'); ?>
         <a class="alter-button" href="#"
-            onlick="javascript:$('.register-block').show();$('.register-block').hide();return false;">
+            onclick="$('.login-block').hide();$('.register-block').show();return false;">
             Зарегистрироваться</a>
     </div>
 
