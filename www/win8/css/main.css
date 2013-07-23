@@ -883,7 +883,14 @@ input.error{ border:1px solid red !important }
 .form-block .services li,
 .form-block .services .auth-link {
 	width: 250px;
-	height: 32px;
+	height: 60px;
+}
+.form-block .services .auth-link:hover .auth-icon i,
+.form-block .services .auth-link:focus .auth-icon i {
+	width: 60px;
+	height: 60px;
+	background: white;
+	opacity: .1; filter:alpha(opacity=10);
 }
 .form-block .services li {
 	position: relative;
@@ -893,7 +900,11 @@ input.error{ border:1px solid red !important }
 .form-block .services .auth-icon {
 	position: absolute;
 	left:0; top: 0;
+	width: 60px; height: 60px;
 
+}
+.form-block .services .auth-icon.facebook {
+	background: url(../img/icons/facebook.png) no-repeat;
 }
 
 .form-block .services li.facebook {
@@ -904,7 +915,8 @@ input.error{ border:1px solid red !important }
 	color: white;
 	font-weight: 200;
 	text-transform: uppercase;
-	margin: 8px 32px 8px 48px;
+	line-height: 60px;
+	margin: 0 72px;
 	text-align: left;
 }
 

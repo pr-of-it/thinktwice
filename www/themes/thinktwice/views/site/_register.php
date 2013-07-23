@@ -5,7 +5,7 @@
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
+        <label for="RegisterForm_email" class="required">E-mail <span class="required">*</span></label>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
         <p class="hint">

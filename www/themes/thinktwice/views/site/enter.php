@@ -45,3 +45,10 @@ $this->breadcrumbs=array(
         <?php endif; ?>
     </section>
 </div>
+
+<script type="text/javascript">
+if ($('.register-block .errorMessage').length > 0) {
+    $('.register-block').show();
+    $('.login-block').hide();
+}
+</script>

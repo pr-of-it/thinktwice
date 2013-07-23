@@ -5,7 +5,7 @@
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
+        <label for="LoginForm_email" class="required">E-mail <span class="required">*</span></label>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
         <p class="hint">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
+        <label for="LoginForm_password" class="required">Пароль <span class="required">*</span></label>
         <?php echo $form->passwordField($model,'password'); ?>
         <?php echo $form->error($model,'password'); ?>
         <p class="hint">
