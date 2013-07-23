@@ -218,7 +218,7 @@ function CConfig() { // для наследования класса внутр�
 	 */
 	self.setWidth = function(is_set){
 		var width = 0
-		$('> *:not(.quick-start-box)', self.rails).each(function(){
+		$('> *', self.rails).each(function(){
 			width += $(this).outerWidth(true)
 		})
 		if(is_set == 'set')

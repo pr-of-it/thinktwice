@@ -1880,6 +1880,9 @@ input[type="reset"].styler:active{
 .quick-start-box + .main-panel {
 	margin-left: -210px;
 }
+.quick-start-box.qsb-hide + .main-panel {
+	margin-left: 179px;
+}
 .main-panel .header{
 	position:absolute;
 	left:0; top:-39px;
