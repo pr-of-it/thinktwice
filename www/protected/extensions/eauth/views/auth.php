@@ -4,8 +4,7 @@
 	foreach ($services as $name => $service) {
 		echo '<li class="auth-service '.$service->id.'">';
 		$html = '<span class="auth-icon '.$service->id.'"><i></i></span>';
-		$html .= '<span class="auth-title">'.$service->title.'</span>';
-
+		$html .= '<span class="auth-title">'.'Войти через '.$service->title.'</span>';
         $params = array();
         if ( !empty($_GET['code']) )
             $params['code'] = $_GET['code'];
