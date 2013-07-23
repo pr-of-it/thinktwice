@@ -111,7 +111,7 @@ class SiteController extends Controller
 
         // Пробуем зарегистрировать пользователя через социальную сеть
         $service = Yii::app()->request->getQuery('service');
-        if ( !empty($service) ) {
+        if ( !empty($service) && !empty($registerForm->email) && !empty($registerForm->invite_code) ) {
             $this->subRegisterByService($service, $registerForm->email, $registerForm->invite_code);
         }
 
