@@ -43,5 +43,9 @@
             Уже есть аккаунт</a>
     </div>
 
+    <?php if ($this->layout != 'expert-mobile'): ?>
+        <?php $this->widget('ext.eauth.EAuthWidget', array('action' => 'site/enter')); ?>
+    <?php endif; ?>
+
     <?php $this->endWidget(); ?>
 </div><!-- form -->

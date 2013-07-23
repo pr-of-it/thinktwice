@@ -109,6 +109,12 @@ class SiteController extends Controller
         $registerForm->invite_code = $code ?: null;
         $registerForm->email = $email ?: null;
 
+        // Пробуем зарегистрировать пользователя через социальную сеть
+        $service = Yii::app()->request->getQuery('service');
+        if ( !empty($service) ) {
+            $this->subRegisterByService($service, $registerForm->email, $registerForm->invite_code);
+        }
+
         // Если заполнена форма регистрации - пытаемся зарегистрировать пользователя
         if(isset($_POST['RegisterForm']))
         {
@@ -293,6 +299,41 @@ class SiteController extends Controller
                 // Закрываем popup окно и перенаправляем на cancelUrl
                 $authIdentity->cancel();
             }
+        } else {
+            $this->redirect($this->createAbsoluteUrl($cancelUrl));
+        }
+
+    }
+
+    /**
+     * Процедура регистрации с использованием локальной сети
+     * @param $service
+     * @param $email
+     * @param null $code
+     * @param string $cancelUrl
+     */
+    protected function subRegisterByService($service, $email, $code=null, $cancelUrl='site/enter') {
+
+        $authIdentity = Yii::app()->eauth->getIdentity($service);
+        $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+        $authIdentity->cancelUrl = $this->createAbsoluteUrl($cancelUrl);
+
+        if ($authIdentity->authenticate()) {
+
+            $identity = new ServiceUserIdentity($authIdentity);
+
+            // Успешный вход
+            if ($identity->register($email, $code)) {
+                Yii::app()->user->login($identity, 3600*24*30);
+                // Специальный редирект с закрытием popup окна
+                $authIdentity->redirect();
+            }
+            else {
+                // Закрываем popup окно и перенаправляем на cancelUrl
+                $authIdentity->cancel();
+            }
+        } else {
+            $this->redirect($this->createAbsoluteUrl($cancelUrl));
         }
 
     }

@@ -59,4 +59,39 @@ class ServiceUserIdentity extends UserIdentity {
 
     }
 
+    public function register($email, $code) {
+
+        if ($this->service->isAuthenticated) {
+
+            $invite = Invite::model()->findByAttributes(array('email'=>$email, 'code'=>$code));
+            if ( is_null($invite) ) {
+                $this->errorCode = self::ERROR_INVITE_INVALID;
+            } else {
+                $user = new User();
+                $user->email = $email;
+                $user->name = $this->service->name;
+                if ( $user->save() ) {
+
+                    $this->_id = $user->id;
+                    $this->email = $user->email;
+                    $this->name = $user->name;
+                    $this->setState('id', $user->id);
+                    $this->setState('email', $user->email);
+                    $this->setState('name', $user->name);
+                    $this->setState('service', $this->service->serviceName);
+                    $this->setState('service_user_id', $serviceUser->service_user_id);
+                    $this->setState('role', $user->role->name);
+                    $this->errorCode = self::ERROR_NONE;
+
+                } else {
+                    $this->errorCode = self::ERROR_EMAIL_INVALID;
+                }
+            }
+
+            return $this->errorCode == self::ERROR_NONE;
+
+        }
+
+    }
+
 }
