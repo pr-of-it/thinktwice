@@ -39,7 +39,7 @@ class ServiceUserIdentity extends UserIdentity {
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
             } else {
                 $this->_id = $serviceUser->user->id;
-                $this->login = $serviceUser->user->login;
+                $this->email = $serviceUser->user->email;
                 $this->name = $serviceUser->user->name;
                 $this->setState('id', $serviceUser->user->id);
                 $this->setState('email', $serviceUser->user->email);
