@@ -4,7 +4,7 @@
  */
 $user = User::model()->findByPk(Yii::app()->user->id);
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>

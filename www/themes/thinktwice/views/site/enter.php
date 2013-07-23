@@ -9,23 +9,39 @@ $this->breadcrumbs=array(
     'Присоединиться',
 );
 ?>
+<div class="form-block register-block">
+    <h1>Вход на сайт</h1>
 
-<section>
-    <h1>Регистрация</h1>
+    <section>
+        <h2>Зарегистрироваться на ThinkTwice</h2>
+        <?php
+        $this->renderPartial('_register', array(
+            'model' => $registerForm,
+        ));
+        ?>
 
-    <?php
-    $this->renderPartial('_register', array(
-        'model' => $registerForm,
-    ));
-    ?>
-</section>
+        <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
+            с&nbsp;<a href="#">афертой пользователя</a></p>
 
-<section>
-    <h1>Вход для зарегистрированных пользователей</h1>
+        <?php if ($this->layout != 'expert-mobile'): ?>
+            <?php Yii::app()->eauth->renderWidget(); ?>
+        <?php endif; ?>
+    </section>
+</div>
 
+<div class="form-block login-block" style="display: none">
+    <h1>Вход на сайт</h1>
+
+    <section>
     <?php
     $this->renderPartial('_login', array(
         'model' => $loginForm,
     ));
     ?>
-</section>
+    <p class="note">Авторизуясь или регистрируясь, вы автоматически соглашаетесь
+            с&nbsp;<a href="#">афертой пользователя</a></p>
+        <?php if ($this->layout != 'expert-mobile'): ?>
+            <?php Yii::app()->eauth->renderWidget(); ?>
+        <?php endif; ?>
+    </section>
+</div>

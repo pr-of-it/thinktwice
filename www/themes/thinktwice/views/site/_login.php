@@ -11,25 +11,26 @@
         <?php echo $form->labelEx($model,'email'); ?>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
+        <p class="hint">
+        </p>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'password'); ?>
         <?php echo $form->passwordField($model,'password'); ?>
         <?php echo $form->error($model,'password'); ?>
+        <p class="hint">
+        </p>
     </div>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Login'); ?>
+        <a class="alter-button" href="#"
+            onlick="javascript:$('.register-block').show();$('.register-block').hide();return false;">
+            Зарегистрироваться</a>
     </div>
 
-    <?php if ($this->layout != 'expert-mobile'): ?>
-        <h2>Либо Вы можете войти через следующие сервисы:</h2>
-        <?php Yii::app()->eauth->renderWidget(); ?>
-        <?php
-        #$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
-        ?>
-    <?php endif; ?>
+    
 
     <?php $this->endWidget(); ?>
 </div><!-- form -->

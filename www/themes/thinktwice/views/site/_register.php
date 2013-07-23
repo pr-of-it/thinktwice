@@ -40,7 +40,10 @@
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Регистрация'); ?>
+        <?php echo CHtml::submitButton('Зарегистрироваться'); ?>
+        <a class="alter-button" href="#"
+            onlick="javascript:$('.register-block').hide();$('.register-block').show();return false;">
+            Уже есть аккаунт</a>
     </div>
 
     <?php if ($this->layout != 'expert-mobile'): ?>

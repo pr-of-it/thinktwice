@@ -48,13 +48,13 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
-    <section class="user-bar">
+    <!--<section class="user-bar">
         <a class="link-reg button-yellow" href="<?php echo $this->createAbsoluteUrl('/site/enter');?>">Присоединиться</a>
         <div class="reg-helper">
             Настройте watchlist, чтобы вся интересная <br />
             информация собиралась в ленте
         </div>
-    </section>
+    </section>-->
 
 </header>
 

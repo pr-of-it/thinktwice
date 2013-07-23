@@ -3,7 +3,7 @@
 $user = new stdClass();
 $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>

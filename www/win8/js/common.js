@@ -374,31 +374,33 @@ function CConfig() { // для наследования класса внутр�
 			self.setWidth('set');
 		})
 
-		$(window).resize(function() {
-			self.fixPostPositions();
-			self.setWidth('set');
-		});
+		if ($('body').hasClass('index'))
+			$(window).resize(function() {
+				self.fixPostPositions();
+				self.setWidth('set');
+			});
 
 		/**
 		 *  Подгрузка контетна в ленту
 		 */
 
-		$("body.index #wrapper").scroll(function () {
-			if (self.rails.hasClass('disabled'))
-				return false;
-			var width = self.setWidth() - 300;
-			var scroll = $(this).scrollLeft() + $(window).width();
+		if ($('body').hasClass('index'))
+			$("#wrapper").scroll(function () {
+				if (self.rails.hasClass('disabled'))
+					return false;
+				var width = self.setWidth() - 300;
+				var scroll = $(this).scrollLeft() + $(window).width();
 
-			if (self.rails.hasClass('quick-start'))
-				width += ($('.quick-start-box').outerWidth() + 90);
+				if (self.rails.hasClass('quick-start'))
+					width += ($('.quick-start-box').outerWidth() + 90);
 
-			if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
-				//alert([width, scroll]);
-				self.loadData();
-			}
+				if (!self.postsAreLoading && !self.everythingWasLoaded && scroll > width) {
+					//alert([width, scroll]);
+					self.loadData();
+				}
 
 
-		});
+			});
 
 		// Форма поста
 		/*$('#blog-form').on('submit', function () {
