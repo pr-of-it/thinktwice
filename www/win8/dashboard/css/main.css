@@ -1874,6 +1874,15 @@ input[type="reset"].styler:active{
 	height:100%;
     float:left;
 }
+.main-panel:first-child{
+	margin-left: 179px;
+}
+.quick-start-box + .main-panel {
+	margin-left: -210px;
+}
+.quick-start-box.qsb-hide + .main-panel {
+	margin-left: 179px;
+}
 .main-panel .header{
 	position:absolute;
 	left:0; top:-39px;
