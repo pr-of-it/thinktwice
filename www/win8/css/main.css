@@ -796,12 +796,11 @@ input.error{ border:1px solid red !important }
 
 .form-block {
 	position: relative;
-	/*top:50px; left: 35px;*/
 
 	border-top:1px solid #1b748d;
 	background:#dfdfd9;
 
-	margin: 40px 90px 90px 125px;
+	margin: 40px 90px 90px 179px;
 
 	font-size: 14px;
 	max-width: 1000px;
@@ -2371,6 +2370,11 @@ screen and (max-device-width: 1024px) and (min-height: 960px),
 screen and (min-device-width: 1024px) and (min-height: 768px),
 screen and (min-device-width: 1024px) and (min-height: 48em)
 {
+	.form-block {
+		position: absolute;
+		top:90px; left: 179px; right: 90px;
+		margin: 10% auto;
+	}
 	.create-post {
 		top: 212px;
 		bottom: 100px;
