@@ -179,8 +179,8 @@ function CConfig() { // для наследования класса внутр�
 		})();
 
 		$("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
-			this.scrollLeft += (deltaX * 30); // трекпад на маке
-			this.scrollLeft -= (deltaY * 30); // колесико мыши
+			this.scrollLeft += (deltaX * 90); // трекпад на маке
+			this.scrollLeft -= (deltaY * 90); // колесико мыши
 
 			return false;
 		});

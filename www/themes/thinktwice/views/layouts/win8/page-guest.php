@@ -45,7 +45,16 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 
 <header id="header">
 
-    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link">
+        <ul>
+            <li class="dl-1"></li>
+            <li class="dl-2"></li>
+            <li class="dl-3"></li>
+            <li class="dl-4"></li>
+            <li class="dl-5"></li>
+        </ul>
+        <div>Дашборд <span></span></div>
+    </div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <!--<section class="user-bar">
