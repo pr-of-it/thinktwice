@@ -45,5 +45,5 @@ if ($('.register-block .errorMessage').length > 0) {
     $('.register-block').show();
     $('.login-block').hide();
 }
-$('.form-block .services .auth-link.facebook .auth-title').text('Войти через Facebook')
+//$('.form-block .services .auth-link.facebook .auth-title').text('Войти через Facebook')
 </script>
