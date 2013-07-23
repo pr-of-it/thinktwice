@@ -1,10 +1,7 @@
 <div class="form">
     <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'register-form',
-        'enableClientValidation'=>true,
-        'clientOptions'=>array(
-            'validateOnSubmit'=>true,
-        ),
+        'enableClientValidation'=>false,
     )); ?>
 
     <div class="row">
