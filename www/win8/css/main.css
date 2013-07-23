@@ -828,10 +828,16 @@ input.error{ border:1px solid red !important }
  	color: #27666c;
  }
 
+.form-block .row {
+	position: relative;
+}
 .form-block .row input {
 	display: block;
 	margin-left: 200px;
 	height: 12px;
+}
+.form-block .row input:focus {
+	border: 1px solid #1b748d;
 }
 
 .form-block .row label {
@@ -841,6 +847,16 @@ input.error{ border:1px solid red !important }
 	float: left;
 	display: block;
 }
+
+.form-block .row .errorMessage {
+	position: absolute;
+	top: 0; left: 420px;
+	background: #D94B4A;
+	padding: 8px 16px;
+	color: white;
+	z-index: 100;
+}
+
 
 .form-block input[type=submit] {
  	position:relative;
