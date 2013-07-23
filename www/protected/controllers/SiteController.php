@@ -182,73 +182,35 @@ class SiteController extends Controller
     }
 
     /**
-     * Авторизация на сайте
+     * Вход на сайт
      */
     public function actionLogin()
     {
 
-        /*
-         * Авторизация по сервису социальной сети
-         */
+        // Создаем форму входа на сайт
+        $loginForm = new LoginForm;
+
+        // Пытаемся авторизоваться по сервису социальной сети
         $service = Yii::app()->request->getQuery('service');
+        if ( !empty($service) )
+            $this->subLoginByService($service);
 
-        if ( !empty($service) ) {
-
-            $authIdentity = Yii::app()->eauth->getIdentity($service);
-            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
-            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/login');
-
-            if ($authIdentity->authenticate()) {
-
-                $identity = new ServiceUserIdentity($authIdentity);
-
-                // Успешный вход
-                if ($identity->authenticate()) {
-                    Yii::app()->user->login($identity, 3600*24*30);
-                    // Специальный редирект с закрытием popup окна
-                    $authIdentity->redirect();
-                }
-                else {
-                    // Закрываем popup окно и перенаправляем на cancelUrl
-                    $authIdentity->cancel();
-                }
-            }
-
-            // Что-то пошло не так, перенаправляем на страницу входа
-            $this->redirect(array('site/login'));
-        }
-
-        /*
-         * Авторизация по токену
-         */
+        // Пытаемся авторизоваться по токену
         $token = Yii::app()->request->getQuery('token');
         if ( !empty($token) ) {
             $this->subLoginByToken($token);
         }
 
-        /*
-         * Авторизация через форму
-         */
-
-        $model=new LoginForm;
-
-        // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-        {
-            echo ActiveForm::validate($model);
-            Yii::app()->end();
-        }
-
-        // collect user input datac
+        // Если форма уже заполнена - пытаемся авторизовать пользователя по данным из формы
         if(isset($_POST['LoginForm']))
         {
-            $model->attributes=$_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
+            $loginForm->attributes=$_POST['LoginForm'];
+            if( $loginForm->validate() && $loginForm->login() )
                 $this->redirect(Yii::app()->user->returnUrl);
         }
-        // display the login form
-        $this->render('login',array('model'=>$model));
+
+        $this->render('login',array('model'=>$loginForm));
+
     }
 
     /**
