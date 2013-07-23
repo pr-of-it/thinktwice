@@ -63,7 +63,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         // Публикация поста в блог с главной и редактирование его
         if ( isset ($_POST['BlogPost']['id']) ) {
             $post = BlogPost::model()->findByPk($_POST['BlogPost']['id']);
@@ -94,7 +93,6 @@ class SiteController extends Controller
             $user = User::model()->with('blog')->findByPk(Yii::app()->user->id);
             $this->layout = '//layouts/win8/index';
         }
-
         $this->render('index',array (
             'post' => $post,
             'user' => $user,
@@ -189,6 +187,36 @@ class SiteController extends Controller
      * @param string $email E-mail
      */
     public function actionRegister($code = null, $email = null) {
+        /*
+        * Авторизация по сервису социальной сети
+        */
+        $service = Yii::app()->request->getQuery('service');
+
+        if (isset($service)) {
+
+            $authIdentity = Yii::app()->eauth->getIdentity($service);
+            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/register');
+
+            if ($authIdentity->authenticate()) {
+
+                $identity = new ServiceUserIdentity($authIdentity);
+
+                // Успешный вход
+                if ($identity->authenticate()) {
+                    Yii::app()->user->login($identity, 3600*24*30);
+                    // Специальный редирект с закрытием popup окна
+                    $authIdentity->redirect();
+                }
+                else {
+                    // Закрываем popup окно и перенаправляем на cancelUrl
+                    $authIdentity->cancel();
+                }
+            }
+
+            // Что-то пошло не так, перенаправляем на страницу входа
+            $this->redirect(array('site/register'));
+        }
 
         $model = new RegisterForm();
         // if it is ajax validation request
@@ -200,6 +228,7 @@ class SiteController extends Controller
 
         $model->invite_code = $code ?: null;
         $model->email = $email ?: null;
+
         // collect user input data
         if(isset($_POST['RegisterForm']))
         {
@@ -208,6 +237,11 @@ class SiteController extends Controller
             if( $model->validate() && $model->register() ) {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
+        }
+
+        if (isset($_POST['RegisterForm']))
+        {
+
         }
 
         // display the login form
