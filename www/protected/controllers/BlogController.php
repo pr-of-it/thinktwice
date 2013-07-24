@@ -48,7 +48,7 @@ class BlogController extends Controller {
     }
 
     protected function getIndexBlogPosts($limitOffset=null, $startDateEndDate=null) {
-		$criteria new CDbCriteria(array(
+		$criteria = new CDbCriteria(array(
 			'order' => 'time DESC',
 			'with' => array('blog', 'blog.user', 'media'),
 		));
@@ -153,9 +153,11 @@ class BlogController extends Controller {
      * Возвращает посты для ленты в период с даты по дату
      * @param string $startDate
      * @param string $endDate
+     * @param int $limit
+     * @param int $offset
      */
-	public function actionAjaxGetIndexBlogPostsByDate($startDate, $endDate) {
-		$posts = getIndexBlogPosts(null, array($startDate, $endDate));
+	public function actionAjaxGetIndexBlogPostsByDate($startDate, $endDate, $limit, $offset=0) {
+		$posts = getIndexBlogPosts(array($limit, $offset), array($startDate, $endDate));
 		header('Content-type: application/json');
 		echo CJSON::encode($posts);
 		Yii::app()->end();
