@@ -456,7 +456,10 @@ input.error{ border:1px solid red !important }
 	position:relative; height:100%; float:left;
 }
 #rails.page-lenta:first-child{
-	padding-left:230px; /* 175+55 */
+	padding-left: 180px; /* 175+55 */
+}
+body.index.authenticated #rails.page-lenta:first-child{
+	padding-left: 235px; /* 180+55 */
 }
 #rails > header > header{
 	padding-left:245px;
@@ -481,6 +484,8 @@ input.error{ border:1px solid red !important }
 	height: 100%;
 	float:left; bottom: 8px;
 	position: relative;
+}
+.index .news-list{
 	background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
 }
 
@@ -2392,8 +2397,11 @@ screen and (min-device-width: 1024px) and (min-height: 48em)
 	.news-item{
 		height:50%;
 	}
+	.index .news-list{
+		background-position: 0 50%;
+	}
 	.news-list{
-		background-position: 0 50%; bottom: 0;
+		bottom: 0;
 	}
 	.news-item .time-dott{
 		bottom: -10px;

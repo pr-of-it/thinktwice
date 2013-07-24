@@ -62,7 +62,7 @@
                 'enableAjaxValidation'=>false,
                 'htmlOptions' => array(
                     'enctype' => 'multipart/form-data',
-                    'class' => 'create-call-request'
+                    'class' => 'create-request'
                 ),
             )); ?>
 

@@ -47,14 +47,60 @@ class BlogController extends Controller {
         ));
     }
 
+    protected function getIndexBlogPosts($limitOffset=null, $startDateEndDate=null) {
+		$criteria = new CDbCriteria(array(
+			'order' => 'time DESC',
+			'with' => array('blog', 'blog.user', 'media'),
+		));
+
+		if ( Yii::app()->user->isGuest ) {
+			$criteria->addInCondition('blog.type', array(Blog::SIMPLE_BLOG, Blog::RSS_BLOG));
+		} else {
+			$currentUser = User::model()->with('subscripts')->findByPk(Yii::app()->user->id);
+
+            $subscripts = array();
+            foreach ( $currentUser->subscripts as $subscript ) {
+                if ( isset ($subscript->blog) )
+                    $subscripts[] = $subscript->blog->id;
+                foreach ( $subscript->feeds as $feed ) {
+                    $subscripts[] = $feed->id;
+                }
+            }
+            $criteria->addInCondition('blog.id', $subscripts, 'OR');
+
+            $arrayUserAddSub = array();
+            foreach ( $currentUser->addedSubscriptions as $userAddSub ){
+                if ( strtotime($userAddSub->expire) > time() )
+                    $arrayUserAddSub[] = $userAddSub->blog_id;
+            }
+            $criteria->addInCondition('blog.id', $arrayUserAddSub, 'OR');
+
+            $currentUserBlogs = array();
+            foreach ( $currentUser->getAllBlogIds() as $ids ) {
+                $currentUserBlogs[] = $ids->id;
+            }
+            $criteria->addInCondition('blog.id', $currentUserBlogs, 'OR');
+        }
+
+		if (is_array($startDateEndDate)) {
+			$criteria->addBetweenCondition('time', $startDateEndDate[0], $startDateEndDate[1]);
+		}
+
+		if (is_array($limitOffset)) {
+			$criteria->limit = $limitOffset[0];
+			$criteria->offset = $limitOffset[1];
+		}
+		return BlogPost::model()->findAll($criteria);
+    }
+
     /**
      * AJAX
      * Возвращает последние посты для ленты
      * @param int $limit
      * @param int $offset
      */
-    public function actionGetIndexBlogPosts($limit, $offset=0) {
-
+    public function actionAjaxGetIndexBlogPosts($limit, $offset=0) {
+		/*
         $criteria = new CDbCriteria(array(
             'order' => 'time DESC',
             'with' => array('blog', 'blog.user', 'media'),
@@ -93,12 +139,29 @@ class BlogController extends Controller {
         }
 
         $posts = BlogPost::model()->findAll($criteria);
-
+		*/
+		$posts = $this->getIndexBlogPosts(array($limit, $offset));
         header('Content-type: application/json');
         echo CJSON::encode($posts);
         Yii::app()->end();
 
-    }
+	}
+
+
+    /**
+     * AJAX
+     * Возвращает посты для ленты в период с даты по дату
+     * @param string $startDate
+     * @param string $endDate
+     * @param int $limit
+     * @param int $offset
+     */
+	public function actionAjaxGetIndexBlogPostsByDate($startDate, $endDate, $limit, $offset=0) {
+		$posts = $this->getIndexBlogPosts(array($limit, $offset), array($startDate, $endDate));
+		header('Content-type: application/json');
+		echo CJSON::encode($posts);
+		Yii::app()->end();
+	}
 
     public function actionGetIndexBlogPost($id) {
         $post = BlogPost::model()->with('blog', 'blog.user', 'media')->findByPk($id);
