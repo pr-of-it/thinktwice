@@ -60,7 +60,7 @@
         <ul class="news-list full-item">
             <li class="news-item">
                 <header>Подписки</header>
-                <div class="content-box" type="subscribes">
+                <div class="content-box subscribes" type="subscribes">
                     <?php foreach ($user->subscriptions as $subscription) : ?>
                         <div class="content-body">
                             <header><?php echo $subscription->title; ?></header>

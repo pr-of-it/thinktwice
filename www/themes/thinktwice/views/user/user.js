@@ -62,16 +62,18 @@ $('.link-advice').click(function(e) {
 });
 
 // открываем окно заказа подписки
-$('.link-addsub').click(function(e) {
+$('.subscribes .content-body').click(function(e) {
     e.preventDefault();
     var popup = $('.get-subscription');
-    var parent = $(this).parents('.content-box');
+    var parent = $(this);
+    var button = parent.find('.link-addsub');
     var form = popup.find('form');
-    form.attr('action', $(this).attr('href'));
+    form.attr('action', button.attr('href'));
     popup.find('.describe').html(parent.find('.content-text').html());
     popup.find('.subs-name').text(parent.find('header').text());
     popup.find('.subs-price').text(parent.find('.content-price').text());
     app.showPopup(popup);
+    return false;
 });
 
 // скрываем окна

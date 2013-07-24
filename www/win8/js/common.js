@@ -315,7 +315,7 @@ function CConfig() { // для наследования класса внутр�
 
 		self.postsAreLoading = true;
 		console.log('loading data...')
-		$.getJSON(self.makeUrl('/blog/getIndexBlogPosts'), {
+		$.getJSON(self.makeUrl('/blog/ajaxGetIndexBlogPosts'), {
 			limit: opts['limit'] | 20,
 			offset: opts['offset'] | self.numPosts
 		}, function(data) {
