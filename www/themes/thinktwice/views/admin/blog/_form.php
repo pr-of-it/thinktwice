@@ -20,6 +20,12 @@
 	<?php echo $form->errorSummary($model); ?>
 
     <div class="row">
+        <?php echo $form->labelEx($model,'type'); ?>
+        <?php echo $form->dropDownList($model, 'type', CHtml::listData( $model->getAllIdTypes(), 'id', 'type' )); ?>
+        <?php echo $form->error($model,'type'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model,'user_id'); ?>
         <?php echo $form->dropDownList($model, 'user_id', CHtml::listData( User::model()->findAll(), 'id', 'email' )); ?>
         <?php echo $form->error($model,'user_id'); ?>
@@ -31,7 +37,25 @@
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row">
+		<?php echo $form->labelEx($model,'desc'); ?>
+		<?php echo $form->textArea($model,'desc'); ?>
+		<?php echo $form->error($model,'desc'); ?>
+	</div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'month_price'); ?>
+        <?php echo $form->textField($model,'month_price'); ?>
+        <?php echo $form->error($model,'month_price'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'week_price'); ?>
+        <?php echo $form->textField($model,'week_price'); ?>
+        <?php echo $form->error($model,'week_price'); ?>
+    </div>
+
+    <div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
