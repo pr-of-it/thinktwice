@@ -140,7 +140,7 @@ class BlogController extends Controller {
 
         $posts = BlogPost::model()->findAll($criteria);
 		*/
-		$posts = getIndexBlogPosts(array($limit, $offset));
+		$posts = $this->getIndexBlogPosts(array($limit, $offset));
         header('Content-type: application/json');
         echo CJSON::encode($posts);
         Yii::app()->end();
@@ -157,7 +157,7 @@ class BlogController extends Controller {
      * @param int $offset
      */
 	public function actionAjaxGetIndexBlogPostsByDate($startDate, $endDate, $limit, $offset=0) {
-		$posts = getIndexBlogPosts(array($limit, $offset), array($startDate, $endDate));
+		$posts = $this->getIndexBlogPosts(array($limit, $offset), array($startDate, $endDate));
 		header('Content-type: application/json');
 		echo CJSON::encode($posts);
 		Yii::app()->end();
