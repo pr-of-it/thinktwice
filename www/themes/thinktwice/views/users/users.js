@@ -268,8 +268,6 @@ $(function () {
 
     fixWidth();
 
-    
-
     not_following.on('click', '.follow', function (e) {
         //console.log('click follow', this)
         var parent = $(this).parent(),

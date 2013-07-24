@@ -89,7 +89,7 @@
 }
 
 .link-advice span {
-	background: url(../img/sprites/main.png) no-repeat -230px -101px transparent;
+	background: url(../img/sprites/main.png) no-repeat -230px -101px transparent;	
 	width: 15px;
 	height: 22px;
 	display: inline-block;
@@ -388,6 +388,391 @@ margin-left: 20px; }
 
 .blog-item .news-item .content-box {
 width: 390px;
+}
+
+.popup.get-call {
+	width: 1020px;
+	max-width: none;
+	border-left: none;
+}
+
+.popup.get-call .popup-content,
+.popup.get-call .scroll {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+
+.popup.get-call .popup-content .popup-sidebar {
+	width: 300px;
+	height: 100%;
+	background-color: #0e6578;
+	float: left;
+	padding: 40px 25px;
+}
+
+.popup.get-call .popup-content .popup-helper {
+	padding: 40px 25px;
+	margin-left: 350px;
+}
+
+.popup.get-call .popup-sidebar .popup-head {
+	color: white;
+	margin-bottom: 30px;
+}
+
+.popup.get-call .create-call-request {
+	position: relative;
+	color: #444;
+	width: 90%;
+}
+
+.popup.get-call .create-call-request input[type="text"] {
+	width: 560px;
+	height: 18px;
+	font-size: 14px;
+	padding: 7px;
+	margin: 0 0 7px 0;
+}
+
+.popup.get-call .create-call-request textarea {
+	width: 560px;
+	height: 100px;
+	padding: 7px;
+}
+
+.popup.get-call .create-call-request .attachments {
+	font-size: 11px;
+	margin: 30px 0 40px;
+}
+
+.popup.get-call .create-call-request .attachments a {
+	text-decoration: none;
+	line-height: 16px;
+}
+
+.ico-clip {
+	width: 31px;
+	height: 31px;
+	display: block;
+	background: transparent url(../img/icons/clip.png) no-repeat;
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.right {
+	float: right;
+}
+
+
+
+
+/*the slider background*/
+.slider {
+width:45%;
+height:7px;
+  background-color: #ea8616;
+  background-image: -moz-linear-gradient(top, #ea8616, #efa71d);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ea8616), to(#efa71d));
+  background-image: -webkit-linear-gradient(top, #ea8616, #efa71d);
+  background-image: -o-linear-gradient(top, #ea8616, #efa71d);
+  background-image: linear-gradient(to bottom, #ea8616, #efa71d);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffea8616', endColorstr='#ffefa71d', GradientType=0);	
+position:relative;
+margin:0;
+padding:0 10px;
+border-radius: 5px;
+float: left;
+margin: 3px 10px 3px 20px;;
+}
+ 
+/*Style for the slider button*/
+.ui-slider-handle {
+width:20px;
+height:20px;
+position:absolute;
+top:-7px;
+margin-left:-12px;
+z-index:200;
+  background-color: #ea9d1b;
+  background-image: -moz-linear-gradient(top, #f1b225, #ea9d1b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f1b225), to(#ea9d1b));
+  background-image: -webkit-linear-gradient(top, #f1b225, #ea9d1b);
+  background-image: -o-linear-gradient(top, #f1b225, #ea9d1b);
+  background-image: linear-gradient(to bottom, #f1b225, #ea9d1b);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff1b225', endColorstr='#ffea9d1b', GradientType=0);
+  border-radius: 20px;
+  box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+}
+ 
+/*Result div where the slider value is displayed*/
+#slider-result {
+float: right;
+font-size:25px;
+font-family:Arial, Helvetica, sans-serif;
+text-align:center;
+font-weight:700;
+margin-top: -10px;
+width: 130px;
+}
+ 
+/*This is the fill bar colour*/
+.ui-widget-header {
+background:url(fill.png) no-repeat left;
+height:8px;
+left:1px;
+top:1px;
+position:absolute;
+}
+ 
+a {
+outline:none;
+-moz-outline-style:none;
+}
+
+.slider-time {
+	float: left;
+}
+
+#min {
+    width: 50px;
+    text-align: center;
+    top: -35px !important;
+    left: 50px;
+}
+
+.popup-sidebar .describe {
+	color: #71c8d1;
+	font-size: 18px;
+}
+
+.popup-sidebar .expert {
+	margin: 30px 0;
+	position: relative;
+}
+
+.popup-sidebar .expert .header {
+	display: block;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.popup-sidebar .expert  .user-avatar{
+	position:absolute;
+	width:50px; height:50px;
+	border-radius:100px;
+	border:3px solid #dc9925;
+	overflow:hidden;
+}
+.popup-sidebar .expert  .user-avatar img{
+	width:50px; height:50px;
+}
+.popup-sidebar .expert  .user-avatar span{
+	position:absolute;
+	left:0; top:0;
+	width:100%; height:100%;
+	box-shadow:0 2px 5px #000 inset;
+	border-radius:100px;
+}
+
+.popup-sidebar .expert  .user-name {
+	display: block;
+	margin: 0 0 0 75px;
+	padding-top: 10px;
+	line-height: 18px;
+}
+
+.popup-sidebar .call-time {
+	margin: 40px 0 30px 0;
+}
+
+.popup-sidebar .call-time span {
+	border: 1px solid #fff;
+	padding: 7px 12px;
+	font-size: 16px;
+	display: inline-block;
+	margin-bottom: 7px;
+}
+
+.popup-sidebar .call-cost {
+	margin: 10px 0 40px 0;
+}
+
+.popup-sidebar .call-cost .call-duration {
+	font-size: 15px;
+}
+
+.popup-sidebar .call-cost .call-charge {
+	margin-top: -10px;
+	vertical-align: bottom;
+	float: right;
+	font-size: 25px;
+}
+
+.popup-sidebar .do-confirm {
+	background-color: #11505f;
+	min-height: 100px;
+	margin: 0 -25px;
+	padding: 25px;
+}
+
+.popup-sidebar .do-confirm .text {
+	font-size: 16px;
+	padding-right: 5px;
+}
+
+.popup-sidebar .do-confirm input {
+	margin-right: 5px;
+}
+
+.popup-sidebar .do-confirm input[type="text"] {
+	height: 18px;
+	padding: 7px;
+}
+
+.button-dark {
+  background-color: #2e2e2e;
+  background-image: -moz-linear-gradient(top, #363636, #2e2e2e);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#363636), to(#2e2e2e));
+  background-image: -webkit-linear-gradient(top, #363636, #2e2e2e);
+  background-image: -o-linear-gradient(top, #363636, #2e2e2e);
+  background-image: linear-gradient(to bottom, #363636, #2e2e2e);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff363636', endColorstr='#ff2e2e2e', GradientType=0);	
+  border: 0;
+  color: white;
+  font-size: 16px;
+  padding: 9px 15px;
+  vertical-align: middle;
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.2);}
+
+.popup-sidebar .button-yellow {
+  border-top: 1px solid #e6b630;
+  background-color: #d99122;
+  background-image: -moz-linear-gradient(top, #dfa128, #d99122);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dfa128), to(#d99122));
+  background-image: -webkit-linear-gradient(top, #dfa128, #d99122);
+  background-image: -o-linear-gradient(top, #dfa128, #d99122);
+  background-image: linear-gradient(to bottom, #dfa128, #d99122);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdfa128', endColorstr='#ffd99122', GradientType=0);	
+	padding: 15px 30px !important;
+	font-size: 20px !important;
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.2);	
+}
+
+.call-time-holder {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.call-time-holder .call-me {
+	font-size: 16px;
+	display: inline-block;
+	width: 170px;
+}
+
+.call-time-holder .call-time-select {
+	background: #f1f1ef url(../img/icons/selector.png) no-repeat right center;
+	border: 1px solid #9b9a96;
+	display: inline-block;
+	padding: 10px 15px 7px 15px;
+	font-size: 16px;
+	width: 280px;
+	cursor: pointer;
+}
+
+.call-time-holder .call-time-data {
+	display: none;
+	position: absolute;
+	background-color: #f0f0ee;
+	border: 1px solid #7e7f7a;
+	min-height: 140px;
+	width: 86%;
+	z-index: 999;
+	margin-top: 10px;
+}
+
+.time-var span {
+	font-size: 16px;
+	border: 1px solid transparent;
+	display: inline-block;
+	padding: 10px 15px;
+}
+
+.time-var span:hover {
+	font-size: 16px;
+	border: 1px solid #ccc;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+.ui-tabs {
+	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	padding: .2em;
+}
+.ui-tabs .ui-tabs-nav {
+	background-color: #dedfda;	
+	margin: -1px 0 0 -1px;
+	height: 60px;
+	width: 100%;
+}
+.ui-tabs .ui-tabs-nav li {
+	list-style: none;
+	float: left;
+	position: relative;
+	top: 0;
+	margin: 10px 5px 10px 5px;
+	border-bottom-width: 0;
+	padding: 0;
+	white-space: nowrap;
+	border: 1px solid transparent;	
+	font-size: 16px;
+}
+.ui-tabs .ui-tabs-nav li:nth-child(1) {
+	margin-left: 10px;
+}
+.ui-tabs .ui-tabs-nav li a {
+	float: left;
+	padding: .5em 1em;
+	text-decoration: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-state-active {
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+	border: 1px solid #9a9b96;
+	background-color: #ebece7;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+.ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+	cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+	cursor: pointer;
+}
+.ui-tabs .ui-tabs-panel {
+	display: block;
+	border-width: 0;
+	background: none;
+	margin-top: 70px;
+}
+
+.ui-tabs .ui-tabs-panel.ui-tabs-hide {
+	display: none;
+}
+
+.do-confirm .error {
+	display: none;
 }
 
 @media only screen 

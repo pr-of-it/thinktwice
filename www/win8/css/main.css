@@ -456,7 +456,10 @@ input.error{ border:1px solid red !important }
 	position:relative; height:100%; float:left;
 }
 #rails.page-lenta:first-child{
-	padding-left:230px; /* 175+55 */
+	padding-left: 180px; /* 175+55 */
+}
+body.index.authenticated #rails.page-lenta:first-child{
+	padding-left: 235px; /* 180+55 */
 }
 #rails > header > header{
 	padding-left:245px;
