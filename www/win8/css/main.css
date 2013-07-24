@@ -484,6 +484,8 @@ body.index.authenticated #rails.page-lenta:first-child{
 	height: 100%;
 	float:left; bottom: 8px;
 	position: relative;
+}
+.index .news-list{
 	background: url(../img/bg/line-x.png) repeat-x 0 100% transparent;
 }
 
@@ -2395,8 +2397,11 @@ screen and (min-device-width: 1024px) and (min-height: 48em)
 	.news-item{
 		height:50%;
 	}
+	.index .news-list{
+		background-position: 0 50%;
+	}
 	.news-list{
-		background-position: 0 50%; bottom: 0;
+		bottom: 0;
 	}
 	.news-item .time-dott{
 		bottom: -10px;
