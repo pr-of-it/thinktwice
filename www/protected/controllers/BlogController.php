@@ -53,10 +53,6 @@ class BlogController extends Controller {
 			'with' => array('blog', 'blog.user', 'media'),
 		));
 
-		if (is_array($startDateEndDate)) {
-			$criteria->addBetweenCondition('time', $startDateEndDate[0], $startDateEndDate[1]);
-		}
-
 		if ( Yii::app()->user->isGuest ) {
 			$criteria->addInCondition('blog.type', array(Blog::SIMPLE_BLOG, Blog::RSS_BLOG));
 		} else {
@@ -85,6 +81,10 @@ class BlogController extends Controller {
             }
             $criteria->addInCondition('blog.id', $currentUserBlogs, 'OR');
         }
+
+		if (is_array($startDateEndDate)) {
+			$criteria->addBetweenCondition('time', $startDateEndDate[0], $startDateEndDate[1]);
+		}
 
 		if (is_array($limitOffset)) {
 			$criteria->limit = $limitOffset[0];
