@@ -4,7 +4,7 @@
  */
 $user = User::model()->findByPk(Yii::app()->user->id);
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -41,13 +41,22 @@ $user = User::model()->findByPk(Yii::app()->user->id);
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/ckeditor/lang/ru.js"></script>
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1012"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1014"></script>
 </head>
 <body class="index authenticated">
 
 <header id="header">
 
-    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link">
+        <ul>
+            <li class="dl-1"></li>
+            <li class="dl-2"></li>
+            <li class="dl-3"></li>
+            <li class="dl-4"></li>
+            <li class="dl-5"></li>
+        </ul>
+        <div>Дашборд <span></span></div>
+    </div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">
@@ -198,44 +207,47 @@ $user = User::model()->findByPk(Yii::app()->user->id);
 <div class="popup window-post">
     <section class="popup-content">
         <form class="scroll" id="blog-edit-form" action="/site/index" method="post">
-        <div class="file-upload-container">
-            <ul class="attach-list">
-            </ul>
-            <?php $this->widget('ext.EFineUploader.EFineUploader', array(
-                'id'=>'FineUploader_Edit',
-                'config' => array(
-                    'autoUpload'=>true,
-                    'request' => array(
-                        'endpoint' => $this->createUrl('blog/uploadImage'),
-                        'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
-                    ),
-                    'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
-                    'chunking'=>array('enable'=>true,'partSize'=>100),
-                    'callbacks'=>array(
-                        'onComplete'=>"js:function(id, name, response){
-                                    $('li.qq-upload-success').remove();
-                                    var imageInput = $('<input class=\"hidden-image\" type=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
-                                    $('.window-post .file-upload-container').append(imageInput);
-                                    $('#blog-edit-form .attach-list').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
-                                }",
-                        //'onError'=>"js:function(id, name, errorReason){ }",
-                    ),
-                    'validation'=>array(
-                        'allowedExtensions'=>array('jpg','jpeg','png','gif'),
-                        'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
-                        //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
-                    ),
-                    /*'messages'=>array(
-                                      'tooManyItemsError'=>'Too many items error',
-                                      'typeError'=>"Файл {file} имеет неверное расширение. Разрешены файлы только с расширениями: {extensions}.",
-                                      'sizeError'=>"Размер файла {file} велик, максимальный размер {sizeLimit}.",
-                                      'minSizeError'=>"Размер файла {file} мал, минимальный размер {minSizeLimit}.",
-                                      'emptyError'=>"{file} is empty, please select files again without it.",
-                                      'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-                                     ),*/
-                )
-            )); ?>
-            <?php //echo $form->hiddenField($model,'image'); ?>
+
+        <div class="file-upload-wrapper">
+            <div class="file-upload-container">
+                <ul class="attach-list">
+                </ul>
+                <?php $this->widget('ext.EFineUploader.EFineUploader', array(
+                    'id'=>'FineUploader_Edit',
+                    'config' => array(
+                        'autoUpload'=>true,
+                        'request' => array(
+                            'endpoint' => $this->createUrl('blog/ajaxUploadImage'),
+                            'params'=>array('YII_CSRF_TOKEN'=>Yii::app()->request->csrfToken),
+                        ),
+                        'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
+                        'chunking'=>array('enable'=>true,'partSize'=>100),
+                        'callbacks'=>array(
+                            'onComplete'=>"js:function(id, name, response){
+                                        $('li.qq-upload-success').remove();
+                                        var imageInput = $('<input class=\"hidden-image\" type=\"hidden\" name=\"BlogPost[images][]\" value=\"/upload/blogs/' + response.filename + '\" />');
+                                        $('.window-post .file-upload-container').append(imageInput);
+                                        $('#blog-edit-form .attach-list:not(.media-list)').append('<li><img src=\"/upload/blogs/' + response.filename + '\"></li>')
+                                    }",
+                            //'onError'=>"js:function(id, name, errorReason){ }",
+                        ),
+                        'validation'=>array(
+                            'allowedExtensions'=>array('jpg','jpeg','png','gif'),
+                            'sizeLimit' => 2 * 1024 * 1024,//maximum file size in bytes
+                            //'minSizeLimit'=>2*1024*1024,// minimum file size in bytes
+                        ),
+                        /*'messages'=>array(
+                                          'tooManyItemsError'=>'Too many items error',
+                                          'typeError'=>"Файл {file} имеет неверное расширение. Разрешены файлы только с расширениями: {extensions}.",
+                                          'sizeError'=>"Размер файла {file} велик, максимальный размер {sizeLimit}.",
+                                          'minSizeError'=>"Размер файла {file} мал, минимальный размер {minSizeLimit}.",
+                                          'emptyError'=>"{file} is empty, please select files again without it.",
+                                          'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+                                         ),*/
+                    )
+                )); ?>
+                <?php //echo $form->hiddenField($model,'image'); ?>
+            </div>
         </div>
         </form>
         <div class="scroll">

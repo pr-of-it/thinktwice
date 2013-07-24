@@ -13,7 +13,8 @@ class UserIdentity extends CUserIdentity
 
     public $name;
 
-    const ERROR_EMAIL_INVALID=10;
+    const ERROR_EMAIL_INVALID = 10;
+    const ERROR_INVITE_INVALID = 11;
 
 
     /**

@@ -2,9 +2,6 @@
 
 class SiteController extends Controller
 {
-
-    const LAST_POST = 20;
-
     public function actions()
     {
         return array(
@@ -18,16 +15,6 @@ class SiteController extends Controller
             'page'=>array(
                 'class'=>'CViewAction',
             ),
-        );
-    }
-
-    public function accessRules()
-    {
-        return array(
-            array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions'=>array('index','view',),
-                'users'=>array('*'),
-            )
         );
     }
 
@@ -63,7 +50,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         // Публикация поста в блог с главной и редактирование его
         if ( isset ($_POST['BlogPost']['id']) ) {
             $post = BlogPost::model()->findByPk($_POST['BlogPost']['id']);
@@ -94,7 +80,6 @@ class SiteController extends Controller
             $user = User::model()->with('blog')->findByPk(Yii::app()->user->id);
             $this->layout = '//layouts/win8/index';
         }
-
         $this->render('index',array (
             'post' => $post,
             'user' => $user,
@@ -116,12 +101,21 @@ class SiteController extends Controller
      */
     public function actionEnter($code = null, $email = null) {
 
-        // Часть регистрации
+        // РЕГИСТРАЦИЯ
 
+        // Создаем форму регистрации
+        // Предзаполняем ей поля "код инвайта" и "email", если они переданы в ссылке
         $registerForm = new RegisterForm();
         $registerForm->invite_code = $code ?: null;
         $registerForm->email = $email ?: null;
 
+        // Пробуем зарегистрировать пользователя через социальную сеть
+        $service = Yii::app()->request->getQuery('service');
+        if ( !empty($service) && !empty($registerForm->email) && !empty($registerForm->invite_code) ) {
+            $this->subRegisterByService($service, $registerForm->email, $registerForm->invite_code);
+        }
+
+        // Если заполнена форма регистрации - пытаемся зарегистрировать пользователя
         if(isset($_POST['RegisterForm']))
         {
             $registerForm->attributes=$_POST['RegisterForm'];
@@ -130,52 +124,36 @@ class SiteController extends Controller
             }
         }
 
-        // Часть входа на сайт
+        // ВХОД НА САЙТ
 
-        $service = Yii::app()->request->getQuery('service');
-
-        if (isset($service)) {
-
-            $authIdentity = Yii::app()->eauth->getIdentity($service);
-            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
-            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/enter');
-
-            $isAuth = $authIdentity->authenticate();
-            if ($isAuth) {
-
-                $identity = new EAuthUserIdentity($authIdentity);
-
-		$isAuth = $identity->authenticate();
-		
-		// Успешный вход
-		if ($isAuth) {
-		    Yii::app()->user->login($identity, 3600*24*30);
-
-                    // Специальный редирект с закрытием popup окна
-                    $authIdentity->redirect();
-                }
-                else {
-                    // Закрываем popup окно и перенаправляем на cancelUrl
-                    $authIdentity->cancel();
-                }
-            }
-
-            // Что-то пошло не так, перенаправляем на страницу входа
-            $this->redirect(array('site/login'));
-        }
-
+        // Создаем форму входа на сайт
         $loginForm = new LoginForm;
 
-        // collect user input datac
+        // Пытаемся авторизоваться по сервису социальной сети
+        $service = Yii::app()->request->getQuery('service');
+        if ( !empty($service) )
+            $this->subLoginByService($service);
+
+        // Пытаемся авторизоваться по токену
+        /*
+         * Закомментировано, поскольку не предусмотрено здесь
+        $token = Yii::app()->request->getQuery('token');
+        if ( !empty($token) ) {
+            $this->subLoginByToken($token);
+        }
+        */
+
+        // Если форма уже заполнена - пытаемся авторизовать пользователя по данным из формы
         if(isset($_POST['LoginForm']))
         {
             $loginForm->attributes=$_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
             if( $loginForm->validate() && $loginForm->login() )
                 $this->redirect(Yii::app()->user->returnUrl);
         }
 
+        // РЕНДЕР
 
+        // Отображаем формы
         $this->render('enter', array(
             'registerForm' => $registerForm,
             'loginForm' => $loginForm,
@@ -190,111 +168,55 @@ class SiteController extends Controller
      */
     public function actionRegister($code = null, $email = null) {
 
-        $model = new RegisterForm();
-        // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
-        {
-            echo ActiveForm::validate($model);
-            Yii::app()->end();
-        }
+        // Создаем форму регистрации
+        // Предзаполняем ей поля "код инвайта" и "email", если они переданы в ссылке
+        $registerForm = new RegisterForm();
+        $registerForm->invite_code = $code ?: null;
+        $registerForm->email = $email ?: null;
 
-        $model->invite_code = $code ?: null;
-        $model->email = $email ?: null;
-        // collect user input data
+        // Если заполнена форма регистрации - пытаемся зарегистрировать пользователя
         if(isset($_POST['RegisterForm']))
         {
-            $model->attributes=$_POST['RegisterForm'];
-            // validate user input and redirect to the previous page if valid
-            if( $model->validate() && $model->register() ) {
+            $registerForm->attributes=$_POST['RegisterForm'];
+            if( $registerForm->validate() && $registerForm->register() ) {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
 
-        // display the login form
-        $this->render('register',array('model'=>$model));
+        $this->render('register',array('model'=>$registerForm));
 
     }
 
     /**
-     * Авторизация на сайте
+     * Вход на сайт
      */
     public function actionLogin()
     {
 
-        /*
-         * Авторизация по сервису социальной сети
-         */
+        // Создаем форму входа на сайт
+        $loginForm = new LoginForm;
+
+        // Пытаемся авторизоваться по сервису социальной сети
         $service = Yii::app()->request->getQuery('service');
+        if ( !empty($service) )
+            $this->subLoginByService($service);
 
-        if (isset($service)) {
-
-            $authIdentity = Yii::app()->eauth->getIdentity($service);
-            $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
-            $authIdentity->cancelUrl = $this->createAbsoluteUrl('site/login');
-
-            if ($authIdentity->authenticate()) {
-
-                $identity = new ServiceUserIdentity($authIdentity);
-
-                // Успешный вход
-                if ($identity->authenticate()) {
-                    Yii::app()->user->login($identity, 3600*24*30);
-                    // Специальный редирект с закрытием popup окна
-                    $authIdentity->redirect();
-                }
-                else {
-                    // Закрываем popup окно и перенаправляем на cancelUrl
-                    $authIdentity->cancel();
-                }
-            }
-
-            // Что-то пошло не так, перенаправляем на страницу входа
-            $this->redirect(array('site/login'));
-        }
-
-        /*
-         * Авторизация по токену
-         */
-
+        // Пытаемся авторизоваться по токену
         $token = Yii::app()->request->getQuery('token');
-
-        if ( isset($token) ) {
-
-            $identity = new TokenUserIdentity($token);
-
-            if ( $identity->authenticate() ) {
-                Yii::app()->user->login($identity, 3600*24*30);
-                // @todo На dev-сайте не работает ->user->returnUrl, поэтому такое кривое решение
-                $this->redirect(Yii::app()->request->getQuery('returnUrl'));
-            } else {
-                $this->redirect($this->createAbsoluteUrl('/site/login'));
-            }
-
+        if ( !empty($token) ) {
+            $this->subLoginByToken($token);
         }
 
-        /*
-         * Авторизация через форму
-         */
-
-        $model=new LoginForm;
-
-        // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-        {
-            echo ActiveForm::validate($model);
-            Yii::app()->end();
-        }
-
-        // collect user input datac
+        // Если форма уже заполнена - пытаемся авторизовать пользователя по данным из формы
         if(isset($_POST['LoginForm']))
         {
-            $model->attributes=$_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
+            $loginForm->attributes=$_POST['LoginForm'];
+            if( $loginForm->validate() && $loginForm->login() )
                 $this->redirect(Yii::app()->user->returnUrl);
         }
-        // display the login form
-        $this->render('login',array('model'=>$model));
+
+        $this->render('login',array('model'=>$loginForm));
+
     }
 
     /**
@@ -306,6 +228,10 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->homeUrl);
     }
 
+
+    /**
+     * Восстановление забытого пароля пользователя
+     */
     public function actionRestore() {
 
         $model = new RestoreForm();
@@ -325,6 +251,90 @@ class SiteController extends Controller
         }
 
         $this->render('restore',array('model'=>$model, 'success'=>$success));
+
+    }
+
+
+    /**
+     * Процедура авторизации по токену
+     * @param $token
+     * @param string $cancelUrl
+     */
+    protected function subLoginByToken($token, $cancelUrl='site/enter') {
+
+        $identity = new TokenUserIdentity($token);
+
+        if ( $identity->authenticate() ) {
+            Yii::app()->user->login($identity, 3600*24*30);
+            // @todo На dev-сайте не работает ->user->returnUrl, поэтому такое кривое решение
+            $this->redirect(Yii::app()->request->getQuery('returnUrl'));
+        } else {
+            $this->redirect($this->createAbsoluteUrl($cancelUrl));
+        }
+
+    }
+
+    /**
+     * Процедура авторизации через социальную сеть
+     * @param $service
+     * @param string $cancelUrl
+     */
+    protected function subLoginByService($service, $cancelUrl='site/enter') {
+
+        $authIdentity = Yii::app()->eauth->getIdentity($service);
+        $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+        $authIdentity->cancelUrl = $this->createAbsoluteUrl($cancelUrl);
+
+        if ($authIdentity->authenticate()) {
+
+            $identity = new ServiceUserIdentity($authIdentity);
+
+            // Успешный вход
+            if ($identity->authenticate()) {
+                Yii::app()->user->login($identity, 3600*24*30);
+                // Специальный редирект с закрытием popup окна
+                $authIdentity->redirect();
+            }
+            else {
+                // Закрываем popup окно и перенаправляем на cancelUrl
+                $authIdentity->cancel();
+            }
+        } else {
+            $this->redirect($this->createAbsoluteUrl($cancelUrl));
+        }
+
+    }
+
+    /**
+     * Процедура регистрации с использованием локальной сети
+     * @param $service
+     * @param $email
+     * @param null $code
+     * @param string $cancelUrl
+     */
+    protected function subRegisterByService($service, $email, $code=null, $cancelUrl='site/enter') {
+
+        $authIdentity = Yii::app()->eauth->getIdentity($service);
+        $authIdentity->redirectUrl = Yii::app()->user->returnUrl;
+        $authIdentity->cancelUrl = $this->createAbsoluteUrl($cancelUrl);
+
+        if ($authIdentity->authenticate()) {
+
+            $identity = new ServiceUserIdentity($authIdentity);
+
+            // Успешный вход
+            if ($identity->register($email, $code)) {
+                Yii::app()->user->login($identity, 3600*24*30);
+                // Специальный редирект с закрытием popup окна
+                $authIdentity->redirect();
+            }
+            else {
+                // Закрываем popup окно и перенаправляем на cancelUrl
+                $authIdentity->cancel();
+            }
+        } else {
+            $this->redirect($this->createAbsoluteUrl($cancelUrl));
+        }
 
     }
 

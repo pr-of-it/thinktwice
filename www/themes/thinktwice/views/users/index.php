@@ -95,8 +95,9 @@
                 <div class="desc">Специалист методологии</div>
                 <div class="price-time"><span><?php echo sprintf('%0.0f', $expert->consult_price); ?></span> руб./мин.</div>
             </div>
-
-            <div class="follow"></div>
+            <?php if ( $currentUser->id != $expert->id ) : ?>
+                <div class="follow"></div>
+            <?php endif ?>
         </li>
 
         <?php endforeach; ?>
@@ -110,7 +111,6 @@
 <li class="users-list-box users-list-row-3 users-list-portals">
     <header>Новостные порталы<span>Всего (<?php echo count($feeds); ?>)</span></header>
     <ul class="users-list clear">
-
         <?php foreach ($feeds as $feed) : ?>
 
             <li class="users-item" data-id="<?php echo $feed->id; ?>" data-userrole="<?php echo $feed->role->name; ?>">
@@ -122,11 +122,12 @@
                     <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $feed->id)); ?>"><?php echo $feed->name; ?></a></header>
                     <div class="desc">Новостной <br/> портал</div>
                 </div>
-                <div class="follow"></div>
+                <?php if ( $currentUser->id != $feed->id ) : ?>
+                    <div class="follow"></div>
+                <?php endif ?>
             </li>
 
         <?php endforeach; ?>
-
     </ul>
 </li>
 
@@ -145,7 +146,9 @@
                     <header class="name"><a href="<?php echo $this->createAbsoluteUrl('/user/index', array('id' => $user->id)); ?>"><?php echo $user->name; ?></a></header>
                     <div class="desc">Пользователь</div>
                 </div>
-                <div class="follow"></div>
+                <?php if ( $currentUser->id != $user->id ) : ?>
+                    <div class="follow"></div>
+                <?php endif ?>
             </li>
 
         <?php endforeach; ?>

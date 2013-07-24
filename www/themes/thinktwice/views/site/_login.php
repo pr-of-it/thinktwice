@@ -1,35 +1,35 @@
 <div class="form">
     <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'login-form',
-        'enableClientValidation'=>true,
-        'clientOptions'=>array(
-            'validateOnSubmit'=>true,
-        ),
+        'enableClientValidation'=>false,
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
+        <label for="LoginForm_email" class="required">E-mail <span class="required">*</span></label>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
+        <p class="hint">
+        </p>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
+        <label for="LoginForm_password" class="required">Пароль <span class="required">*</span></label>
         <?php echo $form->passwordField($model,'password'); ?>
         <?php echo $form->error($model,'password'); ?>
+        <p class="hint">
+        </p>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
+        <?php echo CHtml::submitButton('Войти'); ?>
+        <a class="alter-button" href="#"
+            onclick="$('.login-block').hide();$('.register-block').show();return false;">
+            Зарегистрироваться</a>
     </div>
-
     <?php if ($this->layout != 'expert-mobile'): ?>
-        <h2>Либо Вы можете войти через следующие сервисы:</h2>
-        <?php Yii::app()->eauth->renderWidget(); ?>
-        <?php
-        #$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
-        ?>
+        <?php $this->widget('ext.eauth.EAuthWidget', array('action' => 'site/enter')); ?>
     <?php endif; ?>
+    
 
     <?php $this->endWidget(); ?>
 </div><!-- form -->

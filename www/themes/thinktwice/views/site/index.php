@@ -1,3 +1,5 @@
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/lenta.js')); ?>
+
 <div id="container">
 
     <?php if ( Yii::app()->user->isGuest ) : ?>

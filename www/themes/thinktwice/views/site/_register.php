@@ -1,14 +1,11 @@
 <div class="form">
     <?php $form=$this->beginWidget('ActiveForm', array(
         'id'=>'register-form',
-        'enableClientValidation'=>true,
-        'clientOptions'=>array(
-            'validateOnSubmit'=>true,
-        ),
+        'enableClientValidation'=>false,
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
+        <label for="RegisterForm_email" class="required">E-mail <span class="required">*</span></label>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
         <p class="hint">
@@ -40,8 +37,15 @@
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Регистрация'); ?>
+        <?php echo CHtml::submitButton('Зарегистрироваться'); ?>
+        <a class="alter-button" href="#"
+            onclick="$('.register-block').hide();$('.login-block').show();return false;">
+            Уже есть аккаунт</a>
     </div>
+
+    <?php if ($this->layout != 'expert-mobile'): ?>
+        <?php $this->widget('ext.eauth.EAuthWidget', array('action' => 'site/enter')); ?>
+    <?php endif; ?>
 
     <?php $this->endWidget(); ?>
 </div><!-- form -->

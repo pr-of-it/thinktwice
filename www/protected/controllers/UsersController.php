@@ -49,12 +49,14 @@ class UsersController extends Controller {
         $feeds = User::model()->findAll($feedCriteria);
 
         $usersCriteria = clone $criteria;
-        $usersCriteria->addCondition('roleid=:roleid');
-        $userRole = UserRole::model()->findByAttributes(array('name' => 'user'))->id;
-        $usersCriteria->params = array_merge($usersCriteria->params, array(':roleid' => $userRole));
+        $userRole = UserRole::model()->findAllByAttributes(array('name' => array('user','operator','moderator','lector','admin')));
+        $arrayRoleIds = array();
+        foreach ( $userRole as $ids ) {
+            $arrayRoleIds[] = $ids->id;
+        }
+        $usersCriteria->addInCondition('roleid', $arrayRoleIds);
         $usersCriteria->limit = 25;
         $users = User::model()->findAll($usersCriteria);
-
         $this->render('index', array(
             'currentUser' => $currentUser,
             'subscripts' => $subscripts,
@@ -101,8 +103,12 @@ class UsersController extends Controller {
                 break;
             case 'others':
                 $criteria->addNotInCondition('t.id', $subscriptsIds);
-                $criteria->addCondition('role.name=:rolename');
-                $criteria->params = array_merge($criteria->params, array(':rolename' => 'user'));
+                $userRole = UserRole::model()->findAllByAttributes(array('name' => array('user','operator','moderator','lector','admin')));
+                $arrayRoleIds = array();
+                foreach ( $userRole as $ids ) {
+                    $arrayRoleIds[] = $ids->name;
+                }
+                $criteria->addInCondition('role.name', $arrayRoleIds);
                 break;
         }
 

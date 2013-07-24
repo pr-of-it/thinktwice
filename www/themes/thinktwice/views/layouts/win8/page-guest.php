@@ -39,22 +39,31 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <![endif]-->
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1006"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1014"></script>
 </head>
 <body>
 
 <header id="header">
 
-    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link">
+        <ul>
+            <li class="dl-1"></li>
+            <li class="dl-2"></li>
+            <li class="dl-3"></li>
+            <li class="dl-4"></li>
+            <li class="dl-5"></li>
+        </ul>
+        <div>Дашборд <span></span></div>
+    </div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
-    <section class="user-bar">
+    <!--<section class="user-bar">
         <a class="link-reg button-yellow" href="<?php echo $this->createAbsoluteUrl('/site/enter');?>">Присоединиться</a>
         <div class="reg-helper">
             Настройте watchlist, чтобы вся интересная <br />
             информация собиралась в ленте
         </div>
-    </section>
+    </section>-->
 
 </header>
 

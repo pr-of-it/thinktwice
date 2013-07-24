@@ -3,7 +3,7 @@
 $user = new stdClass();
 $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -41,13 +41,22 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/ckeditor/lang/ru.js"></script>
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1012"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1014"></script>
 </head>
 <body class="index guest">
 
 <header id="header">
 
-    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link"></div></a>
+    <a href="<?php echo Yii::app()->createAbsoluteUrl('/dashboard')?>"><div class="dashboard-link">
+        <ul>
+            <li class="dl-1"></li>
+            <li class="dl-2"></li>
+            <li class="dl-3"></li>
+            <li class="dl-4"></li>
+            <li class="dl-5"></li>
+        </ul>
+        <div>Дашборд <span></span></div>
+    </div></a>
     <a href="<?php echo Yii::app()->request->baseUrl; ?>/"><img id="logo" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/img/logo.png" alt=""/></a>
 
     <section class="user-bar">

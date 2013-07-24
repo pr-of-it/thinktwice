@@ -77,6 +77,25 @@ class Blog extends CActiveRecord
 		);
 	}
 
+    public function getAllTypes() {
+        return array(
+            self::SIMPLE_BLOG => 'Блог пользователя',
+            self::RSS_BLOG => 'Лента новостей',
+            self::SUBSCRIPT_BLOG => 'Подписка (платный блог)',
+        );
+    }
+    public function getAllIdTypes() {
+        $ret = array();
+        foreach ( $this->getAllTypes() as $id=>$type) {
+            $ret[] = array('id'=>$id, 'type'=>$type);
+        }
+        return $ret;
+    }
+    public function getTypeLabel($type) {
+        $types = $this->getAllTypes();
+        return $types[$type];
+    }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
