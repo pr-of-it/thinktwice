@@ -24,24 +24,60 @@ window.onload = function() {
 };
 
 $("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
+    if (app.rails.hasClass('disabled')) {
+        return true;
+    }
     this.scrollLeft += (deltaX * 90); // трекпад на маке
     this.scrollLeft -= (deltaY * 90); // колесико мыши
 
     return false;
 });
 
-$('.link-advice').click(function(){
-    app.bgPopup.show();
-    $('#rails').addClass('disabled');
-    $('.get-call').addClass('visible-on');
+$(document).keydown(function (e) {
+    var container = $('#container');
+
+    if (app.rails.hasClass('disabled'))
+        return true;
+
+    if (e.keyCode == 37) {
+        container.animate({
+            scrollLeft: '-=360',
+        }, 300);
+
+        return false;
+
+    } else if (e.keyCode == 39) {
+        container.animate({
+            scrollLeft: '+=360',
+        }, 300);
+
+        return false;
+    }
+});
+
+// открываем окно заказа звонка
+$('.link-advice').click(function(e) {
+    e.preventDefault();
+    app.showPopup($('.get-call'));
+});
+
+// открываем окно заказа подписки
+$('.link-addsub').click(function(e) {
+    e.preventDefault();
+    var popup = $('.get-subscription');
+    var parent = $(this).parents('.content-box');
+    var form = popup.find('form');
+    form.attr('action', $(this).attr('href'));
+    popup.find('.describe').html(parent.find('.content-text').html());
+    popup.find('.subs-name').text(parent.find('header').text());
+    popup.find('.subs-price').text(parent.find('.content-price').text());
+    app.showPopup(popup);
 });
 
 // скрываем окна
-$('body').on('click', '.close-popup,#bg-popup', function(e){
-    var target = $(e.target);
-    $('#rails').removeClass('disabled')
-    $('.get-call').removeClass('visible-on')
-    app.bgPopup.hide();
+$('body').on('click', '.close-popup,#bg-popup', function(e) {
+    e.preventDefault();
+    app.hidePopup($('.get-popup'));
     return false;
 });
 

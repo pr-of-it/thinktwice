@@ -390,21 +390,21 @@ margin-left: 20px; }
 width: 390px;
 }
 
-.popup.get-call {
+.popup.get-popup {
 	width: 1020px;
 	max-width: none;
 	border-left: none;
 }
 
-.popup.get-call .popup-content,
-.popup.get-call .scroll {
+.popup.get-popup .popup-content,
+.popup.get-popup .scroll {
 	padding: 0;
 	margin: 0;
 	height: 100%;
 }
 
 
-.popup.get-call .popup-content .popup-sidebar {
+.popup.get-popup .popup-content .popup-sidebar {
 	width: 300px;
 	height: 100%;
 	background-color: #0e6578;
@@ -412,23 +412,23 @@ width: 390px;
 	padding: 40px 25px;
 }
 
-.popup.get-call .popup-content .popup-helper {
+.popup.get-popup .popup-content .popup-helper {
 	padding: 40px 25px;
 	margin-left: 350px;
 }
 
-.popup.get-call .popup-sidebar .popup-head {
+.popup.get-popup .popup-sidebar .popup-head {
 	color: white;
 	margin-bottom: 30px;
 }
 
-.popup.get-call .create-call-request {
+.popup.get-popup .create-request {
 	position: relative;
 	color: #444;
 	width: 90%;
 }
 
-.popup.get-call .create-call-request input[type="text"] {
+.popup.get-popup .create-request input[type="text"] {
 	width: 560px;
 	height: 18px;
 	font-size: 14px;
@@ -436,18 +436,18 @@ width: 390px;
 	margin: 0 0 7px 0;
 }
 
-.popup.get-call .create-call-request textarea {
+.popup.get-popup .create-request textarea {
 	width: 560px;
 	height: 100px;
 	padding: 7px;
 }
 
-.popup.get-call .create-call-request .attachments {
+.popup.get-popup .create-request .attachments {
 	font-size: 11px;
 	margin: 30px 0 40px;
 }
 
-.popup.get-call .create-call-request .attachments a {
+.popup.get-popup .create-request .attachments a {
 	text-decoration: none;
 	line-height: 16px;
 }
@@ -523,7 +523,7 @@ width: 130px;
  
 /*This is the fill bar colour*/
 .ui-widget-header {
-background:url(fill.png) no-repeat left;
+/*background:url(fill.png) no-repeat left;*/
 height:8px;
 left:1px;
 top:1px;

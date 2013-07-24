@@ -318,12 +318,49 @@
 <!--wrapper-->
 
 <div id="popup-wrapper">
-    <div class="popup get-call">
+    <div class="popup get-popup get-call">
         <?php $this->renderPartial('_callrequest', array(
             'user' => $user,
             'currentUser' => $currentUser,
             'model' => $model,
         )); ?>
+        <div class="close-popup"></div>
+    </div>
+
+    <div class="popup get-popup get-subscription">
+        <section class="popup-content">
+            <div class="scroll">
+                <section class="popup-sidebar">
+                    <header class="popup-head">Подписка</header>
+                    <div class="describe">Описание подписки</div>
+                    <div class="expert">
+                        <span class="header">Альтернативные инвестиции</span>
+                        <a class="user-avatar" href=""><?php echo Yii::app()->easyImage->thumbOf($user->avatar, array('resize'=>array('width'=>50), 'crop'=>array('width'=>50, 'height'=>50))); ?><span></span></a>
+                        <span class="user-name"><?php echo $user->name; ?></span>
+                        <div class="call-time">
+                            <span>1 месяц</span><br>
+                        </div>
+                        
+                        <input type="button" class="button-yellow" value="Купить" onclick="$('#addSubscription-form').submit();return false;">
+
+                    </div>
+                </section>
+                <section class="popup-helper">
+                    <header class="popup-head">Заказать подписку</header>
+                    <form id="addSubscription-form" action="" method="post" class="create-request">
+                      <h4>Альтернативные инвестиции</h4>
+                        <div>
+                            Вы собираетесь подключить подписку
+                            <span class="subs-name"></span> эксперта <?php echo $user->name; ?>.
+                            Стоимость подписки: <span class="subs-price"></span>
+                        </div>
+
+                      <input name="yes" type="hidden" value="Подтвердить">
+                   
+                   </form>
+                </section>
+            </div>
+        </section>
         <div class="close-popup"></div>
     </div>
 </div>

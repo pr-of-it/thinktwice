@@ -103,6 +103,18 @@ function CConfig() { // для наследования класса внутр�
 		return url;
 	};
 
+	self.showPopup = function(target) {
+		self.rails.addClass('disabled');
+		self.bgPopup.show();
+		target.addClass('visible-on');
+	};
+
+	self.hidePopup = function(target) {
+		target.removeClass('visible-on');
+		self.bgPopup.hide();
+		self.rails.removeClass('disabled');
+	};
+
 	self.bind = function(){
 
 		$('.my-interest').click(function(e){
@@ -222,30 +234,30 @@ function CConfig() { // для наследования класса внутр�
 
 	var declension = function (num, nominative, genitivesingular, genitiveplural) {
 
-        if (num == 11) {return genitiveplural;}
-        if (num == 12) {return genitiveplural;}
-        if (num == 13) {return genitiveplural;}
-        if (num == 14) {return genitiveplural;}
+		if (num == 11) {return genitiveplural;}
+		if (num == 12) {return genitiveplural;}
+		if (num == 13) {return genitiveplural;}
+		if (num == 14) {return genitiveplural;}
 
-        num = '' + num;
+		num = '' + num;
 
-        var length = num.length;
+		var length = num.length;
 
-        num = num.substring(length-1, length);
+		num = num.substring(length-1, length);
 
-        if (num == '1') {return nominative;}
+		if (num == '1') {return nominative;}
 
-        if (num == '2') {return genitivesingular;}
-        if (num == '3') {return genitivesingular;}
-        if (num == '4') {return genitivesingular;}
+		if (num == '2') {return genitivesingular;}
+		if (num == '3') {return genitivesingular;}
+		if (num == '4') {return genitivesingular;}
 
-        if (num == '5') {return genitiveplural;}
-        if (num == '6') {return genitiveplural;}
-        if (num == '7') {return genitiveplural;}
-        if (num == '8') {return genitiveplural;}
-        if (num == '9') {return genitiveplural;}
-        if (num == '0') {return genitiveplural;}
-    };
+		if (num == '5') {return genitiveplural;}
+		if (num == '6') {return genitiveplural;}
+		if (num == '7') {return genitiveplural;}
+		if (num == '8') {return genitiveplural;}
+		if (num == '9') {return genitiveplural;}
+		if (num == '0') {return genitiveplural;}
+	};
 
 	self.formatTimelineDate = function(s) {
 		var now = new Date(),

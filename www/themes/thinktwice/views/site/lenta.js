@@ -28,6 +28,9 @@ window.onload = function() {
 };
 
 $("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
+    if (app.rails.hasClass('disabled')) {
+        return true;
+    }
     this.scrollLeft += (deltaX * 90); // трекпад на маке
     this.scrollLeft -= (deltaY * 90); // колесико мыши
 
