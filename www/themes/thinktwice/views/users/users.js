@@ -1,5 +1,20 @@
 $(function () {
 
+    var app = Config;
+
+    // create config and init classes
+    app.init();
+
+    $("#wrapper").mousewheel(function (event, delta, deltaX, deltaY) {
+        if (app.rails.hasClass('disabled')) {
+            return true;
+        }
+        this.scrollLeft += (deltaX * 90); // трекпад на маке
+        this.scrollLeft -= (deltaY * 90); // колесико мыши
+
+        return false;
+    });
+
     var following = $('.users-list-following');
     var experts = $('.users-list-experts');
     var portals = $('.users-list-portals');
