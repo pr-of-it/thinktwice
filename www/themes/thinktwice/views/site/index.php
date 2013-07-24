@@ -66,3 +66,7 @@
         'user' => $user,
     )); ?>
 <?php endif;?>
+
+<script type="text/javascript">
+window.USER = <?php echo CJSON::encode(Yii::app()->user); ?>;
+</script>

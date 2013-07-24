@@ -340,6 +340,10 @@
                         <div class="call-time">
                             <span>1 месяц</span><br>
                         </div>
+                        <div class="subs-cost">
+                            <span class="subs-charge"><span class="subs-charge-amount"></span> <small>Р<span class="rouble">_</span></span></span>
+                            <span class="subs-period">1 месяц</span>
+                        </div>
                         
                         <input type="button" class="button-yellow" value="Купить" onclick="$('#addSubscription-form').submit();return false;">
 

@@ -71,7 +71,9 @@ $('.subscribes .content-body').click(function(e) {
     form.attr('action', button.attr('href'));
     popup.find('.describe').html(parent.find('.content-text').html());
     popup.find('.subs-name').text(parent.find('header').text());
-    popup.find('.subs-price').text(parent.find('.content-price').text());
+    var price = parent.find('.content-price').text();
+    popup.find('.subs-price').text(price);
+    popup.find('.subs-charge-amount').text(parseInt(price));
     app.showPopup(popup);
     return false;
 });
