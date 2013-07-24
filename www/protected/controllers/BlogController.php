@@ -99,7 +99,7 @@ class BlogController extends Controller {
      * @param int $limit
      * @param int $offset
      */
-    public function actionGetIndexBlogPosts($limit, $offset=0) {
+    public function actionAjaxGetIndexBlogPosts($limit, $offset=0) {
 		/*
         $criteria = new CDbCriteria(array(
             'order' => 'time DESC',
@@ -154,7 +154,7 @@ class BlogController extends Controller {
      * @param string $startDate
      * @param string $endDate
      */
-	public function actionGetIndexBlogPostsByDate($startDate, $endDate) {
+	public function actionAjaxGetIndexBlogPostsByDate($startDate, $endDate) {
 		$posts = getIndexBlogPosts(null, array($startDate, $endDate));
 		header('Content-type: application/json');
 		echo CJSON::encode($posts);
