@@ -1086,7 +1086,7 @@ body.index.authenticated #rails.page-lenta:first-child{
 
 .create-post{
 	position:absolute;
-	bottom:0;
+	bottom:31px;
 	left:0; width:739px;
 	min-height: 75%;
 	background:#e1e1db;

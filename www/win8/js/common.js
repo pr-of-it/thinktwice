@@ -94,7 +94,7 @@ function CConfig() { // для наследования класса внутр�
 		self.bgPopup = $('#bg-popup');
 
 		if ($('.create-post').length)
-			$('.create-post').detach().appendTo('body');
+			$('.create-post').detach().appendTo('#popup-wrapper');
 
 
 	};
