@@ -64,7 +64,7 @@ class TagCategoryController extends AdminController
         $model->name = $_POST['TagCategory']['name'];
 
         if ( 0 == $_POST['parent'] ) {
-            $result = $model->saveNode();
+            $result = $model->moveAsRoot();
         } else {
             $parent = TagCategory::model()->findByPk($_POST['parent']);
             if ( $parent )

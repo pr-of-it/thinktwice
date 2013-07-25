@@ -60,8 +60,8 @@ class TagCategory extends CActiveRecord
                 'leftAttribute'=>'left',
                 'rightAttribute'=>'right',
                 'levelAttribute'=>'level',
-
-
+                'hasManyRoots'=>'true',
+                'rootAttribute'=>'root',
             ),
         );
     }
