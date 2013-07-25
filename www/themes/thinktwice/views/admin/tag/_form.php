@@ -1,13 +1,13 @@
 <?php
-/* @var $this TagCategoryController */
-/* @var $model TagCategory */
+/* @var $this TagController */
+/* @var $model Tag */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'tag-category-form',
+	'id'=>'tag-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -20,27 +20,21 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'category'); ?>
-		<?php echo $form->textField($model,'category',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'category'); ?>
+		<?php echo $form->labelEx($model,'cat_id'); ?>
+		<?php echo $form->textField($model,'cat_id'); ?>
+		<?php echo $form->error($model,'cat_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'left'); ?>
-		<?php echo $form->textField($model,'left'); ?>
-		<?php echo $form->error($model,'left'); ?>
+		<?php echo $form->labelEx($model,'title'); ?>
+		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'title'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'right'); ?>
-		<?php echo $form->textField($model,'right'); ?>
-		<?php echo $form->error($model,'right'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'level'); ?>
-		<?php echo $form->textField($model,'level'); ?>
-		<?php echo $form->error($model,'level'); ?>
+		<?php echo $form->labelEx($model,'serial'); ?>
+		<?php echo $form->textField($model,'serial',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'serial'); ?>
 	</div>
 
 	<div class="row buttons">

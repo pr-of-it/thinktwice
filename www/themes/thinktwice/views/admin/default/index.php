@@ -22,6 +22,7 @@ $this->menu=array(
     array('label'=>'Посты для блогов', 'url'=>array('/admin/blogPost')),
     array('label'=>'Заявки на добавление RSS', 'url'=>array('/admin/blogRssRequest')),
     array('label'=>'Категории тегов', 'url'=>array('/admin/tagCategory')),
+    array('label'=>'Теги', 'url'=>array('/admin/tag')),
 
 );
 ?>

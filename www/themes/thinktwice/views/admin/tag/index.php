@@ -1,18 +1,18 @@
 <?php
-/* @var $this TagCategoryController */
+/* @var $this TagController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Tag Categories',
+	'Tags',
 );
 
 $this->menu=array(
-	array('label'=>'Create TagCategory', 'url'=>array('create')),
-	array('label'=>'Manage TagCategory', 'url'=>array('admin')),
+	array('label'=>'Create Tag', 'url'=>array('create')),
+	array('label'=>'Manage Tag', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Tag Categories</h1>
+<h1>Tags</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

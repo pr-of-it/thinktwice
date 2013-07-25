@@ -1,6 +1,6 @@
 <?php
-/* @var $this TagCategoryController */
-/* @var $model TagCategory */
+/* @var $this TagController */
+/* @var $model Tag */
 /* @var $form CActiveForm */
 ?>
 
@@ -17,23 +17,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'category'); ?>
-		<?php echo $form->textField($model,'category',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($model,'cat_id'); ?>
+		<?php echo $form->textField($model,'cat_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'left'); ?>
-		<?php echo $form->textField($model,'left'); ?>
+		<?php echo $form->label($model,'title'); ?>
+		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'right'); ?>
-		<?php echo $form->textField($model,'right'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'level'); ?>
-		<?php echo $form->textField($model,'level'); ?>
+		<?php echo $form->label($model,'serial'); ?>
+		<?php echo $form->textField($model,'serial',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row buttons">
