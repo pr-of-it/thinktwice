@@ -419,7 +419,17 @@ width: 390px;
 
 .popup.get-popup .popup-sidebar .popup-head {
 	color: white;
+}
+
+.popup.get-popup .popup-head {
+	font-weight: 100;
 	margin-bottom: 30px;
+}
+
+.popup.get-subscription .popup-helper {
+	position: relative;
+	color: #444;
+	font-size: 16px;
 }
 
 .popup.get-popup .create-request {
@@ -599,19 +609,32 @@ outline:none;
 	margin-bottom: 7px;
 }
 
-.popup-sidebar .call-cost {
+.popup-sidebar .call-cost,
+.popup-sidebar .subs-cost {
 	margin: 10px 0 40px 0;
 }
 
-.popup-sidebar .call-cost .call-duration {
+.popup-sidebar .call-cost .call-duration,
+.popup-sidebar .subs-cost .subs-period {
 	font-size: 15px;
 }
 
-.popup-sidebar .call-cost .call-charge {
+.popup-sidebar .call-cost .call-charge,
+.popup-sidebar .subs-cost .subs-charge {
 	margin-top: -10px;
 	vertical-align: bottom;
 	float: right;
 	font-size: 25px;
+}
+
+.popup-sidebar .subs-cost .subs-charge small {
+	font-size: 18px;
+}
+
+.popup-sidebar .rouble {
+	margin-left: -.6em;
+	vertical-align: top;
+	font-size: 20px;
 }
 
 .popup-sidebar .do-confirm {
