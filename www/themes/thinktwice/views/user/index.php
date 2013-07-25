@@ -344,6 +344,7 @@
                             <span>1 месяц</span><br>
                         </div>
                         <div class="subs-cost">
+                            <span class="dots"></span>
                             <span class="subs-charge"><span class="subs-charge-amount"></span> <small>Р<span class="rouble">_</span></small></span>
                             <span class="subs-period">1 месяц</span>
                         </div>

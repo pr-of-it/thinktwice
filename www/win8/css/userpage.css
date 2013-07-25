@@ -613,7 +613,16 @@ outline:none;
 
 .popup-sidebar .call-cost,
 .popup-sidebar .subs-cost {
+	position: relative;
 	margin: 10px 0 40px 0;
+}
+
+.subs-cost .dots {
+	position: absolute;
+	left: 70px; bottom: 0;
+	width: 150px; height: 4px;
+	background: url(../img/bg/white-dot.png) repeat-x;
+	background-size: 4px 2px;
 }
 
 .popup-sidebar .call-cost .call-duration,
