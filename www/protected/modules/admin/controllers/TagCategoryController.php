@@ -62,7 +62,7 @@ class TagCategoryController extends AdminController
     {
 
         $model->name = $_POST['TagCategory']['name'];
-
+        $model->saveAttributes(array('name'=>$model->name));
         if ( 0 == $_POST['parent'] ) {
             $result = $model->moveAsRoot();
         } else {

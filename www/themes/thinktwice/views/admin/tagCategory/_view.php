@@ -9,20 +9,12 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('category')); ?>:</b>
-	<?php echo CHtml::encode($data->category); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('level')); ?>:</b>
+    <?php echo CHtml::encode($data->level); ?>
+    <br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('left')); ?>:</b>
-	<?php echo CHtml::encode($data->left); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('right')); ?>:</b>
-	<?php echo CHtml::encode($data->right); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('level')); ?>:</b>
-	<?php echo CHtml::encode($data->level); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
+	<?php echo CHtml::encode($data->name); ?>
 	<br />
 
 
