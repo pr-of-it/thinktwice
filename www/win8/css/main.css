@@ -1320,7 +1320,7 @@ body.index.authenticated #rails.page-lenta:first-child{
 	margin:3px 0 0 3px;
 	border-radius:2px;
 	background:#F8AC1D;
-	box-shadow:inset 0 -3px 6px #aaa;
+	box-shadow:inset 0 -3px 6px #F8AC1D;
 }
 .jq-checkbox.focused{
 	border:1px solid #08c;
