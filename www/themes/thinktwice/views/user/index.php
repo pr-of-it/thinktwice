@@ -344,7 +344,7 @@
                             <span>1 месяц</span><br>
                         </div>
                         <div class="subs-cost">
-                            <span class="subs-charge"><span class="subs-charge-amount"></span> <small>Р<span class="rouble">_</span></span></span>
+                            <span class="subs-charge"><span class="subs-charge-amount"></span> <small>Р<span class="rouble">_</span></small></span>
                             <span class="subs-period">1 месяц</span>
                         </div>
                         
@@ -362,7 +362,36 @@
                             Стоимость подписки: <span class="subs-price"></span>
                         </div>
 
-                      <input name="yes" type="hidden" value="Подтвердить">
+                        <div class="period-chooser">
+                            <div class="row">
+                                <h5 class="period-radio">Выбор перилода подписки</h5>
+                                <h5 class="period-price">Стоимость</h5>
+                            </div>
+                            <div class="row">
+                                <div class="period-radio">
+                                    <input type="radio" name="period" value="week" checked>
+                                    <label>1 неделя</label></div>
+                                <div class="period-price"><span class="period-price-amount">500</span> <small>Р<span class="rouble">_</span></small></div>
+                            </div>
+                            <div class="row">
+                                <div class="period-radio">
+                                    <input type="radio" name="period" value="month">
+                                    <label>1 месяц</label></div>
+                                <div class="period-price"><span class="period-price-amount">500</span> <small>Р<span class="rouble">_</span></small></div>
+                            </div>
+                            <div class="row">
+                                <div class="period-radio">
+                                    <input type="radio" name="period" value="year">
+                                    <label>1 год</label></div>
+                                <div class="period-price"><span class="period-price-amount">500</span> <small>Р<span class="rouble">_</span></small></div>
+                            </div>
+                        </div>
+
+                        <div class="row giveaway-agreement">
+                            <input type="checkbox">
+                            <label>Разрешить передать эксперту мои личные данные</label>
+                        </div>
+                        <input name="yes" type="hidden" value="Подтвердить">
                    
                    </form>
                 </section>

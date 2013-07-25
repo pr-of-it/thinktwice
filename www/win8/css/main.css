@@ -1304,8 +1304,8 @@ body.index.authenticated #rails.page-lenta:first-child{
 
 .jq-checkbox{
 	position:relative;
-	width:13px;
-	height:13px;
+	width:19px;
+	height:19px;
 	border:1px solid #c3c3c3;
 	border-radius:3px;
 	background:#f6f6f6 url(data:image/gif;base64,R0lGODlhAQAMALMAAPHx8f7+/vv7+/j4+PX19fLy8vz8/Pn5+fb29vPz8/39/ff39wAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAABAAwAAAQJMCgjzliIpAIiADs=) repeat-x;
@@ -1315,11 +1315,11 @@ body.index.authenticated #rails.page-lenta:first-child{
 }
 .jq-checkbox.checked span{
 	display:block;
-	width:9px;
-	height:9px;
-	margin:2px 0 0 2px;
+	width:13px;
+	height:13px;
+	margin:3px 0 0 3px;
 	border-radius:2px;
-	background:#666;
+	background:#F8AC1D;
 	box-shadow:inset 0 -3px 6px #aaa;
 }
 .jq-checkbox.focused{
@@ -1331,8 +1331,8 @@ body.index.authenticated #rails.page-lenta:first-child{
 }
 
 .jq-radio{
-	width:12px;
-	height:12px;
+	width:20px;
+	height:20px;
 	border:1px solid #c3c3c3;
 	border-radius:50%;
 	background:#f6f6f6 url(data:image/gif;base64,R0lGODlhAQAMALMAAPHx8f7+/vv7+/j4+PX19fLy8vz8/Pn5+fb29vPz8/39/ff39wAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAABAAwAAAQJMCgjzliIpAIiADs=) 0 -1px repeat-x;
@@ -1342,12 +1342,12 @@ body.index.authenticated #rails.page-lenta:first-child{
 }
 .jq-radio.checked span{
 	display:block;
-	width:6px;
-	height:6px;
+	width:12px;
+	height:12px;
 	overflow:hidden;
 	margin:3px 0 0 3px;
 	border-radius:50%;
-	background:#666;
+	background:#F8AC1D;
 }
 .jq-radio.focused{
 	border:1px solid #08c;
@@ -2367,7 +2367,6 @@ input[type="reset"].styler:active{
 .w8-cell .user-avatar img{
 	width:90px; height:90px;
 }
-
 
 .rouble { margin-left: -.6em;}
 /*****   page dashboard:end   *****/

@@ -430,6 +430,7 @@ width: 390px;
 	position: relative;
 	color: #444;
 	font-size: 16px;
+	line-height: 24px;
 }
 
 .popup.get-popup .create-request {
@@ -593,8 +594,9 @@ outline:none;
 .popup-sidebar .expert  .user-name {
 	display: block;
 	margin: 0 0 0 75px;
-	padding-top: 10px;
-	line-height: 18px;
+	padding-top: 17px;
+	font-size: 16px;
+	line-height: 20px;
 }
 
 .popup-sidebar .call-time {
@@ -625,10 +627,12 @@ outline:none;
 	vertical-align: bottom;
 	float: right;
 	font-size: 25px;
+	font-weight: 100;
 }
 
 .popup-sidebar .subs-cost .subs-charge small {
 	font-size: 18px;
+	font-weight: 500;
 }
 
 .popup-sidebar .rouble {
@@ -736,6 +740,55 @@ outline:none;
 	display: inline-block;
 	padding: 10px 15px;
 	cursor: pointer;
+}
+
+.period-chooser {
+	margin-top: 20px;
+}
+
+.period-chooser h5 {
+	font-weight: 200;
+	font-size: 16px;
+	margin: 0 0 10px;
+}
+
+.period-chooser .row {
+	padding: 10px 0;
+}
+
+.period-chooser .period-radio {
+	float: left;
+}
+.period-chooser label {
+	margin-left: 5px;
+	font-size: 14px;
+}
+
+.period-chooser .period-price {
+	margin-left: 350px;
+	font-size: 30px;
+	font-weight: 100;
+}
+.period-chooser .period-price small {
+	font-size: 20px;
+	font-weight: 500;
+}
+.period-chooser .rouble {
+	margin-left: -.6em;
+	vertical-align: top;
+	font-size: 20px;
+	line-height: 19px;
+}
+.giveaway-agreement {
+	margin-top: 50px;
+}
+
+.giveaway-agreement input {
+}
+.giveaway-agreement label {
+	margin-left: 7px;
+	font-size: 14px;
+
 }
 
 .ui-tabs {
