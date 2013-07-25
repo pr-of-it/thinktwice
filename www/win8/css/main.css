@@ -370,20 +370,20 @@ input.error{ border:1px solid red !important }
 	position:absolute;
 	left:0; top:0;
 	width:35px; height:35px;
-	background: url(../img/sprites/main.png) no-repeat -34px 0 transparent;
+	background: url(../img/sprites/filters.png) no-repeat 0 0 transparent;
 }
 .icon-archive:hover span{
-	background-position:-69px 0;
+	background-position:-40px 0;
 }
 
 .icon-filter span{
 	position:absolute;
 	left:0; top:0;
 	width:35px; height:35px;
-	background:url(../img/sprites/main.png) no-repeat -139px 0 transparent;
+	background:url(../img/sprites/filters.png) no-repeat -120px 0 transparent;
 }
 .icon-filter:hover span{
-	background-position:-104px 0;
+	background-position:-80px 0;
 }
 
 .lenta-settings li .my-interest{
