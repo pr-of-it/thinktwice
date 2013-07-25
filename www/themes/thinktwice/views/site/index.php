@@ -1,4 +1,7 @@
-<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/lenta.js')); ?>
+<?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(__DIR__.'/lenta.js')); 
+$user = User::model()->findByPk(Yii::app()->user->id);
+?>
 
 <div id="container">
 
@@ -68,5 +71,5 @@
 <?php endif;?>
 
 <script type="text/javascript">
-window.USER = <?php echo CJSON::encode(Yii::app()->user); ?>;
+window.USER = <?php echo CJSON::encode($user); ?> || {};
 </script>

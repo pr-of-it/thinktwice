@@ -273,7 +273,7 @@ $user = User::model()->findByPk(Yii::app()->user->id);
             </article>
         </div>
     </section>
-    <div class="edit-post-button"></div>
+    <div class="edit-post-button" style="display:none"></div>
     <div class="close-popup"></div>
 </div>
 </div>

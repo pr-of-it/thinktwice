@@ -6,7 +6,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    
     <link type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/main.css"/>
     <link media="print" type="text/css" rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/win8/css/print.css"/>
     <meta name= "viewport" content="width=device-width, initial-scale=.8, user-scalable=no">
@@ -42,6 +42,7 @@ $user->avatar = Yii::app()->baseUrl . User::AVATAR_UPLOAD_PATH . 'empty.jpg';
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/mustache.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/win8/js/common.js?1014"></script>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 <body class="index guest">
 

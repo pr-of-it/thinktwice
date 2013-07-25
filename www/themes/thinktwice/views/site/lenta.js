@@ -79,7 +79,20 @@ app.rails.on('click', '.news-box', function(e){
     }
     var data = target.parent().data();
 
+
     var popup = $('.window-post');
+
+    var editButton = popup.find('.edit-post-button');
+    var canEdit = false;
+    if (editButton.length) {
+        if (data.uid == USER.id) {
+            // Пост залогиненного юзера
+            editButton.show();
+            canEdit = true;
+        } else {
+            editButton.hide();
+        }
+    }
 
     var title = target.find('h6').html();
     popup.find('div.scroll header.popup-head').html(title);  // $post->title
@@ -95,34 +108,34 @@ app.rails.on('click', '.news-box', function(e){
     popup.find('.article-info .user-name').text(data.user_name || '');
     popup.find('.article-info a').attr('href', app.makeUrl('/user/?id=' + data.uid));
 
+    if (canEdit) {
+        $.get(app.makeUrl('/blog/ajaxGetPostEditForm'),
+            {id: data.id}, function (d) {
+                if (app.editor) {
+                    app.editor.destroy();
+                }
+                var uploader = popup.find('.file-upload-wrapper').detach();
+                var uploaderContent = uploader.find('.file-upload-container')
+                uploader.find('.hidden-image').remove();
+                uploader.find('.attach-list').html('');
+                popup.find('form').html(d);
+                popup.find('.tag-attach-box').append(uploader);
 
-    $.get(app.makeUrl('/blog/ajaxGetPostEditForm'),
-        {id: data.id}, function (d) {
-            if (app.editor) {
-                app.editor.destroy();
-            }
-            var uploader = popup.find('.file-upload-wrapper').detach();
-            var uploaderContent = uploader.find('.file-upload-container')
-            uploader.find('.hidden-image').remove();
-            uploader.find('.attach-list').html('');
-            popup.find('form').html(d);
-            popup.find('.tag-attach-box').append(uploader);
+                var media = $('<ul class="attach-list media-list" />');
 
-            var media = $('<ul class="attach-list media-list" />');
+                for (var i=0; i < data.media.length; i++ ) {
+                    var item = data.media[i];
+                    media.append('<li><img src="' + item.url  +'"><span data-id="' +  item.id + '">Удалить</span></li>');
+                }
+                uploaderContent.append(media);
+                //uploaderContent.width(media.width());
 
-            for (var i=0; i < data.media.length; i++ ) {
-                var item = data.media[i];
-                media.append('<li><img src="' + item.url  +'"><span data-id="' +  item.id + '">Удалить</span></li>');
-            }
-            uploaderContent.append(media);
-            //uploaderContent.width(media.width());
-
-            if (popup.find('#popup-post-editor').length) {
-                app.editor = CKEDITOR.replace('popup-post-editor', app.ckconf);
-            }
-            popup.find('select').styler();
-    }); // TODO: обработка ошибок связи
-
+                if (popup.find('#popup-post-editor').length) {
+                    app.editor = CKEDITOR.replace('popup-post-editor', app.ckconf);
+                }
+                popup.find('select').styler();
+        }); // TODO: обработка ошибок связи
+    }
     //popup.find('form input.id-field').val(data.id);
 
     var imgTarget = target.find('.image-gallery-min-full'),
@@ -176,7 +189,7 @@ $('body').on('click', '.close-popup,#popup-wrapper,#bg-popup', function(e){
     return false;
 });
 
-$('.edit-post-button,.window-post .button-cancel').on('click', function(e) {
+$('.window-post').on('click', '.edit-post-button,.button-cancel', function(e) {
     e.preventDefault();
     var popup = $(this).parents('.window-post');
     popup.toggleClass('edit-post');
@@ -211,11 +224,11 @@ $('.create-post').click(function(){
  */
 
 
-$("#wrapper").scroll(function () {
+var loaderMonkey = function () {
     if (app.rails.hasClass('disabled'))
         return false;
     var width = app.setWidth() - 300;
-    var scroll = $(this).scrollLeft() + $(window).width();
+    var scroll = $('#wrapper').scrollLeft() + $(window).width();
 
     if (app.rails.hasClass('quick-start'))
         width += ($('.quick-start-box').outerWidth() + 90);
@@ -224,8 +237,9 @@ $("#wrapper").scroll(function () {
         //alert([width, scroll]);
         app.loadData();
     }
+};
 
-
-});
+$("#wrapper").scroll(loaderMonkey);
+setInterval(loaderMonkey, 1000);
 
 });
