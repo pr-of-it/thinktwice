@@ -101,7 +101,7 @@ $this->breadcrumbs=array(
                 'desc',
                 'month_price',
                 'week_price',
-
+                'year_price',
             ),
         ));
 

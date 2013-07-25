@@ -34,6 +34,7 @@
             <select name='time'>
                 <option value="month_price">За месяц</option>
                 <option value="week_price">За неделю</option>
+                <option value="year_price">За год</option>
             </select>
 
            <input type='text' name='price' value='' />

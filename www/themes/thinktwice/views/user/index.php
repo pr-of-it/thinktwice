@@ -66,15 +66,18 @@
                             <header><?php echo $subscription->title; ?></header>
                             <div class="content-text"><?php echo $subscription->desc; ?></div>
                             <div class="content-price">
-                                <?php echo $subscription->month_price == 0 ? $subscription->week_price
-                                    . ' руб/нед' : $subscription->month_price . ' руб/мес' ?>
+                                <?php if ( $subscription->month_price == 0 && $subscription->year_price == 0 ) {
+                                    echo $subscription->week_price . ' руб/нед';
+                                } elseif ( $subscription->week_price == 0 && $subscription->year_price == 0 ) {
+                                    echo $subscription->month_price . ' руб/мес';
+                                } elseif ( $subscription->week_price == 0 && $subscription->month_price == 0 ) {
+                                    echo $subscription->year_price . ' руб/год';
+                                }  ?>
                             </div>
                             <?php
-                            $i = 0;
                             $AddArray = array();
                             foreach ($addedSubscription as $add) {
-                                $AddArray[$i] = $add->blog_id;
-                                $i++;
+                                $AddArray[] = $add->blog_id;
                             }
                             if (!in_array($subscription->id, $AddArray, true)) :  ?>
                                 <a href="<?php echo Yii::app()->createAbsoluteUrl('/blog/addSubscription',

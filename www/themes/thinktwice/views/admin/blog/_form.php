@@ -44,15 +44,14 @@
 	</div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'month_price'); ?>
-        <?php echo $form->textField($model,'month_price'); ?>
-        <?php echo $form->error($model,'month_price'); ?>
-    </div>
+        Стоимость:
+        <select name='time'>
+            <option value="month_price">За месяц</option>
+            <option value="week_price">За неделю</option>
+            <option value="year_price">За год</option>
+        </select>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'week_price'); ?>
-        <?php echo $form->textField($model,'week_price'); ?>
-        <?php echo $form->error($model,'week_price'); ?>
+        <input type='text' name='price' value='' />
     </div>
 
     <div class="row buttons">

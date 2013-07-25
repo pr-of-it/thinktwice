@@ -51,10 +51,17 @@ class PrivateBlogController extends Controller {
                     case 'month_price':
                         $subscript->month_price = $_POST['price'];
                         $subscript->week_price = 0;
+                        $subscript->year_price = 0;
                         break;
                     case 'week_price':
                         $subscript->week_price = $_POST['price'];
                         $subscript->month_price = 0;
+                        $subscript->year_price = 0;
+                        break;
+                    case 'year_price':
+                        $subscript->year_price = $_POST['price'];
+                        $subscript->month_price = 0;
+                        $subscript->week_price = 0;
                         break;
                 }
             }

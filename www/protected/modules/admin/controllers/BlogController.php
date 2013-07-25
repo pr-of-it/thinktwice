@@ -24,7 +24,25 @@ class BlogController extends AdminController
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+        if ( isset( $_POST['time']) && isset($_POST['price']) ) {
+            switch ( $_POST['time'] ) {
+                case 'month_price':
+                    $model->month_price = $_POST['price'];
+                    $model->week_price = 0;
+                    $model->year_price = 0;
+                    break;
+                case 'week_price':
+                    $model->week_price = $_POST['price'];
+                    $model->month_price = 0;
+                    $model->year_price = 0;
+                    break;
+                case 'year_price':
+                    $model->year_price = $_POST['price'];
+                    $model->month_price = 0;
+                    $model->week_price = 0;
+                    break;
+            }
+        }
 		if(isset($_POST['Blog']))
 		{
 			$model->attributes=$_POST['Blog'];
@@ -47,9 +65,26 @@ class BlogController extends AdminController
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Blog']))
+		// $this        ->performAjaxValidation($model);
+        if ( isset( $_POST['time']) && isset($_POST['price']) ) {
+            switch ( $_POST['time'] ) {
+                case 'month_price':
+                    $model->month_price = $_POST['price'];
+                    $model->week_price = 0;
+                    $model->year_price = 0;
+                    break;
+                case 'week_price':
+                    $model->week_price = $_POST['price'];
+                    $model->month_price = 0;
+                    $model->year_price = 0;
+                    break;
+                case 'year_price':
+                    $model->year_price = $_POST['price'];
+                    $model->month_price = 0;
+                    $model->week_price = 0;
+                    break;
+            }
+        }		if(isset($_POST['Blog']))
 		{
 			$model->attributes=$_POST['Blog'];
 			if($model->save())

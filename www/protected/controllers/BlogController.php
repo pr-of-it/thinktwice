@@ -240,13 +240,25 @@ class BlogController extends Controller {
         $user = User::model()->findByPk($id);
         $subscript = Blog::model()->findByPk($subscript);
         if (isset ($_POST['yes'])) {
-            $price = $subscript->month_price == 0 ? $subscript->week_price : $subscript->month_price;
+            if ( $subscript->month_price == 0 && $subscript->year_price == 0 ) {
+                $price = $subscript->week_price;
+            } elseif ( $subscript->week_price == 0 && $subscript->year_price == 0 ) {
+                $price = $subscript->month_price;
+            } elseif ( $subscript->week_price == 0 && $subscript->month_price == 0 ) {
+                $price = $subscript->year_price;
+            }
 
             if ($currentUser->getAmount() < $price) {
                 $this->redirect(array('/private/deposit', 'amount' => $price - $currentUser->getAmount()));
             } else {
 
-                $subscript->month_price == 0 ? $sec = 604800 : $sec = 2592000;
+                if ( $subscript->month_price == 0 && $subscript->year_price == 0 ) {
+                    $sec = 604800;
+                } elseif ( $subscript->week_price == 0 && $subscript->year_price == 0 ) {
+                    $sec = 2592000;
+                } elseif ( $subscript->week_price == 0 && $subscript->month_price == 0 ) {
+                    $sec = 31536000;
+                }
                 $expire = date('Y-m-d H:i:s', time() + $sec);
 
                 $addedSubscription = new AddedSubscription();

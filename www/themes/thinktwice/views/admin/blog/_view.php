@@ -37,5 +37,11 @@
         <br />
     <?php endif; ?>
 
+    <?php if (0!=$data->getAttributeLabel('year_price')) : ?>
+        <b><?php echo CHtml::encode($data->getAttributeLabel('year_price')); ?>:</b>
+        <?php echo CHtml::encode($data->year_price); ?>
+        <br />
+    <?php endif; ?>
+
 
 </div>
