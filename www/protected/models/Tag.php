@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'tt_tags':
  * @property integer $id
  * @property integer $cat_id
- * @property string $tag
+ * @property string $title
  * @property string $serial
  */
 class Tag extends CActiveRecord
@@ -28,10 +28,10 @@ class Tag extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cat_id', 'numerical', 'integerOnly'=>true),
-			array('tag, serial', 'length', 'max'=>255),
+			array('title, serial', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cat_id, tag, serial', 'safe', 'on'=>'search'),
+			array('id, cat_id, title, serial', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +55,7 @@ class Tag extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'cat_id' => 'Cat',
-			'tag' => 'Tag',
+			'title' => 'Title',
 			'serial' => 'Serial',
 		);
 	}
@@ -80,7 +80,7 @@ class Tag extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('cat_id',$this->cat_id);
-		$criteria->compare('tag',$this->tag,true);
+		$criteria->compare('title',$this->title,true);
 		$criteria->compare('serial',$this->serial,true);
 
 		return new CActiveDataProvider($this, array(
