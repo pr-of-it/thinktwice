@@ -295,7 +295,13 @@ $(function () {
             }
             var source = parent.parents('.users-list-box');
             //console.log(following, parent, $(self))
-            parent.detach().prependTo(following.find('.users-list:first'));
+
+            var targetLocation = following.find('.users-list:first');
+            if (!targetLocation.length) {
+                targetLocation = $('<ul class="users-list"/>').appendTo(following);
+            }
+            parent.detach().prependTo(targetLocation);
+
             $(self).removeClass('follow').addClass('unfollow');
             following.data('count', following.data('count') + 1);
             source.data('count', source.data('count') - 1);
@@ -326,7 +332,11 @@ $(function () {
             if (role === 'expert') target = experts;
             else if (role === 'rss') target = portals;
             //console.log(target, parent, $(self))
-            parent.detach().prependTo(target.find('.users-list:first'));
+            var targetLocation = target.find('.users-list:first');
+            if (!targetLocation.length) {
+                targetLocation = $('<ul class="users-list"/>').appendTo(target);
+            }
+            parent.detach().prependTo(targetLocation);
             $(self).removeClass('unfollow').addClass('follow');
 
             target.data('count', target.data('count') + 1);
