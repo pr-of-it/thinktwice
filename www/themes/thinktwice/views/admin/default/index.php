@@ -21,7 +21,7 @@ $this->menu=array(
     array('label'=>'RSS для блогов', 'url'=>array('/admin/blogRss')),
     array('label'=>'Посты для блогов', 'url'=>array('/admin/blogPost')),
     array('label'=>'Заявки на добавление RSS', 'url'=>array('/admin/blogRssRequest')),
-    array('label'=>'Тэги', 'url'=>array('/admin/tagCategory')),
+    array('label'=>'Категории тегов', 'url'=>array('/admin/tagCategory')),
 
 );
 ?>
